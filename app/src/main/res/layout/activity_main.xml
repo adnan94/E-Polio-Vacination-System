@@ -1,18 +1,399 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ali.myapplication.MainActivity">
+    android:fillViewport="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        tools:context="com.example.ali.myapplication.MainActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/editTextApplicantName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/textViewApplicantName"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textViewApplicantName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editTextApplicantName"
+            android:layout_alignBottom="@+id/editTextApplicantName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Applicant's Name"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/editTextApplicantCnic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editTextApplicantName"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignStart="@+id/editTextApplicantName"
+            android:layout_below="@+id/editTextApplicantName"
+            android:ems="10"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textViewApplicantCnic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editTextApplicantCnic"
+            android:layout_alignBottom="@+id/editTextApplicantCnic"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Applicant Cnic"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/editTextChildName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/editTextApplicantCnic"
+            android:layout_toRightOf="@+id/textViewApplicantCnic"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textViewChildName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editTextChildName"
+            android:layout_alignBottom="@+id/editTextChildName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Child's Name"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/editTextRelation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editTextChildName"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignStart="@+id/editTextChildName"
+            android:layout_below="@+id/editTextChildName"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textViewRelation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editTextRelation"
+            android:layout_alignBottom="@+id/editTextRelation"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Relation"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/textViewGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textViewRelation"
+            android:layout_alignRight="@+id/textViewRelation"
+            android:layout_below="@+id/editTextRelation"
+            android:layout_marginTop="10dp"
+            android:text="Gender"
+            android:textColor="#000" />
+
+        <CheckBox
+            android:id="@+id/checkBoxMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textViewChildName"
+            android:layout_alignRight="@+id/textViewChildName"
+            android:layout_below="@+id/textViewGender"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="17dp"
+            android:text="Male"
+            android:textColor="#000" />
+
+        <CheckBox
+            android:id="@+id/checkBoxFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editTextRelation"
+            android:layout_alignStart="@+id/editTextRelation"
+            android:layout_alignTop="@+id/checkBoxMale"
+            android:text="Female"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/editTextReligion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/checkBoxFemale"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_toRightOf="@+id/textViewGender"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textViewReligion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editTextReligion"
+            android:layout_alignBottom="@+id/editTextReligion"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Religion"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/editTextFatherCnic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/checkBoxFemale"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignStart="@+id/checkBoxFemale"
+            android:layout_below="@+id/textViewFatherName"
+            android:ems="10"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/editTextMotherName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editTextFatherCnic"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignStart="@+id/editTextFatherCnic"
+            android:layout_below="@+id/editTextFatherCnic"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textViewMotherName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editTextMotherName"
+            android:layout_alignBottom="@+id/editTextMotherName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Mother's Name"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/textViewFatherCnic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editTextFatherCnic"
+            android:layout_alignBottom="@+id/editTextFatherCnic"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Father's Cnic"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/editTextMotherCnic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/editTextMotherName"
+            android:layout_toRightOf="@+id/textViewFatherCnic"
+            android:ems="10"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textViewMotherCnic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editTextMotherCnic"
+            android:layout_alignBottom="@+id/editTextMotherCnic"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Mother's Cnic"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/editTextAreaOfBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/editTextMotherCnic"
+            android:layout_toRightOf="@+id/textViewAreaOfBirth"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textViewAreaOfBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editTextAreaOfBirth"
+            android:layout_alignBottom="@+id/editTextAreaOfBirth"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Dist/Area O Birth"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/editTextDateOfBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editTextMotherCnic"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignStart="@+id/editTextMotherCnic"
+            android:layout_below="@+id/editTextAreaOfBirth"
+            android:ems="10"
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/textViewDateOfBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editTextDateOfBirth"
+            android:layout_alignBottom="@+id/editTextDateOfBirth"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Date Of Birth"
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/editTextFatherName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/editTextReligion"
+            android:layout_toRightOf="@+id/textViewFatherName"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textViewFatherName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editTextFatherName"
+            android:layout_alignBottom="@+id/editTextFatherName"
+            android:layout_alignLeft="@+id/checkBoxMale"
+            android:layout_alignStart="@+id/checkBoxMale"
+            android:text="Father's Name"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/textViewVacinated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vacinated"
+            android:textColor="#000"
+            android:layout_below="@+id/editTextDateOfBirth"
+            android:layout_alignLeft="@+id/textViewDateOfBirth"
+            android:layout_alignStart="@+id/textViewDateOfBirth"
+            android:layout_marginTop="14dp" />
+
+        <CheckBox
+            android:id="@+id/checkBoxYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:textColor="#000"
+            android:layout_alignBaseline="@+id/textViewVacinated"
+            android:layout_alignBottom="@+id/textViewVacinated"
+            android:layout_toRightOf="@+id/textViewVacinated"
+            android:layout_toEndOf="@+id/textViewVacinated" />
+
+        <TextView
+            android:text="Disability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:id="@+id/textViewDisability"
+            android:layout_alignBaseline="@+id/editTextDisability"
+            android:layout_alignBottom="@+id/editTextDisability"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/editTextDisability"
+            android:layout_below="@+id/checkBoxYes"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@+id/checkBoxYes"
+            android:layout_alignStart="@+id/checkBoxYes" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/editTextAddress"
+            android:layout_below="@+id/editTextDisability"
+            android:layout_alignLeft="@+id/editTextDisability"
+            android:layout_alignStart="@+id/editTextDisability"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:text="Address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewAddress"
+            android:layout_alignBaseline="@+id/editTextAddress"
+            android:textColor="#000"
+            android:layout_alignBottom="@+id/editTextAddress"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="District"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDistrict"
+            android:textColor="#000"
+            android:layout_alignBaseline="@+id/editTextDistrict"
+            android:layout_alignBottom="@+id/editTextDistrict"
+            android:layout_alignLeft="@+id/textViewFatherName"
+            android:layout_alignStart="@+id/textViewFatherName" />
+
+        <CheckBox
+            android:id="@+id/checkBoxNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textColor="#000"
+            android:layout_above="@+id/editTextDisability"
+            android:layout_alignRight="@+id/checkBoxFemale"
+            android:layout_alignEnd="@+id/checkBoxFemale" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/editTextDistrict"
+            android:layout_below="@+id/editTextAddress"
+            android:layout_toRightOf="@+id/textViewDisability"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+</ScrollView>
