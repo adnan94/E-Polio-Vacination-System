@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"
-        tools:context="com.example.ali.myapplication.MainActivity">
+        tools:context="com.example.ali.myapplication.Activities.MainActivity">
 
 
         <EditText
@@ -299,101 +299,110 @@
             android:id="@+id/textViewVacinated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vacinated"
-            android:textColor="#000"
-            android:layout_below="@+id/editTextDateOfBirth"
             android:layout_alignLeft="@+id/textViewDateOfBirth"
             android:layout_alignStart="@+id/textViewDateOfBirth"
-            android:layout_marginTop="14dp" />
+            android:layout_below="@+id/editTextDateOfBirth"
+            android:layout_marginTop="14dp"
+            android:text="Vacinated"
+            android:textColor="#000" />
 
         <CheckBox
             android:id="@+id/checkBoxYes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
-            android:textColor="#000"
             android:layout_alignBaseline="@+id/textViewVacinated"
             android:layout_alignBottom="@+id/textViewVacinated"
+            android:layout_toEndOf="@+id/textViewVacinated"
             android:layout_toRightOf="@+id/textViewVacinated"
-            android:layout_toEndOf="@+id/textViewVacinated" />
+            android:text="Yes"
+            android:textColor="#000" />
 
         <TextView
-            android:text="Disability"
+            android:id="@+id/textViewDisability"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:id="@+id/textViewDisability"
             android:layout_alignBaseline="@+id/editTextDisability"
             android:layout_alignBottom="@+id/editTextDisability"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:text="Disability"
+            android:textColor="#000" />
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
             android:id="@+id/editTextDisability"
-            android:layout_below="@+id/checkBoxYes"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignLeft="@+id/checkBoxYes"
-            android:layout_alignStart="@+id/checkBoxYes" />
-
-        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/editTextAddress"
-            android:layout_below="@+id/editTextDisability"
-            android:layout_alignLeft="@+id/editTextDisability"
-            android:layout_alignStart="@+id/editTextDisability"
+            android:layout_alignLeft="@+id/checkBoxYes"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignStart="@+id/checkBoxYes"
+            android:layout_below="@+id/checkBoxYes"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editTextAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editTextDisability"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignStart="@+id/editTextDisability"
+            android:layout_below="@+id/editTextDisability"
+            android:ems="10"
+            android:inputType="textPersonName" />
 
         <TextView
-            android:text="Address"
+            android:id="@+id/textViewAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewAddress"
             android:layout_alignBaseline="@+id/editTextAddress"
-            android:textColor="#000"
             android:layout_alignBottom="@+id/editTextAddress"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:text="Address"
+            android:textColor="#000" />
 
         <TextView
-            android:text="District"
+            android:id="@+id/textViewDistrict"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewDistrict"
-            android:textColor="#000"
             android:layout_alignBaseline="@+id/editTextDistrict"
             android:layout_alignBottom="@+id/editTextDistrict"
             android:layout_alignLeft="@+id/textViewFatherName"
-            android:layout_alignStart="@+id/textViewFatherName" />
+            android:layout_alignStart="@+id/textViewFatherName"
+            android:text="District"
+            android:textColor="#000" />
 
         <CheckBox
             android:id="@+id/checkBoxNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No"
-            android:textColor="#000"
             android:layout_above="@+id/editTextDisability"
+            android:layout_alignEnd="@+id/checkBoxFemale"
             android:layout_alignRight="@+id/checkBoxFemale"
-            android:layout_alignEnd="@+id/checkBoxFemale" />
+            android:text="No"
+            android:textColor="#000" />
 
         <EditText
+            android:id="@+id/editTextDistrict"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/editTextDistrict"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/editTextAddress"
             android:layout_toRightOf="@+id/textViewDisability"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:ems="10"
+            android:inputType="textPersonName" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3f51b4"
+            android:text="Submit"
+            android:textColor="#fff"
+            android:id="@+id/submitForm"
+            android:layout_below="@id/editTextDistrict"
+            />
     </RelativeLayout>
 </ScrollView>
