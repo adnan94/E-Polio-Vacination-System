@@ -18,7 +18,7 @@ public class FirebaseHandler {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private StorageReference mfirebaseStorage;
     private static FirebaseHandler ourInstance;
-
+    private DatabaseReference usersRef;
     public static DatabaseReference getDataBaseReference() {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("AppData");
         databaseReference.keepSynced(true);
@@ -36,7 +36,7 @@ public class FirebaseHandler {
     private FirebaseHandler() {
         firebaseRef = FirebaseDatabase.getInstance().getReference();
         mfirebaseStorage = FirebaseStorage.getInstance().getReferenceFromUrl(String.valueOf(FirebaseStorage.getInstance().getReference()));
-      //  initializeChildRefs();
+        initializeChildRefs();
     }
 
     //  DatabaseStorage
@@ -49,4 +49,11 @@ public class FirebaseHandler {
         return firebaseRef;
     }
 
+    private void initializeChildRefs() {
+        usersRef = firebaseRef.child("users");
+
+    }
+    public DatabaseReference getUsersRef() {
+        return usersRef;
+    }
 }

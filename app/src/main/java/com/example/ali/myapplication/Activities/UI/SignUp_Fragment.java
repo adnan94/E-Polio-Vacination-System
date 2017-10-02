@@ -45,6 +45,7 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
     String gender_array[] = {"Male",
             "Female",
     };
+    ProgressDialog progressDialog;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +114,7 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
                 //  }
                 else{
                     try {
-                        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "Sign Up", "Connecting...", true, false);
+                         progressDialog = ProgressDialog.show(getActivity(), "Sign Up", "Connecting...", true, false);
 
                         mAuth.createUserWithEmailAndPassword((email.getText().toString()), (password.getText().toString())).addOnCompleteListener(getActivity(),
                                 new OnCompleteListener<AuthResult>() {
@@ -146,7 +147,7 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
                         });
 
                     } catch (Exception ex) {
-
+                        progressDialog.dismiss();
                         ex.printStackTrace();
                     }
                 }

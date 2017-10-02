@@ -79,6 +79,16 @@ public class UserModel {
         this.password = password;
     }
 
+    public static UserModel myObj;
+    public static UserModel getInstance(String name, String fname, String address, String email, String password, String cnic, String cellNo){
+        if(myObj == null){
+            myObj = new UserModel(name, fname,address,email,password,cnic,cellNo);
+        }
+        return myObj;
+    }
 
+    public static UserModel getInstanceIfNotNull(){
+        return myObj;
+    }
 
 }
