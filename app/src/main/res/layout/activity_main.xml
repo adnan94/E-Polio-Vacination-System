@@ -4,405 +4,360 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="10dp"
         tools:context="com.example.ali.myapplication.Activities.MainActivity">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:src="@mipmap/nadra" />
 
-        <EditText
-            android:id="@+id/editTextApplicantName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/textViewApplicantName"
-            android:ems="10"
-            android:inputType="textPersonName" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textViewApplicantName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextApplicantName"
-            android:layout_alignBottom="@+id/editTextApplicantName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Applicant's Name"
-            android:textColor="#000" />
+            <EditText
+                android:id="@+id/editTextApplicantName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Applicant's Name"
+                android:inputType="textPersonName"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/editTextApplicantCnic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editTextApplicantName"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignStart="@+id/editTextApplicantName"
-            android:layout_below="@+id/editTextApplicantName"
-            android:ems="10"
-            android:inputType="number" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textViewApplicantCnic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextApplicantCnic"
-            android:layout_alignBottom="@+id/editTextApplicantCnic"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Applicant Cnic"
-            android:textColor="#000" />
+            <EditText
+                android:id="@+id/editTextApplicantCnic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Applicant's Cnic"
+                android:inputType="number"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp"
 
-        <EditText
-            android:id="@+id/editTextChildName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/editTextApplicantCnic"
-            android:layout_toRightOf="@+id/textViewApplicantCnic"
-            android:ems="10"
-            android:inputType="textPersonName" />
+                />
+        </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textViewChildName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextChildName"
-            android:layout_alignBottom="@+id/editTextChildName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Child's Name"
-            android:textColor="#000" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/editTextRelation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editTextChildName"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignStart="@+id/editTextChildName"
-            android:layout_below="@+id/editTextChildName"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/editTextChildName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Child's Name"
+                android:inputType="textPersonName"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp"
 
-        <TextView
-            android:id="@+id/textViewRelation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextRelation"
-            android:layout_alignBottom="@+id/editTextRelation"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Relation"
-            android:textColor="#000" />
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextRelation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Relation"
+                android:inputType="textPersonName"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp"
+
+                />
+        </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:id="@+id/textViewGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/textViewRelation"
-            android:layout_alignRight="@+id/textViewRelation"
-            android:layout_below="@+id/editTextRelation"
             android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif"
             android:text="Gender"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="16sp"
+
+            />
 
         <CheckBox
             android:id="@+id/checkBoxMale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/textViewChildName"
-            android:layout_alignRight="@+id/textViewChildName"
-            android:layout_below="@+id/textViewGender"
             android:layout_marginEnd="17dp"
             android:layout_marginRight="17dp"
+            android:fontFamily="sans-serif"
             android:text="Male"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="12sp"
+
+            />
 
         <CheckBox
             android:id="@+id/checkBoxFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editTextRelation"
-            android:layout_alignStart="@+id/editTextRelation"
-            android:layout_alignTop="@+id/checkBoxMale"
+            android:fontFamily="sans-serif"
             android:text="Female"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="12sp"
 
-        <EditText
-            android:id="@+id/editTextReligion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/checkBoxFemale"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_toRightOf="@+id/textViewGender"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            />
 
-        <TextView
-            android:id="@+id/textViewReligion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextReligion"
-            android:layout_alignBottom="@+id/editTextReligion"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Religion"
-            android:textColor="#000" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/editTextFatherCnic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/checkBoxFemale"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignStart="@+id/checkBoxFemale"
-            android:layout_below="@+id/textViewFatherName"
-            android:ems="10"
-            android:inputType="number" />
+            <EditText
+                android:id="@+id/editTextReligion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Religion"
+                android:inputType="textPersonName"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp"
 
-        <EditText
-            android:id="@+id/editTextMotherName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editTextFatherCnic"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignStart="@+id/editTextFatherCnic"
-            android:layout_below="@+id/editTextFatherCnic"
-            android:ems="10"
-            android:inputType="textPersonName" />
+                />
+        </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textViewMotherName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextMotherName"
-            android:layout_alignBottom="@+id/editTextMotherName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Mother's Name"
-            android:textColor="#000" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textViewFatherCnic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextFatherCnic"
-            android:layout_alignBottom="@+id/editTextFatherCnic"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Father's Cnic"
-            android:textColor="#000" />
+            <EditText
+                android:id="@+id/editTextFatherCnic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Father's Cnic"
+                android:inputType="number"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp"
 
-        <EditText
-            android:id="@+id/editTextMotherCnic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/editTextMotherName"
-            android:layout_toRightOf="@+id/textViewFatherCnic"
-            android:ems="10"
-            android:inputType="number" />
+                />
+        </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textViewMotherCnic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextMotherCnic"
-            android:layout_alignBottom="@+id/editTextMotherCnic"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Mother's Cnic"
-            android:textColor="#000" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/editTextAreaOfBirth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/editTextMotherCnic"
-            android:layout_toRightOf="@+id/textViewAreaOfBirth"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/editTextMotherName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Mother's Name"
+                android:inputType="textPersonName"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp"
 
-        <TextView
-            android:id="@+id/textViewAreaOfBirth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextAreaOfBirth"
-            android:layout_alignBottom="@+id/editTextAreaOfBirth"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Dist/Area O Birth"
-            android:textColor="#000" />
+                />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/editTextDateOfBirth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editTextMotherCnic"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignStart="@+id/editTextMotherCnic"
-            android:layout_below="@+id/editTextAreaOfBirth"
-            android:ems="10"
-            android:inputType="date" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textViewDateOfBirth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextDateOfBirth"
-            android:layout_alignBottom="@+id/editTextDateOfBirth"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Date Of Birth"
-            android:textColor="#000" />
+            <EditText
+                android:id="@+id/editTextMotherCnic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Mother's Cnic"
+                android:inputType="number"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp"
 
-        <EditText
-            android:id="@+id/editTextFatherName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/editTextReligion"
-            android:layout_toRightOf="@+id/textViewFatherName"
-            android:ems="10"
-            android:inputType="textPersonName" />
+                />
+        </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textViewFatherName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextFatherName"
-            android:layout_alignBottom="@+id/editTextFatherName"
-            android:layout_alignLeft="@+id/checkBoxMale"
-            android:layout_alignStart="@+id/checkBoxMale"
-            android:text="Father's Name"
-            android:textColor="#000" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextAreaOfBirth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Area Of Birth"
+                android:inputType="textPersonName"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextDateOfBirth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Date Of Birth"
+                android:inputType="date"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextFatherName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Father's Name"
+                android:inputType="textPersonName"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp"
+
+                />
+        </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:id="@+id/textViewVacinated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textViewDateOfBirth"
-            android:layout_alignStart="@+id/textViewDateOfBirth"
-            android:layout_below="@+id/editTextDateOfBirth"
             android:layout_marginTop="14dp"
+            android:fontFamily="sans-serif"
             android:text="Vacinated"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="16sp"
+
+            />
 
         <CheckBox
             android:id="@+id/checkBoxYes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textViewVacinated"
-            android:layout_alignBottom="@+id/textViewVacinated"
-            android:layout_toEndOf="@+id/textViewVacinated"
-            android:layout_toRightOf="@+id/textViewVacinated"
+            android:fontFamily="sans-serif"
             android:text="Yes"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="12sp"
 
-        <TextView
-            android:id="@+id/textViewDisability"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextDisability"
-            android:layout_alignBottom="@+id/editTextDisability"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Disability"
-            android:textColor="#000" />
-
-        <EditText
-            android:id="@+id/editTextDisability"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/checkBoxYes"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignStart="@+id/checkBoxYes"
-            android:layout_below="@+id/checkBoxYes"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/editTextAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editTextDisability"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignStart="@+id/editTextDisability"
-            android:layout_below="@+id/editTextDisability"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textViewAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextAddress"
-            android:layout_alignBottom="@+id/editTextAddress"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Address"
-            android:textColor="#000" />
-
-        <TextView
-            android:id="@+id/textViewDistrict"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editTextDistrict"
-            android:layout_alignBottom="@+id/editTextDistrict"
-            android:layout_alignLeft="@+id/textViewFatherName"
-            android:layout_alignStart="@+id/textViewFatherName"
-            android:text="District"
-            android:textColor="#000" />
+            />
 
         <CheckBox
             android:id="@+id/checkBoxNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/editTextDisability"
-            android:layout_alignEnd="@+id/checkBoxFemale"
-            android:layout_alignRight="@+id/checkBoxFemale"
+            android:fontFamily="sans-serif"
             android:text="No"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="12sp"
 
-        <EditText
-            android:id="@+id/editTextDistrict"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/editTextAddress"
-            android:layout_toRightOf="@+id/textViewDisability"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextDisability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkBoxYes"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Disability"
+                android:inputType="textPersonName"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Address"
+                android:inputType="textPersonName"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextDistrict"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="District"
+                android:inputType="textPersonName"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp" />
+        </android.support.design.widget.TextInputLayout>
 
         <Button
+            android:id="@+id/submitForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#3f51b4"
+            android:fontFamily="sans-serif"
             android:text="Submit"
             android:textColor="#fff"
-            android:id="@+id/submitForm"
-            android:layout_below="@id/editTextDistrict"
+            android:textSize="14sp"
+
             />
-    </RelativeLayout>
+    </LinearLayout>
 </ScrollView>

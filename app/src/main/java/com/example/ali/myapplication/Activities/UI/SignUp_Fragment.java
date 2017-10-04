@@ -35,17 +35,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SignUp_Fragment extends android.support.v4.app.Fragment {
 
-    private EditText cell_no,email,cnic,password,address,confirmpass,fname,name;
+    private EditText cell_no, email, cnic, password, address, fname, name;
     private Button signup;
     private FirebaseAuth mAuth;
-    private FirebaseUser firebase_user;
+    //    private FirebaseUser firebase_user;
     private DatabaseReference firebase;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-    String gender_array[] = {"Male",
-            "Female",
-    };
+    //    private SharedPreferences sharedPreferences;
+//    private SharedPreferences.Editor editor;
+//    String gender_array[] = {"Male",
+//            "Female",
+//    };
     ProgressDialog progressDialog;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +56,13 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.signup_view,null);
+        View rootView = inflater.inflate(R.layout.signup_view, null);
 
         firebase = FirebaseDatabase.getInstance().getReference();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        editor = sharedPreferences.edit();
-        editor.clear();
+        mAuth = FirebaseAuth.getInstance();
+//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        editor = sharedPreferences.edit();
+//        editor.clear();
         email = (EditText) rootView.findViewById(R.id.email);
         cnic = (EditText) rootView.findViewById(R.id.cnic);
         password = (EditText) rootView.findViewById(R.id.password);
@@ -69,11 +71,11 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
         address = (EditText) rootView.findViewById(R.id.address);
         cell_no = (EditText) rootView.findViewById(R.id.cell_no);
 
-        signup = (Button)rootView.findViewById(R.id.signup_btn);
+        signup = (Button) rootView.findViewById(R.id.signup_btn);
 
-   //     profile_image  = (CircleImageView)rootView.findViewById(R.id.profile_img);
-    //    spinner_country=(Spinner)rootView.findViewById(R.id.country_signup_spin);
-     //   spinner_gender=(Spinner)rootView.findViewById(R.id.country_signup_gender);
+        //     profile_image  = (CircleImageView)rootView.findViewById(R.id.profile_img);
+        //    spinner_country=(Spinner)rootView.findViewById(R.id.country_signup_spin);
+        //   spinner_gender=(Spinner)rootView.findViewById(R.id.country_signup_gender);
 
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -84,24 +86,20 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
                 //Checking the length of pasword while registering new USER;
                 if (pass.length() <= 6) {
                     main(pass);
-                }else if(( fname.getText().toString().equals("")
+                } else if ((fname.getText().toString().equals("")
                         || name.getText().toString().equals("")
                         || cnic.getText().toString().equals("")
-                        || pass.equals(""))){
+                        || pass.equals(""))) {
                     ///    || confrim_passwordd.equals("")) ){
-                    Toast.makeText(getActivity(),"Fields Should not be left Empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Fields Should not be left Empty", Toast.LENGTH_SHORT).show();
 
-                }
-                else if(email.getText().length()==0 || !android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches() ){
+                } else if (email.getText().length() == 0 || !android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
                     email.setError("Enter Valid Email Address");
-                }
-                else if(fname.getText().length()== 0 || !fname.getText().toString().matches("[a-zA-Z ]+")){
+                } else if (fname.getText().length() == 0 || !fname.getText().toString().matches("[a-zA-Z ]+")) {
                     fname.setError("Invalid Name");
-                }
-                else if(name.getText().length() == 0 || !name.getText().toString().matches("[a-zA-Z ]+")){
+                } else if (name.getText().length() == 0 || !name.getText().toString().matches("[a-zA-Z ]+")) {
                     name.setError("Invalid Name");
-                }
-                else if(cell_no.getText().length() == 0){
+                } else if (cell_no.getText().length() == 0) {
                     cell_no.setError("Invalid PHONE");
                 }
                 //Checking the length of pasword while registering new USER;
@@ -112,36 +110,39 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
                 // else if(imageURL==null) {
                 //    Toast.makeText(getActivity(),"Upload Image",Toast.LENGTH_SHORT).show();
                 //  }
-                else{
+                else {
                     try {
-                         progressDialog = ProgressDialog.show(getActivity(), "Sign Up", "Connecting...", true, false);
+                        progressDialog = ProgressDialog.show(getActivity(), "Sign Up", "Connecting...", true, false);
 
                         mAuth.createUserWithEmailAndPassword((email.getText().toString()), (password.getText().toString())).addOnCompleteListener(getActivity(),
                                 new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
-                                        String uid = mAuth.getCurrentUser().getUid();
-               //                         String user_country = spinner_country.getSelectedItem().toString();
-                 //                       String user_gender = spinner_gender.getSelectedItem().toString();
-                                        firebase.child("users").child(uid).setValue(new UserModel(name.getText().toString(), fname.getText().toString(),address.getText().toString(), email.getText().toString(), pass,cnic.getText().toString(),cell_no.getText().toString()));
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getActivity(), "Successfull", Toast.LENGTH_SHORT).show();
-                                        AppLogs.logd("createUserWithEmail:onComplete: " + task.isSuccessful());
-                                        if(getActivity().getSupportFragmentManager().findFragmentById(R.id.container) != null) {
-                                            getActivity().getSupportFragmentManager()
-                                                    .beginTransaction().
-                                                    remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.container)).commit();
-                                        }
-//                                                } else
                                         if (!task.isSuccessful()) {
                                             progressDialog.dismiss();
                                             Toast.makeText(getActivity(), " " + task.getException(), Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            String uid = task.getResult().getUser().getUid();
+                                            //                         String user_country = spinner_country.getSelectedItem().toString();
+                                            //                       String user_gender = spinner_gender.getSelectedItem().toString();
+                                            firebase.child("users").child(uid).setValue(new UserModel(name.getText().toString(), fname.getText().toString(), address.getText().toString(), email.getText().toString(), pass, cnic.getText().toString(), cell_no.getText().toString()));
+                                            progressDialog.dismiss();
+                                            Toast.makeText(getActivity(), "Successfull", Toast.LENGTH_SHORT).show();
+                                            AppLogs.logd("createUserWithEmail:onComplete: " + task.isSuccessful());
+                                            if (getActivity().getSupportFragmentManager().findFragmentById(R.id.container) != null) {
+                                                getActivity().getSupportFragmentManager()
+                                                        .beginTransaction().
+                                                        remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.container)).commit();
+                                            }
+//                                                } else
+
                                         }
+
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                AppLogs.d("FailureSignup",e.getMessage());
+                                AppLogs.d("FailureSignup", e.getMessage());
 
                             }
                         });
