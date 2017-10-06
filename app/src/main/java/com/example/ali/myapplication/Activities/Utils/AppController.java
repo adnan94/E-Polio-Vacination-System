@@ -2,6 +2,7 @@ package com.example.ali.myapplication.Activities.Utils;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -12,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AppController extends Application {
     @Override
     public void onCreate() {
+        MultiDex.install(this);
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         super.onCreate();
 

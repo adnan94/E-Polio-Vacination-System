@@ -91,41 +91,97 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textViewGender"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif"
-            android:text="Gender"
-            android:textColor="#000"
-            android:textSize="16sp"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-            />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-        <CheckBox
-            android:id="@+id/checkBoxMale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="17dp"
-            android:layout_marginRight="17dp"
-            android:fontFamily="sans-serif"
-            android:text="Male"
-            android:textColor="#000"
-            android:textSize="12sp"
+                <TextView
+                    android:id="@+id/textViewGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Gender"
+                    android:textColor="#000"
+                    android:textSize="16sp"
 
-            />
+                    />
 
-        <CheckBox
-            android:id="@+id/checkBoxFemale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="Female"
-            android:textColor="#000"
-            android:textSize="12sp"
+                <CheckBox
+                    android:id="@+id/checkBoxMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="17dp"
+                    android:layout_marginRight="17dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Male"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:checked="true"
 
-            />
+                    />
+
+                <CheckBox
+                    android:id="@+id/checkBoxFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="Female"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewVacinated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Vacinated"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="Yes"
+                    android:textColor="#000"
+                    android:checked="true"
+                    android:textSize="12sp" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="No"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -138,6 +194,25 @@
                 android:ems="10"
                 android:fontFamily="sans-serif"
                 android:hint="Religion"
+                android:inputType="textPersonName"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextFatherName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Father's Name"
                 android:inputType="textPersonName"
                 android:textColor="#000"
                 android:textColorHint="#000"
@@ -246,60 +321,6 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/editTextFatherName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Father's Name"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp"
-
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <TextView
-            android:id="@+id/textViewVacinated"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:fontFamily="sans-serif"
-            android:text="Vacinated"
-            android:textColor="#000"
-            android:textSize="16sp"
-
-            />
-
-        <CheckBox
-            android:id="@+id/checkBoxYes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="Yes"
-            android:textColor="#000"
-            android:textSize="12sp"
-
-            />
-
-        <CheckBox
-            android:id="@+id/checkBoxNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="No"
-            android:textColor="#000"
-            android:textSize="12sp"
-
-            />
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
                 android:id="@+id/editTextDisability"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -361,3 +382,4 @@
             />
     </LinearLayout>
 </ScrollView>
+
