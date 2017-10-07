@@ -6,8 +6,9 @@ package com.example.ali.myapplication.Activities.ModelClasses;
  */
 
 public class BForm {
-    String applicantName,applicantCnic,childName,relation,religion,fatherName,fatherCnic,motherName,motherCnic,areaOfBirth,dateOfBirth,disablity,address,district,gender;
+    public String applicantName, applicantCnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disablity, address, district, gender;
     boolean vacinated;
+    String formID;
 
     public String getGender() {
         return gender;
@@ -20,7 +21,7 @@ public class BForm {
     public BForm() {
     }
 
-    public BForm(String applicantName, String applicantCnic, String childName, String relation, String religion, String fatherName, String fatherCnic, String motherName, String motherCnic, String areaOfBirth, String dateOfBirth, String disablity, String address, String district, String gender, boolean vacinated) {
+    public BForm(String applicantName, String applicantCnic, String childName, String relation, String religion, String fatherName, String fatherCnic, String motherName, String motherCnic, String areaOfBirth, String dateOfBirth, String disablity, String address, String district, String gender, boolean vacinated, String formID) {
         this.applicantName = applicantName;
         this.applicantCnic = applicantCnic;
         this.childName = childName;
@@ -37,6 +38,15 @@ public class BForm {
         this.district = district;
         this.gender = gender;
         this.vacinated = vacinated;
+        this.formID = formID;
+    }
+
+    public String getFormID() {
+        return formID;
+    }
+
+    public void setFormID(String formID) {
+        this.formID = formID;
     }
 
     public String getApplicantName() {

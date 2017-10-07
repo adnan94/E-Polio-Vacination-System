@@ -26,11 +26,11 @@ import java.util.Random;
 
 public class Form_Detail extends android.support.v4.app.Fragment {
 
-    EditText name, cnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address, district;
-    Button submit;
-    CheckBox yes, no, male, female;
-    DatabaseReference ref;
-
+    public EditText name, cnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address, district;
+    public Button submit;
+    public CheckBox yes, no, male, female;
+    public DatabaseReference ref;
+    public String randomNumber;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,10 +101,10 @@ public class Form_Detail extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 Random random = new Random();
-                final int key = random.nextInt(20);
-                Utils.toast(getActivity(), key + "");
+                 randomNumber =generateRandom();
+            //    Utils.toast(getActivity(), key + "");
                 BForm bForm = getFormData();
-                ref.child(String.valueOf(key)).setValue(bForm, new DatabaseReference.CompletionListener() {
+                ref.child(randomNumber).setValue(bForm, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 //                        Dialog dialog = new Dialog(getActivity());
@@ -136,6 +136,7 @@ public class Form_Detail extends android.support.v4.app.Fragment {
 
     //
     public BForm getFormData() {
+        randomNumber = generateRandom();
         BForm bForm = new BForm();
         bForm.setApplicantName(name.getText().toString());
         bForm.setApplicantCnic(cnic.getText().toString());
@@ -161,6 +162,7 @@ public class Form_Detail extends android.support.v4.app.Fragment {
         bForm.setDisablity(disability.getText().toString());
         bForm.setAddress(address.getText().toString());
         bForm.setDistrict(district.getText().toString());
+        bForm.setFormID(randomNumber);
         return bForm;
     }
 
@@ -185,5 +187,16 @@ public class Form_Detail extends android.support.v4.app.Fragment {
         male = (CheckBox) view.findViewById(R.id.checkBoxMale);
         female = (CheckBox) view.findViewById(R.id.checkBoxFemale);
 
+    }
+
+    public String generateRandom(){
+        char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+        Random rnd = new Random();
+        char rndNumber;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 5; i++)
+           sb.append(chars[rnd.nextInt(chars.length)]);
+
+        return sb.toString();
     }
 }
