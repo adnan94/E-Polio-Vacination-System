@@ -6,10 +6,10 @@ package com.example.ali.myapplication.Activities.ModelClasses;
 
 public class UserModel {
    public String name, fname, address, email, password, cnic, cellNo;
+    public int user_type;
 
 
-
-    public UserModel(String name, String fname, String address, String email, String password, String cnic, String cellNo) {
+    public UserModel(String name, String fname, String address, String email, String password, String cnic, String cellNo, int user_type) {
         this.name = name;
         this.fname = fname;
         this.address = address;
@@ -17,9 +17,19 @@ public class UserModel {
         this.password = password;
         this.cnic = cnic;
         this.cellNo = cellNo;
+        this.user_type = user_type;
     }
 
     public UserModel() {
+    }
+
+
+    public int getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(int user_type) {
+        this.user_type = user_type;
     }
 
     public String getCnic() {
@@ -81,9 +91,9 @@ public class UserModel {
 
     public static UserModel myObj;
 
-    public static UserModel getInstance(String name, String fname, String address, String email, String password, String cnic, String cellNo){
+    public static UserModel getInstance(String name, String fname, String address, String email, String password, String cnic, String cellNo, int user_type){
         if(myObj == null){
-            myObj = new UserModel(name, fname,address,email,password,cnic,cellNo);
+            myObj = new UserModel(name, fname,address,email,password,cnic,cellNo,user_type);
         }
         return myObj;
     }

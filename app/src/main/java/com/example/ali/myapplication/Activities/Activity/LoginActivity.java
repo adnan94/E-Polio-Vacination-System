@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,10 +64,10 @@ public class LoginActivity extends AppCompatActivity {
         userpass = (EditText) findViewById(R.id.editText_loginpass);
         firebase = FirebaseDatabase.getInstance().getReference();
         checkBox = (CheckBox) findViewById(R.id.remember_me);
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
-        }
+//        if (mAuth.getCurrentUser() != null) {
+//            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//            finish();
+//        }
 
         permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
         fragmentManager = getSupportFragmentManager();
@@ -131,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                                             if (dataSnapshot != null) {
                                                 if (dataSnapshot.getValue() != null) {
                                                     UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                    UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo());
+                                                    UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(),userModel.getUser_type());
                                                     UserModel.myObj = userModel1;
 
                                                 }
@@ -160,5 +161,67 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    FirebaseHandler.getInstance().getUsersRef().child(user.getUid()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if(dataSnapshot!=null){
+                                if(dataSnapshot.getValue()!=null){
+                                    UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                                    UserModel.getInstance(
+                                            userModel.getName(),
+                                            userModel.getFname(),
+                                            userModel.getAddress(),
+                                            userModel.getEmail(),
+                                            userModel.getPassword(),
+                                            userModel.getCnic(),
+                                            userModel.getCellNo(),
+                                            userModel.getUser_type()
+                                    );
+
+                                    openMainScreen();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+
+
+
+                } else {
+                    // User is signed out
+               //     Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+               //     overridePendingTransition(R.anim.slide_down,R.anim.slide_up);
+                 //   startActivity(intent);
+                 //   finish();
+                }
+            }
+        };
+
+
+    }
+
+    private void openMainScreen() {
+        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
     }
 }
