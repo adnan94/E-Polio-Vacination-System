@@ -1,4 +1,4 @@
-package com.example.ali.myapplication.Activities.Activity;
+package com.example.ali.myapplication.Activities.UI;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -102,17 +102,10 @@ public class Form_Detail extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 Random random = new Random();
                  randomNumber =generateRandom();
-            //    Utils.toast(getActivity(), key + "");
                 BForm bForm = getFormData();
                 ref.child(randomNumber).setValue(bForm, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-//                        Dialog dialog = new Dialog(getActivity());
-//                        dialog.setTitle("Your Token Id Is : " + key);
-//                        dialog.setCancelable(true);
-//                        dialog.show();
-//                        Utils.toast(getActivity(), "Your Token Id Is : " + key);
-//                        Utils.toast(getActivity(), "Sucessfull");
 //                        name.setText("");
 //                        cnic.setText("");
 //                        childName.setText("");
