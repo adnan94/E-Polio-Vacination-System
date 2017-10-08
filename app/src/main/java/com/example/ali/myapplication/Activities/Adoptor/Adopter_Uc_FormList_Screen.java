@@ -47,6 +47,8 @@ public class Adopter_Uc_FormList_Screen extends BaseAdapter {
         View v = inflater.inflate(R.layout.item_form_uc_screen, viewGroup, false);
         TextView name = (TextView) v.findViewById(R.id.textNameUcFormListScreen);
         TextView cnic = (TextView) v.findViewById(R.id.textCnicUcFormListScreen);
+        name.setText("Name : " + list.get(i).applicantName);
+        cnic.setText("Cnic : " + list.get(i).applicantCnic);
 
         return v;
     }

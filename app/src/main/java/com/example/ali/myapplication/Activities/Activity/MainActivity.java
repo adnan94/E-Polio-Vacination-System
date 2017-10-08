@@ -25,15 +25,15 @@ public class MainActivity extends AppCompatActivity {
         form_btn_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().add(R.id.container,new Form_Detail()).addToBackStack(null).commit();
-                form_btn_details.setVisibility(View.GONE);
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,new Form_Detail()).addToBackStack(null).commit();
+//                form_btn_details.setVisibility(View.GONE);
             }
         });
         form_btn_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().add(R.id.container,new Form_List()).addToBackStack(null).commit();
-                form_btn_list.setVisibility(View.GONE);
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,new Form_List()).addToBackStack(null).commit();
+//                form_btn_list.setVisibility(View.GONE);
             }
         });
 
@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        form_btn_details.setVisibility(View.VISIBLE);
-        form_btn_list.setVisibility(View.VISIBLE);
+//        form_btn_details.setVisibility(View.VISIBLE);
+//        form_btn_list.setVisibility(View.VISIBLE);
 
     }
 }
