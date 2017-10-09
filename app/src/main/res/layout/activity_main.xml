@@ -9,14 +9,14 @@
     >
 
     <FrameLayout
-        android:id="@+id/container"
-
+        android:background="#fff"
+        android:id="@+id/maincontainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </FrameLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -28,12 +28,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:layout_below="@id/form_btn"
             android:id="@+id/form_btn_list"
             android:text="List"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-</LinearLayout>
+</RelativeLayout>
 
 
 

@@ -1,11 +1,14 @@
 package com.example.ali.myapplication.Activities.Activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -33,7 +36,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow();
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
 
         form_btn_details = (Button)findViewById(R.id.form_btn);
         form_btn_list = (Button)findViewById(R.id.form_btn_list);
@@ -64,14 +71,14 @@ public class MainActivity extends AppCompatActivity {
         form_btn_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,new Form_Detail()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.maincontainer,new Form_Detail()).addToBackStack(null).commit();
 //                form_btn_details.setVisibility(View.GONE);
             }
         });
         form_btn_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,new Form_List()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.maincontainer,new Form_List()).addToBackStack(null).commit();
 //                form_btn_list.setVisibility(View.GONE);
             }
         });
