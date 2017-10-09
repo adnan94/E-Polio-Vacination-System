@@ -1,6 +1,5 @@
 package com.example.ali.myapplication.Activities.Activity;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,18 +14,16 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
+import com.example.ali.myapplication.Activities.UI.Form_Detail;
+import com.example.ali.myapplication.Activities.UI.Form_List;
 import com.example.ali.myapplication.Activities.UI.Navigations_ItemsAdapter;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button form_btn;
+    Button form_btn_list,form_btn_details;
     public DrawerLayout drawer_layout;
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -37,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        form_btn = (Button)findViewById(R.id.form_btn);
+
+        form_btn_details = (Button)findViewById(R.id.form_btn);
+        form_btn_list = (Button)findViewById(R.id.form_btn_list);
         customer_container = (FrameLayout)findViewById(R.id.container);
         drawer_layout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
@@ -59,11 +58,21 @@ public class MainActivity extends AppCompatActivity {
         };
         drawer_layout.setDrawerListener(mDrawerToggle);
 
-        form_btn.setOnClickListener(new View.OnClickListener() {
+
+
+
+        form_btn_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().add(R.id.container,new Form_Detail()).addToBackStack(null).commit();
-                form_btn.setVisibility(View.GONE);
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,new Form_Detail()).addToBackStack(null).commit();
+//                form_btn_details.setVisibility(View.GONE);
+            }
+        });
+        form_btn_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,new Form_List()).addToBackStack(null).commit();
+//                form_btn_list.setVisibility(View.GONE);
             }
         });
 
@@ -72,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        form_btn.setVisibility(View.VISIBLE);
+//        form_btn_details.setVisibility(View.VISIBLE);
+//        form_btn_list.setVisibility(View.VISIBLE);
+
     }
 }
 

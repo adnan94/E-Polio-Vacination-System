@@ -1,4 +1,4 @@
-package com.example.ali.myapplication.Activities.Activity;
+package com.example.ali.myapplication.Activities.UI;
 
 import android.app.Dialog;
 import android.os.Build;
@@ -109,7 +109,6 @@ public class Form_Detail extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 Random random = new Random();
                  randomNumber =generateRandom();
-            //    Utils.toast(getActivity(), key + "");
                 BForm bForm = getFormData();
                 ref.child(randomNumber).setValue(bForm, new DatabaseReference.CompletionListener() {
                     @Override
