@@ -1,11 +1,14 @@
 package com.example.ali.myapplication.Activities.Activity;
 
 import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -42,7 +45,11 @@ public class Form_Detail extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.polio_form,null);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getActivity().getWindow();
+        //    w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
         init();
         cast(view);
         clickListeners();
@@ -107,6 +114,13 @@ public class Form_Detail extends android.support.v4.app.Fragment {
                 ref.child(randomNumber).setValue(bForm, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+                        if(getActivity().getSupportFragmentManager().findFragmentById(R.id.container) != null) {
+                            getActivity().getSupportFragmentManager()
+                                    .beginTransaction().
+                                    remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.container)).commit();
+                        }
+
 //                        Dialog dialog = new Dialog(getActivity());
 //                        dialog.setTitle("Your Token Id Is : " + key);
 //                        dialog.setCancelable(true);

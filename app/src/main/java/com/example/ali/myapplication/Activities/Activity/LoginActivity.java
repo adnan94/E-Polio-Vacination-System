@@ -162,61 +162,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                final FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    FirebaseHandler.getInstance().getUsersRef().child(user.getUid()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if(dataSnapshot!=null){
-                                if(dataSnapshot.getValue()!=null){
-                                    UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                    UserModel.getInstance(
-                                            userModel.getName(),
-                                            userModel.getFname(),
-                                            userModel.getAddress(),
-                                            userModel.getEmail(),
-                                            userModel.getPassword(),
-                                            userModel.getCnic(),
-                                            userModel.getCellNo(),
-                                            userModel.getUser_type()
-                                    );
 
-                                    openMainScreen();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
-
-
-
-
-                } else {
-                    // User is signed out
-               //     Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
-               //     overridePendingTransition(R.anim.slide_down,R.anim.slide_up);
-                 //   startActivity(intent);
-                 //   finish();
-                }
-            }
-        };
-
-
-    }
-
-    private void openMainScreen() {
-        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     @Override
