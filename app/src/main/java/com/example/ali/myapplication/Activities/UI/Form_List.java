@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.ali.myapplication.Activities.Adoptor.Adopter_Uc_FormList_Screen;
@@ -17,9 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +51,17 @@ public class Form_List extends Fragment {
         adopter = new Adopter_Uc_FormList_Screen(getActivity(), list);
         listView.setAdapter(adopter);
         getData();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("formData", list.get(position));
+                ViewFormForUc viewFormForUc = new ViewFormForUc();
+                viewFormForUc.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.maincontainer, viewFormForUc).addToBackStack(null).commit();
+
+            }
+        });
     }
 
     private void getData() {

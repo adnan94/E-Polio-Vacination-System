@@ -1,65 +1,46 @@
 package com.example.ali.myapplication.Activities.UI;
 
-import android.app.Dialog;
-import android.os.Build;
+
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
-import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
-import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-
-import java.util.Random;
 
 /**
- * Created by Sami Khan on 10/7/2017.
+ * A simple {@link Fragment} subclass.
  */
-
-public class Form_Detail extends android.support.v4.app.Fragment {
+public class FragmentEditForm extends Fragment {
 
     public EditText name, cnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address, district;
     public CheckBox yes, no, male, female;
     public Button submit;
-    public DatabaseReference ref;
+    BForm bForm;
     public String randomNumber;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+    public FragmentEditForm() {
+        // Required empty public constructor
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.polio_form, null);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getActivity().getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-            w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
-        init();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_fragment_edit_form, container, false);
+        bForm = getArguments().getParcelable("formData");
         cast(view);
+        setFormData();
         clickListeners();
-
-
         return view;
-    }
-
-    private void init() {
-        ref = FirebaseHandler.getInstance().getDataBaseReference().child("FormData");
     }
 
     private void clickListeners() {
@@ -106,49 +87,42 @@ public class Form_Detail extends android.support.v4.app.Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Random random = new Random();
-                randomNumber = generateRandom();
-                BForm bForm = getFormData();
-                ref.child(randomNumber).setValue(bForm, new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-
-                        if (getActivity().getSupportFragmentManager().findFragmentById(R.id.container) != null) {
-                            getActivity().getSupportFragmentManager()
-                                    .beginTransaction().
-                                    remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.container)).commit();
-                        }
-
-//                        Dialog dialog = new Dialog(getActivity());
-//                        dialog.setTitle("Your Token Id Is : " + key);
-//                        dialog.setCancelable(true);
-//                        dialog.show();
-//                        Utils.toast(getActivity(), "Your Token Id Is : " + key);
-//                        Utils.toast(getActivity(), "Sucessfull");
-//                        name.setText("");
-//                        cnic.setText("");
-//                        childName.setText("");
-//                        relation.setText("");
-//                        religion.setText("");
-//                        fatherName.setText("");
-//                        fatherCnic.setText("");
-//                        motherName.setText("");
-//                        motherCnic.setText("");
-//                        areaOfBirth.setText("");
-//                        dateOfBirth.setText("");
-//                        disability.setText("");
-//                        address.setText("");
-//                        district.setText("");
-
-                    }
-                });
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
     }
 
+    public void setFormData() {
+        if (bForm != null) {
+            name.setText(bForm.applicantName);
+            cnic.setText(bForm.applicantCnic);
+            childName.setText(bForm.childName);
+            relation.setText(bForm.relation);
+            if (bForm.getGender().equalsIgnoreCase("Male")) {
+                male.setChecked(true);
+            } else if (female.isChecked()) {
+                female.setChecked(true);
+            }
+            religion.setText(bForm.religion);
+            fatherName.setText(bForm.fatherName);
+            fatherCnic.setText(bForm.fatherCnic);
+            motherName.setText(bForm.motherName);
+            motherCnic.setText(bForm.motherCnic);
+            areaOfBirth.setText(bForm.areaOfBirth);
+            dateOfBirth.setText(bForm.dateOfBirth);
+            if (bForm.isVacinated()) {
+                yes.setChecked(true);
+            } else {
+                no.setChecked(true);
+            }
+            disability.setText(bForm.getDisablity());
+            address.setText(bForm.getAddress());
+            district.setText(bForm.getDistrict());
+        }
+    }
+
     //
     public BForm getFormData() {
-        randomNumber = generateRandom();
         BForm bForm = new BForm();
         bForm.setApplicantName(name.getText().toString());
         bForm.setApplicantCnic(cnic.getText().toString());
@@ -199,16 +173,5 @@ public class Form_Detail extends android.support.v4.app.Fragment {
         male = (CheckBox) view.findViewById(R.id.checkBoxMale);
         female = (CheckBox) view.findViewById(R.id.checkBoxFemale);
 
-    }
-
-    public String generateRandom() {
-        char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
-        Random rnd = new Random();
-        char rndNumber;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 5; i++)
-            sb.append(chars[rnd.nextInt(chars.length)]);
-
-        return sb.toString();
     }
 }

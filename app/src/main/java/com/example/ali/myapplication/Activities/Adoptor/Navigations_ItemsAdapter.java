@@ -1,4 +1,4 @@
-package com.example.ali.myapplication.Activities.UI;
+package com.example.ali.myapplication.Activities.Adoptor;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
