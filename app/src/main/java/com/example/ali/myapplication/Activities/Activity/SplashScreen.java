@@ -8,7 +8,6 @@ import android.os.Bundle;
 import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.R;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -55,7 +54,7 @@ public class SplashScreen extends AppCompatActivity {
                                                         userModel.getCellNo(),
                                                         userModel.getUser_type()
                                                 );
-                                                openMainScreen();
+                                                openMainScreen(userModel);
                                             }
                                         }
                                     }
@@ -91,9 +90,20 @@ public class SplashScreen extends AppCompatActivity {
         thread.start();
     }
 
-    private void openMainScreen() {
-        Intent intent = new Intent(SplashScreen.this,MainActivity.class);
-        startActivity(intent);
+    private void openMainScreen(UserModel userModel) {
+        if (userModel.getUser_type() == 3) {
+            //User Screen
+            startActivity(new Intent(SplashScreen.this, UserHome.class));
+        } else if (userModel.getUser_type() == 1) {
+            //Admin Screen
+            startActivity(new Intent(SplashScreen.this, AdminHome.class));
+        } else if (userModel.getUser_type() == 2) {
+            //Uc Screen
+            startActivity(new Intent(SplashScreen.this, UcHome.class));
+        } else if (userModel.getUser_type() == 4) {
+        }
+
+
         finish();
     }
 

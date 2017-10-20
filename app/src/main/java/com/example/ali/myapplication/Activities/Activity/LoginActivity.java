@@ -9,13 +9,11 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +27,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         firebase = FirebaseDatabase.getInstance().getReference();
         checkBox = (CheckBox) findViewById(R.id.remember_me);
 //        if (mAuth.getCurrentUser() != null) {
-//            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//            startActivity(new Intent(LoginActivity.this, UserHome.class));
 //            finish();
 //        }
 
@@ -123,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     AppLogs.logd("signInWithEmail:onComplete:" + task.isSuccessful());
                                     Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                     progressDialog.dismiss();
 
                                     FirebaseHandler.getInstance().getUsersRef().child(task.getResult().getUser().getUid()).addValueEventListener(new ValueEventListener() {
@@ -132,9 +128,19 @@ public class LoginActivity extends AppCompatActivity {
                                             if (dataSnapshot != null) {
                                                 if (dataSnapshot.getValue() != null) {
                                                     UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                    UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(),userModel.getUser_type());
+                                                    UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type());
                                                     UserModel.myObj = userModel1;
-
+                                                    if (userModel.getUser_type() == 3) {
+                                                        //User Screen
+                                                        startActivity(new Intent(LoginActivity.this, UserHome.class));
+                                                    } else if (userModel.getUser_type() == 1) {
+                                                        //Admin Screen
+                                                        startActivity(new Intent(LoginActivity.this, AdminHome.class));
+                                                    } else if (userModel.getUser_type() == 2) {
+                                                        //Uc Screen
+                                                        startActivity(new Intent(LoginActivity.this, UcHome.class));
+                                                    } else if (userModel.getUser_type() == 4) {
+                                                    }
                                                 }
                                             }
                                         }

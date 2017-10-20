@@ -19,11 +19,11 @@
             android:layout_height="wrap_content"
             android:text="Form" />
 
-        <Button
-            android:id="@+id/form_btn_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/form_btn"
-            android:text="List" />
+        <!--<Button-->
+            <!--android:id="@+id/form_btn_list"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/form_btn"-->
+            <!--android:text="List" />-->
     </LinearLayout>
 </FrameLayout>

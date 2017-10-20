@@ -16,7 +16,7 @@ import com.example.ali.myapplication.Activities.UI.HomeScreenFragment;
 import com.example.ali.myapplication.Activities.Adoptor.Navigations_ItemsAdapter;
 import com.example.ali.myapplication.R;
 
-public class MainActivity extends AppCompatActivity {
+public class UserHome extends AppCompatActivity {
 
     Button form_btn_list, form_btn_details;
     public DrawerLayout drawer_layout;
@@ -40,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        View viewinflate = MainActivity.this.getLayoutInflater().inflate(R.layout.nav_header_main, null);
-        Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(MainActivity.this, menuName, null);
+        View viewinflate = UserHome.this.getLayoutInflater().inflate(R.layout.nav_header_main, null);
+        Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(UserHome.this, menuName, null);
         mDrawerList.setAdapter(navigations_itemsAdapter);
         mDrawerList.addHeaderView(viewinflate);
 
-        mDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawer_layout, null, R.string.app_name, R.string.app_name) {
+        mDrawerToggle = new ActionBarDrawerToggle(UserHome.this, drawer_layout, null, R.string.app_name, R.string.app_name) {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 super.onDrawerSlide(drawerView, slideOffset);
