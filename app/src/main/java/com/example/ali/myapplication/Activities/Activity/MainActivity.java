@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new HomeScreenFragment()).addToBackStack(null).commit();
 
-        customer_container = (FrameLayout) findViewById(R.id.container);
+        customer_container = (FrameLayout) findViewById(R.id.maincontainer);
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
