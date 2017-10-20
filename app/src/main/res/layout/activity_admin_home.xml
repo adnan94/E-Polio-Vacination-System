@@ -6,21 +6,35 @@
     android:layout_height="match_parent"
     tools:context="com.example.ali.myapplication.Activities.Activity.AdminHome">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Admin Home"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:textColor="#000"
-        />
 
-    <Button
-        android:id="@+id/ucList"
+    <FrameLayout
+        android:id="@+id/maincontainer_admin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="List Of Uc"
-        android:layout_centerInParent="true"
-        />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin Home"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000"
+            />
+
+        <Button
+            android:id="@+id/ucList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="List Of Uc"
+            android:layout_centerInParent="true"
+            />
+
+        </LinearLayout>
+
+    </FrameLayout>
 </RelativeLayout>

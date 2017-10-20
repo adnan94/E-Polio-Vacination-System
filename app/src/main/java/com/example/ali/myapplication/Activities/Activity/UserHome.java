@@ -34,7 +34,7 @@ public class UserHome extends AppCompatActivity {
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-        getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new HomeScreenFragment()).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.maincontainer, new HomeScreenFragment()).commit();
 
         customer_container = (FrameLayout) findViewById(R.id.maincontainer);
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -38,9 +38,9 @@ public class HomeScreenFragment extends Fragment {
         form_btn_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            //    if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 1) {
                     getActivity().getSupportFragmentManager().popBackStack();
-                }
+            //    }
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new Form_Detail()).addToBackStack(null).commit();
 //                form_btn_details.setVisibility(View.GONE);

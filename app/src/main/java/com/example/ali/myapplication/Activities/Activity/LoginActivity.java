@@ -141,6 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         startActivity(new Intent(LoginActivity.this, UcHome.class));
                                                     } else if (userModel.getUser_type() == 4) {
                                                     }
+                                                    finish();
                                                 }
                                             }
                                         }

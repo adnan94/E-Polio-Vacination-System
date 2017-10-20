@@ -12,7 +12,7 @@ import com.example.ali.myapplication.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListOfUc extends Fragment {
+public class ListOfUc extends android.support.v4.app.Fragment {
 
 
     public ListOfUc() {

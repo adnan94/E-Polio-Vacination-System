@@ -58,7 +58,7 @@ public class Form_List extends Fragment {
                 bundle.putParcelable("formData", list.get(position));
                 ViewFormForUc viewFormForUc = new ViewFormForUc();
                 viewFormForUc.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.maincontainer, viewFormForUc).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc, viewFormForUc).addToBackStack(null).commit();
 
             }
         });

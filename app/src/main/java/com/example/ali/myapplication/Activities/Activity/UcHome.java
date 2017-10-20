@@ -22,21 +22,21 @@ public class UcHome extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 listUc.setVisibility(View.GONE);
-                getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new Form_List()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.maincontainer_uc, new Form_List()).commit();
             }
         });
     }
 
     @Override
     protected void onRestart() {
-        listUc.setVisibility(View.VISIBLE);
+     //   listUc.setVisibility(View.VISIBLE);
         super.onRestart();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        listUc.setVisibility(View.VISIBLE);
+     //   listUc.setVisibility(View.VISIBLE);
 
     }
 }

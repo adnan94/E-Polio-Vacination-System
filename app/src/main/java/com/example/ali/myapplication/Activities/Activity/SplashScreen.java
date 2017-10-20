@@ -20,6 +20,7 @@ public class SplashScreen extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
+    public UserModel userModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,24 +39,27 @@ public class SplashScreen extends AppCompatActivity {
                             final FirebaseUser user = firebaseAuth.getCurrentUser();
                             if (user != null) {
                                 // User is signed in
-                                FirebaseHandler.getInstance().getUsersRef().child(user.getUid()).addValueEventListener(new ValueEventListener() {
+                                FirebaseHandler.getInstance().getUsersRef().child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if(dataSnapshot!=null){
                                             if(dataSnapshot.getValue()!=null){
-                                                UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                UserModel.getInstance(
-                                                        userModel.getName(),
-                                                        userModel.getFname(),
-                                                        userModel.getAddress(),
-                                                        userModel.getEmail(),
-                                                        userModel.getPassword(),
-                                                        userModel.getCnic(),
-                                                        userModel.getCellNo(),
-                                                        userModel.getUser_type()
-                                                );
-                                                openMainScreen(userModel);
+                                          //      for(DataSnapshot data:dataSnapshot.getChildren()) {
+                                                    userModel = dataSnapshot.getValue(UserModel.class);
+                                                    UserModel.getInstance(
+                                                            userModel.getName(),
+                                                            userModel.getFname(),
+                                                            userModel.getAddress(),
+                                                            userModel.getEmail(),
+                                                            userModel.getPassword(),
+                                                            userModel.getCnic(),
+                                                            userModel.getCellNo(),
+                                                            userModel.getUser_type()
+                                                    );
+                                           //     }
                                             }
+                                            openMainScreen(userModel);
+
                                         }
                                     }
 
@@ -110,6 +114,14 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }

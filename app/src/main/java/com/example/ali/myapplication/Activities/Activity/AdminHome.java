@@ -10,17 +10,27 @@ import com.example.ali.myapplication.Activities.UI.ListOfUc;
 import com.example.ali.myapplication.R;
 
 public class AdminHome extends AppCompatActivity {
-Button listUc;
+    Button listUc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
-        listUc=(Button)findViewById(R.id.ucList);
+        listUc = (Button) findViewById(R.id.ucList);
         listUc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new ListOfUc()).addToBackStack(null).commit();
+         //       listUc.setVisibility(View.GONE);
+                getSupportFragmentManager().beginTransaction().add(R.id.maincontainer_admin, new ListOfUc()).addToBackStack(null).commit();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+      //  getSupportFragmentManager().popBackStack();
+
     }
 }
