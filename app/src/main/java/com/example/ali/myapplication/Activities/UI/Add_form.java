@@ -18,6 +18,7 @@ import com.example.ali.myapplication.Activities.ModelClasses.BForm;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
@@ -27,7 +28,7 @@ import java.util.Random;
  * Created by Sami Khan on 10/7/2017.
  */
 
-public class Form_Detail extends android.support.v4.app.Fragment {
+public class Add_form extends android.support.v4.app.Fragment {
 
     public EditText name, cnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address, district;
     public CheckBox yes, no, male, female;
@@ -59,7 +60,7 @@ public class Form_Detail extends android.support.v4.app.Fragment {
     }
 
     private void init() {
-        ref = FirebaseHandler.getInstance().getDataBaseReference().child("FormData");
+        ref = FirebaseHandler.getInstance().getAdd_forms();
     }
 
     private void clickListeners() {
@@ -166,6 +167,8 @@ public class Form_Detail extends android.support.v4.app.Fragment {
         bForm.setMotherCnic(motherCnic.getText().toString());
         bForm.setAreaOfBirth(areaOfBirth.getText().toString());
         bForm.setDateOfBirth(dateOfBirth.getText().toString());
+        bForm.setUser_uid(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        bForm.setForm_status("Applied");
         if (yes.isChecked()) {
             bForm.setVacinated(true);
         } else {

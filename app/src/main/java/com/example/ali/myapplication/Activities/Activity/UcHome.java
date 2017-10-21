@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.ali.myapplication.Activities.UI.Form_Detail;
 import com.example.ali.myapplication.Activities.UI.Form_List;
-import com.example.ali.myapplication.Activities.UI.ListOfUc;
 import com.example.ali.myapplication.R;
 
 public class UcHome extends AppCompatActivity {
@@ -21,8 +19,8 @@ public class UcHome extends AppCompatActivity {
         listUc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listUc.setVisibility(View.GONE);
-                getSupportFragmentManager().beginTransaction().add(R.id.maincontainer_uc, new Form_List()).commit();
+           //     listUc.setVisibility(View.GONE);
+                getSupportFragmentManager().beginTransaction().add(R.id.maincontainer_uc, new Form_List()).addToBackStack(null).commit();
             }
         });
     }

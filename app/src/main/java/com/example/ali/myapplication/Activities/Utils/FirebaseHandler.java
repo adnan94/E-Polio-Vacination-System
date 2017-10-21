@@ -19,6 +19,8 @@ public class FirebaseHandler {
     private StorageReference mfirebaseStorage;
     private static FirebaseHandler ourInstance;
     private DatabaseReference usersRef;
+    private DatabaseReference add_forms;
+
     public static DatabaseReference getDataBaseReference() {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("AppData");
         databaseReference.keepSynced(true);
@@ -51,9 +53,13 @@ public class FirebaseHandler {
 
     private void initializeChildRefs() {
         usersRef = firebaseRef.child("users");
-
+        add_forms = firebaseRef.child("user_forms");
     }
     public DatabaseReference getUsersRef() {
         return usersRef;
+    }
+
+    public DatabaseReference getAdd_forms() {
+        return add_forms;
     }
 }

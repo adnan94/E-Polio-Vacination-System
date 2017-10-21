@@ -42,7 +42,7 @@ public class HomeScreenFragment extends Fragment {
                     getActivity().getSupportFragmentManager().popBackStack();
             //    }
 
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new Form_Detail()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new Add_form()).addToBackStack(null).commit();
 //                form_btn_details.setVisibility(View.GONE);
             }
         });

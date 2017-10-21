@@ -86,7 +86,7 @@ public class ViewFormForUc extends Fragment {
                 bundle.putParcelable("formData",bform);
                 FragmentEditForm fragmentEditForm = new FragmentEditForm();
                 fragmentEditForm.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.maincontainer,fragmentEditForm).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc,fragmentEditForm).addToBackStack(null).commit();
 
             }
         });

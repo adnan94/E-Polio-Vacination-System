@@ -12,6 +12,38 @@ public class BForm implements Parcelable {
     public String applicantName, applicantCnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disablity, address, district, gender;
     boolean vacinated;
     String formID;
+    public String user_uid;
+    public String form_status;
+
+
+
+
+
+
+    public BForm() {
+    }
+
+    public BForm(String applicantName, String applicantCnic, String childName, String relation, String religion, String fatherName, String fatherCnic, String motherName, String motherCnic, String areaOfBirth, String dateOfBirth, String disablity, String address, String district, String gender, boolean vacinated, String formID, String user_uid, String form_status) {
+        this.applicantName = applicantName;
+        this.applicantCnic = applicantCnic;
+        this.childName = childName;
+        this.relation = relation;
+        this.religion = religion;
+        this.fatherName = fatherName;
+        this.fatherCnic = fatherCnic;
+        this.motherName = motherName;
+        this.motherCnic = motherCnic;
+        this.areaOfBirth = areaOfBirth;
+        this.dateOfBirth = dateOfBirth;
+        this.disablity = disablity;
+        this.address = address;
+        this.district = district;
+        this.gender = gender;
+        this.vacinated = vacinated;
+        this.formID = formID;
+        this.user_uid = user_uid;
+        this.form_status = form_status;
+    }
 
     protected BForm(Parcel in) {
         applicantName = in.readString();
@@ -31,6 +63,36 @@ public class BForm implements Parcelable {
         gender = in.readString();
         vacinated = in.readByte() != 0;
         formID = in.readString();
+        user_uid = in.readString();
+        form_status = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(applicantName);
+        dest.writeString(applicantCnic);
+        dest.writeString(childName);
+        dest.writeString(relation);
+        dest.writeString(religion);
+        dest.writeString(fatherName);
+        dest.writeString(fatherCnic);
+        dest.writeString(motherName);
+        dest.writeString(motherCnic);
+        dest.writeString(areaOfBirth);
+        dest.writeString(dateOfBirth);
+        dest.writeString(disablity);
+        dest.writeString(address);
+        dest.writeString(district);
+        dest.writeString(gender);
+        dest.writeByte((byte) (vacinated ? 1 : 0));
+        dest.writeString(formID);
+        dest.writeString(user_uid);
+        dest.writeString(form_status);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<BForm> CREATOR = new Creator<BForm>() {
@@ -45,6 +107,22 @@ public class BForm implements Parcelable {
         }
     };
 
+    public String getUser_uid() {
+        return user_uid;
+    }
+
+    public void setUser_uid(String user_uid) {
+        this.user_uid = user_uid;
+    }
+
+    public String getForm_status() {
+        return form_status;
+    }
+
+    public void setForm_status(String form_status) {
+        this.form_status = form_status;
+    }
+
     public String getGender() {
         return gender;
     }
@@ -53,28 +131,6 @@ public class BForm implements Parcelable {
         this.gender = gender;
     }
 
-    public BForm() {
-    }
-
-    public BForm(String applicantName, String applicantCnic, String childName, String relation, String religion, String fatherName, String fatherCnic, String motherName, String motherCnic, String areaOfBirth, String dateOfBirth, String disablity, String address, String district, String gender, boolean vacinated, String formID) {
-        this.applicantName = applicantName;
-        this.applicantCnic = applicantCnic;
-        this.childName = childName;
-        this.relation = relation;
-        this.religion = religion;
-        this.fatherName = fatherName;
-        this.fatherCnic = fatherCnic;
-        this.motherName = motherName;
-        this.motherCnic = motherCnic;
-        this.areaOfBirth = areaOfBirth;
-        this.dateOfBirth = dateOfBirth;
-        this.disablity = disablity;
-        this.address = address;
-        this.district = district;
-        this.gender = gender;
-        this.vacinated = vacinated;
-        this.formID = formID;
-    }
 
     public String getFormID() {
         return formID;
@@ -206,29 +262,4 @@ public class BForm implements Parcelable {
     }
 
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(applicantName);
-        dest.writeString(applicantCnic);
-        dest.writeString(childName);
-        dest.writeString(relation);
-        dest.writeString(religion);
-        dest.writeString(fatherName);
-        dest.writeString(fatherCnic);
-        dest.writeString(motherName);
-        dest.writeString(motherCnic);
-        dest.writeString(areaOfBirth);
-        dest.writeString(dateOfBirth);
-        dest.writeString(disablity);
-        dest.writeString(address);
-        dest.writeString(district);
-        dest.writeString(gender);
-        dest.writeByte((byte) (vacinated ? 1 : 0));
-        dest.writeString(formID);
-    }
 }
