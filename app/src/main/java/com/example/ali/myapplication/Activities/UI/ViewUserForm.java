@@ -7,24 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
-import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
 import com.example.ali.myapplication.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ViewFormForUc extends Fragment {
+public class ViewUserForm extends Fragment {
 
     public TextView name, cnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address, district, gender, vacinated;
     Button edit;
     BForm bform;
 
-    public ViewFormForUc() {
+    public ViewUserForm() {
         // Required empty public constructor
     }
 
@@ -33,12 +30,11 @@ public class ViewFormForUc extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_view_form_for_ui, container, false);
+        View view = inflater.inflate(R.layout.fragment_view_user_form, container, false);
         cast(view);
         init();
         return view;
     }
-
     private void init() {
         bform = getArguments().getParcelable("formData");
         if(bform!=null){
@@ -79,20 +75,20 @@ public class ViewFormForUc extends Fragment {
         disability = (TextView) view.findViewById(R.id.disability);
         address = (TextView) view.findViewById(R.id.address);
         district = (TextView) view.findViewById(R.id.district);
-        edit=(Button)view.findViewById(R.id.edit);
+//        edit=(Button)view.findViewById(R.id.edit);
 
 
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("formData",bform);
-                FragmentEditForm fragmentEditForm = new FragmentEditForm();
-                fragmentEditForm.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc,fragmentEditForm).addToBackStack(null).commit();
-
-            }
-        });
+//        edit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("formData",bform);
+//                FragmentEditForm fragmentEditForm = new FragmentEditForm();
+//                fragmentEditForm.setArguments(bundle);
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc,fragmentEditForm).addToBackStack(null).commit();
+//
+//            }
+//        });
 
     }
 
