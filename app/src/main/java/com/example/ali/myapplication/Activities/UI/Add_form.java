@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import com.example.ali.myapplication.Activities.Activity.UserHome;
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.Activities.Utils.Utils;
@@ -114,11 +115,15 @@ public class Add_form extends android.support.v4.app.Fragment {
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 
-                        if (getActivity().getSupportFragmentManager().findFragmentById(R.id.container) != null) {
+                        if (getActivity().getSupportFragmentManager().findFragmentById(R.id.maincontainer) != null) {
                             getActivity().getSupportFragmentManager()
                                     .beginTransaction().
-                                    remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.container)).commit();
+                                    remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.maincontainer)).commit();
                         }
+
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .add(R.id.maincontainer,new HomeScreenFragment())
+                                .commit();
 
 //                        Dialog dialog = new Dialog(getActivity());
 //                        dialog.setTitle("Your Token Id Is : " + key);
