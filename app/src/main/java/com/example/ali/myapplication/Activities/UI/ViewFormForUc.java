@@ -141,6 +141,7 @@ public class ViewFormForUc extends Fragment {
         address = (TextView) view.findViewById(R.id.address);
         district = (TextView) view.findViewById(R.id.district);
         edit=(Button)view.findViewById(R.id.edit);
+
         change_status = (Button)view.findViewById(R.id.change_status);
 
 
@@ -154,6 +155,18 @@ public class ViewFormForUc extends Fragment {
         status_userform.setAdapter(statusAdapter);
 
 
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("formData",bform);
+                FragmentEditForm fragmentEditForm = new FragmentEditForm();
+                fragmentEditForm.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc,fragmentEditForm).addToBackStack(null).commit();
+
+
+    }
+    });
     }
 
 }

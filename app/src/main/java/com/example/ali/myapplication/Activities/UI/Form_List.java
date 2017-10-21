@@ -11,12 +11,16 @@ import android.widget.ListView;
 
 import com.example.ali.myapplication.Activities.Adoptor.Adopter_Uc_FormList_Screen;
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
+import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.SharedPref;
 import com.example.ali.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 
@@ -27,7 +31,7 @@ public class Form_List extends Fragment {
 
     ListView listView;
     ArrayList<BForm> list;
-    DatabaseReference ref;
+    Query ref;
     Adopter_Uc_FormList_Screen adopter;
 
     public Form_List() {
@@ -57,15 +61,30 @@ public class Form_List extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("formData", list.get(position));
                 ViewFormForUc viewFormForUc = new ViewFormForUc();
+                ViewUserForm viewUserForm=new ViewUserForm();
                 viewFormForUc.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc, viewFormForUc).addToBackStack(null).commit();
+                viewUserForm.setArguments(bundle);
+
+                if (UserModel.getInstanceIfNotNull().getUser_type() == 3) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, viewUserForm).addToBackStack(null).commit();
+                } else {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc, viewFormForUc).addToBackStack(null).commit();
+
+                }
 
             }
         });
     }
 
     private void getData() {
-        FirebaseHandler.getInstance().getAdd_forms().addChildEventListener(new ChildEventListener() {
+        if (UserModel.getInstanceIfNotNull().getUser_type() == 3) {
+
+            ref = FirebaseHandler.getInstance().getAdd_forms().orderByChild("user_uid").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        } else {
+            ref = FirebaseHandler.getInstance().getAdd_forms();
+        }
+        ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 BForm bform = dataSnapshot.getValue(BForm.class);
