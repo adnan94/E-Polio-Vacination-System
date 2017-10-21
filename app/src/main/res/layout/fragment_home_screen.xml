@@ -5,7 +5,7 @@
     android:clickable="true"
     android:focusable="true"
     android:background="#fff"
-    tools:context="com.example.ali.myapplication.Activities.UI.HomeScreenFragment">
+    tools:context="com.example.ali.myapplication.Activities.UI.UserHomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout

@@ -1,6 +1,5 @@
 package com.example.ali.myapplication.Activities.UI;
 
-import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,10 +13,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
-import com.example.ali.myapplication.Activities.Activity.UserHome;
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
-import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
@@ -122,7 +119,7 @@ public class Add_form extends android.support.v4.app.Fragment {
                         }
 
                         getActivity().getSupportFragmentManager().beginTransaction()
-                                .add(R.id.maincontainer,new HomeScreenFragment())
+                                .add(R.id.maincontainer,new UserHomeFragment())
                                 .commit();
 
 //                        Dialog dialog = new Dialog(getActivity());

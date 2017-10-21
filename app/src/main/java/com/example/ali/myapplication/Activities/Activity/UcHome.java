@@ -6,25 +6,19 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.ali.myapplication.Activities.UI.Form_List_Uc;
+import com.example.ali.myapplication.Activities.UI.UcHomeFragment;
+import com.example.ali.myapplication.Activities.UI.UserHomeFragment;
 import com.example.ali.myapplication.R;
 
 public class UcHome extends AppCompatActivity {
     Button listUc;
-    public Button uc_form_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uc_home);
-        listUc = (Button) findViewById(R.id.ucList);
-        uc_form_list = (Button)findViewById(R.id.uc_form_list);
-        listUc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-           //     listUc.setVisibility(View.GONE);
-                getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc, new Form_List_Uc()).addToBackStack(null).commit();
-            }
-        });
+        getSupportFragmentManager().beginTransaction().add(R.id.maincontainer_uc, new UcHomeFragment()).commit();
+
 
 
     }

@@ -9,33 +9,6 @@
         android:id="@+id/maincontainer_uc"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <TextView
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:text="UC Home"
-        android:textColor="#000"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:layout_gravity="center"
-        android:id="@+id/ucList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="List Of Uc"
-        android:layout_centerInParent="true"
-        />
-        <Button
-            android:layout_marginTop="45dp"
-            android:layout_gravity="center"
-            android:id="@+id/uc_form_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="List Of Forms"
-            android:layout_centerInParent="true"
-            />
 
     </FrameLayout>
 
