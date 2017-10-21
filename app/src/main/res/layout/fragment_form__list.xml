@@ -2,14 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
     android:clickable="true"
     android:focusable="true"
+    android:background="#fff"
     tools:context="com.example.ali.myapplication.Activities.UI.Form_List">
 
     <!-- TODO: Update blank fragment layout -->
 
     <ListView
+        android:background="#fff"
         android:id="@+id/listViewFormsUc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>

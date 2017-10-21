@@ -65,7 +65,7 @@ public class Form_List extends Fragment {
     }
 
     private void getData() {
-        ref.child("FormData").addChildEventListener(new ChildEventListener() {
+        FirebaseHandler.getInstance().getAdd_forms().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 BForm bform = dataSnapshot.getValue(BForm.class);

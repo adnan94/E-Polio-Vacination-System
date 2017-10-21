@@ -20,6 +20,8 @@ public class FirebaseHandler {
     private static FirebaseHandler ourInstance;
     private DatabaseReference usersRef;
     private DatabaseReference add_forms;
+    private DatabaseReference form_token;
+
 
     public static DatabaseReference getDataBaseReference() {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("AppData");
@@ -54,6 +56,10 @@ public class FirebaseHandler {
     private void initializeChildRefs() {
         usersRef = firebaseRef.child("users");
         add_forms = firebaseRef.child("user_forms");
+        form_token = firebaseRef.child("form_tokens");
+
+
+
     }
     public DatabaseReference getUsersRef() {
         return usersRef;
@@ -61,5 +67,9 @@ public class FirebaseHandler {
 
     public DatabaseReference getAdd_forms() {
         return add_forms;
+    }
+
+    public DatabaseReference getForm_token() {
+        return form_token;
     }
 }

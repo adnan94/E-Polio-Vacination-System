@@ -140,13 +140,36 @@
                     android:layout_margin="5dp"
                     android:textColor="#000" />
 
-                <Button
+                <LinearLayout
+                    android:weightSum="2"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:background="#d70101"
+                    android:layout_height="wrap_content">
+                <Button
+                    android:textSize="12sp"
+
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#f18b8b"
                     android:text="Edit"
+                    android:layout_margin="5dp"
                     android:id="@+id/edit"
                     android:textColor="#fff" />
+
+                    <Button
+                        android:textSize="12sp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#f18b8b"
+                        android:text="Change Status"
+                        android:id="@+id/change_status"
+                        android:textColor="#fff" />
+
+                </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
 
