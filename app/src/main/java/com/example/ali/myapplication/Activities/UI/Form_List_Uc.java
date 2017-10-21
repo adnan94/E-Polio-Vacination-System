@@ -27,14 +27,14 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Form_List extends Fragment {
+public class Form_List_Uc extends Fragment {
 
     ListView listView;
     ArrayList<BForm> list;
     Query ref;
     Adopter_Uc_FormList_Screen adopter;
 
-    public Form_List() {
+    public Form_List_Uc() {
         // Required empty public constructor
     }
 
