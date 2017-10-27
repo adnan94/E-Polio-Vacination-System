@@ -85,8 +85,10 @@ public class ViewFormForUc extends Fragment {
                        @Override
                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                            filter_dialog.dismiss();
-                         //  DatabaseReference key = FirebaseHandler.getInstance().getForm_token().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(bform.getFormID()).push();
-                         //   key.setValue(new Form_Token(key.getKey(),bform.getFormID(),bform.getApplicantName(),bform.getApplicantCnic(),))
+                           DatabaseReference key = FirebaseHandler.getInstance().getForm_token().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(bform.getFormID()).push();
+                            key.setValue(new Form_Token(key.getKey(),bform.getFormID(),
+                                    bform.getApplicantName(),bform.getApplicantCnic(),
+                                    bform.getTimestamp(),bform.getTimestamp()));
                        }
                    });
                }

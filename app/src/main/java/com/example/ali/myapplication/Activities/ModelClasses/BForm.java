@@ -14,7 +14,7 @@ public class BForm implements Parcelable {
     String formID;
     public String user_uid;
     public String form_status;
-
+    public long timestamp;
 
 
 
@@ -23,7 +23,7 @@ public class BForm implements Parcelable {
     public BForm() {
     }
 
-    public BForm(String applicantName, String applicantCnic, String childName, String relation, String religion, String fatherName, String fatherCnic, String motherName, String motherCnic, String areaOfBirth, String dateOfBirth, String disablity, String address, String district, String gender, boolean vacinated, String formID, String user_uid, String form_status) {
+    public BForm(String applicantName, String applicantCnic, String childName, String relation, String religion, String fatherName, String fatherCnic, String motherName, String motherCnic, String areaOfBirth, String dateOfBirth, String disablity, String address, String district, String gender, boolean vacinated, String formID, String user_uid, String form_status, long timestamp) {
         this.applicantName = applicantName;
         this.applicantCnic = applicantCnic;
         this.childName = childName;
@@ -43,7 +43,9 @@ public class BForm implements Parcelable {
         this.formID = formID;
         this.user_uid = user_uid;
         this.form_status = form_status;
+        this.timestamp = timestamp;
     }
+
 
     protected BForm(Parcel in) {
         applicantName = in.readString();
@@ -65,6 +67,7 @@ public class BForm implements Parcelable {
         formID = in.readString();
         user_uid = in.readString();
         form_status = in.readString();
+        timestamp = in.readLong();
     }
 
     @Override
@@ -88,6 +91,7 @@ public class BForm implements Parcelable {
         dest.writeString(formID);
         dest.writeString(user_uid);
         dest.writeString(form_status);
+        dest.writeLong(timestamp);
     }
 
     @Override
@@ -106,6 +110,14 @@ public class BForm implements Parcelable {
             return new BForm[size];
         }
     };
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public String getUser_uid() {
         return user_uid;

@@ -183,6 +183,7 @@ public class Add_form extends android.support.v4.app.Fragment {
         bForm.setAddress(address.getText().toString());
         bForm.setDistrict(district.getText().toString());
         bForm.setFormID(randomNumber);
+        bForm.setTimestamp(System.currentTimeMillis());
         return bForm;
     }
 
