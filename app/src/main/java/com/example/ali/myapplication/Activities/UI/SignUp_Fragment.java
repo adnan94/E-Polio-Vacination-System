@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -92,7 +93,6 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
                         || pass.equals(""))) {
                     ///    || confrim_passwordd.equals("")) ){
                     Toast.makeText(getActivity(), "Fields Should not be left Empty", Toast.LENGTH_SHORT).show();
-
                 } else if (email.getText().length() == 0 || !android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
                     email.setError("Enter Valid Email Address");
                 } else if (fname.getText().length() == 0 || !fname.getText().toString().matches("[a-zA-Z ]+")) {
@@ -129,6 +129,8 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
                                             progressDialog.dismiss();
                                             Toast.makeText(getActivity(), "Successfull", Toast.LENGTH_SHORT).show();
                                             AppLogs.logd("createUserWithEmail:onComplete: " + task.isSuccessful());
+                                            firebase.child("ActivitySeen").child(uid).setValue(ServerValue.TIMESTAMP);
+
                                             if (getActivity().getSupportFragmentManager().findFragmentById(R.id.container) != null) {
                                                 getActivity().getSupportFragmentManager()
                                                         .beginTransaction().

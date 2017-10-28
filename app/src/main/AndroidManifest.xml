@@ -13,16 +13,19 @@
             android:name=".Activities.Activity.UcHome"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <service android:name=".Activities.Utils.Service"
+            android:enabled="true"
+            />
+
         <activity
             android:name=".Activities.Activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-        </activity>
-        <activity android:name=".Activities.Activity.SplashScreen"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activities.Activity.SplashScreen"
             android:theme="@style/AppTheme.NoActionBar"
 
             >
@@ -36,16 +39,14 @@
             android:name=".Activities.Activity.AdminHome"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
         <activity
             android:name=".Activities.Activity.UserHome"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
     </application>
 
 </manifest>

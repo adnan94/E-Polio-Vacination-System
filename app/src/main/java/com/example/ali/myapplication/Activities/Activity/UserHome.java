@@ -65,12 +65,6 @@ public class UserHome extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-//        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-//            getSupportFragmentManager().popBackStack();
-//        }
-//        form_btn_details.setVisibility(View.VISIBLE);
-//        form_btn_list.setVisibility(View.VISIBLE);
-
     }
 }
 

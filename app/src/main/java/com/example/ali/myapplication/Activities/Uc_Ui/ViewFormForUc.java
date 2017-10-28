@@ -90,7 +90,7 @@ public class ViewFormForUc extends Fragment {
                                DatabaseReference key = FirebaseHandler.getInstance().getForm_token().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(bform.getFormID()).push();
                                key.setValue(new Form_Token(key.getKey(), bform.getFormID(),
                                        bform.getUserName(), bform.getApplicantCnic(),
-                                       bform.getTimestamp(), bform.getTimestamp()));
+                                       bform.getTimestamp(), bform.getTimestamp(),System.currentTimeMillis()));
                                 getActivity().getSupportFragmentManager().popBackStack();
                            }
                        });
