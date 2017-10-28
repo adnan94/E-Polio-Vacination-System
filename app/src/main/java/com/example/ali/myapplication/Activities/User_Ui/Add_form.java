@@ -149,7 +149,7 @@ public class Add_form extends android.support.v4.app.Fragment {
     public BForm getFormData() {
         randomNumber = generateRandom();
         BForm bForm = new BForm();
-        bForm.setApplicantName(name.getText().toString());
+        bForm.setUserName(name.getText().toString());
         bForm.setApplicantCnic(cnic.getText().toString());
         bForm.setChildName(childName.getText().toString());
         bForm.setRelation(relation.getText().toString());

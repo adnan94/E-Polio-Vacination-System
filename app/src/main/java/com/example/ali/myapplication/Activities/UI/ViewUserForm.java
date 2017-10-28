@@ -18,7 +18,6 @@ import com.example.ali.myapplication.R;
 public class ViewUserForm extends Fragment {
 
     public TextView name, cnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address, district, gender, vacinated;
-    Button edit;
     BForm bform;
 
     public ViewUserForm() {

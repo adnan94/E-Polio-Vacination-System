@@ -12,8 +12,9 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
-import com.example.ali.myapplication.Activities.UI.HomeScreenFragment;
-import com.example.ali.myapplication.Activities.Adoptor.Navigations_ItemsAdapter;
+
+import com.example.ali.myapplication.Activities.Adaptor.Navigations_ItemsAdapter;
+import com.example.ali.myapplication.Activities.User_Ui.UserHomeFragment;
 import com.example.ali.myapplication.R;
 
 public class UserHome extends AppCompatActivity {
@@ -29,12 +30,8 @@ public class UserHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-            w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
-        getSupportFragmentManager().beginTransaction().add(R.id.maincontainer, new HomeScreenFragment()).commit();
+
+        getSupportFragmentManager().beginTransaction().add(R.id.maincontainer, new UserHomeFragment()).commit();
 
         customer_container = (FrameLayout) findViewById(R.id.maincontainer);
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);

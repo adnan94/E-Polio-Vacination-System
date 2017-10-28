@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,34 +17,50 @@
         android:id="@+id/maincontainer_uc"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <TextView
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:text="UC Home"
-        android:textColor="#000"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 
-    <Button
-        android:layout_gravity="center"
-        android:id="@+id/ucList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="List Of Uc"
-        android:layout_centerInParent="true"
-        />
-        <Button
-            android:layout_marginTop="45dp"
-            android:layout_gravity="center"
-            android:id="@+id/uc_form_list"
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="List Of Forms"
-            android:layout_centerInParent="true"
-            />
+            android:layout_height="match_parent">
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#8d5aa3"
+                app:tabMode="fixed"
+                app:tabIndicatorColor="#fefeff"
+                app:tabIndicatorHeight="5dp"
 
+
+                app:tabSelectedTextColor="#fffdfe"
+                app:tabTextColor="#f0c7f7"
+
+
+
+                />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tab_layout"
+
+
+                />
+        </LinearLayout>
     </FrameLayout>
 
 </RelativeLayout>
+    <ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#FFFFFF"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" />
+
+
+</android.support.v4.widget.DrawerLayout>

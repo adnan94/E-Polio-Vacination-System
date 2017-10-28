@@ -94,22 +94,22 @@ public class FragmentEditForm extends Fragment {
 
     public void setFormData() {
         if (bForm != null) {
-            name.setText(bForm.applicantName);
-            cnic.setText(bForm.applicantCnic);
-            childName.setText(bForm.childName);
-            relation.setText(bForm.relation);
+            name.setText(bForm.getUserName());
+            cnic.setText(bForm.getApplicantCnic());
+            childName.setText(bForm.getChildName());
+            relation.setText(bForm.getRelation());
             if (bForm.getGender().equalsIgnoreCase("Male")) {
                 male.setChecked(true);
             } else if (female.isChecked()) {
                 female.setChecked(true);
             }
-            religion.setText(bForm.religion);
-            fatherName.setText(bForm.fatherName);
-            fatherCnic.setText(bForm.fatherCnic);
-            motherName.setText(bForm.motherName);
-            motherCnic.setText(bForm.motherCnic);
-            areaOfBirth.setText(bForm.areaOfBirth);
-            dateOfBirth.setText(bForm.dateOfBirth);
+            religion.setText(bForm.getReligion());
+            fatherName.setText(bForm.getFatherName());
+            fatherCnic.setText(bForm.getFatherCnic());
+            motherName.setText(bForm.getMotherName());
+            motherCnic.setText(bForm.getMotherCnic());
+            areaOfBirth.setText(bForm.getAreaOfBirth());
+            dateOfBirth.setText(bForm.getDateOfBirth());
             if (bForm.isVacinated()) {
                 yes.setChecked(true);
             } else {
@@ -124,7 +124,7 @@ public class FragmentEditForm extends Fragment {
     //
     public BForm getFormData() {
         BForm bForm = new BForm();
-        bForm.setApplicantName(name.getText().toString());
+        bForm.setUserName(name.getText().toString());
         bForm.setApplicantCnic(cnic.getText().toString());
         bForm.setChildName(childName.getText().toString());
         bForm.setRelation(relation.getText().toString());

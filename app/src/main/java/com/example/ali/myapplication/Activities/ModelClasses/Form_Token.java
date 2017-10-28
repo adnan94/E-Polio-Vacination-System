@@ -6,12 +6,12 @@ package com.example.ali.myapplication.Activities.ModelClasses;
 
 public class Form_Token {
 
-    public String token_id;
-    public String Form_id;
-    public String ApplicantName;
-    public String CNIC_no;
-    public long form_date;
-    public long appointment_date;
+    private String token_id;
+    private String Form_id;
+    private String ApplicantName;
+    private String CNIC_no;
+    private long form_date;
+    private long appointment_date;
 
 
 

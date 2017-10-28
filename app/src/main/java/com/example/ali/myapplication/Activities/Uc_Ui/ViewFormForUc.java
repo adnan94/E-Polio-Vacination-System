@@ -89,9 +89,9 @@ public class ViewFormForUc extends Fragment {
                                filter_dialog.dismiss();
                                DatabaseReference key = FirebaseHandler.getInstance().getForm_token().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(bform.getFormID()).push();
                                key.setValue(new Form_Token(key.getKey(), bform.getFormID(),
-                                       bform.getApplicantName(), bform.getApplicantCnic(),
+                                       bform.getUserName(), bform.getApplicantCnic(),
                                        bform.getTimestamp(), bform.getTimestamp()));
-
+                                getActivity().getSupportFragmentManager().popBackStack();
                            }
                        });
                    }else{
@@ -110,7 +110,7 @@ public class ViewFormForUc extends Fragment {
     private void init() {
         bform = getArguments().getParcelable("formData");
         if(bform!=null){
-            name.setText("Applicant Name : "+bform.getApplicantName());
+            name.setText("Applicant Name : "+bform.getUserName());
             cnic.setText("Applicant Cnic : "+bform.getApplicantCnic());
             childName.setText("Child Name : "+bform.getChildName());
             relation.setText("Relation : "+bform.getRelation());

@@ -9,12 +9,12 @@ import android.os.Parcelable;
  */
 
 public class BForm implements Parcelable {
-    public String applicantName, applicantCnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disablity, address, district, gender;
-    boolean vacinated;
-    String formID;
-    public String user_uid;
-    public String form_status;
-    public long timestamp;
+    private String userName, applicantCnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disablity, address, district, gender;
+    private boolean vacinated;
+    private String formID;
+    private String user_uid;
+    private String form_status;
+    private long timestamp;
 
 
 
@@ -23,8 +23,8 @@ public class BForm implements Parcelable {
     public BForm() {
     }
 
-    public BForm(String applicantName, String applicantCnic, String childName, String relation, String religion, String fatherName, String fatherCnic, String motherName, String motherCnic, String areaOfBirth, String dateOfBirth, String disablity, String address, String district, String gender, boolean vacinated, String formID, String user_uid, String form_status, long timestamp) {
-        this.applicantName = applicantName;
+    public BForm(String userName, String applicantCnic, String childName, String relation, String religion, String fatherName, String fatherCnic, String motherName, String motherCnic, String areaOfBirth, String dateOfBirth, String disablity, String address, String district, String gender, boolean vacinated, String formID, String user_uid, String form_status, long timestamp) {
+        this.userName = userName;
         this.applicantCnic = applicantCnic;
         this.childName = childName;
         this.relation = relation;
@@ -46,9 +46,8 @@ public class BForm implements Parcelable {
         this.timestamp = timestamp;
     }
 
-
     protected BForm(Parcel in) {
-        applicantName = in.readString();
+        userName = in.readString();
         applicantCnic = in.readString();
         childName = in.readString();
         relation = in.readString();
@@ -72,7 +71,7 @@ public class BForm implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(applicantName);
+        dest.writeString(userName);
         dest.writeString(applicantCnic);
         dest.writeString(childName);
         dest.writeString(relation);
@@ -152,13 +151,12 @@ public class BForm implements Parcelable {
         this.formID = formID;
     }
 
-    public String getApplicantName() {
-
-        return applicantName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setApplicantName(String applicantName) {
-        this.applicantName = applicantName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getApplicantCnic() {

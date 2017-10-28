@@ -58,7 +58,7 @@ public class ViewUserForm extends Fragment {
     private void init() {
         bform = getArguments().getParcelable("formData");
         if (bform != null) {
-            name.setText("Applicant Name : " + bform.getApplicantName());
+            name.setText("Applicant Name : " + bform.getUserName());
             cnic.setText("Applicant Cnic : " + bform.getApplicantCnic());
             childName.setText("Child Name : " + bform.getChildName());
             relation.setText("Relation : " + bform.getRelation());
