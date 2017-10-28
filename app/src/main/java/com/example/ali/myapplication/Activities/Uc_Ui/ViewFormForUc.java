@@ -1,19 +1,27 @@
 package com.example.ali.myapplication.Activities.Uc_Ui;
 
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.Service;
+import android.app.TimePickerDialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
 import com.example.ali.myapplication.Activities.ModelClasses.Form_Token;
@@ -23,6 +31,10 @@ import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +50,10 @@ public class ViewFormForUc extends Fragment {
     public String status[]={"Applied","In-Progress","Completed"};
     public ArrayAdapter<String> statusAdapter;
     public Button form_status_apply,form_status_cancle;
+    public EditText token_date;
+    public EditText token_time;
+    public Calendar myCalendar;
+
 
     public ViewFormForUc() {
         // Required empty public constructor
@@ -90,7 +106,7 @@ public class ViewFormForUc extends Fragment {
                                DatabaseReference key = FirebaseHandler.getInstance().getForm_token().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(bform.getFormID()).push();
                                key.setValue(new Form_Token(key.getKey(), bform.getFormID(),
                                        bform.getUserName(), bform.getApplicantCnic(),
-                                       bform.getTimestamp(), bform.getTimestamp()));
+                                       bform.getTimestamp(), token_date.getText().toString(),token_time.getText().toString()));
                                 getActivity().getSupportFragmentManager().popBackStack();
                            }
                        });
@@ -159,8 +175,83 @@ public class ViewFormForUc extends Fragment {
         form_status_cancle = (Button)completeView.findViewById(R.id.form_status_cancle);
         form_status_apply= (Button)completeView.findViewById(R.id.form_status_apply);
         status_userform= (Spinner)completeView.findViewById(R.id.status_userform);
+        token_date = (EditText)completeView.findViewById(R.id.token_date);
+        token_time = (EditText)completeView.findViewById(R.id.token_time);
+        token_date.setInputType(InputType.TYPE_NULL);
+        token_time.setInputType(InputType.TYPE_NULL);
         statusAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,status);
         status_userform.setAdapter(statusAdapter);
+
+
+         myCalendar = Calendar.getInstance();
+
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                view.setMinDate(System.currentTimeMillis());
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                updateLabel();
+            }
+
+        };
+
+
+
+        token_date.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+//your co
+
+                  DatePickerDialog datePickerDialog =   new DatePickerDialog(getActivity(), date, myCalendar
+                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                            myCalendar.get(Calendar.DAY_OF_MONTH));
+
+                    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                    datePickerDialog.show();
+
+                    return true;
+
+                }
+
+
+                return false;
+            }
+        });
+
+        token_time.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+//your co
+                    Calendar mcurrentTime = Calendar.getInstance();
+                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                    int minute = mcurrentTime.get(Calendar.MINUTE);
+                    TimePickerDialog mTimePicker;
+                    mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            token_time.setText( selectedHour + ":" + selectedMinute);
+                        }
+                    }, hour, minute, true);//Yes 24 hour time
+                    mTimePicker.setTitle("Select Time");
+                    mTimePicker.show();
+                    return true;
+
+                }
+
+                return false;
+            }
+        });
 
 
         edit.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +266,13 @@ public class ViewFormForUc extends Fragment {
 
     }
     });
+    }
+
+    private void updateLabel() {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        token_date.setText(sdf.format(myCalendar.getTime()));
     }
 
 }

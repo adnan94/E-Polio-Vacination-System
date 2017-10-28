@@ -13,8 +13,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
+import com.example.ali.myapplication.Activities.ModelClasses.Form_Token;
+import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.R;
 import com.google.android.gms.vision.text.Text;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
 
@@ -30,6 +36,8 @@ public class ViewUserForm extends Fragment {
     public TextView father_name_alert;
     public TextView father_cnic_alert;
     public TextView mother_name_alert, mother_cnic_alert, dob_alert, form_submit_alert, form_verification_alert, form_status;
+    public TextView form_verification_time;
+
 
     public ViewUserForm() {
         // Required empty public constructor
@@ -77,18 +85,43 @@ public class ViewUserForm extends Fragment {
 
             if (bform.getForm_status().equals("In-Progress")) {
 
-                String dateString = DateFormat.format("dd/MM/yyyy", new Date( bform.getTimestamp())).toString();
+                FirebaseHandler.getInstance().getForm_token()
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child(bform.getFormID())
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot!=null){
+                                    if(dataSnapshot.getValue()!=null){
+
+                                        Form_Token form_token = dataSnapshot.getValue(Form_Token.class);
+                                        String dateString = DateFormat.format("dd/MM/yyyy", new Date( bform.getTimestamp())).toString();
 
 
-                show_token_btn.setVisibility(View.VISIBLE);
-                father_name_alert.setText(bform.getFatherName());
-                father_cnic_alert.setText(bform.getFatherCnic());
-                mother_name_alert.setText(bform.getMotherName());
-                mother_cnic_alert.setText(bform.getMotherCnic());
-                dob_alert.setText(bform.getDateOfBirth());
-                form_submit_alert.setText(dateString);
-                form_verification_alert.setText(dateString);
-                form_status.setText(bform.getForm_status());
+                                        show_token_btn.setVisibility(View.VISIBLE);
+                                        father_name_alert.setText(bform.getFatherName());
+                                        father_cnic_alert.setText(bform.getFatherCnic());
+                                        mother_name_alert.setText(bform.getMotherName());
+                                        mother_cnic_alert.setText(bform.getMotherCnic());
+                                        dob_alert.setText(bform.getDateOfBirth());
+                                        form_submit_alert.setText(dateString);
+                                        form_verification_alert.setText(form_token.getAppointment_date());
+                                        form_verification_time.setText(form_token.getAppointment_time());
+                                        form_status.setText(bform.getForm_status());
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+
+
+
             } else {
                 show_token_btn.setVisibility(View.GONE);
             }
@@ -128,6 +161,7 @@ public class ViewUserForm extends Fragment {
         form_submit_alert = (TextView) completeView.findViewById(R.id.form_submit_alert);
         form_verification_alert = (TextView) completeView.findViewById(R.id.form_verification_alert);
         form_status = (TextView) completeView.findViewById(R.id.form_status);
+        form_verification_time = (TextView)completeView.findViewById(R.id.form_verification_time);
 
 
         //end

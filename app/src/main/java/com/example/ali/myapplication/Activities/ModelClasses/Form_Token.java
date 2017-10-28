@@ -1,5 +1,7 @@
 package com.example.ali.myapplication.Activities.ModelClasses;
 
+import java.lang.ref.SoftReference;
+
 /**
  * Created by Sami Khan on 10/22/2017.
  */
@@ -11,20 +13,38 @@ public class Form_Token {
     private String ApplicantName;
     private String CNIC_no;
     private long form_date;
-    private long appointment_date;
+    private String appointment_date;
+    private String appointment_time;
 
 
 
     public Form_Token() {
     }
 
-    public Form_Token(String token_id, String form_id, String applicantName, String CNIC_no, long form_date, long appointment_date) {
+    public Form_Token(String token_id, String form_id, String applicantName, String CNIC_no, long form_date, String appointment_date,String appointment_time) {
         this.token_id = token_id;
         Form_id = form_id;
         ApplicantName = applicantName;
         this.CNIC_no = CNIC_no;
         this.form_date = form_date;
         this.appointment_date = appointment_date;
+        this.appointment_time = appointment_time;
+    }
+
+    public String getAppointment_date() {
+        return appointment_date;
+    }
+
+    public void setAppointment_date(String appointment_date) {
+        this.appointment_date = appointment_date;
+    }
+
+    public String getAppointment_time() {
+        return appointment_time;
+    }
+
+    public void setAppointment_time(String appointment_time) {
+        this.appointment_time = appointment_time;
     }
 
     public String getForm_id() {
@@ -67,11 +87,4 @@ public class Form_Token {
         this.form_date = form_date;
     }
 
-    public long getAppointment_date() {
-        return appointment_date;
-    }
-
-    public void setAppointment_date(long appointment_date) {
-        this.appointment_date = appointment_date;
-    }
 }

@@ -54,7 +54,7 @@
         android:layout_marginTop="5dp"
         android:background="@mipmap/bar_code_hi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="45dp" />
 
     <TextView
         android:textStyle="bold"
@@ -200,7 +200,7 @@
 
             <TextView
                 android:layout_weight="1"
-                android:text="Form Submitted:"
+                android:text="Form Submitted Date:"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -244,7 +244,29 @@
 
             <TextView
                 android:layout_weight="1"
-                android:text="Verification Date:"
+                android:text="Verification time:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/form_verification_time"
+                android:layout_weight="1"
+                android:text="Faiz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1"
+                android:text="Form Status:"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -257,8 +279,6 @@
 
 
         </LinearLayout>
-
-
 
     </LinearLayout>
 
