@@ -31,6 +31,7 @@ import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ServerValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -94,6 +95,8 @@ public class ViewFormForUc extends Fragment {
             }
         });
 
+
+
         form_status_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,7 +109,7 @@ public class ViewFormForUc extends Fragment {
                                DatabaseReference key = FirebaseHandler.getInstance().getForm_token().child(bform.getUser_uid()).child(bform.getFormID()).push();
                                key.setValue(new Form_Token(key.getKey(), bform.getFormID(),
                                        bform.getUserName(), bform.getApplicantCnic(),
-                                       bform.getTimestamp(), token_date.getText().toString(),token_time.getText().toString(),System.currentTimeMillis()));
+                                       bform.getTimestamp(), token_date.getText().toString(),token_time.getText().toString(), ServerValue.TIMESTAMP));
                                 getActivity().getSupportFragmentManager().popBackStack();
                            }
                        });
