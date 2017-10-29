@@ -15,13 +15,13 @@ public class Form_Token {
     private long form_date;
     private String appointment_date;
     private String appointment_time;
-    private long token_date;
+    private Object token_date;
 
 
     public Form_Token() {
     }
 
-    public Form_Token(String token_id, String form_id, String applicantName, String CNIC_no, long form_date, String appointment_date, String appointment_time, long token_date) {
+    public Form_Token(String token_id, String form_id, String applicantName, String CNIC_no, long form_date, String appointment_date, String appointment_time, Object token_date) {
         this.token_id = token_id;
         Form_id = form_id;
         ApplicantName = applicantName;
@@ -88,12 +88,11 @@ public class Form_Token {
         this.appointment_time = appointment_time;
     }
 
-    public long getToken_date() {
+    public Object getToken_date() {
         return token_date;
     }
 
-    public void setToken_date(long token_date) {
+    public void setToken_date(Object token_date) {
         this.token_date = token_date;
     }
-
 }
