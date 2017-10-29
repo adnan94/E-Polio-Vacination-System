@@ -135,7 +135,7 @@ public class Service extends android.app.Service {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.getValue() != null) {
 
-                                if (Long.parseLong(dataSnapshot.getValue().toString()) < finalTokenDate) {
+                                if (Long.parseLong(dataSnapshot.getValue().toString()) < finalTokenDate) { 
                                     Log.d("TAG", dataSnapshot.getValue().toString());
                                     Intent intent = new Intent(getApplicationContext(), UcHome.class);
                                     NotificationManager notificationManager =
