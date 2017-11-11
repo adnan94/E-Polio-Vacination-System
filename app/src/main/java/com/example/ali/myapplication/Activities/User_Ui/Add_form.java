@@ -31,7 +31,7 @@ public class Add_form extends android.support.v4.app.Fragment {
 
     public EditText name, cnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address, district;
     public CheckBox yes, no, male, female;
-    public Button submit;
+    public Button submit, addLocation;
     public DatabaseReference ref;
     public String randomNumber;
 
@@ -98,6 +98,13 @@ public class Add_form extends android.support.v4.app.Fragment {
                 }
             }
         });
+    addLocation.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new AddFormLocation()).addToBackStack(null).commit();
+
+        }
+    });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +122,7 @@ public class Add_form extends android.support.v4.app.Fragment {
                         }
 
                         getActivity().getSupportFragmentManager().beginTransaction()
-                                .add(R.id.maincontainer,new UserHomeFragment())
+                                .add(R.id.maincontainer, new UserHomeFragment())
                                 .commit();
 
 //                        Dialog dialog = new Dialog(getActivity());
@@ -178,6 +185,7 @@ public class Add_form extends android.support.v4.app.Fragment {
         bForm.setFormID(randomNumber);
         bForm.setTimestamp(System.currentTimeMillis());
         return bForm;
+
     }
 
     private void cast(View view) {
@@ -196,6 +204,7 @@ public class Add_form extends android.support.v4.app.Fragment {
         address = (EditText) view.findViewById(R.id.editTextAddress);
         district = (EditText) view.findViewById(R.id.editTextDistrict);
         submit = (Button) view.findViewById(R.id.submitForm);
+        addLocation = (Button) view.findViewById(R.id.addLocation);
         yes = (CheckBox) view.findViewById(R.id.checkBoxYes);
         no = (CheckBox) view.findViewById(R.id.checkBoxNo);
         male = (CheckBox) view.findViewById(R.id.checkBoxMale);
