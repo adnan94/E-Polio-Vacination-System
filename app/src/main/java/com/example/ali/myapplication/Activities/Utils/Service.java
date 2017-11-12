@@ -30,6 +30,7 @@ import java.util.Random;
 public class Service extends android.app.Service {
     String id;
     DatabaseReference firebase;
+    int childChangeCount = 0;
 
     @Nullable
     @Override
@@ -68,45 +69,50 @@ public class Service extends android.app.Service {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.getValue() != null) {
-
-                                if (Long.parseLong(dataSnapshot.getValue().toString()) < finalTokenDate) {
-                                    Log.d("TAG", dataSnapshot.getValue().toString());
-                                    Intent intent = new Intent(getApplicationContext(), UcHome.class);
-                                    NotificationManager notificationManager =
-                                            (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                                    PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-                                    Notification notification = null;
-                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                                        notification = new Notification.Builder(getApplicationContext())
-                                                .setTicker("E-Polio")
-                                                .setContentTitle("E-Polio")
-                                                .setStyle(new Notification.BigTextStyle().bigText(""))
-                                                .setContentText("You have notification")
-                                                .setTicker("E-Polio")
-                                                .setPriority(Notification.PRIORITY_HIGH)
-                                                .setSmallIcon(R.mipmap.nadra)
-                                                .setAutoCancel(true)
-                                                .setContentIntent(pendingIntent)
-                                                .setVibrate(new long[]{500, 500})
-                                                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                                                .build();
-                                    }
-                                    Random r = new Random();
-                                    int i = r.nextInt(80 - 65) + 65;
+                                if (childChangeCount == 0) {
+                                    if (Long.parseLong(dataSnapshot.getValue().toString()) < finalTokenDate) {
+                                        Log.d("TAG", dataSnapshot.getValue().toString());
+                                        Intent intent = new Intent(getApplicationContext(), UcHome.class);
+                                        NotificationManager notificationManager =
+                                                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                                        Notification notification = null;
+                                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                                            notification = new Notification.Builder(getApplicationContext())
+                                                    .setTicker("E-Polio")
+                                                    .setContentTitle("E-Polio")
+                                                    .setStyle(new Notification.BigTextStyle().bigText(""))
+                                                    .setContentText("You have notification")
+                                                    .setTicker("E-Polio")
+                                                    .setPriority(Notification.PRIORITY_HIGH)
+                                                    .setSmallIcon(R.mipmap.nadra)
+                                                    .setAutoCancel(true)
+                                                    .setContentIntent(pendingIntent)
+                                                    .setVibrate(new long[]{500, 500})
+                                                    .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+                                                    .build();
+                                        }
+                                        Random r = new Random();
+                                        int i = r.nextInt(80 - 65) + 65;
 //                                    int i = 1221;
-                                    notificationManager.notify(++i, notification);
-                                    if (id != null) {
-                                        firebase.child("ActivitySeen").child(id).setValue(ServerValue.TIMESTAMP, new DatabaseReference.CompletionListener() {
-                                            @Override
-                                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                        notificationManager.notify(++i, notification);
+                                        if (id != null) {
+                                            firebase.child("ActivitySeen").child(id).setValue(ServerValue.TIMESTAMP, new DatabaseReference.CompletionListener() {
+                                                @Override
+                                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 //                                Utils.log("completed");
-                                            }
-                                        });
+                                                }
+                                            });
+
+                                        }
+
 
                                     }
-
-
+                                    ++childChangeCount;
+                                } else {
+                                    childChangeCount = 0;
                                 }
+
 
                             }
                         }
@@ -135,7 +141,7 @@ public class Service extends android.app.Service {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.getValue() != null) {
 
-                                if (Long.parseLong(dataSnapshot.getValue().toString()) < finalTokenDate) { 
+                                if (Long.parseLong(dataSnapshot.getValue().toString()) < finalTokenDate) {
                                     Log.d("TAG", dataSnapshot.getValue().toString());
                                     Intent intent = new Intent(getApplicationContext(), UcHome.class);
                                     NotificationManager notificationManager =

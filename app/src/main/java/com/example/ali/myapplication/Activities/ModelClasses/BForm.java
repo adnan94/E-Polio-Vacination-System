@@ -15,15 +15,13 @@ public class BForm implements Parcelable {
     private String user_uid;
     private String form_status;
     private long timestamp;
-
-
-
+    private double lat, lng;
 
 
     public BForm() {
     }
 
-    public BForm(String userName, String applicantCnic, String childName, String relation, String religion, String fatherName, String fatherCnic, String motherName, String motherCnic, String areaOfBirth, String dateOfBirth, String disablity, String address, String district, String gender, boolean vacinated, String formID, String user_uid, String form_status, long timestamp) {
+    public BForm(String userName, String applicantCnic, String childName, String relation, String religion, String fatherName, String fatherCnic, String motherName, String motherCnic, String areaOfBirth, String dateOfBirth, String disablity, String address, String district, String gender, boolean vacinated, String formID, String user_uid, String form_status, long timestamp, double lat, double lng) {
         this.userName = userName;
         this.applicantCnic = applicantCnic;
         this.childName = childName;
@@ -44,6 +42,8 @@ public class BForm implements Parcelable {
         this.user_uid = user_uid;
         this.form_status = form_status;
         this.timestamp = timestamp;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     protected BForm(Parcel in) {
@@ -67,6 +67,9 @@ public class BForm implements Parcelable {
         user_uid = in.readString();
         form_status = in.readString();
         timestamp = in.readLong();
+        lat = in.readDouble();
+        lng = in.readDouble();
+
     }
 
     @Override
@@ -91,6 +94,9 @@ public class BForm implements Parcelable {
         dest.writeString(user_uid);
         dest.writeString(form_status);
         dest.writeLong(timestamp);
+        dest.writeDouble(lat);
+        dest.writeDouble(lng);
+
     }
 
     @Override
@@ -149,6 +155,22 @@ public class BForm implements Parcelable {
 
     public void setFormID(String formID) {
         this.formID = formID;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 
     public String getUserName() {
