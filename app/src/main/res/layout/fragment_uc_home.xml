@@ -14,4 +14,14 @@
         android:layout_centerInParent="true"
         />
 
+    <Button
+        android:layout_below="@+id/ucList"
+        android:layout_gravity="center"
+        android:id="@+id/Add_teams"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Polio Teams"
+        android:layout_centerInParent="true"
+        />
+
 </RelativeLayout>
