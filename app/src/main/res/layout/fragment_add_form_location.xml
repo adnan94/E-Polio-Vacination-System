@@ -1,25 +1,66 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.ali.myapplication.Activities.User_Ui.AddFormLocation">
+    android:background="#fff"
+    android:clickable="true"
+    android:focusable="true"
+    >
 
+    <!-- TODO: Update blank fragment layout -->
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        tools:context="com.example.ali.ijararide.PickUpRideLocation" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        tools:context="com.example.ali.ijararide.PickUpRideLocation">
 
-    <Button
-        android:id="@+id/submit"
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:visibility="visible">
+
+
+            <ImageView
+                android:id="@+id/pin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/pin" />
+        </RelativeLayout>
+    </fragment>
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3f51b4"
-        android:text="Submit"
-        android:textColor="#fff" />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:background="#e3e3e3"
+        android:orientation="vertical">
+
+
+
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Confirm Pick Up"
+                android:textColor="#fff"
+                android:background="#3f51b4"
+                android:id="@+id/submit"
+                />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

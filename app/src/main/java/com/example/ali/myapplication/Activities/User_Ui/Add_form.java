@@ -1,8 +1,10 @@
 package com.example.ali.myapplication.Activities.User_Ui;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +14,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
 import com.example.ali.myapplication.Activities.User_Ui.UserHomeFragment;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.R;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,10 +38,12 @@ public class Add_form extends android.support.v4.app.Fragment {
     public Button submit, addLocation;
     public DatabaseReference ref;
     public String randomNumber;
+    public static LatLng location;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -55,6 +61,66 @@ public class Add_form extends android.support.v4.app.Fragment {
 
     private void init() {
         ref = FirebaseHandler.getInstance().getAdd_forms();
+    }
+
+
+    public boolean checkEmptyFields() {
+        boolean flag = true;
+        if (cnic.getText().toString().length() == 0) {
+            cnic.setError("Enter Applicant Cnic");
+            flag = false;
+        }
+        if (name.getText().toString().length() == 0) {
+            name.setError("Enter Applicant Name");
+            flag = false;
+        }
+        if (childName.getText().toString().length() == 0) {
+            childName.setError("Enter Child Name");
+            flag = false;
+        }
+        if (relation.getText().toString().length() == 0) {
+            flag = false;
+            relation.setError("Enter Relation");
+        }
+        if (religion.getText().toString().length() == 0) {
+            relation.setError("Enter Religion ");
+            flag = false;
+        }
+        if (fatherCnic.getText().toString().length() == 0) {
+            fatherCnic.setError("Enter Father Cnic");
+            flag = false;
+        }
+        if (fatherName.getText().toString().length() == 0) {
+            flag = false;
+            fatherName.setError("Enter Father Name");
+        }
+        if (motherName.getText().toString().length() == 0) {
+            flag = false;
+            motherName.setError("Enter Mother Name");
+        }
+        if (motherCnic.getText().toString().length() == 0) {
+            flag = false;
+            motherCnic.setError("Enter Mother Cnic");
+        }
+        if (areaOfBirth.getText().toString().length() == 0) {
+            flag = false;
+            areaOfBirth.setError("Enter Area Of Birth");
+        }
+        if (dateOfBirth.getText().toString().length() == 0) {
+            flag = false;
+            dateOfBirth.setError("Enter Date Of Birth");
+        }
+        if (address.getText().toString().length() == 0) {
+            flag = false;
+            address.setError("Enter Address");
+//            address.requestFocus();
+        }
+        if (district.getText().toString().length() == 0) {
+            district.setError("Enter District");
+            flag = false;
+//            district.requestFocus();
+        }
+        return flag;
     }
 
     private void clickListeners() {
@@ -98,32 +164,37 @@ public class Add_form extends android.support.v4.app.Fragment {
                 }
             }
         });
-    addLocation.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new AddFormLocation()).addToBackStack(null).commit();
+        addLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new AddFormLocation()).addToBackStack(null).commit();
 
-        }
-    });
+            }
+        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Random random = new Random();
-                randomNumber = generateRandom();
-                BForm bForm = getFormData();
-                ref.child(randomNumber).setValue(bForm, new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (location != null && checkEmptyFields()) {
 
-                        if (getActivity().getSupportFragmentManager().findFragmentById(R.id.maincontainer) != null) {
-                            getActivity().getSupportFragmentManager()
-                                    .beginTransaction().
-                                    remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.maincontainer)).commit();
-                        }
+                    Random random = new Random();
+                    randomNumber = generateRandom();
+                    BForm bForm = getFormData();
+                    bForm.setLat(location.latitude);
+                    bForm.setLng(location.longitude);
+                    ref.child(randomNumber).setValue(bForm, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .add(R.id.maincontainer, new UserHomeFragment())
-                                .commit();
+                            if (getActivity().getSupportFragmentManager().findFragmentById(R.id.maincontainer) != null) {
+                                getActivity().getSupportFragmentManager()
+                                        .beginTransaction().
+                                        remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.maincontainer)).commit();
+
+                            }
+                            location = null;
+                            getActivity().getSupportFragmentManager().beginTransaction()
+                                    .add(R.id.maincontainer, new UserHomeFragment())
+                                    .commit();
 
 //                        Dialog dialog = new Dialog(getActivity());
 //                        dialog.setTitle("Your Token Id Is : " + key);
@@ -146,8 +217,17 @@ public class Add_form extends android.support.v4.app.Fragment {
 //                        address.setText("");
 //                        district.setText("");
 
+                        }
+                    });
+
+                } else {
+                    if (location == null) {
+                        Snackbar.make(v, "Add Location", Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        Snackbar.make(v, "Empty Fields Not Allowed", Snackbar.LENGTH_SHORT).show();
+
                     }
-                });
+                }
             }
         });
     }
@@ -210,6 +290,14 @@ public class Add_form extends android.support.v4.app.Fragment {
         male = (CheckBox) view.findViewById(R.id.checkBoxMale);
         female = (CheckBox) view.findViewById(R.id.checkBoxFemale);
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            Toast.makeText(getActivity(), "Got It", Toast.LENGTH_SHORT).show();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public String generateRandom() {
