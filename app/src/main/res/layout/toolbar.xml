@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:layout_gravity="center"
-    android:background="#8d5aa3"
+    android:background="#039be5"
     android:padding="8dp"
     android:contentInsetEnd="0dp"
     android:contentInsetLeft="0dp"
@@ -37,7 +37,7 @@
         />
 
     <TextView
-        android:text="Car Wash"
+        android:text="E-Polio"
         android:id="@+id/main_appbar_textView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

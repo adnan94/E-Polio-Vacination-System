@@ -2,19 +2,24 @@ package com.example.ali.myapplication.Activities.Uc_Ui;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 
 import com.example.ali.myapplication.Activities.Activity.UcHome;
 import com.example.ali.myapplication.Activities.Adaptor.Navigations_ItemsAdapter;
@@ -31,14 +36,27 @@ public class Add_Polio_TeamActivity extends AppCompatActivity {
     public String[] areaName = {"Nazimabad", "Johar", "Gulshan", "Landi", "Malir"};
     public ArrayAdapter arrayAdapter;
     public RelativeLayout team_container;
+    public ImageView back_arrow;
+    public static TextView ActionBartitle;
+    public static Add_Polio_TeamActivity add_polio_teamActivity;
 
+    public static Add_Polio_TeamActivity getInstance(){
+        return add_polio_teamActivity;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add__polio__team);
+        add_polio_teamActivity = this;
         team_container = (RelativeLayout) findViewById(R.id.team_container);
-
-
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_outside);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
+        back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
+        ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
+        ActionBartitle.setText("Add Polio Team");
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
       //  team_container = (RelativeLayout) findViewById(R.id.team_container);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -59,7 +77,7 @@ public class Add_Polio_TeamActivity extends AppCompatActivity {
         drawer_layout.setDrawerListener(mDrawerToggle);
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.add_member_container, new Add_PolioTeam_Fragment())
+                .add(R.id.add_member_container, new Polio_TeamList())
               //  .addToBackStack(null)
                 .commit();
 

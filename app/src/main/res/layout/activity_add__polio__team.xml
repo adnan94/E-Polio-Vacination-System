@@ -19,7 +19,6 @@
             layout="@layout/toolbar" />
 
        <FrameLayout
-           android:layout_below="@+id/toolbar_outside"
            android:id="@+id/add_member_container"
            android:layout_width="match_parent"
            android:layout_height="match_parent">

@@ -8,11 +8,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 import com.example.ali.myapplication.Activities.Adaptor.Form_PagerAdapter;
@@ -40,11 +43,21 @@ public class UcHome extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     public FrameLayout maincontainer_uc;
     public String[] menuName = {"Home","Add Polio Teams", "View Polio Teams", "About", "Setting","Log Out"};
+    public ImageView back_arrow;
+    public static TextView ActionBartitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uc_home);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_outside);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
+        back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
+        back_arrow.setVisibility(View.INVISIBLE);
+        ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
+        ActionBartitle.setText("UC Office");
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
         maincontainer_uc = (FrameLayout)findViewById(R.id.maincontainer_uc);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
