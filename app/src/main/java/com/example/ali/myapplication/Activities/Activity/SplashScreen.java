@@ -113,6 +113,7 @@ public class SplashScreen extends AppCompatActivity {
             startActivity(new Intent(SplashScreen.this, UcHome.class));
         } else if (userModel.getUser_type() == 4) {
             startService(new Intent(SplashScreen.this, Service.class));
+            startActivity(new Intent(SplashScreen.this, TeamMemberActivity.class));
             databaseReference.child("ActivitySeen").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(ServerValue.TIMESTAMP);
         }
 

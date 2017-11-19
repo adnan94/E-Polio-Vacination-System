@@ -140,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         //Uc Screen
                                                         startActivity(new Intent(LoginActivity.this, UcHome.class));
                                                     } else if (userModel.getUser_type() == 4) {
+                                                        startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
                                                     }
                                                     finish();
                                                 }

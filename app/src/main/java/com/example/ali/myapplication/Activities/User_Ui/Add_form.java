@@ -33,7 +33,7 @@ import java.util.Random;
 
 public class Add_form extends android.support.v4.app.Fragment {
 
-    public EditText name, cnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address, district;
+    public EditText name, cnic, childName, relation, religion, drops, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address, district;
     public CheckBox yes, no, male, female;
     public Button submit, addLocation;
     public DatabaseReference ref;
@@ -120,6 +120,18 @@ public class Add_form extends android.support.v4.app.Fragment {
             flag = false;
 //            district.requestFocus();
         }
+        if (drops.getText().toString().length() == 0) {
+            if (Integer.parseInt(drops.getText().toString()) > 10) {
+                district.setError("No Of Drops Not Greater Than 10");
+                flag = false;
+            }else{
+                district.setError("No Of Drops Should Not Kept Empty");
+                flag = false;
+
+            }
+
+
+        }
         return flag;
     }
 
@@ -181,6 +193,7 @@ public class Add_form extends android.support.v4.app.Fragment {
                     BForm bForm = getFormData();
                     bForm.setLat(location.latitude);
                     bForm.setLng(location.longitude);
+                    bForm.setDrops(Integer.parseInt(drops.getText().toString()));
                     ref.child(randomNumber).setValue(bForm, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
@@ -289,6 +302,7 @@ public class Add_form extends android.support.v4.app.Fragment {
         no = (CheckBox) view.findViewById(R.id.checkBoxNo);
         male = (CheckBox) view.findViewById(R.id.checkBoxMale);
         female = (CheckBox) view.findViewById(R.id.checkBoxFemale);
+        drops = (EditText) view.findViewById(R.id.editTextDrops);
 
     }
 

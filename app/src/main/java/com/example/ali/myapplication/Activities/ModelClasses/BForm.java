@@ -9,19 +9,21 @@ import android.os.Parcelable;
  */
 
 public class BForm implements Parcelable {
-    private String userName, applicantCnic, childName, relation, religion, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disablity, address, district, gender;
+    private String userName, applicantCnic,
+            childName, relation, religion, fatherName, fatherCnic,
+            motherName, motherCnic, areaOfBirth, dateOfBirth, disablity, address, district, gender;
     private boolean vacinated;
     private String formID;
     private String user_uid;
     private String form_status;
     private long timestamp;
     private double lat, lng;
-
+    private int drops;
 
     public BForm() {
     }
 
-    public BForm(String userName, String applicantCnic, String childName, String relation, String religion, String fatherName, String fatherCnic, String motherName, String motherCnic, String areaOfBirth, String dateOfBirth, String disablity, String address, String district, String gender, boolean vacinated, String formID, String user_uid, String form_status, long timestamp, double lat, double lng) {
+    public BForm(String userName, String applicantCnic, String childName, String relation, String religion, String fatherName, String fatherCnic, String motherName, String motherCnic, String areaOfBirth, String dateOfBirth, String disablity, String address, String district, String gender, boolean vacinated, String formID, String user_uid, String form_status, long timestamp, double lat, double lng, int drops) {
         this.userName = userName;
         this.applicantCnic = applicantCnic;
         this.childName = childName;
@@ -44,6 +46,7 @@ public class BForm implements Parcelable {
         this.timestamp = timestamp;
         this.lat = lat;
         this.lng = lng;
+        this.drops = drops;
     }
 
     protected BForm(Parcel in) {
@@ -69,7 +72,7 @@ public class BForm implements Parcelable {
         timestamp = in.readLong();
         lat = in.readDouble();
         lng = in.readDouble();
-
+        drops = in.readInt();
     }
 
     @Override
@@ -96,7 +99,7 @@ public class BForm implements Parcelable {
         dest.writeLong(timestamp);
         dest.writeDouble(lat);
         dest.writeDouble(lng);
-
+        dest.writeInt(drops);
     }
 
     @Override
@@ -179,6 +182,14 @@ public class BForm implements Parcelable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getDrops() {
+        return drops;
+    }
+
+    public void setDrops(int drops) {
+        this.drops = drops;
     }
 
     public String getApplicantCnic() {
