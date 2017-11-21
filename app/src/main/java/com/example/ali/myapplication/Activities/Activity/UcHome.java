@@ -1,5 +1,6 @@
 package com.example.ali.myapplication.Activities.Activity;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -7,17 +8,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 import com.example.ali.myapplication.Activities.Adaptor.Form_PagerAdapter;
 import com.example.ali.myapplication.Activities.Adaptor.Navigations_ItemsAdapter;
-import com.example.ali.myapplication.Activities.UI.Applied_Forms;
-import com.example.ali.myapplication.Activities.UI.Completed_Forms;
-import com.example.ali.myapplication.Activities.UI.In_Progress_Forms;
+import com.example.ali.myapplication.Activities.Uc_Ui.Applied_Forms;
+import com.example.ali.myapplication.Activities.Uc_Ui.Completed_Forms;
+import com.example.ali.myapplication.Activities.Uc_Ui.In_Progress_Forms;
+import com.example.ali.myapplication.Activities.Uc_Ui.Add_Polio_TeamActivity;
 import com.example.ali.myapplication.R;
 
 import java.util.ArrayList;
@@ -36,12 +42,22 @@ public class UcHome extends AppCompatActivity {
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     public FrameLayout maincontainer_uc;
-    public String[] menuName = {"Change Password", "Terms & Conditions", "Send Messages", "Add Polio Teams","Log Out"};
+    public String[] menuName = {"Home","Add Polio Teams", "View Polio Teams", "About", "Setting","Log Out"};
+    public ImageView back_arrow;
+    public static TextView ActionBartitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uc_home);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_outside);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
+        back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
+        back_arrow.setVisibility(View.INVISIBLE);
+        ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
+        ActionBartitle.setText("UC Office");
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
         maincontainer_uc = (FrameLayout)findViewById(R.id.maincontainer_uc);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -99,6 +115,23 @@ public class UcHome extends AppCompatActivity {
                 @Override
                 public void onTabReselected(TabLayout.Tab tab) {
 
+                }
+            });
+
+            mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    if(i==1){
+                        Intent intent = new Intent(UcHome.this, UcHome.class);
+                        startActivity(intent);
+                        finish();
+                        drawer_layout.closeDrawer(mDrawerList);
+                    } else if(i==2){
+                        Intent intent = new Intent(UcHome.this, Add_Polio_TeamActivity.class);
+                        startActivity(intent);
+                        finish();
+                        drawer_layout.closeDrawer(mDrawerList);
+                    }
                 }
             });
 

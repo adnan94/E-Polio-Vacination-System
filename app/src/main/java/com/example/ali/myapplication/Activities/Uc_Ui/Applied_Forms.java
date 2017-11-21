@@ -1,4 +1,4 @@
-package com.example.ali.myapplication.Activities.UI;
+package com.example.ali.myapplication.Activities.Uc_Ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -77,6 +77,7 @@ public class Applied_Forms extends android.support.v4.app.Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot!=null){
                     if(dataSnapshot.getValue()!=null) {
+                        list.clear();
                         for(DataSnapshot data:dataSnapshot.getChildren()) {
                             BForm bform = data.getValue(BForm.class);
                             if (bform.getForm_status().equals("Applied")) {

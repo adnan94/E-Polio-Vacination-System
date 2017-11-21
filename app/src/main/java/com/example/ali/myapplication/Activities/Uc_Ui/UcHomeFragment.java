@@ -16,7 +16,7 @@ import com.example.ali.myapplication.R;
  */
 public class UcHomeFragment extends Fragment {
     Button listUc;
-
+    public Button Add_teams;
     public UcHomeFragment() {
         // Required empty public constructor
     }
@@ -28,6 +28,7 @@ public class UcHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_uc_home, container, false);
         listUc = (Button) view.findViewById(R.id.ucList);
+        Add_teams = (Button)view.findViewById(R.id.Add_teams);
         listUc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

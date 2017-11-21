@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include
+        android:id="@+id/toolbar_outside"
+        layout="@layout/toolbar" />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:padding="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/member_image"
+                android:layout_gravity="center"
+                android:background="@mipmap/sehat_logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+
+            <android.support.v7.widget.CardView
+                app:cardElevation="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                app:cardUseCompatPadding="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        android:text="Membership Type*"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+                    <Spinner
+                        android:id="@+id/team_member_type"
+                        android:layout_marginTop="1dp"
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:id="@+id/team_mname"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        android:inputType="text"
+                        android:hint="MEMBER NAME"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:id="@+id/team_mnic_no"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        android:inputType="number"
+                        android:hint="MEMBER NIC NO"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+                    <EditText
+                        android:id="@+id/team_email"
+                        android:textColor="#000"
+                        android:inputType="text"
+                        android:textSize="12sp"
+                        android:layout_marginTop="5dp"
+                        android:hint="MEMBER EMAIL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+
+                    <EditText
+                        android:id="@+id/team_maddress"
+                        android:paddingRight="10dp"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        android:layout_marginTop="5dp"
+                        android:hint="MEMBER ADDRESS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+                    <EditText
+                        android:id="@+id/team_mphone_no"
+                        android:textColor="#000"
+                        android:inputType="number"
+                        android:textSize="12sp"
+                        android:layout_marginTop="5dp"
+                        android:hint="MEMBER PHONE NO"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <Button
+                android:id="@+id/add_member"
+                android:layout_marginTop="5dp"
+                android:textColor="#fff"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:text="SAVE"
+                android:background="@drawable/curver_btn"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="35dp" />
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
