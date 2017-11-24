@@ -3,7 +3,6 @@ package com.example.ali.myapplication.Activities.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.ali.myapplication.Activities.UI.ListOfUc;
 import com.example.ali.myapplication.Activities.UI.TeamMemberHomeFragment;
 import com.example.ali.myapplication.R;
 

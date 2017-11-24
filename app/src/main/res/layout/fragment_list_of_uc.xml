@@ -3,12 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
      android:background="#fff"
-    tools:context="com.example.ali.myapplication.Activities.UI.ListOfUc">
+    android:orientation="vertical"
+    tools:context="com.example.ali.myapplication.Activities.Admin_Ui.ListOfUc">
 
-     TODO: Update blank fragment layout
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:text="@string/hello_blank_fragment" />-->
+     <include
+         android:id="@+id/toolbar_outside"
+         layout="@layout/toolbar" />
+
+     <ListView
+         android:id="@+id/uc_memberlist"
+         android:layout_gravity="start"
+         android:background="#fff"
+         android:choiceMode="singleChoice"
+         android:divider="@android:color/transparent"
+         android:dividerHeight="0dp"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+
+
+     </ListView>
 
 </LinearLayout>

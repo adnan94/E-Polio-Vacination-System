@@ -53,7 +53,7 @@ public class Polio_TeamList extends android.support.v4.app.Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
         back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
-        back_arrow.setVisibility(View.GONE);
+      //  back_arrow.setVisibility(View.GONE);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
      //   add_teams = (FloatingActionButton)view.findViewById(R.id.add_teams);
         ActionBartitle.setText("Polio Team List");

@@ -1,19 +1,27 @@
 package com.example.ali.myapplication.Activities.User_Ui;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
@@ -25,6 +33,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -33,13 +44,18 @@ import java.util.Random;
 
 public class Add_form extends android.support.v4.app.Fragment {
 
-    public EditText name, cnic, childName, relation, religion, drops, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address, district;
+    public EditText name, cnic, childName , drops, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address;
     public CheckBox yes, no, male, female;
     public Button submit, addLocation;
     public DatabaseReference ref;
     public String randomNumber;
     public static LatLng location;
-
+    public Spinner relation,religion,district;
+    public ArrayAdapter<String> relationAdapter,religionAdapter,districtAdapter;
+    public String relations[] = {"Father","Mother","Sister","Brother","Cousin"};
+    public String religions[] = {"Islam","Ahmadiyya"};
+    public String districts[] = {"East District","Central District","West District","Korangi District","Malir District"};
+    public Calendar myCalendar;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,14 +94,14 @@ public class Add_form extends android.support.v4.app.Fragment {
             childName.setError("Enter Child Name");
             flag = false;
         }
-        if (relation.getText().toString().length() == 0) {
-            flag = false;
-            relation.setError("Enter Relation");
-        }
-        if (religion.getText().toString().length() == 0) {
-            relation.setError("Enter Religion ");
-            flag = false;
-        }
+//        if (relation.getText().toString().length() == 0) {
+//            flag = false;
+//            relation.setError("Enter Relation");
+//        }
+//        if (religion.getText().toString().length() == 0) {
+//            religion.setError("Enter Religion ");
+//            flag = false;
+//        }
         if (fatherCnic.getText().toString().length() == 0) {
             fatherCnic.setError("Enter Father Cnic");
             flag = false;
@@ -115,17 +131,17 @@ public class Add_form extends android.support.v4.app.Fragment {
             address.setError("Enter Address");
 //            address.requestFocus();
         }
-        if (district.getText().toString().length() == 0) {
-            district.setError("Enter District");
-            flag = false;
-//            district.requestFocus();
-        }
+//        if (district.getText().toString().length() == 0) {
+//            district.setError("Enter District");
+//            flag = false;
+////            district.requestFocus();
+//        }
         if (drops.getText().toString().length() == 0) {
             if (Integer.parseInt(drops.getText().toString()) > 10) {
-                district.setError("No Of Drops Not Greater Than 10");
+                drops.setError("No Of Drops Not Greater Than 10");
                 flag = false;
             }else{
-                district.setError("No Of Drops Should Not Kept Empty");
+                drops.setError("No Of Drops Should Not Kept Empty");
                 flag = false;
 
             }
@@ -252,13 +268,13 @@ public class Add_form extends android.support.v4.app.Fragment {
         bForm.setUserName(name.getText().toString());
         bForm.setApplicantCnic(cnic.getText().toString());
         bForm.setChildName(childName.getText().toString());
-        bForm.setRelation(relation.getText().toString());
+        bForm.setRelation(relation.getSelectedItem().toString());
         if (male.isChecked()) {
             bForm.setGender("Male");
         } else if (female.isChecked()) {
             bForm.setGender("Female");
         }
-        bForm.setReligion(religion.getText().toString());
+        bForm.setReligion(religion.getSelectedItem().toString());
         bForm.setFatherName(fatherName.getText().toString());
         bForm.setFatherCnic(fatherCnic.getText().toString());
         bForm.setMotherName(motherName.getText().toString());
@@ -274,7 +290,7 @@ public class Add_form extends android.support.v4.app.Fragment {
         }
         bForm.setDisablity(disability.getText().toString());
         bForm.setAddress(address.getText().toString());
-        bForm.setDistrict(district.getText().toString());
+        bForm.setDistrict(district.getSelectedItem().toString());
         bForm.setFormID(randomNumber);
         bForm.setTimestamp(System.currentTimeMillis());
         return bForm;
@@ -285,8 +301,8 @@ public class Add_form extends android.support.v4.app.Fragment {
         name = (EditText) view.findViewById(R.id.editTextApplicantName);
         cnic = (EditText) view.findViewById(R.id.editTextApplicantCnic);
         childName = (EditText) view.findViewById(R.id.editTextChildName);
-        relation = (EditText) view.findViewById(R.id.editTextRelation);
-        religion = (EditText) view.findViewById(R.id.editTextReligion);
+        relation = (Spinner) view.findViewById(R.id.editTextRelation);
+        religion = (Spinner) view.findViewById(R.id.TextReligion);
         fatherName = (EditText) view.findViewById(R.id.editTextFatherName);
         fatherCnic = (EditText) view.findViewById(R.id.editTextFatherCnic);
         motherName = (EditText) view.findViewById(R.id.editTextMotherName);
@@ -295,7 +311,7 @@ public class Add_form extends android.support.v4.app.Fragment {
         dateOfBirth = (EditText) view.findViewById(R.id.editTextDateOfBirth);
         disability = (EditText) view.findViewById(R.id.editTextDisability);
         address = (EditText) view.findViewById(R.id.editTextAddress);
-        district = (EditText) view.findViewById(R.id.editTextDistrict);
+        district = (Spinner) view.findViewById(R.id.editTextDistrict);
         submit = (Button) view.findViewById(R.id.submitForm);
         addLocation = (Button) view.findViewById(R.id.addLocation);
         yes = (CheckBox) view.findViewById(R.id.checkBoxYes);
@@ -303,6 +319,105 @@ public class Add_form extends android.support.v4.app.Fragment {
         male = (CheckBox) view.findViewById(R.id.checkBoxMale);
         female = (CheckBox) view.findViewById(R.id.checkBoxFemale);
         drops = (EditText) view.findViewById(R.id.editTextDrops);
+
+        relationAdapter= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,relations);
+        relation.setAdapter(relationAdapter);
+
+        religionAdapter= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,religions);
+        religion.setAdapter(religionAdapter);
+
+        districtAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,districts);
+        district.setAdapter(districtAdapter);
+
+
+        relation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (adapterView.getChildAt(0) != null) {
+                    ((TextView) adapterView.getChildAt(0)).setTextSize(12);
+                    ((TextView) adapterView.getChildAt(0)).setTypeface(null, Typeface.BOLD);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                if (adapterView.getChildAt(0) != null) {
+                    ((TextView) adapterView.getChildAt(0)).setTextSize(12);
+                    ((TextView) adapterView.getChildAt(0)).setTypeface(null, Typeface.BOLD);
+                }
+            }
+        });
+
+        religion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (adapterView.getChildAt(0) != null) {
+                    ((TextView) adapterView.getChildAt(0)).setTextSize(12);
+                    ((TextView) adapterView.getChildAt(0)).setTypeface(null, Typeface.BOLD);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (adapterView.getChildAt(0) != null) {
+                    ((TextView) adapterView.getChildAt(0)).setTextSize(12);
+                    ((TextView) adapterView.getChildAt(0)).setTypeface(null, Typeface.BOLD);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        myCalendar = Calendar.getInstance();
+
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+             //   view.setMinDate(System.currentTimeMillis());
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                updateLabel();
+            }
+
+        };
+
+        dateOfBirth.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+//your co
+
+                    DatePickerDialog datePickerDialog =   new DatePickerDialog(getActivity(), date, myCalendar
+                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                            myCalendar.get(Calendar.DAY_OF_MONTH));
+
+          //          datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                    datePickerDialog.show();
+
+                    return true;
+
+                }
+
+
+                return false;
+            }
+        });
 
     }
 
@@ -323,5 +438,11 @@ public class Add_form extends android.support.v4.app.Fragment {
             sb.append(chars[rnd.nextInt(chars.length)]);
 
         return sb.toString();
+    }
+    private void updateLabel() {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        dateOfBirth.setText(sdf.format(myCalendar.getTime()));
     }
 }

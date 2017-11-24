@@ -39,7 +39,7 @@
 
 
                 app:tabSelectedTextColor="#fffdfe"
-                app:tabTextColor="#f0c7f7"
+                app:tabTextColor="#063951"
 
 
 
@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#FFFFFF"
+        android:background="#039be5"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp" />

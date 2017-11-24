@@ -14,7 +14,7 @@
         android:background="#fff"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="16dp">
 
         <ImageView
             android:layout_width="match_parent"
@@ -76,24 +76,16 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <EditText
+
+            <Spinner
                 android:id="@+id/editTextRelation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Relation"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp"
+
 
                 />
-        </android.support.design.widget.TextInputLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -125,6 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="17dp"
                     android:layout_marginRight="17dp"
+                    android:layout_marginTop="5dp"
                     android:checked="true"
                     android:fontFamily="sans-serif"
                     android:text="Male"
@@ -163,6 +156,7 @@
                     android:textSize="16sp" />
 
                 <CheckBox
+                    android:layout_marginTop="5dp"
                     android:id="@+id/checkBoxYes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -187,24 +181,14 @@
         </LinearLayout>
 
 
-        <android.support.design.widget.TextInputLayout
+        <Spinner
+            android:id="@+id/TextReligion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
 
-            <EditText
-                android:id="@+id/editTextReligion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Religion"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp"
 
-                />
-        </android.support.design.widget.TextInputLayout>
+            />
+
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -310,6 +294,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:paddingBottom="25dp"
+                android:paddingRight="15dp"
+                android:drawableEnd="@mipmap/calendar"
                 android:fontFamily="sans-serif"
                 android:hint="Date Of Birth"
                 android:inputType="date"
@@ -343,6 +330,9 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:drawableEnd="@mipmap/map_pin"
+                android:paddingRight="15dp"
+                android:paddingBottom="20dp"
                 android:id="@+id/editTextAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -356,22 +346,15 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <EditText
+
+            <Spinner
+
                 android:id="@+id/editTextDistrict"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="District"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp" />
-        </android.support.design.widget.TextInputLayout>
+                 />
+
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -393,21 +376,25 @@
         <Button
             android:id="@+id/addLocation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#3f51b4"
+            android:layout_height="35dp"
+            android:background="@drawable/curver_btn"
             android:fontFamily="sans-serif"
             android:text="Add Location"
             android:textColor="#fff"
+            android:textAllCaps="false"
+            android:textStyle="bold"
             android:textSize="14sp" />
 
         <Button
             android:id="@+id/submitForm"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginTop="5dp"
-            android:background="#3f51b4"
+            android:background="@drawable/curver_btn"
             android:fontFamily="sans-serif"
             android:text="Submit"
+            android:textAllCaps="false"
+            android:textStyle="bold"
             android:textColor="#fff"
             android:textSize="14sp"
 

@@ -1,6 +1,7 @@
 package com.example.ali.myapplication.Activities.Activity;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,67 +32,63 @@ public class SplashScreen extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         //  mFirebaseAnalytics = FirebaseAnalytics.getInstance(SplashScreen.this);
-        Thread thread = new Thread() {
+        new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                super.run();
-                try {
-                    mAuthListener = new FirebaseAuth.AuthStateListener() {
-                        @Override
-                        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                            final FirebaseUser user = firebaseAuth.getCurrentUser();
-                            if (user != null) {
-                                // User is signed in
-                                FirebaseHandler.getInstance().getUsersRef().child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot != null) {
-                                            if (dataSnapshot.getValue() != null) {
-                                                //      for(DataSnapshot data:dataSnapshot.getChildren()) {
-                                                userModel = dataSnapshot.getValue(UserModel.class);
-                                                UserModel.getInstance(
-                                                        userModel.getName(),
-                                                        userModel.getFname(),
-                                                        userModel.getAddress(),
-                                                        userModel.getEmail(),
-                                                        userModel.getPassword(),
-                                                        userModel.getCnic(),
-                                                        userModel.getCellNo(),
-                                                        userModel.getUser_type()
-                                                );
-                                                //     }
-                                            }
-                                            openMainScreen(userModel);
 
+                mAuthListener = new FirebaseAuth.AuthStateListener() {
+                    @Override
+                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                        final FirebaseUser user = firebaseAuth.getCurrentUser();
+                        if (user != null) {
+                            // User is signed in
+                            FirebaseHandler.getInstance().getUsersRef().child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if(dataSnapshot!=null){
+                                        if(dataSnapshot.getValue()!=null){
+                                            UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                                            UserModel.getInstance(
+
+                                                    userModel.getName(),
+                                                    userModel.getFname(),
+                                                    userModel.getAddress(),
+                                                    userModel.getEmail(),
+                                                    userModel.getPassword(),
+                                                    userModel.getCnic(),
+                                                    userModel.getCellNo(),
+                                                    userModel.getUser_type()
+                                            );
+
+                                            openMainScreen(userModel);
                                         }
                                     }
+                                }
 
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
 
-                                    }
-                                });
+                                }
+                            });
 
 
-                            } else {
-                                // User is signed out
-                                Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
-                                //   overridePendingTransition(R.anim.slide_down,R.anim.slide_up);
-                                startActivity(intent);
-                                finish();
-                            }
+
+
+
+                        } else {
+                            // User is signed out
+                            Intent intent = new Intent(SplashScreen.this,LoginActivity.class);
+                         //   overridePendingTransition(R.anim.sli,R.anim.slide_up);
+                            startActivity(intent);
+                            finish();
                         }
-                    };
-                    //add listener
-                    mAuth.addAuthStateListener(mAuthListener);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    }
+                };
+                //add listener
+                mAuth.addAuthStateListener(mAuthListener);
 
             }
-
-        };
-        thread.start();
+        }, 3000);
     }
 
     private void openMainScreen(UserModel userModel) {
@@ -121,19 +118,19 @@ public class SplashScreen extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        if (mAuthListener != null) {
+//            mAuth.removeAuthStateListener(mAuthListener);
+//        }
+//    }
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        if (mAuthListener != null) {
+//            mAuth.removeAuthStateListener(mAuthListener);
+//        }
+//    }
 }

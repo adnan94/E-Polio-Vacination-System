@@ -25,6 +25,7 @@ import com.example.ali.myapplication.Activities.Uc_Ui.Completed_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.In_Progress_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.Add_Polio_TeamActivity;
 import com.example.ali.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -55,7 +56,8 @@ public class UcHome extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
         back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
-        back_arrow.setVisibility(View.INVISIBLE);
+      //  back_arrow.setVisibility(View.INVISIBLE);
+        back_arrow.setImageResource(R.mipmap.menu);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("UC Office");
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -130,6 +132,9 @@ public class UcHome extends AppCompatActivity {
                         Intent intent = new Intent(UcHome.this, Add_Polio_TeamActivity.class);
                         startActivity(intent);
                         finish();
+                        drawer_layout.closeDrawer(mDrawerList);
+                    }else if(i==6){
+                        FirebaseAuth.getInstance().signOut();
                         drawer_layout.closeDrawer(mDrawerList);
                     }
                 }

@@ -55,6 +55,7 @@ public class Add_Polio_TeamActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
         back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
+     //   back_arrow.setVisibility(View.VISIBLE);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("Add Polio Team");
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);

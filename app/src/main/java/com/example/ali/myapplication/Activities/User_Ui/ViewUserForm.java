@@ -37,7 +37,7 @@ public class ViewUserForm extends Fragment {
     public TextView father_cnic_alert;
     public TextView mother_name_alert, mother_cnic_alert, dob_alert, form_submit_alert, form_verification_alert, form_status;
     public TextView form_verification_time;
-
+    public TextView user_name;
 
     public ViewUserForm() {
         // Required empty public constructor
@@ -83,6 +83,7 @@ public class ViewUserForm extends Fragment {
             address.setText("Address : " + bform.getAddress());
             district.setText("District : " + bform.getDistrict());
 
+
             if (bform.getForm_status().equals("In-Progress")) {
 
                 FirebaseHandler.getInstance().getForm_token()
@@ -108,6 +109,7 @@ public class ViewUserForm extends Fragment {
                                         form_verification_alert.setText(form_token.getAppointment_date());
                                         form_verification_time.setText(form_token.getAppointment_time());
                                         form_status.setText(bform.getForm_status());
+                                        user_name.setText(bform.getChildName());
                                     }
                                 }
                             }
@@ -157,6 +159,7 @@ public class ViewUserForm extends Fragment {
         father_cnic_alert = (TextView) completeView.findViewById(R.id.father_cnic_alert);
         mother_name_alert = (TextView) completeView.findViewById(R.id.mother_name_alert);
         mother_cnic_alert = (TextView) completeView.findViewById(R.id.mother_cnic_alert);
+        user_name = (TextView)completeView.findViewById(R.id.user_name);
         dob_alert = (TextView) completeView.findViewById(R.id.dob_alert);
         form_submit_alert = (TextView) completeView.findViewById(R.id.form_submit_alert);
         form_verification_alert = (TextView) completeView.findViewById(R.id.form_verification_alert);

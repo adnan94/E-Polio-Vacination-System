@@ -8,13 +8,20 @@
 
     >
 
-    <FrameLayout
+
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
         android:id="@+id/maincontainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fff">
-
-    </FrameLayout>
+        <include
+            android:id="@+id/toolbar_outside"
+            layout="@layout/toolbar" />
+    </LinearLayout>
 
 
 
@@ -23,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#FFFFFF"
+        android:background="#039be5"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp" />
