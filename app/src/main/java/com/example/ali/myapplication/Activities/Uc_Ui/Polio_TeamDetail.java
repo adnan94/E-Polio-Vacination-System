@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
 import com.example.ali.myapplication.Activities.ModelClasses.Team_MemberObject;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
@@ -54,6 +55,7 @@ public class Polio_TeamDetail extends android.support.v4.app.Fragment {
                 team_detail_email.setText(polio_team.getTeam_email());
                 team_id.setText(String.valueOf(polio_team.getTeam_uid()));
                 team_area_detail.setText(polio_team.getTeam_area());
+
             }
         }
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +112,23 @@ public class Polio_TeamDetail extends android.support.v4.app.Fragment {
         floatingActionButton = (ImageView) view.findViewById(R.id.customer_team_sort);
         floatingMenuItem1 = (ImageView)view.findViewById(R.id.edit_team_details);
         floatingMenuItem2 = (ImageView)view.findViewById(R.id.delete_team_details);
+
+        floatingMenuItem1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+                Bundle bundle= new Bundle();
+                bundle.putParcelable("obj",polio_team);
+             //   bundle.putParcelable("member",team_memberObject);
+                Add_PolioTeam_Fragment add_team_view = new Add_PolioTeam_Fragment();
+                add_team_view.setArguments(bundle);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.add_member_container, add_team_view)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
     }
 
@@ -241,6 +260,15 @@ public class Polio_TeamDetail extends android.support.v4.app.Fragment {
         member_email.setText(team_memberObject.getMember_email());
         member_nic.setText(team_memberObject.getMember_nic_no());
         member_phone.setText(team_memberObject.getMember_phone_no());
+        ImageView member_picture = (ImageView)layout.findViewById(R.id.member_picture);
+
+
+        Glide.with(getActivity())
+                .load(team_memberObject.getMember_pic())
+                .asBitmap()
+                .placeholder(R.drawable.user)
+                .into(member_picture);
+
 
 //        layout.setOnClickListener(new View.OnClickListener() {
 //            @Override

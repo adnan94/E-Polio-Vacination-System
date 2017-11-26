@@ -33,6 +33,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
 import com.example.ali.myapplication.Activities.ModelClasses.Team_MemberObject;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
@@ -42,6 +43,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.soundcloud.android.crop.Crop;
@@ -81,6 +83,8 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
     private StorageReference rootStorageRef, imageRef, folderRef, fileStorageRef;
     private ProgressDialog mProgressDialog;
     private String downloadURL = "";
+    public Team_MemberObject team_memberObject;
+    public String key = "";
 
 
     @Override
@@ -98,6 +102,22 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
         if(getArguments()!=null){
             if(getArguments().getParcelable("obj")!=null){
                 polio_team = getArguments().getParcelable("obj");
+            }if(getArguments().getParcelable("member")!=null){
+                team_memberObject = getArguments().getParcelable("member");
+                key = team_memberObject.getMember_uid();
+                downloadURL = team_memberObject.getMember_pic();
+                team_email.setText(team_memberObject.getMember_email());
+                team_email.setEnabled(false);
+                team_mname.setText(team_memberObject.getMember_name());
+                team_mphone_no.setText(team_memberObject.getMember_phone_no());
+                team_mnic_no.setText(team_memberObject.getMember_nic_no());
+                team_mnic_no.setEnabled(false);
+
+                Glide.with(getActivity())
+                        .load(team_memberObject.getMember_pic())
+                        .asBitmap()
+                        .placeholder(R.drawable.user)
+                        .into(member_image);
             }
         }
 
@@ -175,11 +195,11 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
                     team_email.setError("Enter Member Email");
                     // flag = false;
                 }
-                else  if (team_mnic_no.getText().toString().length() == 0) {
+                else  if (team_mnic_no.getText().toString().length() == 0 || team_mnic_no.getText().toString().length() > 13 || team_mnic_no.getText().toString().length() < 13) {
                     team_mnic_no.setError("Enter NIC No");
                     //  flag = false;
                 }
-                else  if (team_mphone_no.getText().toString().length() == 0) {
+                else  if (team_mphone_no.getText().toString().length() == 0 || team_mphone_no.getText().toString().length() <11 || team_mphone_no.getText().toString().length() >11) {
                     team_mphone_no.setError("Enter Phone Number");
                     //   flag = false;
                 } else if(downloadURL.equals("")) {
@@ -187,14 +207,18 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
 
                 }else{
 
+                    if(key.equals("")){
+                        DatabaseReference reference = FirebaseHandler.getInstance().getPolio_teams().child(polio_team.getTeam_uid()).push();
+                        key = reference.getKey();
+                    }else{
 
-                    DatabaseReference reference = FirebaseHandler.getInstance().getPolio_teams().child(polio_team.getTeam_uid()).push();
+                    }
 
                     final Team_MemberObject team_memberObject = new Team_MemberObject(team_mname.getText().toString(), team_email.getText().toString()
-                            , team_mnic_no.getText().toString(), team_member_type.getSelectedItem().toString(), team_mphone_no.getText().toString(),reference.getKey(),downloadURL);
+                            , team_mnic_no.getText().toString(), team_member_type.getSelectedItem().toString(), team_mphone_no.getText().toString(),key,downloadURL);
 
                     FirebaseHandler.getInstance().getPolio_teams()
-                            .child(polio_team.getTeam_uid()).child(reference.getKey()).setValue(team_memberObject, new DatabaseReference.CompletionListener() {
+                            .child(polio_team.getTeam_uid()).child(key).setValue(team_memberObject, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                             getActivity().getSupportFragmentManager().popBackStack();
@@ -335,9 +359,12 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
         member_image = (ImageView)view.findViewById(R.id.member_image);
         team_mnic_no = (EditText)view.findViewById(R.id.team_mnic_no);
         team_email = (EditText)view.findViewById(R.id.team_email);
-        team_maddress = (EditText)view.findViewById(R.id.team_maddress);
+       // team_maddress = (EditText)view.findViewById(R.id.team_maddress);
         team_mphone_no = (EditText)view.findViewById(R.id.team_mphone_no);
         add_member = (Button)view.findViewById(R.id.add_member);
+        rootStorageRef = FirebaseStorage.getInstance().getReference();
+        folderRef = rootStorageRef.child("user_profile_images");
+
 
         memberShipAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, membership_type);
         team_member_type.setAdapter(memberShipAdapter);
@@ -439,6 +466,7 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
                 }
 
                 member_image.setImageBitmap(bitmap);
+                uploadImage(member_image);
 
             } catch (IOException e) {
                 e.printStackTrace();

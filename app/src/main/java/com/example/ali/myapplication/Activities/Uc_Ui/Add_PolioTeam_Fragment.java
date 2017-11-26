@@ -3,6 +3,7 @@ package com.example.ali.myapplication.Activities.Uc_Ui;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
 import com.example.ali.myapplication.Activities.ModelClasses.Team_MemberObject;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
@@ -64,6 +66,7 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
                 polio_team = getArguments().getParcelable("obj");
                 team_name.setText(polio_team.getTeam_name());
                 team_email.setText(polio_team.getTeam_email());
+
                 key = polio_team.getTeam_uid();
             }
         } else {
@@ -97,17 +100,28 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
         add_members.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().popBackStack();
-                Polio_Team polio_team = new Polio_Team(key, team_name.getText().toString(),spinner_area.getSelectedItem().toString(),team_email.getText().toString(),"");
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("obj", polio_team);
-                Add_Team_View add_team_view = new Add_Team_View();
-                add_team_view.setArguments(bundle);
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.add_member_container, add_team_view)
-                        .addToBackStack(null)
-                        .commit();
+
+          //      if(team_name.getText().toString().length()==0 || !team_name.getText().toString().matches("[A-Za-z][^.]*")){
+
+           //         Snackbar.make(view,"Enter Valid team name",Snackbar.LENGTH_SHORT).show();
+
+         //       }else if(team_email.getText().toString().length()==0 || !android.util.Patterns.EMAIL_ADDRESS.matcher(team_email.getText().toString()).matches()){
+         //           Snackbar.make(view,"Enter Valid team email",Snackbar.LENGTH_SHORT).show();
+
+           //     }else {
+
+                    getActivity().getSupportFragmentManager().popBackStack();
+                    Polio_Team polio_team = new Polio_Team(key, team_name.getText().toString(), spinner_area.getSelectedItem().toString(), team_email.getText().toString(), "");
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("obj", polio_team);
+                    Add_Team_View add_team_view = new Add_Team_View();
+                    add_team_view.setArguments(bundle);
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.add_member_container, add_team_view)
+                            .addToBackStack(null)
+                            .commit();
+             //   }
             }
         });
 
@@ -131,7 +145,7 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
 
-                if(team_name.getText().toString().equals("")){
+                if(team_name.getText().toString().equals("") || !team_name.getText().toString().matches("[A-Za-z][^.]*")){
                     team_name.setError("Enter Valid Name");
                 }else if(team_email.getText().toString().equals("") && !android.util.Patterns.EMAIL_ADDRESS.matcher(team_email.getText().toString()).matches()){
                     team_email.setError("Enter Valid Email");
@@ -155,7 +169,7 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
         return view;
     }
 
-    private void addLayout(Team_MemberObject team_memberObject) {
+    private void addLayout(final Team_MemberObject team_memberObject) {
         LayoutInflater inflater;
         inflater = LayoutInflater.from(getActivity());
 
@@ -165,32 +179,38 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
         TextView member_email = (TextView) layout.findViewById(R.id.member_email);
         TextView member_nic = (TextView) layout.findViewById(R.id.member_nic);
         TextView member_phone = (TextView) layout.findViewById(R.id.member_phone);
+        ImageView member_picture = (ImageView)layout.findViewById(R.id.member_picture);
         layout.setTag(team_memberObject);
         member_name.setText(team_memberObject.getMember_name());
         member_email.setText(team_memberObject.getMember_email());
         member_nic.setText(team_memberObject.getMember_nic_no());
         member_phone.setText(team_memberObject.getMember_phone_no());
 
-//        layout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AddSegment appartment_detail = new AddSegment();
-//                Bundle bundle = new Bundle();
-//                segmentObject = new Apartment(add_apart_name.getText().toString(),
-//                        "",
-//                        "", key);
-//                bundle.putParcelable("object", segmentObject);
-//                bundle.putParcelable("segment", (Parcelable) layout.getTag());
-//                appartment_detail.setArguments(bundle);
-//                //   getActivity().getSupportFragmentManager().popBackStack();
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .setCustomAnimations(R.anim.slide_right, R.anim.slide_out_right, R.anim.slide_left, R.anim.slide_out_left)
-//                        // .addToBackStack(null)
-//                        .replace(R.id.profile_container, appartment_detail).commit();
-//            }
-//
-//        });
-//
+
+        Glide.with(getActivity())
+                .load(team_memberObject.getMember_pic())
+                .asBitmap()
+                .placeholder(R.drawable.user)
+                .into(member_picture);
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+                Bundle bundle= new Bundle();
+                bundle.putParcelable("obj",polio_team);
+                bundle.putParcelable("member",team_memberObject);
+                Add_Team_View add_team_view = new Add_Team_View();
+                add_team_view.setArguments(bundle);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.add_member_container, add_team_view)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+        });
+
 
 
     }
