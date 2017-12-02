@@ -3,6 +3,7 @@ package com.example.ali.myapplication.Activities.Activity;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.example.ali.myapplication.Activities.Adaptor.Form_PagerAdapter;
 import com.example.ali.myapplication.Activities.Adaptor.Navigations_ItemsAdapter;
+import com.example.ali.myapplication.Activities.Uc_Ui.About_Fragment;
 import com.example.ali.myapplication.Activities.Uc_Ui.Applied_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.Completed_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.In_Progress_Forms;
@@ -43,7 +45,7 @@ public class UcHome extends AppCompatActivity {
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     public FrameLayout maincontainer_uc;
-    public String[] menuName = {"Home","Add Polio Teams", "View Polio Teams", "About", "Setting","Log Out"};
+    public String[] menuName = {"Home","Polio Teams","Terms & Conditions", "Setting","Log Out"};
     public ImageView back_arrow;
     public static TextView ActionBartitle;
 
@@ -78,7 +80,12 @@ public class UcHome extends AppCompatActivity {
             }
         };
         drawer_layout.setDrawerListener(mDrawerToggle);
-
+        back_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawer_layout.openDrawer(GravityCompat.START);
+            }
+        });
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         fragments = new ArrayList<>();
@@ -133,8 +140,12 @@ public class UcHome extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                         drawer_layout.closeDrawer(mDrawerList);
-                    }else if(i==6){
+                    }else if(i==5){
                         FirebaseAuth.getInstance().signOut();
+                        drawer_layout.closeDrawer(mDrawerList);
+                    }else if(i==4){
+                        getSupportFragmentManager().popBackStack();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc,new About_Fragment()).addToBackStack(null).commit();
                         drawer_layout.closeDrawer(mDrawerList);
                     }
                 }

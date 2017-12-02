@@ -39,7 +39,9 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
     public String[] menuName = {"Home", "Add Polio Teams", "View Polio Teams", "About", "Setting", "Log Out"};
     public Spinner spinner_area;
     public String[] areaName = {"Nazimabad", "Johar", "Gulshan", "Landi", "Malir"};
+    public String[] team_statuss = {"Activated", "Not Activate"};
     public ArrayAdapter arrayAdapter;
+    public ArrayAdapter team_adapter;
     public ImageView back_arrow;
     public static TextView ActionBartitle;
     public DatabaseReference reference;
@@ -50,6 +52,8 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
     public Polio_Team polio_team;
     public Button add_polio_team;
     public LinearLayout members_container;
+    public Spinner team_status;
+
 
     @Nullable
     @Override
@@ -70,7 +74,7 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
                 key = polio_team.getTeam_uid();
             }
         } else {
-            polio_team = new Polio_Team(key, team_name.getText().toString(), spinner_area.getSelectedItem().toString(),team_email.getText().toString(),"");
+            polio_team = new Polio_Team(key, team_name.getText().toString(), spinner_area.getSelectedItem().toString(),team_email.getText().toString(),"",team_status.getSelectedItem().toString(),0.0,0.0);
         }
 
         FirebaseHandler.getInstance().getPolio_teams()
@@ -111,7 +115,7 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
            //     }else {
 
                     getActivity().getSupportFragmentManager().popBackStack();
-                    Polio_Team polio_team = new Polio_Team(key, team_name.getText().toString(), spinner_area.getSelectedItem().toString(), team_email.getText().toString(), "");
+                    Polio_Team polio_team = new Polio_Team(key, team_name.getText().toString(), spinner_area.getSelectedItem().toString(), team_email.getText().toString(), "",team_status.getSelectedItem().toString(),0.0,0.0);
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("obj", polio_team);
                     Add_Team_View add_team_view = new Add_Team_View();
@@ -141,6 +145,22 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
             }
         });
 
+        team_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (adapterView.getChildAt(0) != null) {
+                    ((TextView) adapterView.getChildAt(0)).setTextSize(10);
+                    ((TextView) adapterView.getChildAt(0)).setTypeface(null, Typeface.BOLD);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         add_polio_team.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,7 +170,7 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
                 }else if(team_email.getText().toString().equals("") && !android.util.Patterns.EMAIL_ADDRESS.matcher(team_email.getText().toString()).matches()){
                     team_email.setError("Enter Valid Email");
                 }else {
-                    polio_team = new Polio_Team(key, team_name.getText().toString(), spinner_area.getSelectedItem().toString(), team_email.getText().toString(),"");
+                    polio_team = new Polio_Team(key, team_name.getText().toString(), spinner_area.getSelectedItem().toString(), team_email.getText().toString(),"",team_status.getSelectedItem().toString(),0.0,0.0);
 
 
                     FirebaseHandler.getInstance().getUc_teams().child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -222,7 +242,7 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
         back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
-        ActionBartitle.setText("Add Team Member");
+        ActionBartitle.setText("Add Team");
         reference = FirebaseDatabase.getInstance().getReference();
         referenceKey = FirebaseHandler.getInstance().getPolio_teams().push();
         key = referenceKey.getKey();
@@ -232,7 +252,10 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
         team_email = (EditText) view.findViewById(R.id.team_email);
         members_container = (LinearLayout) view.findViewById(R.id.members_container);
         spinner_area = (Spinner) view.findViewById(R.id.spinner_area);
+        team_status = (Spinner)view.findViewById(R.id.team_status);
         arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, areaName);
+        team_adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, team_statuss);
         spinner_area.setAdapter(arrayAdapter);
+        team_status.setAdapter(team_adapter);
     }
 }

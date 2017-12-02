@@ -34,16 +34,6 @@
 
 
 
-
-
-        <Button
-            android:id="@+id/ucList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="List Of Uc"
-            android:layout_centerInParent="true"
-            />
-
         </LinearLayout>
 </RelativeLayout>
 </LinearLayout>

@@ -14,20 +14,23 @@ public class Polio_Team implements Parcelable {
     public String team_area;
     public String team_email;
     public String team_image;
+    public String team_status;
+    public double team_lat;
+    public double team_lng;
 
     public Polio_Team() {
     }
 
-
-
-    public Polio_Team(String team_uid, String team_name, String team_area, String team_email, String team_image) {
+    public Polio_Team(String team_uid, String team_name, String team_area, String team_email, String team_image, String team_status, double team_lat, double team_lng) {
         this.team_uid = team_uid;
         this.team_name = team_name;
         this.team_area = team_area;
         this.team_email = team_email;
         this.team_image = team_image;
+        this.team_status = team_status;
+        this.team_lat = team_lat;
+        this.team_lng = team_lng;
     }
-
 
     protected Polio_Team(Parcel in) {
         team_uid = in.readString();
@@ -35,6 +38,9 @@ public class Polio_Team implements Parcelable {
         team_area = in.readString();
         team_email = in.readString();
         team_image = in.readString();
+        team_status = in.readString();
+        team_lat = in.readDouble();
+        team_lng = in.readDouble();
     }
 
     public static final Creator<Polio_Team> CREATOR = new Creator<Polio_Team>() {
@@ -89,9 +95,6 @@ public class Polio_Team implements Parcelable {
         this.team_image = team_image;
     }
 
-    public static Creator<Polio_Team> getCREATOR() {
-        return CREATOR;
-    }
 
     @Override
     public int describeContents() {
@@ -105,5 +108,32 @@ public class Polio_Team implements Parcelable {
         parcel.writeString(team_area);
         parcel.writeString(team_email);
         parcel.writeString(team_image);
+        parcel.writeString(team_status);
+        parcel.writeDouble(team_lat);
+        parcel.writeDouble(team_lng);
+    }
+
+    public String getTeam_status() {
+        return team_status;
+    }
+
+    public void setTeam_status(String team_status) {
+        this.team_status = team_status;
+    }
+
+    public double getTeam_lat() {
+        return team_lat;
+    }
+
+    public void setTeam_lat(double team_lat) {
+        this.team_lat = team_lat;
+    }
+
+    public double getTeam_lng() {
+        return team_lng;
+    }
+
+    public void setTeam_lng(double team_lng) {
+        this.team_lng = team_lng;
     }
 }
