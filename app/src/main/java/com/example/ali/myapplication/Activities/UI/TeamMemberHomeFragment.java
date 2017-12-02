@@ -92,6 +92,7 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
     }
 
 
+
     private void getData() {
         list = new ArrayList<>();
 
@@ -225,4 +226,6 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
     public void onDestroy() {
         super.onDestroy();
     }
+
+
 }

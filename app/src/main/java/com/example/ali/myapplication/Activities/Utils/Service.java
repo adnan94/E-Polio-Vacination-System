@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.location.Location;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.IntDef;
@@ -11,7 +12,10 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.ali.myapplication.Activities.Activity.UcHome;
+import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
 import com.example.ali.myapplication.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +25,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Time;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
+import io.nlopez.smartlocation.SmartLocation;
+
+import static com.google.android.gms.internal.zzagy.runOnUiThread;
 
 /**
  * Created by AdnanAhmed on 10/28/2017.
@@ -47,7 +61,37 @@ public class Service extends android.app.Service {
         if (FirebaseAuth.getInstance().getCurrentUser().getUid() != null) {
             getTokenNotifications();
         }
+        Timerr();
         return START_STICKY;
+    }
+
+    public void Timerr() {
+        Timer t = new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+
+            @Override
+            public void run() {
+                SmartLocation.with(getApplicationContext()).location()
+                        .oneFix()
+                        .start(new OnLocationUpdatedListener() {
+                            @Override
+                            public void onLocationUpdated(Location location) {
+                                if (location != null) {
+                                    Map<String, Double> map = new HashMap<>();
+                                    map.put("lat", location.getLatitude());
+                                    map.put("lng", location.getLongitude());
+                                    if(UserModel.myObj!=null) {
+                                        if (FirebaseAuth.getInstance().getCurrentUser() != null && UserModel.myObj.getUser_type() == 4) {
+                                            firebase.child("TeamTracking").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(map);
+                                        }
+                                    }
+                                }
+
+                            }
+                        });
+            }
+
+        }, 0, 30000);
     }
 
     @Override
