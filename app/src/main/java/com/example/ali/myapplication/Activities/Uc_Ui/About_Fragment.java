@@ -1,5 +1,6 @@
 package com.example.ali.myapplication.Activities.Uc_Ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.ali.myapplication.Activities.Activity.UcHome;
 import com.example.ali.myapplication.R;
 
 /**
@@ -39,6 +41,9 @@ public class About_Fragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().popBackStack();
+                Intent intent = new Intent(getActivity(), UcHome.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 

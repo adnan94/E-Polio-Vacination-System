@@ -19,9 +19,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toolbar;
 
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
 import com.example.ali.myapplication.Activities.ModelClasses.Form_Token;
@@ -54,7 +56,9 @@ public class ViewFormForUc extends Fragment {
     public EditText token_date;
     public EditText token_time;
     public Calendar myCalendar;
-
+    public android.support.v7.widget.Toolbar toolbar_outside;
+    public ImageView back_image;
+    public TextView main_appbar_textView;
 
     public ViewFormForUc() {
         // Required empty public constructor
@@ -168,10 +172,12 @@ public class ViewFormForUc extends Fragment {
         address = (TextView) view.findViewById(R.id.address);
         district = (TextView) view.findViewById(R.id.district);
         edit=(Button)view.findViewById(R.id.edit);
-
+        toolbar_outside =  (android.support.v7.widget.Toolbar)view.findViewById(R.id.toolbar_outside);
+        back_image = (ImageView)toolbar_outside.findViewById(R.id.back_image);
         change_status = (Button)view.findViewById(R.id.change_status);
-
-
+        back_image.setVisibility(View.INVISIBLE);
+        main_appbar_textView = (TextView)view.findViewById(R.id.main_appbar_textView);
+        main_appbar_textView.setText("View Form");
         filter_dialog = new Dialog(getActivity());
         filter_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         filter_dialog.setContentView(completeView);

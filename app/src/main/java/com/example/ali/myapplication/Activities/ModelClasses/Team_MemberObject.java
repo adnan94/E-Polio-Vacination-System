@@ -17,11 +17,12 @@ public class Team_MemberObject implements Parcelable {
     public String member_phone_no;
     public String member_uid;
     public String member_pic;
+    public String team_uid;
 
     public Team_MemberObject() {
     }
 
-    public Team_MemberObject(String member_name, String member_email, String member_nic_no, String member_type, String member_phone_no, String member_uid, String member_pic) {
+    public Team_MemberObject(String member_name, String member_email, String member_nic_no, String member_type, String member_phone_no, String member_uid, String member_pic, String team_uid) {
         this.member_name = member_name;
         this.member_email = member_email;
         this.member_nic_no = member_nic_no;
@@ -29,6 +30,7 @@ public class Team_MemberObject implements Parcelable {
         this.member_phone_no = member_phone_no;
         this.member_uid = member_uid;
         this.member_pic = member_pic;
+        this.team_uid = team_uid;
     }
 
     protected Team_MemberObject(Parcel in) {
@@ -39,6 +41,7 @@ public class Team_MemberObject implements Parcelable {
         member_phone_no = in.readString();
         member_uid = in.readString();
         member_pic = in.readString();
+        team_uid = in.readString();
     }
 
     @Override
@@ -50,6 +53,7 @@ public class Team_MemberObject implements Parcelable {
         dest.writeString(member_phone_no);
         dest.writeString(member_uid);
         dest.writeString(member_pic);
+        dest.writeString(team_uid);
     }
 
     @Override
@@ -68,6 +72,14 @@ public class Team_MemberObject implements Parcelable {
             return new Team_MemberObject[size];
         }
     };
+
+    public String getTeam_uid() {
+        return team_uid;
+    }
+
+    public void setTeam_uid(String team_uid) {
+        this.team_uid = team_uid;
+    }
 
     public void setMember_name(String member_name) {
         this.member_name = member_name;

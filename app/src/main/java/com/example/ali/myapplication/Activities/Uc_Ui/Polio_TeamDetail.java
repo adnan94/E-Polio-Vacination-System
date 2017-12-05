@@ -256,8 +256,11 @@ public class Polio_TeamDetail extends android.support.v4.app.Fragment {
         TextView member_nic = (TextView) layout.findViewById(R.id.member_nic);
         TextView member_phone = (TextView) layout.findViewById(R.id.member_phone);
         layout.setTag(team_memberObject);
+
+        String split[] = team_memberObject.getMember_email().split("team");
+
         member_name.setText(team_memberObject.getMember_name());
-        member_email.setText(team_memberObject.getMember_email());
+        member_email.setText(split[1]);
         member_nic.setText(team_memberObject.getMember_nic_no());
         member_phone.setText(team_memberObject.getMember_phone_no());
         ImageView member_picture = (ImageView)layout.findViewById(R.id.member_picture);

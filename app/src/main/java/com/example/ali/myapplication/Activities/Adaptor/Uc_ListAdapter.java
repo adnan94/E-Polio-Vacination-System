@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
+import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
 import com.example.ali.myapplication.R;
 
@@ -22,12 +23,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Uc_ListAdapter extends BaseAdapter {
 
-    public ArrayList<UserModel> userModels;
+    public ArrayList<UC_Object> userModels;
     public Context mContext;
     public int mCurrentfilterLength;
-    public ArrayList<UserModel> backUplist;
+    public ArrayList<UC_Object> backUplist;
 
-    public Uc_ListAdapter(ArrayList<UserModel> userModels, Context mContext) {
+    public Uc_ListAdapter(ArrayList<UC_Object> userModels, Context mContext) {
         this.userModels = userModels;
         this.mContext = mContext;
         this.backUplist = new ArrayList<>(userModels);
@@ -57,7 +58,7 @@ public class Uc_ListAdapter extends BaseAdapter {
 
         ViewHolder viewHolder ;
         if(view == null){
-            view =  layoutInflater.inflate(R.layout.polio_list_adapter,null);
+            view =  layoutInflater.inflate(R.layout.uc_member_list,null);
             viewHolder = new ViewHolder();
             viewHolder.cust_adapter_image = (CircleImageView)view.findViewById(R.id.cust_adapter_image);
             viewHolder.cust_adapter_user_name = (TextView)view.findViewById(R.id.team_area);
@@ -69,15 +70,15 @@ public class Uc_ListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        Glide.with(mContext).load(R.mipmap.ic_launcher).asBitmap().into(viewHolder.cust_adapter_image);
+        Glide.with(mContext).load(userModels.get(i).getUc_member_piture()).asBitmap().into(viewHolder.cust_adapter_image);
 
-        viewHolder.cust_adapter_user_name.setText(userModels.get(i).getName());
-        viewHolder.cust_adapter_user_app.setText(userModels.get(i).getFname());
+        viewHolder.cust_adapter_user_name.setText(userModels.get(i).getUc_area());
+        viewHolder.cust_adapter_user_app.setText(userModels.get(i).getUc_membern());
 
         return view;
     }
 
-    public void add(UserModel add_customer_object){
+    public void add(UC_Object add_customer_object){
         backUplist.add(add_customer_object);
     }
 

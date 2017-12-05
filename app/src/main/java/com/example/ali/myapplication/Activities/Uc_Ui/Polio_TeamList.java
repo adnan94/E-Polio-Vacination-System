@@ -3,6 +3,7 @@ package com.example.ali.myapplication.Activities.Uc_Ui;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,9 +17,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.ali.myapplication.Activities.Activity.UcHome;
 import com.example.ali.myapplication.Activities.Adaptor.PolioTeam_list_Adapter;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
+import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +47,8 @@ public class Polio_TeamList extends android.support.v4.app.Fragment {
     public ImageView floatingMenuItem1;
     public ImageView floatingMenuItem2;
     public View clist_back_view;
+    public UC_Object uc_object;
+
 
     @Nullable
     @Override
@@ -67,7 +73,8 @@ public class Polio_TeamList extends android.support.v4.app.Fragment {
         polio_teams = new ArrayList<>();
        polioTeam_list_adapter = new PolioTeam_list_Adapter(polio_teams,getActivity());
         polio_teamlist.setAdapter(polioTeam_list_adapter);
-        FirebaseHandler.getInstance().getUc_teams().child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+        uc_object = SharedPref_UC.getCurrentUser(getActivity());
+        FirebaseHandler.getInstance().getUc_teams().child(uc_object.getUc_member_uid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -87,6 +94,15 @@ public class Polio_TeamList extends android.support.v4.app.Fragment {
 
                     }
                 });
+
+        back_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), UcHome.class);
+                startActivity(intent);
+              getActivity().finish();
+            }
+        });
 
 
         polio_teamlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {

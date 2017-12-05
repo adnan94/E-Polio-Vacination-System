@@ -85,7 +85,7 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
     private String downloadURL = "";
     public Team_MemberObject team_memberObject;
     public String key = "";
-
+    public String teamid="";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -102,9 +102,11 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
         if(getArguments()!=null){
             if(getArguments().getParcelable("obj")!=null){
                 polio_team = getArguments().getParcelable("obj");
+                teamid= polio_team.getTeam_uid();
             }if(getArguments().getParcelable("member")!=null){
                 team_memberObject = getArguments().getParcelable("member");
                 key = team_memberObject.getMember_uid();
+                teamid = team_memberObject.getTeam_uid();
                 downloadURL = team_memberObject.getMember_pic();
                 team_email.setText(team_memberObject.getMember_email());
                 team_email.setEnabled(false);
@@ -191,7 +193,7 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
                     team_mname.setError("Enter Member Name");
                     //   flag = false;
                 }
-                else  if (team_email.getText().toString().length() == 0 && !android.util.Patterns.EMAIL_ADDRESS.matcher(team_email.getText().toString()).matches()) {
+                else  if (team_email.getText().toString().length() == 0 || !android.util.Patterns.EMAIL_ADDRESS.matcher(team_email.getText().toString()).matches()) {
                     team_email.setError("Enter Member Email");
                     // flag = false;
                 }
@@ -214,8 +216,8 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
 
                     }
 
-                    final Team_MemberObject team_memberObject = new Team_MemberObject(team_mname.getText().toString(), team_email.getText().toString()
-                            , team_mnic_no.getText().toString(), team_member_type.getSelectedItem().toString(), team_mphone_no.getText().toString(),key,downloadURL);
+                    final Team_MemberObject team_memberObject = new Team_MemberObject(team_mname.getText().toString(),"team"+team_email.getText().toString()
+                            , team_mnic_no.getText().toString(), team_member_type.getSelectedItem().toString(), team_mphone_no.getText().toString(),key,downloadURL,teamid);
 
                     FirebaseHandler.getInstance().getPolio_teams()
                             .child(polio_team.getTeam_uid()).child(key).setValue(team_memberObject, new DatabaseReference.CompletionListener() {

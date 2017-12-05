@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -28,10 +29,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.Uc_Ui.Add_Team_View;
+import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -64,6 +69,7 @@ public class Add_UC_Activity extends AppCompatActivity {
     public Uri mCapturedImageURI;
     private String imgPath;
     public ImageView back_image;
+    public String key="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,17 +107,35 @@ public class Add_UC_Activity extends AppCompatActivity {
         add_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(uc_team_name.getText().toString().length()==0 || uc_team_name.getText().toString().matches("")){
-
+                if(uc_team_name.getText().toString().length()==0 || uc_team_name.getText().toString().matches("\"^[a-zA-Z]+( [a-zA-z]+)*$\"")){
+                   // uc_team_name.setError("Enter Valid name");
+                    Snackbar.make(view,"Enter Valid Name",Snackbar.LENGTH_SHORT).show();
                 }else if(uc_member_email.getText().toString().length()==0 || !android.util.Patterns.EMAIL_ADDRESS.matcher(uc_member_email.getText().toString()).matches()){
-
+                    Snackbar.make(view,"Enter Valid Email",Snackbar.LENGTH_SHORT).show();
                 }else if(uc_team_nic_no.getText().toString().length()==0 || uc_team_nic_no.getText().toString().length() > 13 || uc_team_nic_no.getText().toString().length() < 13){
-
-                }else if(uc_member_phone_no.getText().toString().length()==0 || uc_team_nic_no.getText().toString().length() > 11 || uc_team_nic_no.getText().toString().length() < 11 ){
-
+                    Snackbar.make(view,"Enter Valid CNIC",Snackbar.LENGTH_SHORT).show();
+                }else if(uc_member_phone_no.getText().toString().length()==0 || uc_member_phone_no.getText().toString().length() > 11 || uc_member_phone_no.getText().toString().length() < 11 ){
+                    Snackbar.make(view,"Enter Valid Phone Number",Snackbar.LENGTH_SHORT).show();
                 }else if(downloadURL.equals("")){
-
+                    Snackbar.make(view,"Upload Image",Snackbar.LENGTH_SHORT).show();
                 }else{
+
+                    if(key.equals("")) {
+                        key = FirebaseHandler.getInstance().getUc_members().push().getKey();
+                    }
+
+                    UC_Object uc_object = new UC_Object(uc_area.getSelectedItem().toString(),uc_team_name.getText().toString(),uc_team_nic_no.getText().toString()
+                                    ,uc_member_email.getText().toString(),uc_member_phone_no.getText().toString(),downloadURL,key);
+
+
+
+                    FirebaseHandler.getInstance().getUc_members().child(key).setValue(uc_object, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            finish();
+                        }
+                    });
+
 
                 }
             }
@@ -359,6 +383,7 @@ public class Add_UC_Activity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
                     // Handle unsuccessful uploads
+                    mProgressDialog.dismiss();
                     Toast.makeText(Add_UC_Activity.this, "UPLOAD FAILD", Toast.LENGTH_LONG).show();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

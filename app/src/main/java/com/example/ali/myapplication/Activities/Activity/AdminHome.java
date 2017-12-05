@@ -30,7 +30,7 @@ public class AdminHome extends AppCompatActivity {
     public DrawerLayout drawer_layout;
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    public String[] menuName = {"List Of Uc", "Polio Forms", "Add UC Member", "Monitor Polio Team","Add Schedule", "Logout"};
+    public String[] menuName = {"Home","List Of Uc", "Polio Forms", "Add UC Member", "Monitor Polio Team", "Logout"};
     public ImageView back_arrow;
     public static TextView ActionBartitle;
     public RelativeLayout maincontainer_admin;
@@ -88,13 +88,18 @@ public class AdminHome extends AppCompatActivity {
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 1) {
+
+                if(i==1){
+                    Intent intent = new Intent(AdminHome.this, AdminHome.class);
+                    startActivity(intent);
+                    drawer_layout.closeDrawer(mDrawerList);
+                }else if (i == 2) {
 
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_admin, new ListOfUc()).addToBackStack(null).commit();
                     // finish();
                     drawer_layout.closeDrawer(mDrawerList);
-                } else if (i == 2) {
+                } else if (i == 3) {
 //                    Intent intent = new Intent(AdminHome.this, Add_Polio_TeamActivity.class);
 //                    startActivity(intent);
 //                    finish();
@@ -103,12 +108,13 @@ public class AdminHome extends AppCompatActivity {
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 6) {
                     FirebaseAuth.getInstance().signOut();
+                    finish();
                     drawer_layout.closeDrawer(mDrawerList);
-                } else if (i == 3) {
+                } else if (i == 4) {
                     Intent intent = new Intent(AdminHome.this, Add_UC_Activity.class);
                     startActivity(intent);
                     drawer_layout.closeDrawer(mDrawerList);
-                }else if(i==4){
+                }else if(i==5){
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_admin, new Monitoring_Fragment()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);

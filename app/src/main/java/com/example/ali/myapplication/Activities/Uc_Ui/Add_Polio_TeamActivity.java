@@ -21,16 +21,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
+import com.example.ali.myapplication.Activities.Activity.LoginActivity;
 import com.example.ali.myapplication.Activities.Activity.UcHome;
 import com.example.ali.myapplication.Activities.Adaptor.Navigations_ItemsAdapter;
+import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
+import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
 import com.example.ali.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Add_Polio_TeamActivity extends AppCompatActivity {
     public DrawerLayout drawer_layout;
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     public LinearLayout add_teamcontainer_uc;
-    public String[] menuName = {"Home", "Add Polio Teams", "View Polio Teams", "About", "Setting", "Log Out"};
+    public String[] menuName = {"Home", "Polio Teams", "About", "Setting", "Log Out"};
     public Spinner spinner_area;
     public LinearLayout add_members;
     public String[] areaName = {"Nazimabad", "Johar", "Gulshan", "Landi", "Malir"};
@@ -93,6 +97,19 @@ public class Add_Polio_TeamActivity extends AppCompatActivity {
                     finish();
                 } else if (i == 2) {
                     Intent intent = new Intent(Add_Polio_TeamActivity.this, Add_Polio_TeamActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else if (i == 3) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .add(R.id.add_member_container, new About_Fragment())
+                            //  .addToBackStack(null)
+                            .commit();
+                }
+                else if (i ==5) {
+                    UC_Object uc_object = new UC_Object("","","","","","","");
+                    SharedPref_UC.setCurrentUser(Add_Polio_TeamActivity.this,uc_object);
+                    Intent intent = new Intent(Add_Polio_TeamActivity.this,LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }

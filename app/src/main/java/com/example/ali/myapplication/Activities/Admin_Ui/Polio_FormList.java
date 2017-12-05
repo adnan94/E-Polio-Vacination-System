@@ -46,6 +46,7 @@ public class Polio_FormList extends android.support.v4.app.Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
         back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
+        back_arrow.setVisibility(View.INVISIBLE);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("List Of Polio Forms");
 

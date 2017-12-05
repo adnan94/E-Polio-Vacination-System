@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ali.myapplication.Activities.Adaptor.Uc_ListAdapter;
+import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.R;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 public class ListOfUc extends android.support.v4.app.Fragment {
 
     public ListView uc_memberlist;
-    public ArrayList<UserModel> userModelArrayList;
+    public ArrayList<UC_Object> userModelArrayList;
     public Uc_ListAdapter uc_listAdapter;
     public ImageView back_arrow;
     public static TextView ActionBartitle;
@@ -49,23 +50,26 @@ public class ListOfUc extends android.support.v4.app.Fragment {
         back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("List Of UC");
+
+        back_arrow.setVisibility(View.INVISIBLE);
         uc_memberlist = (ListView)view.findViewById(R.id.uc_memberlist);
         userModelArrayList = new ArrayList<>();
         uc_listAdapter = new Uc_ListAdapter(userModelArrayList,getActivity());
         uc_memberlist.setAdapter(uc_listAdapter);
 
 
-        FirebaseHandler.getInstance().getUsersRef().addValueEventListener(new ValueEventListener() {
+        FirebaseHandler.getInstance().getUc_members().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot!=null){
                     if(dataSnapshot.getValue()!=null){
                         for(DataSnapshot data:dataSnapshot.getChildren()){
-                            UserModel userModel = data.getValue(UserModel.class);
-                            if(userModel.getUser_type()==2){
+                            UC_Object userModel = data.getValue(UC_Object.class);
+
                                 userModelArrayList.add(userModel);
+                            uc_listAdapter.add(userModel);
                                 uc_listAdapter.notifyDataSetChanged();
-                            }
+
                         }
                     }
                 }

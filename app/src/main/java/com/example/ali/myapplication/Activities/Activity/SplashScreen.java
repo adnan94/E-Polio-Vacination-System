@@ -9,6 +9,8 @@ import android.os.Bundle;
 import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.Activities.Utils.Service;
+import com.example.ali.myapplication.Activities.Utils.SharedPref_Team;
+import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -77,10 +79,28 @@ public class SplashScreen extends AppCompatActivity {
 
                         } else {
                             // User is signed out
-                            Intent intent = new Intent(SplashScreen.this,LoginActivity.class);
-                         //   overridePendingTransition(R.anim.sli,R.anim.slide_up);
-                            startActivity(intent);
-                            finish();
+                            if (!SharedPref_Team.getCurrentUser(SplashScreen.this).getMember_email().equals("")) {
+                                Intent intent = new Intent(SplashScreen.this, TeamMemberActivity.class);
+                   //             startService(new Intent(SplashScreen.this, Service.class));
+
+                                //   overridePendingTransition(R.anim.sli,R.anim.slide_up);
+                                startActivity(intent);
+                                finish();
+                            }else if(!SharedPref_UC.getCurrentUser(SplashScreen.this).getUc_member_email().equals("")){
+                                Intent intent = new Intent(SplashScreen.this, UcHome.class);
+                                //             startService(new Intent(SplashScreen.this, Service.class));
+
+                                //   overridePendingTransition(R.anim.sli,R.anim.slide_up);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            else {
+                                Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
+                                //   overridePendingTransition(R.anim.sli,R.anim.slide_up);
+                                startActivity(intent);
+                                finish();
+                            }
                         }
                     }
                 };

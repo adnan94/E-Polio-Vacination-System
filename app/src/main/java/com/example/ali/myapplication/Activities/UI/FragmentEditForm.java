@@ -3,6 +3,7 @@ package com.example.ali.myapplication.Activities.UI;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
 import com.example.ali.myapplication.R;
@@ -24,7 +28,9 @@ public class FragmentEditForm extends Fragment {
     public Button submit;
     BForm bForm;
     public String randomNumber;
-
+    public Toolbar toolbar_outside;
+    public ImageView back_image;
+public TextView main_appbar_textView;
 
     public FragmentEditForm() {
         // Required empty public constructor
@@ -172,6 +178,16 @@ public class FragmentEditForm extends Fragment {
         no = (CheckBox) view.findViewById(R.id.checkBoxNo);
         male = (CheckBox) view.findViewById(R.id.checkBoxMale);
         female = (CheckBox) view.findViewById(R.id.checkBoxFemale);
-
+        toolbar_outside = (Toolbar)view.findViewById(R.id.toolbar_outside);
+        back_image = (ImageView)toolbar_outside.findViewById(R.id.back_image);
+        main_appbar_textView = (TextView)view.findViewById(R.id.main_appbar_textView);
+        main_appbar_textView.setText("Edit Form");
+       // back_image.setVisibility(View.INVISIBLE);
+     back_image.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+             getActivity().getSupportFragmentManager().popBackStack();
+         }
+     });
     }
 }

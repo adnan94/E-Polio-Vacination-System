@@ -21,11 +21,13 @@ import android.widget.TextView;
 
 import com.example.ali.myapplication.Activities.Adaptor.Form_PagerAdapter;
 import com.example.ali.myapplication.Activities.Adaptor.Navigations_ItemsAdapter;
+import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.Uc_Ui.About_Fragment;
 import com.example.ali.myapplication.Activities.Uc_Ui.Applied_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.Completed_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.In_Progress_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.Add_Polio_TeamActivity;
+import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -141,7 +143,12 @@ public class UcHome extends AppCompatActivity {
                         finish();
                         drawer_layout.closeDrawer(mDrawerList);
                     }else if(i==5){
-                        FirebaseAuth.getInstance().signOut();
+                        UC_Object uc_object = new UC_Object("","","","","","","");
+                        SharedPref_UC.setCurrentUser(UcHome.this,uc_object);
+                        Intent intent = new Intent(UcHome.this,LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        //   FirebaseAuth.getInstance().signOut();
                         drawer_layout.closeDrawer(mDrawerList);
                     }else if(i==4){
                         getSupportFragmentManager().popBackStack();

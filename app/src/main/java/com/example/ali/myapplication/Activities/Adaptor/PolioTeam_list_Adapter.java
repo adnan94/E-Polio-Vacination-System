@@ -62,7 +62,7 @@ public class PolioTeam_list_Adapter extends BaseAdapter {
             viewHolder.cust_adapter_image = (CircleImageView)view.findViewById(R.id.cust_adapter_image);
             viewHolder.cust_adapter_user_name = (TextView)view.findViewById(R.id.team_area);
             viewHolder.cust_adapter_user_app = (TextView)view.findViewById(R.id.team_name);
-
+            viewHolder.cus_status = (TextView)view.findViewById(R.id.team_status);
             view.setTag(viewHolder);
         }
         else {
@@ -70,7 +70,7 @@ public class PolioTeam_list_Adapter extends BaseAdapter {
         }
 
         Glide.with(mContext).load(R.mipmap.ic_launcher).asBitmap().into(viewHolder.cust_adapter_image);
-
+        viewHolder.cus_status.setText(userModels.get(i).getTeam_status());
         viewHolder.cust_adapter_user_name.setText(userModels.get(i).getTeam_area());
         viewHolder.cust_adapter_user_app.setText(userModels.get(i).getTeam_name());
 
@@ -113,6 +113,6 @@ public class PolioTeam_list_Adapter extends BaseAdapter {
         CircleImageView cust_adapter_image;
         TextView cust_adapter_user_name;
         TextView cust_adapter_user_app;
-
+        TextView cus_status;
     }
 }
