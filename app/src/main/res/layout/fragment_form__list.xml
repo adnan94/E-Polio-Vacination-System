@@ -5,7 +5,7 @@
     android:clickable="true"
     android:focusable="true"
     android:background="#fff"
-    tools:context="com.example.ali.myapplication.Activities.UI.Form_List_Uc">
+    >
 
     <!-- TODO: Update blank fragment layout -->
 

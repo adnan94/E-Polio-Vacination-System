@@ -40,7 +40,7 @@ public class SharedPref_Team   {
         user.setMember_nic_no(preferences.getString(M_NICNO, ""));
         user.setMember_type(preferences.getString(M_TYPE, ""));
         user.setMember_phone_no(preferences.getString(M_PHONE, ""));
-        user.setTeam_uid(preferences.getString(M_UID, ""));
+        user.setMember_uid(preferences.getString(M_UID, ""));
         user.setMember_pic(preferences.getString(M_PIC, ""));
         user.setTeam_uid(preferences.getString(M_T_UID, ""));
         return user;

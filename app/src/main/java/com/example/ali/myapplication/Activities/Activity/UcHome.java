@@ -43,11 +43,11 @@ public class UcHome extends AppCompatActivity {
     public In_Progress_Forms in_progress_forms;
     public Completed_Forms completed_forms;
     Button form_btn_list, form_btn_details;
-    public DrawerLayout drawer_layout;
     public ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
     public FrameLayout maincontainer_uc;
+    public DrawerLayout drawer_layout;
     public String[] menuName = {"Home","Polio Teams","Terms & Conditions", "Setting","Log Out"};
+    private ActionBarDrawerToggle mDrawerToggle;
     public ImageView back_arrow;
     public static TextView ActionBartitle;
 

@@ -17,6 +17,7 @@ import com.example.ali.myapplication.R;
 public class UcHomeFragment extends Fragment {
     Button listUc;
     public Button Add_teams;
+
     public UcHomeFragment() {
         // Required empty public constructor
     }

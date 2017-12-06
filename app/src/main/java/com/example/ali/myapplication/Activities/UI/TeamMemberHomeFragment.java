@@ -42,6 +42,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
@@ -92,7 +94,6 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
     }
 
 
-
     private void getData() {
         list = new ArrayList<>();
 
@@ -101,11 +102,13 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 final BForm bform = dataSnapshot.getValue(BForm.class);
-                list.add(bform);
-                map.addMarker(new MarkerOptions()
-                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.tour_icon_marker))
-                        .title(list.size() - 1 + "")
-                        .position(new LatLng(bform.getLat(), bform.getLng())));
+                if (bform.getVacinationDate() < System.currentTimeMillis()) {
+                    list.add(bform);
+                    map.addMarker(new MarkerOptions()
+                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.tour_icon_marker))
+                            .title(list.size() - 1 + "")
+                            .position(new LatLng(bform.getLat(), bform.getLng())));
+                }
 
 
             }
@@ -176,7 +179,6 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
                 done.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        Utils.toast(getActivity(), "Clicked");
                     }
                 });
                 RatingBar ratingBar = (RatingBar) v.findViewById(R.id.ratingBar);
@@ -208,11 +210,15 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
         if (list.get(Integer.parseInt(marker.getTitle())).getDrops() == 10) {
             Utils.toast(getActivity(), "Drops limit exceed");
         } else {
-            list.get(Integer.parseInt(marker.getTitle())).setDrops(list.get(Integer.parseInt(marker.getTitle())).getDrops()+1);
+            final Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.add(Calendar.MONTH, 6);
+            list.get(Integer.parseInt(marker.getTitle())).setDrops(list.get(Integer.parseInt(marker.getTitle())).getDrops() + 1);
+            list.get(Integer.parseInt(marker.getTitle())).setVacinationDate(calendar.getTimeInMillis());
             FirebaseHandler.getInstance().getAdd_forms().child(list.get(Integer.parseInt(marker.getTitle())).getFormID()).setValue(list.get(Integer.parseInt(marker.getTitle())), new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                    Utils.toast(getActivity(), "Vacinated");
+                    Utils.toast(getActivity(), "Next Vacination Date Starts From"+Utils.formatDAte(new Date(calendar.getTimeInMillis())));
                     list.get(Integer.parseInt(marker.getTitle()));
                     marker.remove();
 

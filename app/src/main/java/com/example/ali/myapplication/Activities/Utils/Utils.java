@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.location.LocationManager;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by ADnan on 8/19/2017.
  */
@@ -25,7 +28,12 @@ public class Utils {
 
 
     }
+    public static String formatDAte(Date date1) {
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String dateString = sdf.format(date1);
+        return dateString;
+    }
     private static void buildAlertMessageNoGps(final Context context) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")

@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,6 +25,7 @@ import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
 import com.example.ali.myapplication.Activities.UI.SignUp_Fragment;
 import com.example.ali.myapplication.Activities.Utils.AppLogs;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.Service;
 import com.example.ali.myapplication.Activities.Utils.SharedPref;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_Team;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
@@ -136,7 +138,9 @@ public class LoginActivity extends AppCompatActivity {
                                                                 progressDialog.dismiss();
                                                                 team_flag = true;
                                                                 SharedPref_Team.setCurrentUser(LoginActivity.this, team_memberObject);
+                                                                startService(new Intent(LoginActivity.this, Service.class));
                                                                 startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
+
                                                                 break;
                                                             } else {
                                                                 team_flag = false;

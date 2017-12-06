@@ -1,6 +1,7 @@
 package com.example.ali.myapplication.Activities.Activity;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,7 +31,7 @@ public class AdminHome extends AppCompatActivity {
     public DrawerLayout drawer_layout;
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    public String[] menuName = {"Home","List Of Uc", "Polio Forms", "Add UC Member", "Monitor Polio Team", "Logout"};
+    public String[] menuName = {"Home", "List Of Uc", "Polio Forms", "Add UC Member", "Monitor Polio Team", "Logout"};
     public ImageView back_arrow;
     public static TextView ActionBartitle;
     public RelativeLayout maincontainer_admin;
@@ -80,8 +81,8 @@ public class AdminHome extends AppCompatActivity {
         back_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    drawer_layout.openDrawer(GravityCompat.START);
-                }
+                drawer_layout.openDrawer(GravityCompat.START);
+            }
         });
 
 
@@ -89,11 +90,10 @@ public class AdminHome extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if(i==1){
-                    Intent intent = new Intent(AdminHome.this, AdminHome.class);
-                    startActivity(intent);
+                if (i == 1) {
+                    getSupportFragmentManager().popBackStack(1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     drawer_layout.closeDrawer(mDrawerList);
-                }else if (i == 2) {
+                } else if (i == 2) {
 
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_admin, new ListOfUc()).addToBackStack(null).commit();
@@ -114,7 +114,7 @@ public class AdminHome extends AppCompatActivity {
                     Intent intent = new Intent(AdminHome.this, Add_UC_Activity.class);
                     startActivity(intent);
                     drawer_layout.closeDrawer(mDrawerList);
-                }else if(i==5){
+                } else if (i == 5) {
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_admin, new Monitoring_Fragment()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);

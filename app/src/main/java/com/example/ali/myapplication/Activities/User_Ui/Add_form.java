@@ -32,6 +32,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ServerValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,18 +45,19 @@ import java.util.Random;
 
 public class Add_form extends android.support.v4.app.Fragment {
 
-    public EditText name, cnic, childName , drops, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address;
+    public EditText name, cnic, childName, drops, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address;
     public CheckBox yes, no, male, female;
     public Button submit, addLocation;
     public DatabaseReference ref;
     public String randomNumber;
     public static LatLng location;
-    public Spinner relation,religion,district;
-    public ArrayAdapter<String> relationAdapter,religionAdapter,districtAdapter;
-    public String relations[] = {"Father","Mother","Sister","Brother","Cousin"};
-    public String religions[] = {"Islam","Ahmadiyya"};
-    public String districts[] = {"East District","Central District","West District","Korangi District","Malir District"};
+    public Spinner relation, religion, district;
+    public ArrayAdapter<String> relationAdapter, religionAdapter, districtAdapter;
+    public String relations[] = {"Father", "Mother", "Sister", "Brother", "Cousin"};
+    public String religions[] = {"Islam", "Ahmadiyya"};
+    public String districts[] = {"East District", "Central District", "West District", "Korangi District", "Malir District"};
     public Calendar myCalendar;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,7 +142,7 @@ public class Add_form extends android.support.v4.app.Fragment {
             if (Integer.parseInt(drops.getText().toString()) > 10) {
                 drops.setError("No Of Drops Not Greater Than 10");
                 flag = false;
-            }else{
+            } else {
                 drops.setError("No Of Drops Should Not Kept Empty");
                 flag = false;
 
@@ -281,6 +283,7 @@ public class Add_form extends android.support.v4.app.Fragment {
         bForm.setMotherCnic(motherCnic.getText().toString());
         bForm.setAreaOfBirth(areaOfBirth.getText().toString());
         bForm.setDateOfBirth(dateOfBirth.getText().toString());
+        bForm.setVacinationDate(System.currentTimeMillis());
         bForm.setUser_uid(FirebaseAuth.getInstance().getCurrentUser().getUid());
         bForm.setForm_status("Applied");
         if (yes.isChecked()) {
@@ -320,13 +323,13 @@ public class Add_form extends android.support.v4.app.Fragment {
         female = (CheckBox) view.findViewById(R.id.checkBoxFemale);
         drops = (EditText) view.findViewById(R.id.editTextDrops);
 
-        relationAdapter= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,relations);
+        relationAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, relations);
         relation.setAdapter(relationAdapter);
 
-        religionAdapter= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,religions);
+        religionAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, religions);
         religion.setAdapter(religionAdapter);
 
-        districtAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,districts);
+        districtAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, districts);
         district.setAdapter(districtAdapter);
 
 
@@ -387,7 +390,7 @@ public class Add_form extends android.support.v4.app.Fragment {
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
                 // TODO Auto-generated method stub
-             //   view.setMinDate(System.currentTimeMillis());
+                //   view.setMinDate(System.currentTimeMillis());
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -403,11 +406,11 @@ public class Add_form extends android.support.v4.app.Fragment {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 //your co
 
-                    DatePickerDialog datePickerDialog =   new DatePickerDialog(getActivity(), date, myCalendar
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), date, myCalendar
                             .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                             myCalendar.get(Calendar.DAY_OF_MONTH));
 
-          //          datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                    //          datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                     datePickerDialog.show();
 
                     return true;
@@ -439,6 +442,7 @@ public class Add_form extends android.support.v4.app.Fragment {
 
         return sb.toString();
     }
+
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);

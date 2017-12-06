@@ -55,12 +55,12 @@ public class Service extends android.app.Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         firebase = FirebaseDatabase.getInstance().getReference();
-        if (FirebaseAuth.getInstance().getCurrentUser().getUid() != null) {
-            id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        }
-        if (FirebaseAuth.getInstance().getCurrentUser().getUid() != null) {
-            getTokenNotifications();
-        }
+//        if (FirebaseAuth.getInstance().getCurrentUser().getUid() != null) {
+//            id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        }
+//        if (FirebaseAuth.getInstance().getCurrentUser().getUid() != null) {
+//            getTokenNotifications();
+//        }
         Timerr();
         return START_STICKY;
     }
@@ -80,10 +80,8 @@ public class Service extends android.app.Service {
                                     Map<String, Double> map = new HashMap<>();
                                     map.put("lat", location.getLatitude());
                                     map.put("lng", location.getLongitude());
-                                    if(UserModel.myObj!=null) {
-                                        if (FirebaseAuth.getInstance().getCurrentUser() != null && UserModel.myObj.getUser_type() == 4) {
-                                            firebase.child("TeamTracking").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(map);
-                                        }
+                                    if(!SharedPref_Team.getCurrentUser(getApplicationContext()).getMember_email().equals("")) {
+                                            firebase.child("TeamTracking").child(SharedPref_Team.getCurrentUser(getApplicationContext()).getMember_uid()).setValue(map);
                                     }
                                 }
 
