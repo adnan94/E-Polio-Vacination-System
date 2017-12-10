@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
 import com.example.ali.myapplication.Activities.ModelClasses.Team_MemberObject;
 import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
@@ -131,24 +132,56 @@ public class LoginActivity extends AppCompatActivity {
                                             if(dataSnapshot.getValue()!=null) {
                                                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                                                     for (DataSnapshot d : data.getChildren()) {
-                                                        Team_MemberObject team_memberObject = d.getValue(Team_MemberObject.class);
+                                                        final Team_MemberObject team_memberObject = d.getValue(Team_MemberObject.class);
                                                         if (team_memberObject.getMember_email().equals("team" + emails)) {
                                                             if (passo.equals("pakistan")) {
-                                                              //  FirebaseHandler.getInstance().
-                                                                progressDialog.dismiss();
-                                                                team_flag = true;
-                                                                SharedPref_Team.setCurrentUser(LoginActivity.this, team_memberObject);
-                                                                startService(new Intent(LoginActivity.this, Service.class));
-                                                                startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
+                                                                FirebaseHandler.getInstance()
+                                                                        .getUc_teams()
+                                                                       // .child(team_memberObject.getTeam_uid())
+                                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                            @Override
+                                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                                if (dataSnapshot != null) {
+                                                                                    if (dataSnapshot.getValue() != null) {
+                                                                                        for (DataSnapshot d : dataSnapshot.getChildren()) {
+                                                                                            for (DataSnapshot snap : d.getChildren()) {
+                                                                                                Polio_Team polio_team = snap.getValue(Polio_Team.class);
+                                                                                                if (polio_team.getTeam_uid().equals(team_memberObject.getTeam_uid())) {
+                                                                                                    if (polio_team.getTeam_status().equals("Activated")) {
+                                                                                                        progressDialog.dismiss();
+                                                                                                        team_flag = true;
+                                                                                                        SharedPref_Team.setCurrentUser(LoginActivity.this, team_memberObject);
+                                                                                                        startService(new Intent(LoginActivity.this, Service.class));
+                                                                                                        startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
+
+                                                                                                        break;
+                                                                                                    } else {
+                                                                                                        progressDialog.dismiss();
+                                                                                                        Snackbar.make(view, "ID is not Activated", Snackbar.LENGTH_SHORT).show();
+                                                                                                        team_flag = false;
+                                                                                                        break;
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                            @Override
+                                                                            public void onCancelled(DatabaseError databaseError) {
+
+                                                                            }
+                                                                        });
 
                                                                 break;
+
                                                             } else {
                                                                 team_flag = false;
                                                                 progressDialog.dismiss();
                                                                 Snackbar.make(view, "Enter Correct Password", Snackbar.LENGTH_SHORT).show();
                                                             }
                                                         }else{
-                                                            team_flag = false;
+
                                                         }
                                                     }
 
@@ -207,11 +240,12 @@ public class LoginActivity extends AppCompatActivity {
                                                                                             UC_Object uc_object = data.getValue(UC_Object.class);
                                                                                             if(uc_object.getUc_member_email().equals(emails)){
                                                                                                 if(passo.equals("pakistan")){
-                                                                                                    progressDialog.dismiss();
+
                                                                                                     uc_flag=true;
                                                                                                     Team_MemberObject team_memberObject  = new Team_MemberObject("","","","","","","","");
                                                                                                     SharedPref_Team.setCurrentUser(LoginActivity.this,team_memberObject);
                                                                                                     SharedPref_UC.setCurrentUser(LoginActivity.this,uc_object);
+                                                                                                    progressDialog.dismiss();
 
                                                                                                     startActivity(new Intent(LoginActivity.this, UcHome.class));
                                                                                                     break;
@@ -265,9 +299,9 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                         });
                                                                                                     } else if (!task.isSuccessful()) {
                                                                                                         progressDialog.dismiss();
-                                                                                                        AppLogs.logw("signInWithEmail" + task.getException());
-                                                                                                        Toast.makeText(LoginActivity.this, "" + task.getException(),
-                                                                                                                Toast.LENGTH_LONG).show();
+                                                                                                   //     AppLogs.logw("signInWithEmail" + task.getException());
+                                                                                                     //   Toast.makeText(LoginActivity.this, "" + task.getException(),
+                                                                                                       //         Toast.LENGTH_LONG).show();
                                                                                                     }
                                                                                                 }
                                                                                             });
@@ -390,11 +424,12 @@ public class LoginActivity extends AppCompatActivity {
                                                                                         UC_Object uc_object = data.getValue(UC_Object.class);
                                                                                         if(uc_object.getUc_member_email().equals(emails)){
                                                                                             if(passo.equals("pakistan")){
-                                                                                                progressDialog.dismiss();
+
                                                                                                 uc_flag=true;
                                                                                                 Team_MemberObject team_memberObject  = new Team_MemberObject("","","","","","","","");
                                                                                                 SharedPref_Team.setCurrentUser(LoginActivity.this,team_memberObject);
                                                                                                 SharedPref_UC.setCurrentUser(LoginActivity.this,uc_object);
+                                                                                                progressDialog.dismiss();
 
                                                                                                 startActivity(new Intent(LoginActivity.this, UcHome.class));
                                                                                                 break;
@@ -498,8 +533,8 @@ public class LoginActivity extends AppCompatActivity {
                                                                                         } else if (!task.isSuccessful()) {
                                                                                             progressDialog.dismiss();
                                                                                             AppLogs.logw("signInWithEmail" + task.getException());
-                                                                                            Toast.makeText(LoginActivity.this, "" + task.getException(),
-                                                                                                    Toast.LENGTH_LONG).show();
+                                                                                    //        Toast.makeText(LoginActivity.this, "" + task.getException(),
+                                                                                   //                 Toast.LENGTH_LONG).show();
                                                                                         }
                                                                                     }
                                                                                 });

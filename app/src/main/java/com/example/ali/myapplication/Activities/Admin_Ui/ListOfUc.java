@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -77,6 +78,21 @@ public class ListOfUc extends android.support.v4.app.Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        uc_memberlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("obj",userModelArrayList.get(i));
+                UcMemberDetails ucMemberDetails = new UcMemberDetails();
+                ucMemberDetails.setArguments(bundle);
+
+                getActivity().getSupportFragmentManager().popBackStack();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_admin,ucMemberDetails).addToBackStack(null).commit();
 
             }
         });

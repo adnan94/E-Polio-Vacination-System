@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        >
+
+        <ImageView
+            android:background="@mipmap/sehat_logo"
+            android:id="@+id/member_picture"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/member_name"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TEAM NAME"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:textAllCaps="true"
+            android:textColor="#e66110"
+            android:gravity="center"
+            android:id="@+id/team_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Activated"
+            android:textSize="12sp" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:gravity="center"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TEAM EMAIL"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:gravity="center"
+                android:textAllCaps="true"
+
+                android:id="@+id/member_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="USER KHAN"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:gravity="center"
+
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TEAM AREA"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:gravity="center"
+                android:textAllCaps="true"
+
+                android:id="@+id/member_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NAZIMABAD"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="#9c000000" />
+</LinearLayout>

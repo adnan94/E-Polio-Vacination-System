@@ -29,6 +29,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.Uc_Ui.Add_Team_View;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
@@ -70,11 +71,13 @@ public class Add_UC_Activity extends AppCompatActivity {
     private String imgPath;
     public ImageView back_image;
     public String key="";
+    public UC_Object uc_object;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add__uc_);
+
 
         back_image = (ImageView)findViewById(R.id.back_image);
         member_image = (CircleImageView)findViewById(R.id.member_image);
@@ -88,6 +91,26 @@ public class Add_UC_Activity extends AppCompatActivity {
         folderRef = rootStorageRef.child("user_profile_images");
         arrayAdapter = new ArrayAdapter<String>(Add_UC_Activity.this,android.R.layout.simple_list_item_1,uc_areas);
         uc_area.setAdapter(arrayAdapter);
+
+
+        if(getIntent().hasExtra("obj")){
+            uc_object = getIntent().getParcelableExtra("obj");
+            uc_team_name.setText(uc_object.getUc_membern());
+            uc_member_email.setText(uc_object.getUc_member_email());
+            uc_team_nic_no.setText(uc_object.getUc_member_cnic());
+            uc_member_phone_no.setText(uc_object.getUc_member_phone());
+           key=uc_object.getUc_member_uid();
+            downloadURL=uc_object.getUc_member_piture();
+            Glide.with(Add_UC_Activity.this)
+                    .load(uc_object.getUc_member_piture())
+                    .asBitmap()
+                    .placeholder(R.drawable.user)
+                    .into(member_image);
+
+
+        }
+
+
 
         uc_area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
