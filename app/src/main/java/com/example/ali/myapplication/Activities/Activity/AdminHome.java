@@ -21,6 +21,7 @@ import com.example.ali.myapplication.Activities.Adaptor.Navigations_ItemsAdapter
 import com.example.ali.myapplication.Activities.Admin_Ui.Add_UC_Activity;
 import com.example.ali.myapplication.Activities.Admin_Ui.ListOfUc;
 import com.example.ali.myapplication.Activities.Admin_Ui.Monitoring_Fragment;
+import com.example.ali.myapplication.Activities.Admin_Ui.PolioSchedule;
 import com.example.ali.myapplication.Activities.Admin_Ui.Polio_FormList;
 import com.example.ali.myapplication.Activities.Uc_Ui.Add_Polio_TeamActivity;
 import com.example.ali.myapplication.R;
@@ -31,7 +32,7 @@ public class AdminHome extends AppCompatActivity {
     public DrawerLayout drawer_layout;
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    public String[] menuName = {"Home", "List Of Uc", "Polio Forms", "Add UC Member", "Monitor Polio Team", "Logout"};
+    public String[] menuName = {"Home", "List Of Uc", "Polio Forms", "Add UC Member","Add Polio Schedule", "Monitor Polio Team", "Logout"};
     public ImageView back_arrow;
     public static TextView ActionBartitle;
     public RelativeLayout maincontainer_admin;
@@ -106,7 +107,7 @@ public class AdminHome extends AppCompatActivity {
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_admin, new Polio_FormList()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
-                } else if (i == 6) {
+                } else if (i == 7) {
                     FirebaseAuth.getInstance().signOut();
                     finish();
                     drawer_layout.closeDrawer(mDrawerList);
@@ -114,9 +115,15 @@ public class AdminHome extends AppCompatActivity {
                     Intent intent = new Intent(AdminHome.this, Add_UC_Activity.class);
                     startActivity(intent);
                     drawer_layout.closeDrawer(mDrawerList);
-                } else if (i == 5) {
+                } else if (i == 6) {
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_admin, new Monitoring_Fragment()).addToBackStack(null).commit();
+                    drawer_layout.closeDrawer(mDrawerList);
+                }else if (i == 5) {
+
+                    getSupportFragmentManager().popBackStack();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_admin, new PolioSchedule()).addToBackStack(null).commit();
+                    // finish();
                     drawer_layout.closeDrawer(mDrawerList);
                 }
             }

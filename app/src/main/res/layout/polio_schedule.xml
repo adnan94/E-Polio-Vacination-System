@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/polio_schedule"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar_outside"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_below="@+id/toolbar_outside"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:id="@+id/my_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+        </ListView>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginBottom="25dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/floatingMenuItem2"
+            android:visibility="gone"
+            android:background="@mipmap/custlist_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  />
+
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/floatingMenuItem1"
+            android:background="@mipmap/custlist_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/customer_list_sort"
+            android:layout_width="wrap_content"
+            android:background="@mipmap/sort_btn"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

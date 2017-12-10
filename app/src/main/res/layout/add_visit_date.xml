@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:focusable="true"
+    android:clickable="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="ADD VISIT TIMINGS"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="VISITING DATE"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/visit_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@mipmap/calendar"
+                    android:hint="VISIT DAY"
+                    android:inputType="number"
+                    android:paddingRight="15dp"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="FROM"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/time_from"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@mipmap/time"
+                    android:hint="TIME FROM"
+                    android:inputType="text"
+                    android:paddingRight="15dp"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="TO"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/time_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@mipmap/time"
+                    android:hint="TIME TO"
+                    android:inputType="number"
+                    android:paddingRight="15dp"
+                    android:textSize="12sp" />
+
+
+                <Button
+                    android:id="@+id/save_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginRight="45dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/curver_btn"
+                    android:text="SAVE VISIT TIME"
+                    android:textColor="#fff" />
+
+
+
+
+            </LinearLayout>
+
+
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>

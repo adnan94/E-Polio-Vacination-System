@@ -25,6 +25,8 @@ public class FirebaseHandler {
     private DatabaseReference uc_teams;
     private DatabaseReference team_members;
     private  DatabaseReference uc_members;
+    private DatabaseReference polio_schedule;
+    private DatabaseReference polio_subSchedule;
 
 
     public static DatabaseReference getDataBaseReference() {
@@ -65,6 +67,8 @@ public class FirebaseHandler {
         uc_teams = firebaseRef.child("uc_teams");
         team_members = firebaseRef.child("team_members");
         uc_members = firebaseRef.child("uc_members");
+        polio_schedule = firebaseRef.child("polio_schedule");
+        polio_subSchedule = firebaseRef.child("polio_sub_schedule");
 
     }
     public DatabaseReference getUsersRef() {
@@ -93,5 +97,13 @@ public class FirebaseHandler {
 
     public DatabaseReference getUc_members() {
         return uc_members;
+    }
+
+    public DatabaseReference getPolio_schedule() {
+        return polio_schedule;
+    }
+
+    public DatabaseReference getPolio_subSchedule() {
+        return polio_subSchedule;
     }
 }

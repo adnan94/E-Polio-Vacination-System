@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar_outside"
+        layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_below="@+id/toolbar_outside"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="ADD TO SCHEDULE"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="FROM"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:paddingRight="15dp"
+                        android:drawableRight="@mipmap/calendar"
+                        android:id="@+id/schedule_from"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="SCHEDULE FROM"
+                        android:inputType="text"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="TO"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:paddingRight="15dp"
+                        android:drawableRight="@mipmap/calendar"
+                        android:id="@+id/schedule_to"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="SCHEDULE TO"
+                        android:inputType="number"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="SCHEDULE TITLE"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+
+                    <EditText
+                        android:id="@+id/schedule_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="SCHEDULE TITLE"
+                        android:inputType="text"
+                        android:textSize="12sp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="SCHEDULE DESCRIPTION"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+
+                    <EditText
+                        android:id="@+id/schedule_des"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="SCHEDULE DESCRIPTION"
+                        android:inputType="text"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:id="@+id/add_visit_dates"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:src="@mipmap/add_blocks"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:textSize="12sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:text="ADD VISIT DATES"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:id="@+id/visit_dates_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ListView
+                            android:id="@+id/visit_dates"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+
+                        </ListView>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <Button
+                android:id="@+id/save_schedule"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/curver_btn"
+                android:text="SAVE SCHEDULE"
+                android:textColor="#fff" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>
