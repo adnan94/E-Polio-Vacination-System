@@ -1,6 +1,7 @@
 package com.example.ali.myapplication.Activities.User_Ui;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -24,9 +25,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.util.Util;
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
 import com.example.ali.myapplication.Activities.User_Ui.UserHomeFragment;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,7 +48,7 @@ import java.util.Random;
 
 public class Add_form extends android.support.v4.app.Fragment {
 
-    public EditText name, cnic, childName, drops, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address;
+    public EditText name, cnic, childName, cell, drops, fatherName, fatherCnic, motherName, motherCnic, areaOfBirth, dateOfBirth, disability, address;
     public CheckBox yes, no, male, female;
     public Button submit, addLocation;
     public DatabaseReference ref;
@@ -57,6 +60,7 @@ public class Add_form extends android.support.v4.app.Fragment {
     public String religions[] = {"Islam", "Ahmadiyya"};
     public String districts[] = {"East District", "Central District", "West District", "Korangi District", "Malir District"};
     public Calendar myCalendar;
+    private int age = 0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,6 +87,7 @@ public class Add_form extends android.support.v4.app.Fragment {
 
 
     public boolean checkEmptyFields() {
+
         boolean flag = true;
         if (cnic.getText().toString().length() == 0) {
             cnic.setError("Enter Applicant Cnic");
@@ -133,19 +138,25 @@ public class Add_form extends android.support.v4.app.Fragment {
             address.setError("Enter Address");
 //            address.requestFocus();
         }
+        if (cell.getText().toString().length() == 0) {
+            flag = false;
+            cell.setError("Enter Contact Number");
+//            address.requestFocus();
+        }
 //        if (district.getText().toString().length() == 0) {
 //            district.setError("Enter District");
 //            flag = false;
 ////            district.requestFocus();
 //        }
-        if (drops.getText().toString().length() == 0) {
-            if (Integer.parseInt(drops.getText().toString()) > 10) {
-                drops.setError("No Of Drops Not Greater Than 10");
-                flag = false;
+        if (!drops.getText().toString().isEmpty()) {
+            if (drops.getText().toString().length() != 0) {
+                if (Integer.parseInt(drops.getText().toString()) > 10) {
+                    drops.setError("No Of Drops Not Greater Than 10");
+                    flag = false;
+                }
             } else {
                 drops.setError("No Of Drops Should Not Kept Empty");
                 flag = false;
-
             }
 
 
@@ -205,55 +216,50 @@ public class Add_form extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 if (location != null && checkEmptyFields()) {
+                    final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                    progressDialog.setMessage("Wait While Processing");
+                    progressDialog.show();
+                    if (age < 5) {
+                        if (drops.getText().toString().isEmpty()) {
+                            Snackbar.make(v, "No Of Drops Should Not Kept Empty", Snackbar.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        } else {
 
-                    Random random = new Random();
-                    randomNumber = generateRandom();
-                    BForm bForm = getFormData();
-                    bForm.setLat(location.latitude);
-                    bForm.setLng(location.longitude);
-                    bForm.setDrops(Integer.parseInt(drops.getText().toString()));
-                    ref.child(randomNumber).setValue(bForm, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            Random random = new Random();
+                            randomNumber = generateRandom();
+                            BForm bForm = getFormData();
+                            bForm.setLat(location.latitude);
+                            bForm.setLng(location.longitude);
+                            int i = age * 2;
+                            if (i != 0) {
+                                if (Integer.parseInt(drops.getText().toString()) > i) {
+                                    Snackbar.make(v, "Invalid No Of Vaccinated Before", Snackbar.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                } else {
+                                    bForm.setDrops(Integer.parseInt(drops.getText().toString()));
+                                    progressDialog.dismiss();
+                                    add(bForm, progressDialog);
 
-                            if (getActivity().getSupportFragmentManager().findFragmentById(R.id.maincontainer) != null) {
-                                getActivity().getSupportFragmentManager()
-                                        .beginTransaction().
-                                        remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.maincontainer)).commit();
-
+                                }
+                            } else {
+                                if (Integer.parseInt(drops.getText().toString()) > 1) {
+                                    Snackbar.make(v, "Invalid No Of Vaccinated Before", Snackbar.LENGTH_SHORT).show();
+                               progressDialog.dismiss();
+                                } else {
+                                    bForm.setDrops(Integer.parseInt(drops.getText().toString()));
+                                    add(bForm,progressDialog);
+                                }
                             }
-                            location = null;
-                            getActivity().getSupportFragmentManager().beginTransaction()
-                                    .add(R.id.maincontainer, new UserHomeFragment())
-                                    .commit();
-
-//                        Dialog dialog = new Dialog(getActivity());
-//                        dialog.setTitle("Your Token Id Is : " + key);
-//                        dialog.setCancelable(true);
-//                        dialog.show();
-//                        Utils.toast(getActivity(), "Your Token Id Is : " + key);
-//                        Utils.toast(getActivity(), "Sucessfull");
-//                        name.setText("");
-//                        cnic.setText("");
-//                        childName.setText("");
-//                        relation.setText("");
-//                        religion.setText("");
-//                        fatherName.setText("");
-//                        fatherCnic.setText("");
-//                        motherName.setText("");
-//                        motherCnic.setText("");
-//                        areaOfBirth.setText("");
-//                        dateOfBirth.setText("");
-//                        disability.setText("");
-//                        address.setText("");
-//                        district.setText("");
-
                         }
-                    });
-
+                    } else {
+                        Snackbar.make(v, "Child Age Should Be Less Than 5", Snackbar.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
                 } else {
+
                     if (location == null) {
                         Snackbar.make(v, "Add Location", Snackbar.LENGTH_SHORT).show();
+
                     } else {
                         Snackbar.make(v, "Empty Fields Not Allowed", Snackbar.LENGTH_SHORT).show();
 
@@ -263,8 +269,40 @@ public class Add_form extends android.support.v4.app.Fragment {
         });
     }
 
+    public void add(BForm bForm, final ProgressDialog progressDialog) {
+        if (cell.getText().toString().length() != 11) {
+            Snackbar.make(submit, "Cell Number Should Be 11 Numbers", Snackbar.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+        } else {
+            ref.child(randomNumber).setValue(bForm, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+                    if (getActivity().getSupportFragmentManager().findFragmentById(R.id.maincontainer) != null) {
+                        Utils.toast(getActivity(), "Sucessfully Submitted");
+                        progressDialog.dismiss();
+
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction().
+                                remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.maincontainer)).commit();
+
+                    }
+                    location = null;
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .add(R.id.maincontainer, new UserHomeFragment())
+                            .commit();
+
+                }
+            });
+
+        }
+
+
+    }
+
     //
     public BForm getFormData() {
+
         randomNumber = generateRandom();
         BForm bForm = new BForm();
         bForm.setUserName(name.getText().toString());
@@ -282,7 +320,7 @@ public class Add_form extends android.support.v4.app.Fragment {
         bForm.setMotherName(motherName.getText().toString());
         bForm.setMotherCnic(motherCnic.getText().toString());
         bForm.setAreaOfBirth(areaOfBirth.getText().toString());
-        bForm.setDateOfBirth(dateOfBirth.getText().toString());
+        bForm.setDateOfBirth(myCalendar.getTimeInMillis() + "");
         bForm.setVacinationDate(System.currentTimeMillis());
         bForm.setUser_uid(FirebaseAuth.getInstance().getCurrentUser().getUid());
         bForm.setForm_status("Applied");
@@ -295,6 +333,7 @@ public class Add_form extends android.support.v4.app.Fragment {
         bForm.setAddress(address.getText().toString());
         bForm.setDistrict(district.getSelectedItem().toString());
         bForm.setFormID(randomNumber);
+        bForm.setCell(cell.getText().toString());
         bForm.setTimestamp(System.currentTimeMillis());
         return bForm;
 
@@ -314,6 +353,7 @@ public class Add_form extends android.support.v4.app.Fragment {
         dateOfBirth = (EditText) view.findViewById(R.id.editTextDateOfBirth);
         disability = (EditText) view.findViewById(R.id.editTextDisability);
         address = (EditText) view.findViewById(R.id.editTextAddress);
+        cell = (EditText) view.findViewById(R.id.editTextCell);
         district = (Spinner) view.findViewById(R.id.editTextDistrict);
         submit = (Button) view.findViewById(R.id.submitForm);
         addLocation = (Button) view.findViewById(R.id.addLocation);
@@ -322,7 +362,7 @@ public class Add_form extends android.support.v4.app.Fragment {
         male = (CheckBox) view.findViewById(R.id.checkBoxMale);
         female = (CheckBox) view.findViewById(R.id.checkBoxFemale);
         drops = (EditText) view.findViewById(R.id.editTextDrops);
-
+        drops.setText("0");
         relationAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, relations);
         relation.setAdapter(relationAdapter);
 
@@ -394,7 +434,9 @@ public class Add_form extends android.support.v4.app.Fragment {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
+                Calendar calendar = Calendar.getInstance();
+                age = calendar.get(Calendar.YEAR) - myCalendar.get(Calendar.YEAR);
+                Utils.toast(getActivity(), "" + age);
                 updateLabel();
             }
 
@@ -446,7 +488,6 @@ public class Add_form extends android.support.v4.app.Fragment {
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
         dateOfBirth.setText(sdf.format(myCalendar.getTime()));
     }
 }

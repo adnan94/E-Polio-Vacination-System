@@ -307,6 +307,7 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -361,12 +362,30 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/editTextCell"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Cell Number"
+                android:inputType="number"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="12sp" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
                 android:id="@+id/editTextDrops"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="sans-serif"
-                android:hint="District"
+                android:hint="Vaccination Before"
                 android:inputType="number"
                 android:textColor="#000"
                 android:textColorHint="#000"

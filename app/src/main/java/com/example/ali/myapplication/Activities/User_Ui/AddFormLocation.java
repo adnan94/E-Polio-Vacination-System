@@ -21,11 +21,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -38,6 +45,8 @@ import com.google.android.gms.maps.model.Marker;
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
 
+import static android.app.Activity.RESULT_OK;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +55,10 @@ public class AddFormLocation extends Fragment implements OnMapReadyCallback, Goo
     View view;
     SupportMapFragment mSupportMapFragment;
     GoogleMap map;
+    LatLngBounds bounds;
+    ImageButton ib;
+    Location mlocation;
+    Button locationSearch;
     LatLng source;
 
     public AddFormLocation() {
@@ -76,6 +89,23 @@ public class AddFormLocation extends Fragment implements OnMapReadyCallback, Goo
         if (mSupportMapFragment != null) {
             mSupportMapFragment.getMapAsync(this);
         }
+
+        locationSearch = (Button) view.findViewById(R.id.locationSearch);
+        locationSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new PlaceAutocomplete.IntentBuilder
+                            (PlaceAutocomplete.MODE_OVERLAY)
+                            .setBoundsBias(bounds)
+                            .build(getActivity());
+                    startActivityForResult(intent, 2000);
+                } catch (GooglePlayServicesRepairableException |
+                        GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         ((Button) view.findViewById(R.id.submit)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,8 +116,40 @@ public class AddFormLocation extends Fragment implements OnMapReadyCallback, Goo
                 }
             }
         });
+        ib = (ImageButton) view.findViewById(R.id.gps);
+        ib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLocation();
+            }
+        });
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 2000) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(getActivity(), data);
+                if (mlocation != null) {
+                    Location searched = new Location("");
+                    searched.setLatitude(place.getLatLng().latitude);
+                    searched.setLongitude(place.getLatLng().longitude);
+                    float d = mlocation.distanceTo(searched) / 1000;
+                    if (d < 50) {
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 15.0f));
+                    } else {
+                        Utils.toast(getActivity(), "Select Location Less Than 50km From Current Location");
+                    }
+                }
+
+
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(getActivity(), data);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -105,9 +167,9 @@ public class AddFormLocation extends Fragment implements OnMapReadyCallback, Goo
         }
         googleMap.setOnCameraIdleListener(this);
         googleMap.setOnCameraMoveListener(this);
-        googleMap.setMyLocationEnabled(true);
-        googleMap.getUiSettings().isZoomControlsEnabled();
-        googleMap.getUiSettings().isMyLocationButtonEnabled();
+//        googleMap.setMyLocationEnabled(true);
+//        googleMap.getUiSettings().isZoomControlsEnabled();
+//        googleMap.getUiSettings().isMyLocationButtonEnabled();
         Utils.checkForLocation(getActivity());
 
         getLocation();
@@ -121,8 +183,12 @@ public class AddFormLocation extends Fragment implements OnMapReadyCallback, Goo
                     @Override
                     public void onLocationUpdated(Location location) {
                         if (location != null) {
+                            mlocation = location;
                             source = new LatLng(location.getLatitude(), location.getLongitude());
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13.0f));
+                            bounds = new LatLngBounds(
+                                    new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(location.getLatitude(), location.getLongitude()));
+
                         }
 
                     }
