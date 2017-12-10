@@ -14,7 +14,34 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:visibility="gone"
-        tools:context="com.example.ali.ijararide.PickUpRideLocation"/>
+        tools:context="com.example.ali.ijararide.PickUpRideLocation">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/locationSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="40dp"
+                android:background="@mipmap/search_bar_drop_off"
+                android:text="Search Location"
+                android:textColor="#000" />
+
+            <ImageButton
+                android:id="@+id/gps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="5dp"
+                android:background="#00000000"
+                android:src="@mipmap/gps_location_icon" />
+
+        </RelativeLayout>
+    </fragment>
 
 
 </FrameLayout>

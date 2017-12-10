@@ -2,6 +2,8 @@ package com.example.ali.myapplication.Activities.UI;
 
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
@@ -26,6 +29,11 @@ import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,6 +41,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,6 +57,7 @@ import java.util.Date;
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
@@ -58,6 +68,10 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
     SupportMapFragment mSupportMapFragment;
     GoogleMap map;
     ArrayList<BForm> list;
+    Button locationSearch;
+    LatLngBounds bounds;
+    Location mlocation;
+    ImageButton ib;
 
     public TeamMemberHomeFragment() {
         // Required empty public constructor
@@ -87,6 +101,30 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
         if (mSupportMapFragment != null) {
             mSupportMapFragment.getMapAsync(this);
         }
+        locationSearch = (Button) view.findViewById(R.id.locationSearch);
+        locationSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new PlaceAutocomplete.IntentBuilder
+                            (PlaceAutocomplete.MODE_OVERLAY)
+                            .setBoundsBias(bounds)
+                            .build(getActivity());
+                    startActivityForResult(intent, 2000);
+                } catch (GooglePlayServicesRepairableException |
+                        GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        ib=(ImageButton)view.findViewById(R.id.gps);
+        ib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLocation();
+            }
+        });
+
         Utils.checkForLocation(getActivity());
         getLocation();
         getData();
@@ -148,10 +186,10 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        googleMap.setMyLocationEnabled(true);
-        googleMap.getUiSettings().isZoomControlsEnabled();
-        googleMap.getUiSettings().isMyLocationButtonEnabled();
-        googleMap.getUiSettings().setZoomControlsEnabled(true);
+//        googleMap.setMyLocationEnabled(true);
+//        googleMap.getUiSettings().isZoomControlsEnabled();
+//        googleMap.getUiSettings().isMyLocationButtonEnabled();
+//        googleMap.getUiSettings().setZoomControlsEnabled(true);
         googleMap.setOnInfoWindowClickListener(this);
         getLocation();
 
@@ -197,6 +235,10 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
                     @Override
                     public void onLocationUpdated(Location location) {
                         if (location != null) {
+                            bounds = new LatLngBounds(
+                                    new LatLng(location.getLatitude(), location.getLongitude()), new LatLng(location.getLatitude(), location.getLongitude()));
+
+                            mlocation = location;
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13.0f));
                         }
 
@@ -218,7 +260,7 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
             FirebaseHandler.getInstance().getAdd_forms().child(list.get(Integer.parseInt(marker.getTitle())).getFormID()).setValue(list.get(Integer.parseInt(marker.getTitle())), new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                    Utils.toast(getActivity(), "Next Vacination Date Starts From"+Utils.formatDAte(new Date(calendar.getTimeInMillis())));
+                    Utils.toast(getActivity(), "Next Vacination Date Starts From" + Utils.formatDAte(new Date(calendar.getTimeInMillis())));
                     list.get(Integer.parseInt(marker.getTitle()));
                     marker.remove();
 
@@ -233,5 +275,29 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
         super.onDestroy();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 2000) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(getActivity(), data);
+                if (mlocation != null) {
+                    Location searched = new Location("");
+                    searched.setLatitude(place.getLatLng().latitude);
+                    searched.setLongitude(place.getLatLng().longitude);
+                    float d = mlocation.distanceTo(searched) / 1000;
+                    if (d < 50) {
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 15.0f));
+                    } else {
+                        Utils.toast(getActivity(),"Select Location Less Than 50km From Current Location");
+                    }
+                }
 
+
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(getActivity(), data);
+            }
+        }
+            super.onActivityResult(requestCode, resultCode, data);
+
+    }
 }

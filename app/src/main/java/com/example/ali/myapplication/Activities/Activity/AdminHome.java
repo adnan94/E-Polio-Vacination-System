@@ -111,7 +111,7 @@ public class AdminHome extends AppCompatActivity {
                     finish();
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 4) {
-                    Intent intent = new Intent(AdminHome.this, Add_UC_Activity.class);
+                    Intent intent =  new Intent(AdminHome.this, Add_UC_Activity.class);
                     startActivity(intent);
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 5) {
