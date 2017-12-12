@@ -38,6 +38,8 @@ public class ViewUserForm extends Fragment {
     public TextView mother_name_alert, mother_cnic_alert, dob_alert, form_submit_alert, form_verification_alert, form_status;
     public TextView form_verification_time;
     public TextView user_name;
+    public TextView token_id;
+    public TextView track_id;
 
     public ViewUserForm() {
         // Required empty public constructor
@@ -56,6 +58,47 @@ public class ViewUserForm extends Fragment {
             @Override
             public void onClick(View v) {
                 show_token.show();
+
+                FirebaseHandler.getInstance().getForm_token()
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child(bform.getFormID())
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot!=null){
+                                    if(dataSnapshot.getValue()!=null){
+                                    for(DataSnapshot data:dataSnapshot.getChildren()) {
+                                        Form_Token form_token = data.getValue(Form_Token.class);
+                                        String dateString = DateFormat.format("dd/MM/yyyy", new Date(bform.getTimestamp())).toString();
+
+
+                                        show_token_btn.setVisibility(View.VISIBLE);
+                                        father_name_alert.setText(bform.getFatherName());
+                                        father_cnic_alert.setText(bform.getFatherCnic());
+                                        mother_name_alert.setText(bform.getMotherName());
+                                        mother_cnic_alert.setText(bform.getMotherCnic());
+                                        dob_alert.setText(bform.getDateOfBirth());
+                                        form_submit_alert.setText(dateString);
+                                        form_verification_alert.setText(form_token.getAppointment_date());
+                                        form_verification_time.setText(form_token.getAppointment_time());
+                                        form_status.setText(bform.getForm_status());
+                                        user_name.setText(bform.getChildName());
+                                        token_id.setText(form_token.getForm_id());
+                                        track_id.setText(form_token.getToken_id());
+
+                                    }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+
             }
         });
 
@@ -110,6 +153,9 @@ public class ViewUserForm extends Fragment {
                                         form_verification_time.setText(form_token.getAppointment_time());
                                         form_status.setText(bform.getForm_status());
                                         user_name.setText(bform.getChildName());
+                                        token_id.setText(form_token.getForm_id());
+                                        track_id.setText(form_token.getToken_id());
+
                                     }
                                 }
                             }
@@ -165,7 +211,8 @@ public class ViewUserForm extends Fragment {
         form_verification_alert = (TextView) completeView.findViewById(R.id.form_verification_alert);
         form_status = (TextView) completeView.findViewById(R.id.form_status);
         form_verification_time = (TextView)completeView.findViewById(R.id.form_verification_time);
-
+        token_id = (TextView)completeView.findViewById(R.id.token_id);
+        track_id = (TextView)completeView.findViewById(R.id.track_id);
 
         //end
 

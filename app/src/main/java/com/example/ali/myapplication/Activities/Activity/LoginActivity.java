@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,7 +47,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public TextView signUpText;
     private Button loginBtn;
-    private EditText useremail, userpass;
+    private EditText useremail;
+    public TextInputEditText userpass;
     public FragmentManager fragmentManager;
     DatabaseReference firebase;
     private FirebaseAuth mAuth;
@@ -68,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         signUpText = (TextView) findViewById(R.id.signup);
         loginBtn = (Button) findViewById(R.id.user_login);
         useremail = (EditText) findViewById(R.id.editText_Loginemail);
-        userpass = (EditText) findViewById(R.id.editText_loginpass);
+        userpass = (TextInputEditText) findViewById(R.id.editText_loginpass);
         firebase = FirebaseDatabase.getInstance().getReference();
         checkBox = (CheckBox) findViewById(R.id.remember_me);
 //        if (mAuth.getCurrentUser() != null) {

@@ -24,13 +24,18 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.ali.myapplication.Activities.Adaptor.Team_visitDate;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Schedule;
+import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
 import com.example.ali.myapplication.Activities.ModelClasses.Visit_DateObject;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.R;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,6 +69,7 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
     Calendar now;
     public ListView visit_dates;
     public ArrayList<Visit_DateObject> visit_dateObjects;
+    public Team_visitDate team_visitDateAdapter;
 
     @Nullable
     @Override
@@ -101,6 +107,27 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
 
             }
         }
+
+        FirebaseHandler.getInstance().getPolio_subSchedule()
+                .child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if(dataSnapshot.getValue()!=null){
+                        for(DataSnapshot data: dataSnapshot.getChildren()){
+                            Visit_DateObject visit_dateObject = data.getValue(Visit_DateObject.class);
+                            visit_dateObjects.add(visit_dateObject);
+                            team_visitDateAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
         final DatePickerDialog.OnDateSetListener dateStart = new DatePickerDialog.OnDateSetListener() {
@@ -210,7 +237,8 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
         schedule_to = (EditText) view.findViewById(R.id.schedule_to);
         schedule_title = (EditText) view.findViewById(R.id.schedule_title);
         schedule_des = (EditText) view.findViewById(R.id.schedule_des);
-
+        team_visitDateAdapter = new Team_visitDate(visit_dateObjects,getActivity());
+        visit_dates.setAdapter(team_visitDateAdapter);
 
         View completeView = getActivity().getLayoutInflater().inflate(R.layout.add_visit_date, null);
         filter_dialog = new Dialog(getActivity());
@@ -222,6 +250,9 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
         time_to = (EditText) completeView.findViewById(R.id.time_to);
         add_visit_dates = (LinearLayout) view.findViewById(R.id.add_visit_dates);
         dialog_calender = Calendar.getInstance();
+
+
+
 
         final DatePickerDialog.OnDateSetListener dialog_date = new DatePickerDialog.OnDateSetListener() {
 
@@ -454,4 +485,5 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
         now = Calendar.getInstance();
         return false;
     }
+
 }

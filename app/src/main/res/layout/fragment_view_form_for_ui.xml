@@ -6,7 +6,7 @@
     android:clickable="true"
     android:focusable="true"
     android:background="#fff"
-    tools:context="com.example.ali.myapplication.Activities.UI.ViewFormForUc">
+  >
 
     <include
         android:id="@+id/toolbar_outside"

@@ -70,6 +70,13 @@ public class Add_Polio_TeamActivity extends AppCompatActivity {
         mDrawerList.setAdapter(navigations_itemsAdapter);
         mDrawerList.addHeaderView(viewinflate);
 
+        back_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         mDrawerToggle = new ActionBarDrawerToggle(Add_Polio_TeamActivity.this, drawer_layout, null, R.string.app_name, R.string.app_name) {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {

@@ -27,6 +27,7 @@ import com.example.ali.myapplication.Activities.Uc_Ui.Applied_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.Completed_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.In_Progress_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.Add_Polio_TeamActivity;
+import com.example.ali.myapplication.Activities.Uc_Ui.SettingFragment;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -150,10 +151,14 @@ public class UcHome extends AppCompatActivity {
                         finish();
                         //   FirebaseAuth.getInstance().signOut();
                         drawer_layout.closeDrawer(mDrawerList);
-                    }else if(i==4){
+                    }else if(i==3){
                         getSupportFragmentManager().popBackStack();
                         getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc,new About_Fragment()).addToBackStack(null).commit();
                         drawer_layout.closeDrawer(mDrawerList);
+                    }else if(i==4){
+                        getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc,new SettingFragment()).addToBackStack(null).commit();
+                        drawer_layout.closeDrawer(mDrawerList);
+                       // SettingFragment
                     }
                 }
             });

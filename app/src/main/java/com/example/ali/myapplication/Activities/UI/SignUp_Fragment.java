@@ -6,12 +6,17 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
@@ -35,8 +40,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class SignUp_Fragment extends android.support.v4.app.Fragment {
-
-    private EditText cell_no, email, cnic, password, address, fname, name;
+    public static TextView ActionBartitle;
+    public ImageView back_arrow;
+    private EditText cell_no, email, cnic, address, fname, name;
+    public TextInputEditText password;
     private Button signup;
     private FirebaseAuth mAuth;
     //    private FirebaseUser firebase_user;
@@ -58,7 +65,13 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.signup_view, null);
+        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar_outside);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
 
+        ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
+        ActionBartitle.setText("SignUp");
+        back_arrow = (ImageView)toolbar.findViewById(R.id.back_image);
         firebase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 //        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -66,13 +79,20 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
 //        editor.clear();
         email = (EditText) rootView.findViewById(R.id.email);
         cnic = (EditText) rootView.findViewById(R.id.cnic);
-        password = (EditText) rootView.findViewById(R.id.password);
+        password = (TextInputEditText) rootView.findViewById(R.id.password);
         fname = (EditText) rootView.findViewById(R.id.father_name);
         name = (EditText) rootView.findViewById(R.id.name);
         address = (EditText) rootView.findViewById(R.id.address);
         cell_no = (EditText) rootView.findViewById(R.id.cell_no);
 
         signup = (Button) rootView.findViewById(R.id.signup_btn);
+
+        back_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
 
         //     profile_image  = (CircleImageView)rootView.findViewById(R.id.profile_img);
         //    spinner_country=(Spinner)rootView.findViewById(R.id.country_signup_spin);

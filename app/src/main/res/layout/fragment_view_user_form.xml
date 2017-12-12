@@ -142,9 +142,10 @@
                     android:textColor="#000" />
 
                 <Button
+
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#d70101"
+                    android:layout_height="35dp"
+                    android:background="@drawable/curver_btn"
                     android:text="View Token"
                     android:id="@+id/show_token"
                     android:textColor="#fff" />
