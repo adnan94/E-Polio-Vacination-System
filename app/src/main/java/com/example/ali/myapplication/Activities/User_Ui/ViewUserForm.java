@@ -2,8 +2,12 @@ package com.example.ali.myapplication.Activities.User_Ui;
 
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -22,6 +26,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 
 /**
@@ -40,6 +46,8 @@ public class ViewUserForm extends Fragment {
     public TextView user_name;
     public TextView token_id;
     public TextView track_id;
+    public Button save_token;
+    View completeView;
 
     public ViewUserForm() {
         // Required empty public constructor
@@ -197,7 +205,7 @@ public class ViewUserForm extends Fragment {
         show_token_btn = (Button) view.findViewById(R.id.show_token);
 
         //alert dialog
-        View completeView = getActivity().getLayoutInflater().inflate(R.layout.token_view, null);
+         completeView = getActivity().getLayoutInflater().inflate(R.layout.token_view, null);
         show_token = new Dialog(getActivity());
         show_token.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         show_token.setContentView(completeView);
@@ -213,10 +221,65 @@ public class ViewUserForm extends Fragment {
         form_verification_time = (TextView)completeView.findViewById(R.id.form_verification_time);
         token_id = (TextView)completeView.findViewById(R.id.token_id);
         track_id = (TextView)completeView.findViewById(R.id.track_id);
-
+        save_token  = (Button)completeView.findViewById(R.id.save_token);
         //end
 
+        save_token.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+           takeScreenshot();
+            }
+        });
 
+    }
+
+    private void takeScreenshot() {
+        Date now = new Date();
+        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
+
+        try {
+            // image naming and path  to include sd card  appending name you choose for file
+            String mPath =Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/" + now + ".jpg";
+
+            // create bitmap screen capture
+          //  View v1 = getActivity().getWindow().getDecorView().getRootView();
+            completeView.setDrawingCacheEnabled(true);
+            Bitmap bitmap = Bitmap.createBitmap(completeView.getDrawingCache());
+            completeView.setDrawingCacheEnabled(false);
+
+        //    File imageFile = new File(mPath);
+
+         //   if (!imageFile.exists()) {
+         //       imageFile.mkdir();
+        //    }
+
+            File file=new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath()+"/polio/");
+            if(!file.exists())
+            {
+                file.mkdirs();
+            }
+            File file1=new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath()+"/"+ now + ".jpg");
+         //   fos=new FileOutputStream(file1);
+
+            FileOutputStream outputStream = new FileOutputStream(file1);
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+            outputStream.flush();
+            outputStream.close();
+
+            openScreenshot(file1);
+        } catch (Throwable e) {
+            // Several error may come out with file handling or DOM
+            e.printStackTrace();
+        }
+    }
+
+    private void openScreenshot(File imageFile) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri uri = Uri.fromFile(imageFile);
+        intent.setDataAndType(uri, "image/*");
+        startActivity(intent);
     }
 
 }

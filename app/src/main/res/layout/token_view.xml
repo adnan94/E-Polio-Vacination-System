@@ -11,346 +11,347 @@
         android:layout_height="match_parent"
         android:layout_margin="5dp"
 
-        app:cardElevation="5dp"
         android:background="#fff"
+        app:cardElevation="5dp"
         app:cardUseCompatPadding="true">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="#fff"
-    android:layout_height="match_parent">
-
-
-    <TextView
-        android:layout_marginTop="10dp"
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="E-POLIO VACCINATION SYSTEM"
-        android:textSize="15sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:textSize="12sp"
-        android:gravity="center"
-        android:text="PAKISTAN"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
-    <LinearLayout
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/token_container"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_marginTop="5dp"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:text="TOKEN NO"
-            android:gravity="center"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/token_id"
-            android:textSize="12dp"
-            android:gravity="center"
-            android:text="42424"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_height="wrap_content" />
-
-
-    </LinearLayout>
-
-    <ImageView
-        android:layout_marginTop="5dp"
-        android:background="@mipmap/bar_code_hi"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-    <TextView
-        android:id="@+id/track_id"
-        android:textStyle="bold"
-        android:textSize="13sp"
-        android:gravity="center"
-        android:text="Tracking ID:123456789"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="5dp"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/user_name"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:gravity="center"
-        android:text="User Name"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="5dp"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:padding="10dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
             <TextView
-                android:textColor="#000"
-                android:textSize="12sp"
-                android:layout_weight="1"
-                android:text="Father Name:"
+                android:id="@+id/textView2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="E-POLIO VACCINATION SYSTEM"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:textSize="12sp"
-                android:id="@+id/father_name_alert"
-                android:layout_weight="1"
-                android:text="Faiz"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="PAKISTAN"
+                android:textSize="12sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/token_container"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="TOKEN NO"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/token_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:text="42424"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@mipmap/bar_code_hi" />
+
+            <TextView
+                android:id="@+id/track_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="Tracking ID:123456789"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="User Name"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Father Name:"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/father_name_alert"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Faiz"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Father CNIC:"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/father_cnic_alert"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Faiz"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Mother Name:"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/mother_name_alert"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Faiz"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Mother CNIC:"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/mother_cnic_alert"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Faiz"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Date Of Birth:"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/dob_alert"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Faiz"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Form Submitted Date:"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+
+                        android:id="@+id/form_submit_alert"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Faiz"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Verification Date:"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/form_verification_alert"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Faiz"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Verification time:"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/form_verification_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Faiz" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Form Status:"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/form_status"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Faiz"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:id="@+id/save_token"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/curver_btn"
+                android:text="Save Token"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="15sp" />
 
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:layout_weight="1"
-                android:text="Father CNIC:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textSize="12sp"
-
-                android:id="@+id/father_cnic_alert"
-                android:layout_weight="1"
-                android:text="Faiz"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:layout_weight="1"
-                android:text="Mother Name:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textSize="12sp"
-
-                android:id="@+id/mother_name_alert"
-                android:layout_weight="1"
-                android:text="Faiz"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:layout_weight="1"
-                android:text="Mother CNIC:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textSize="12sp"
-
-                android:id="@+id/mother_cnic_alert"
-                android:layout_weight="1"
-                android:text="Faiz"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:layout_weight="1"
-                android:text="Date Of Birth:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textSize="12sp"
-
-                android:id="@+id/dob_alert"
-                android:layout_weight="1"
-                android:text="Faiz"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:layout_weight="1"
-                android:text="Form Submitted Date:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-
-                android:textSize="12sp"
-                android:id="@+id/form_submit_alert"
-                android:layout_weight="1"
-                android:text="Faiz"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:layout_weight="1"
-                android:text="Verification Date:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textSize="12sp"
-
-                android:id="@+id/form_verification_alert"
-                android:layout_weight="1"
-                android:text="Faiz"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:layout_weight="1"
-                android:text="Verification time:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/form_verification_time"
-                android:layout_weight="1"
-                android:text="Faiz"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:layout_weight="1"
-                android:text="Form Status:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textSize="12sp"
-
-                android:id="@+id/form_status"
-                android:layout_weight="1"
-                android:text="Faiz"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <Button
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-
-        android:textSize="15sp"
-        android:textColor="#fff"
-        android:textAllCaps="false"
-        android:text="Save Token"
-        android:layout_marginRight="35dp"
-        android:layout_marginLeft="35dp"
-        android:background="@drawable/curver_btn"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-
-</LinearLayout>
-</android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
 </LinearLayout>
