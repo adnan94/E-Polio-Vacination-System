@@ -9,9 +9,11 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -31,6 +33,7 @@ import com.example.ali.myapplication.Activities.Utils.Service;
 import com.example.ali.myapplication.Activities.Utils.SharedPref;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_Team;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,7 +48,7 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity {
 
 
-    public TextView signUpText;
+    public TextView signUpText,forgotPassword;
     private Button loginBtn;
     private EditText useremail;
     public TextInputEditText userpass;
@@ -77,7 +80,53 @@ public class LoginActivity extends AppCompatActivity {
 //            startActivity(new Intent(LoginActivity.this, UserHome.class));
 //            finish();
 //        }
+        forgotPassword = (TextView) findViewById(R.id.forgotPassword);
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
+//
+                LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+                View view = layoutInflater.inflate(R.layout.alert_layout, null);
+                Button button = (Button) view.findViewById(R.id.alertSubmit);
+                TextView title = (TextView) view.findViewById(R.id.alertTitleText);
+                TextView message = (TextView) view.findViewById(R.id.alertMessageText);
+                final EditText emailText = (EditText) view.findViewById(R.id.alertEditText);
+                button.setText("Submit");
+                emailText.setVisibility(View.VISIBLE);
+                title.setText("Forgot your password");
+                message.setText("Enter your email here we sent you email for password reset");
+                alert.setView(view);
 
+                final AlertDialog alertDialog = alert.create();
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (emailText.getText().toString().equals("")) {
+                            Snackbar.make(v, "Enter Email First", Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            mAuth.sendPasswordResetEmail(emailText.getText().toString())
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Utils.toast(LoginActivity.this,"Sucessfull");
+                                                alertDialog.dismiss();
+                                            } else {
+                                                task.getException().getMessage();
+                                                Snackbar.make(emailText, "" + task.getException().getMessage(), Snackbar.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+
+                });
+                alertDialog.show();
+
+
+            }
+        });
         permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
         fragmentManager = getSupportFragmentManager();
         //   fbSignIn = false;

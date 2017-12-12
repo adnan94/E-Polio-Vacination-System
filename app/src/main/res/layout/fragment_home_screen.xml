@@ -2,9 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:clickable="true"
     android:focusable="true"
-    android:background="#fff"
     tools:context="com.example.ali.myapplication.Activities.UI.UserHomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -12,24 +12,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-      <com.example.ali.myapplication.Activities.Utils.ViewPagerCustomDuration
-          android:id="@+id/viewPager"
-          android:layout_width="match_parent"
-          android:layout_height="180dp"
-          android:layout_centerInParent="true">
 
-      </com.example.ali.myapplication.Activities.Utils.ViewPagerCustomDuration>
+        <com.example.ali.myapplication.Activities.Utils.ViewPagerCustomDuration
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_centerInParent="true">
+
+        </com.example.ali.myapplication.Activities.Utils.ViewPagerCustomDuration>
 
         <Button
             android:id="@+id/form_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Form" />
+            android:layout_marginLeft="30dp"
+         android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/curver_btn"
+            android:text="Form"
+            android:textColor="#fff"
+            android:textSize="13sp" />
 
         <Button
             android:id="@+id/form_btn_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/curver_btn"
+            android:textColor="#fff"
+            android:textSize="13sp"
+            android:layout_marginTop="10dp"
             android:layout_below="@id/form_btn"
             android:text="List of forms" />
     </LinearLayout>
