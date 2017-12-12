@@ -18,22 +18,33 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ali.myapplication.Activities.Adaptor.Navigations_ItemsAdapter;
+import com.example.ali.myapplication.Activities.Adaptor.Slider_Pager_Adaptor;
 import com.example.ali.myapplication.Activities.Admin_Ui.Add_UC_Activity;
 import com.example.ali.myapplication.Activities.Admin_Ui.ListOfUc;
 import com.example.ali.myapplication.Activities.Admin_Ui.Monitoring_Fragment;
 import com.example.ali.myapplication.Activities.Admin_Ui.PolioSchedule;
 import com.example.ali.myapplication.Activities.Admin_Ui.Polio_FormList;
 import com.example.ali.myapplication.Activities.Uc_Ui.Add_Polio_TeamActivity;
+import com.example.ali.myapplication.Activities.User_Ui.UserHomeFragment;
+import com.example.ali.myapplication.Activities.Utils.ViewPagerCustomDuration;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.google.android.gms.internal.zzagy.runOnUiThread;
 
 public class AdminHome extends AppCompatActivity {
     //  Button listUc;
     public DrawerLayout drawer_layout;
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    public String[] menuName = {"Home", "List Of Uc", "Polio Forms", "Add UC Member","Add Polio Schedule", "Monitor Polio Team", "Logout"};
+    public String[] menuName = {"Home", "List Of Uc", "Polio Forms", "Add UC Member", "Add Polio Schedule", "Monitor Polio Team", "Logout"};
     public ImageView back_arrow;
+    ViewPagerCustomDuration viewPager;
+    Slider_Pager_Adaptor slider_pager_adaptor;
     public static TextView ActionBartitle;
     public RelativeLayout maincontainer_admin;
 
@@ -42,7 +53,7 @@ public class AdminHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
         //    listUc = (Button) findViewById(R.id.ucList);
-
+        slider();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_outside);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
@@ -112,14 +123,14 @@ public class AdminHome extends AppCompatActivity {
                     finish();
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 4) {
-                    Intent intent =  new Intent(AdminHome.this, Add_UC_Activity.class);
+                    Intent intent = new Intent(AdminHome.this, Add_UC_Activity.class);
                     startActivity(intent);
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 6) {
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_admin, new Monitoring_Fragment()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
-                }else if (i == 5) {
+                } else if (i == 5) {
 
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_admin, new PolioSchedule()).addToBackStack(null).commit();
@@ -130,11 +141,59 @@ public class AdminHome extends AppCompatActivity {
         });
     }
 
+    private void slider() {
+
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(R.mipmap.one);
+        list.add(R.mipmap.six);
+        list.add(R.mipmap.two);
+        list.add(R.mipmap.five);
+        viewPager = (ViewPagerCustomDuration) findViewById(R.id.viewPager);
+        viewPager.setScrollDuration(2000);
+        slider_pager_adaptor = new Slider_Pager_Adaptor(AdminHome.this, list);
+        viewPager.setAdapter(slider_pager_adaptor);
+        viewPager.setOffscreenPageLimit(2);
+        pageSwitcher(5, list.size());
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
 
         //  getSupportFragmentManager().popBackStack();
 
+    }
+
+    Timer timer;
+    int page = 0;
+
+    public void pageSwitcher(int seconds, int pages) {
+        timer = new Timer(); // At this line a new Thread will be created
+        timer.scheduleAtFixedRate(new RemindTask(pages), 0, seconds * 1000); // delay
+
+    }
+
+    class RemindTask extends TimerTask {
+        int pages;
+        ArrayList list;
+
+        public RemindTask(int pages) {
+            this.pages = pages;
+            this.list = list;
+        }
+
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    if (page > pages) {
+                        page = 0;
+                    }
+                    viewPager.setCurrentItem(page++);
+
+                }
+            });
+
+        }
     }
 }

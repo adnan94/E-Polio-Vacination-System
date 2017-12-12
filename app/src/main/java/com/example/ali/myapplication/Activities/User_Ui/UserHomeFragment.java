@@ -25,7 +25,7 @@ public class UserHomeFragment extends Fragment {
 
     Button form_btn_details, form_btn_list;
     ViewPagerCustomDuration viewPager;
-Slider_Pager_Adaptor slider_pager_adaptor;
+    Slider_Pager_Adaptor slider_pager_adaptor;
 
     public UserHomeFragment() {
         // Required empty public constructor
@@ -46,12 +46,12 @@ Slider_Pager_Adaptor slider_pager_adaptor;
         form_btn_list = (Button) view.findViewById(R.id.form_btn_list);
         viewPager = (ViewPagerCustomDuration) view.findViewById(R.id.viewPager);
         viewPager.setScrollDuration(2000);
-        ArrayList<Integer> list=new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
         list.add(R.mipmap.one);
         list.add(R.mipmap.six);
         list.add(R.mipmap.two);
         list.add(R.mipmap.five);
-         slider_pager_adaptor = new Slider_Pager_Adaptor(getActivity(), list);
+        slider_pager_adaptor = new Slider_Pager_Adaptor(getActivity(), list);
         viewPager.setAdapter(slider_pager_adaptor);
         viewPager.setOffscreenPageLimit(2);
         pageSwitcher(5, list.size());
