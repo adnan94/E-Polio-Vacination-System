@@ -20,7 +20,12 @@ import android.widget.TextView;
 
 
 import com.example.ali.myapplication.Activities.Adaptor.Navigations_ItemsAdapter;
+import com.example.ali.myapplication.Activities.Uc_Ui.About_Fragment;
+import com.example.ali.myapplication.Activities.Uc_Ui.SettingFragment;
+import com.example.ali.myapplication.Activities.User_Ui.Add_form;
+import com.example.ali.myapplication.Activities.User_Ui.UserFormListScreen;
 import com.example.ali.myapplication.Activities.User_Ui.UserHomeFragment;
+import com.example.ali.myapplication.Activities.User_Ui.UserTerms_Fragment;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -31,7 +36,7 @@ public class UserHome extends AppCompatActivity {
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     public LinearLayout customer_container;
-    public String[] menuName = {"Change Password", "Terms & Conditions", "Send Complaint", "Add Form","Logout"};
+    public String[] menuName = {"Home", "Terms & Conditions", "View Fill Forms", "Add Form","Setting","Logout"};
     public ImageView back_arrow;
     public static TextView ActionBartitle;
   //  public LinearLayout e;
@@ -78,15 +83,26 @@ public class UserHome extends AppCompatActivity {
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i==0){
-
-                }else if(i==1){
-
-                }
-                else if(i==5){
-                    FirebaseAuth.getInstance().signOut();
+             if(i==1){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserHomeFragment()).commit();
                     drawer_layout.closeDrawer(mDrawerList);
                 }
+                else if(i==6){
+                    FirebaseAuth.getInstance().signOut();
+                    drawer_layout.closeDrawer(mDrawerList);
+                }else if(i==3){
+                   getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserFormListScreen()).commit();
+                    drawer_layout.closeDrawer(mDrawerList);
+                }else if(i==4){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new Add_form()).commit();
+                    drawer_layout.closeDrawer(mDrawerList);
+                }else if(i==5){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new SettingFragment()).commit();
+                    drawer_layout.closeDrawer(mDrawerList);
+                }else if(i==2){
+                 getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserTerms_Fragment()).commit();
+                 drawer_layout.closeDrawer(mDrawerList);
+             }
             }
         });
 

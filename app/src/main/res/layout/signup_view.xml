@@ -204,8 +204,14 @@
 
                     </android.support.design.widget.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
+                    <LinearLayout
 
+                        android:weightSum="5"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_weight="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -230,6 +236,29 @@
 
 
                     </android.support.design.widget.TextInputLayout>
+
+                        <Button
+                            android:id="@+id/verified"
+                            android:textStyle="bold"
+                            android:textColor="#fff"
+                            android:textSize="10sp"
+                            android:text="Verify"
+                            android:layout_gravity="center"
+                            android:background="@drawable/curver_btn"
+                            android:layout_width="60dp"
+                            android:layout_height="20dp" />
+
+                        <CheckBox
+                            android:id="@+id/check"
+                            android:enabled="false"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"

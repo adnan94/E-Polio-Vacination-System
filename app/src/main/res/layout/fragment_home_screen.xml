@@ -22,6 +22,8 @@
         </com.example.ali.myapplication.Activities.Utils.ViewPagerCustomDuration>
 
         <Button
+
+            android:visibility="gone"
             android:id="@+id/form_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,16 +36,17 @@
             android:textSize="13sp" />
 
         <Button
+            android:visibility="gone"
             android:id="@+id/form_btn_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/form_btn"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/curver_btn"
-            android:textColor="#fff"
-            android:textSize="13sp"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/form_btn"
-            android:text="List of forms" />
+            android:background="@drawable/curver_btn"
+            android:text="List of forms"
+            android:textColor="#fff"
+            android:textSize="13sp" />
     </LinearLayout>
 </FrameLayout>
