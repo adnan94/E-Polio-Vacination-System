@@ -285,7 +285,7 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
                                             String uid = task.getResult().getUser().getUid();
                                             //                         String user_country = spinner_country.getSelectedItem().toString();
                                             //                       String user_gender = spinner_gender.getSelectedItem().toString();
-                                            firebase.child("users").child(uid).setValue(new UserModel(name.getText().toString(), fname.getText().toString(), address.getText().toString(), email.getText().toString(), pass, cnic.getText().toString(), cell_no.getText().toString(),3));
+                                            firebase.child("users").child(uid).setValue(new UserModel(name.getText().toString(), fname.getText().toString(), address.getText().toString(), email.getText().toString(), pass, cnic.getText().toString(), cell_no.getText().toString(),3,"",uid));
                                             progressDialog.dismiss();
                                             Toast.makeText(getActivity(), "Successfull", Toast.LENGTH_SHORT).show();
                                             AppLogs.logd("createUserWithEmail:onComplete: " + task.isSuccessful());

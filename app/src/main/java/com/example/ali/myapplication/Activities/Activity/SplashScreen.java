@@ -60,6 +60,7 @@ public class SplashScreen extends AppCompatActivity {
                                                     userModel.getCnic(),
                                                     userModel.getCellNo(),
                                                     userModel.getUser_type()
+                                                    ,userModel.getPicUrl(),userModel.getUid()
                                             );
 
                                             openMainScreen(userModel);

@@ -252,7 +252,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                         if (dataSnapshot != null) {
                                                                             if (dataSnapshot.getValue() != null) {
                                                                                 UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                                                UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type());
+                                                                                UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(),userModel.getPicUrl(),userModel.getUid());
                                                                                 UserModel.myObj = userModel1;
 //                                                                                    if (userModel.getUser_type() == 3) {
 //                                                                                        //User Screen
@@ -324,7 +324,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                                 if (dataSnapshot != null) {
                                                                                                                     if (dataSnapshot.getValue() != null) {
                                                                                                                         UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                                                                                        UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type());
+                                                                                                                        UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(),userModel.getPicUrl(),userModel.getUid());
                                                                                                                         UserModel.myObj = userModel1;
 //                                                                                    if (userModel.getUser_type() == 3) {
 //                                                                                        //User Screen
@@ -373,7 +373,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                         if (dataSnapshot != null) {
                                                                                                             if (dataSnapshot.getValue() != null) {
                                                                                                                 UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                                                                                UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type());
+                                                                                                                UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(),userModel.getPicUrl(),userModel.getUid());
                                                                                                                 UserModel.myObj = userModel1;
 //                                                                                    if (userModel.getUser_type() == 3) {
 //                                                                                        //User Screen
@@ -432,7 +432,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                     if (dataSnapshot != null) {
                                                                         if (dataSnapshot.getValue() != null) {
                                                                             UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                                            UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type());
+                                                                            UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(),userModel.getPicUrl(),userModel.getUid());
                                                                             UserModel.myObj = userModel1;
 //                                                                                    if (userModel.getUser_type() == 3) {
 //                                                                                        //User Screen
@@ -508,7 +508,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                             if (dataSnapshot != null) {
                                                                                                                 if (dataSnapshot.getValue() != null) {
                                                                                                                     UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                                                                                    UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type());
+                                                                                                                    UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(),userModel.getPicUrl(),userModel.getUid());
                                                                                                                     UserModel.myObj = userModel1;
 //                                                                                    if (userModel.getUser_type() == 3) {
 //                                                                                        //User Screen
@@ -557,7 +557,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                     if (dataSnapshot != null) {
                                                                                                         if (dataSnapshot.getValue() != null) {
                                                                                                             UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                                                                            UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type());
+                                                                                                            UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(),userModel.getPicUrl(),userModel.getUid());
                                                                                                             UserModel.myObj = userModel1;
 //                                                                                    if (userModel.getUser_type() == 3) {
 //                                                                                        //User Screen

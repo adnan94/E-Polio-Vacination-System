@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.ali.myapplication.Activities.Adaptor.Slider_Pager_Adaptor;
 import com.example.ali.myapplication.Activities.Utils.ViewPagerCustomDuration;
 import com.example.ali.myapplication.R;
+import com.google.android.gms.vision.text.Line;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -23,9 +25,10 @@ import static com.google.android.gms.internal.zzagy.runOnUiThread;
  */
 public class UserHomeFragment extends Fragment {
 
-    Button form_btn_details, form_btn_list;
+    //    Button form_btn_details, form_btn_list;
     ViewPagerCustomDuration viewPager;
     Slider_Pager_Adaptor slider_pager_adaptor;
+    LinearLayout addForm, viewForm, viewShedule, viewToken;
 
     public UserHomeFragment() {
         // Required empty public constructor
@@ -42,8 +45,11 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void castAndClicks(View view) {
-        form_btn_details = (Button) view.findViewById(R.id.form_btn);
-        form_btn_list = (Button) view.findViewById(R.id.form_btn_list);
+        addForm = (LinearLayout) view.findViewById(R.id.addForm);
+        viewForm = (LinearLayout) view.findViewById(R.id.viewForm);
+        viewShedule = (LinearLayout) view.findViewById(R.id.viewShedule);
+        viewToken = (LinearLayout) view.findViewById(R.id.viewToken);
+
         viewPager = (ViewPagerCustomDuration) view.findViewById(R.id.viewPager);
         viewPager.setScrollDuration(2000);
         ArrayList<Integer> list = new ArrayList<>();
@@ -56,18 +62,44 @@ public class UserHomeFragment extends Fragment {
         viewPager.setOffscreenPageLimit(2);
         pageSwitcher(5, list.size());
 
-        form_btn_details.setOnClickListener(new View.OnClickListener() {
+        addForm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new Add_form()).addToBackStack(null).commit();
             }
         });
-        form_btn_list.setOnClickListener(new View.OnClickListener() {
+        viewForm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-            //    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserFormListScreen()).addToBackStack(null).commit();
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserFormListScreen()).addToBackStack(null).commit();
+            }
+        });
+        viewToken.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });
+
+        viewShedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+//
+//        form_btn_details.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//            }
+//        });
+//        form_btn_list.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//            //    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserFormListScreen()).addToBackStack(null).commit();
+//
+//            }
+//        });
 
     }
 
