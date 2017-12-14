@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#fff"
     android:layout_height="match_parent">
 
     <include
@@ -8,10 +9,11 @@
         layout="@layout/toolbar" />
 
     <ListView
-
+        android:layout_below="@+id/toolbar_outside"
+android:background="#fff"
         android:id="@+id/polio_forms"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="match_parent"></ListView>
 
 
-</LinearLayout>
+</RelativeLayout>

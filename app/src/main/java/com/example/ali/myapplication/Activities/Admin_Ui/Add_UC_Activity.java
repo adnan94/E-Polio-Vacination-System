@@ -99,6 +99,8 @@ public class Add_UC_Activity extends AppCompatActivity {
             uc_member_email.setText(uc_object.getUc_member_email());
             uc_team_nic_no.setText(uc_object.getUc_member_cnic());
             uc_member_phone_no.setText(uc_object.getUc_member_phone());
+            int spinnerPosition = arrayAdapter.getPosition(uc_object.getUc_area());
+            uc_area.setSelection(spinnerPosition);
            key=uc_object.getUc_member_uid();
             downloadURL=uc_object.getUc_member_piture();
             Glide.with(Add_UC_Activity.this)
@@ -130,17 +132,26 @@ public class Add_UC_Activity extends AppCompatActivity {
         add_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                progressDialog = ProgressDialog.show(Add_UC_Activity.this, "Add UC", "Adding...", true, false);
+
+
                 if(uc_team_name.getText().toString().length()==0 || uc_team_name.getText().toString().matches("\"^[a-zA-Z]+( [a-zA-z]+)*$\"")){
                    // uc_team_name.setError("Enter Valid name");
                     Snackbar.make(view,"Enter Valid Name",Snackbar.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }else if(uc_member_email.getText().toString().length()==0 || !android.util.Patterns.EMAIL_ADDRESS.matcher(uc_member_email.getText().toString()).matches()){
                     Snackbar.make(view,"Enter Valid Email",Snackbar.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }else if(uc_team_nic_no.getText().toString().length()==0 || uc_team_nic_no.getText().toString().length() > 13 || uc_team_nic_no.getText().toString().length() < 13){
                     Snackbar.make(view,"Enter Valid CNIC",Snackbar.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }else if(uc_member_phone_no.getText().toString().length()==0 || uc_member_phone_no.getText().toString().length() > 11 || uc_member_phone_no.getText().toString().length() < 11 ){
                     Snackbar.make(view,"Enter Valid Phone Number",Snackbar.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }else if(downloadURL.equals("")){
                     Snackbar.make(view,"Upload Image",Snackbar.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }else{
 
                     if(key.equals("")) {
@@ -155,6 +166,7 @@ public class Add_UC_Activity extends AppCompatActivity {
                     FirebaseHandler.getInstance().getUc_members().child(key).setValue(uc_object, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            progressDialog.dismiss();
                             finish();
                         }
                     });

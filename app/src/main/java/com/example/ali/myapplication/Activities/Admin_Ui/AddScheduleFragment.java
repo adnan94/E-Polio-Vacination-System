@@ -2,6 +2,7 @@ package com.example.ali.myapplication.Activities.Admin_Ui;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -70,6 +71,7 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
     public ListView visit_dates;
     public ArrayList<Visit_DateObject> visit_dateObjects;
     public Team_visitDate team_visitDateAdapter;
+    public ProgressDialog progressDialog;
 
     @Nullable
     @Override
@@ -406,14 +408,22 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
         save_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                progressDialog = ProgressDialog.show(getActivity(), "Add Schedule", "Adding...", true, false);
+
+
                 if (schedule_from.getText().toString().equals("") || schedule_from.getText().toString().length() == 0) {
                     schedule_from.setError("Enter Valid Date");
+                    progressDialog.dismiss();
                 } else if (schedule_to.getText().toString().equals("") || schedule_to.getText().toString().length() == 0) {
                     schedule_to.setError("Enter Valid Date");
+                    progressDialog.dismiss();
                 } else if (schedule_des.getText().toString().equals("") || schedule_des.getText().toString().length() == 0) {
                     schedule_des.setError("Enter Description");
+                    progressDialog.dismiss();
                 } else if (schedule_title.getText().toString().equals("") || schedule_title.getText().toString().length() == 0) {
                     schedule_title.setText("Enter Title");
+                    progressDialog.dismiss();
                 } else {
 
 
@@ -425,7 +435,9 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
                             .child(key).setValue(polioSchedule, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            progressDialog.dismiss();
                             getActivity().getSupportFragmentManager().popBackStack();
+
                         }
                     });
                 }

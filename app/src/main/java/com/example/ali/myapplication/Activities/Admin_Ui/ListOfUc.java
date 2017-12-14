@@ -91,7 +91,7 @@ public class ListOfUc extends android.support.v4.app.Fragment {
                 UcMemberDetails ucMemberDetails = new UcMemberDetails();
                 ucMemberDetails.setArguments(bundle);
 
-                getActivity().getSupportFragmentManager().popBackStack();
+               // getActivity().getSupportFragmentManager().popBackStack();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_admin,ucMemberDetails).addToBackStack(null).commit();
 
             }
