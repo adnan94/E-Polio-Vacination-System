@@ -79,18 +79,19 @@ public class UcMemberDetails extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot!=null){
-                            if(dataSnapshot.getValue()!=null){
-                                polio_team_container.removeAllViews();
-                               for(DataSnapshot data:dataSnapshot.getChildren()){
-                                   Polio_Team polio_team = data.getValue(Polio_Team.class);
-                                    addLayout(polio_team);
-                               }
+                        if (dataSnapshot != null) {
+                            if (getActivity() != null) {
+                                if (dataSnapshot.getValue() != null) {
+                                    polio_team_container.removeAllViews();
+                                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                        Polio_Team polio_team = data.getValue(Polio_Team.class);
+                                        addLayout(polio_team);
+                                    }
 
+                                }
                             }
                         }
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:id="@+id/polio_schedule"
+    android:background="#fff"
     android:layout_height="match_parent">
 
     <include
@@ -9,11 +10,15 @@
         layout="@layout/toolbar" />
 
     <LinearLayout
+        android:background="#fff"
         android:layout_below="@+id/toolbar_outside"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ListView
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:background="#fff"
             android:id="@+id/my_schedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -27,6 +32,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:background="#fff"
         android:layout_marginBottom="25dp"
         android:layout_marginRight="15dp"
         android:layout_alignParentBottom="true"
