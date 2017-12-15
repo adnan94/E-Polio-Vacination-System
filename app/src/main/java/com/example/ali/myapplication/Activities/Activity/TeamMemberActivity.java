@@ -65,6 +65,7 @@ public class TeamMemberActivity extends AppCompatActivity {
         Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(TeamMemberActivity.this, menuName, null);
         mDrawerList.setAdapter(navigations_itemsAdapter);
         mDrawerList.addHeaderView(viewinflate);
+        startService(new Intent(TeamMemberActivity.this, Service.class));
 
         mDrawerToggle = new ActionBarDrawerToggle(TeamMemberActivity.this, drawer_layout, null, R.string.app_name, R.string.app_name) {
             @Override

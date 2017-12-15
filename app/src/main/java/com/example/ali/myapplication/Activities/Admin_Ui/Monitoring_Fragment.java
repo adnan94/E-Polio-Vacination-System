@@ -94,16 +94,16 @@ public class Monitoring_Fragment extends android.support.v4.app.Fragment impleme
                 if (dataSnapshot.getValue() != null) {
                     final double lat = Double.valueOf(dataSnapshot.child("lat").getValue().toString());
                     final double lng = Double.valueOf(dataSnapshot.child("lng").getValue().toString());
+                    final String teamId = dataSnapshot.child("teamId").getValue().toString();
                     final String key = dataSnapshot.getKey();
 
-                    FirebaseDatabase.getInstance().getReference().child("users").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                    FirebaseDatabase.getInstance().getReference().child("polio_teams").child(teamId).child(key).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.getValue() != null) {
-//                            textView.setText("Adnan");
-                                listTracking.add(new Tracking(lat, lng, key, dataSnapshot.child("name").getValue().toString(), map.addMarker(new MarkerOptions()
+                                listTracking.add(new Tracking(lat, lng, key, dataSnapshot.child("member_name").getValue().toString(), map.addMarker(new MarkerOptions()
                                         .icon(BitmapDescriptorFactory.fromResource(R.mipmap.tour_icon_marker))
-                                        .title(dataSnapshot.child("name").getValue().toString())
+                                        .title(dataSnapshot.child("member_name").getValue().toString())
                                         .position(new LatLng(lat, lng)))));
 
                             }
@@ -125,18 +125,15 @@ public class Monitoring_Fragment extends android.support.v4.app.Fragment impleme
                     final double lng = Double.valueOf(dataSnapshot.child("lng").getValue().toString());
                     final String key = dataSnapshot.getKey();
 
-//              Utils.toast(getActivity(), "Updated");
                     for (int i = 0; i < listTracking.size(); i++) {
-
-
                         if (dataSnapshot.getKey().equals(listTracking.get(i).getId())) {
                             listTracking.add(new Tracking(lat, lng, key, listTracking.get(i).getName(), map.addMarker(new MarkerOptions()
                                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.tour_icon_marker))
                                     .title(listTracking.get(i).getName())
                                     .position(new LatLng(lat, lng)))));
-
                             listTracking.get(i).getMarker().remove();
                             listTracking.remove(i);
+                        Utils.toast(getActivity(),"Updated");
                         }
 
                     }
@@ -169,7 +166,6 @@ public class Monitoring_Fragment extends android.support.v4.app.Fragment impleme
     public void onCameraIdle() {
         LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
         source = bounds.getCenter();
-        Log.d("ADI", "Updated");
     }
 
     @Override

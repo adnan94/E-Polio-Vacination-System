@@ -59,7 +59,7 @@ public class Service extends android.app.Service {
 //            id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 //        }
 //        if (FirebaseAuth.getInstance().getCurrentUser().getUid() != null) {
-//            getTokenNotifications();
+            getTokenNotifications();
 //        }
         Timerr();
         return START_STICKY;
@@ -77,11 +77,17 @@ public class Service extends android.app.Service {
                             @Override
                             public void onLocationUpdated(Location location) {
                                 if (location != null) {
-                                    Map<String, Double> map = new HashMap<>();
-                                    map.put("lat", location.getLatitude());
-                                    map.put("lng", location.getLongitude());
+                                    Map<String,String> map = new HashMap<>();
+                                    map.put("lat", location.getLatitude()+"");
+                                    map.put("lng", location.getLongitude()+"");
+                                    map.put("teamId",SharedPref_Team.getCurrentUser(getApplicationContext()).getTeam_uid()+"");
                                     if(!SharedPref_Team.getCurrentUser(getApplicationContext()).getMember_email().equals("")) {
-                                            firebase.child("TeamTracking").child(SharedPref_Team.getCurrentUser(getApplicationContext()).getMember_uid()).setValue(map);
+                                            firebase.child("TeamTracking").child(SharedPref_Team.getCurrentUser(getApplicationContext()).getMember_uid()).setValue(map, new DatabaseReference.CompletionListener() {
+                                                @Override
+                                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+                                                }
+                                            });
                                     }
                                 }
 
@@ -89,7 +95,7 @@ public class Service extends android.app.Service {
                         });
             }
 
-        }, 0, 30000);
+        }, 0, 15000);
     }
 
     @Override
@@ -98,7 +104,7 @@ public class Service extends android.app.Service {
     }
 
     private void getTokenNotifications() {
-        if (FirebaseAuth.getInstance().getCurrentUser().getUid() != null) {
+        if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
             id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
             firebase.child("form_tokens").child(id).addChildEventListener(new ChildEventListener() {
@@ -108,8 +114,10 @@ public class Service extends android.app.Service {
                         Log.d("TAG", dataSnapshot.getValue().toString());
                         long tokenDate = 0;
                         for (DataSnapshot d : dataSnapshot.getChildren()) {
-                            tokenDate = Long.parseLong(d.child("token_date").getValue().toString());
-                        }
+//                            for (DataSnapshot d1 : d.getChildren()) {
+                                tokenDate = Long.parseLong(d.child("token_date").getValue().toString());
+//                            }
+                            }
 
                         final long finalTokenDate = tokenDate;
                         firebase.child("ActivitySeen").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -128,8 +136,8 @@ public class Service extends android.app.Service {
                                                 notification = new Notification.Builder(getApplicationContext())
                                                         .setTicker("E-Polio")
                                                         .setContentTitle("E-Polio")
-                                                        .setStyle(new Notification.BigTextStyle().bigText(""))
-                                                        .setContentText("You have notification")
+                                                        .setStyle(new Notification.BigTextStyle().bigText("Your form request is in progress"))
+                                                        .setContentText("Your form request is in progress")
                                                         .setTicker("E-Polio")
                                                         .setPriority(Notification.PRIORITY_HIGH)
                                                         .setSmallIcon(R.mipmap.nadra)
@@ -199,8 +207,8 @@ public class Service extends android.app.Service {
                                             notification = new Notification.Builder(getApplicationContext())
                                                     .setTicker("E-Polio")
                                                     .setContentTitle("E-Polio")
-                                                    .setStyle(new Notification.BigTextStyle().bigText(""))
-                                                    .setContentText("You have notification")
+                                                    .setStyle(new Notification.BigTextStyle().bigText("Your form request is in progress"))
+                                                    .setContentText("Your form request is in progress")
                                                     .setTicker("E-Polio")
                                                     .setPriority(Notification.PRIORITY_HIGH)
                                                     .setSmallIcon(R.mipmap.nadra)
