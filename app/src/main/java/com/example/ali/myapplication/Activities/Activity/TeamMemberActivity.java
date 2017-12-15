@@ -50,6 +50,9 @@ public class TeamMemberActivity extends AppCompatActivity {
     public FrameLayout maincontainer_uc;
     public DrawerLayout drawer_layout;
     public String[] menuName = {"Home", "View Forms", "Terms & Conditions", "Setting", "LogOut"};
+    public int a[]={R.drawable.home,R.drawable.terms,R.drawable.view_token
+            ,R.drawable.settingss,R.drawable.logout};
+
     private ActionBarDrawerToggle mDrawerToggle;
     public static TextView ActionBartitle;
 
@@ -62,7 +65,7 @@ public class TeamMemberActivity extends AppCompatActivity {
         maincontainer_uc = (FrameLayout) findViewById(R.id.maincontainer);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         View viewinflate = TeamMemberActivity.this.getLayoutInflater().inflate(R.layout.nav_header_main, null);
-        Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(TeamMemberActivity.this, menuName, null);
+        Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(TeamMemberActivity.this, menuName, a);
         mDrawerList.setAdapter(navigations_itemsAdapter);
         mDrawerList.addHeaderView(viewinflate);
 

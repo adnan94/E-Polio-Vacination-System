@@ -30,11 +30,13 @@ import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Add_Polio_TeamActivity extends AppCompatActivity {
-    public DrawerLayout drawer_layout;
-    public ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
-    public LinearLayout add_teamcontainer_uc;
-    public String[] menuName = {"Home", "Polio Teams", "About", "Setting", "Log Out"};
+ //   public DrawerLayout drawer_layout;
+ //   public ListView mDrawerList;
+ //   private ActionBarDrawerToggle mDrawerToggle;
+ //   public LinearLayout add_teamcontainer_uc;
+  //  public String[] menuName = {"Home", "Polio Teams", "About", "Setting", "Log Out"};
+  //  public int a[]={R.drawable.home,R.drawable.terms,R.drawable.view_token
+  //          ,R.drawable.settingss,R.drawable.logout};
     public Spinner spinner_area;
     public LinearLayout add_members;
     public String[] areaName = {"Nazimabad", "Johar", "Gulshan", "Landi", "Malir"};
@@ -62,13 +64,13 @@ public class Add_Polio_TeamActivity extends AppCompatActivity {
      //   back_arrow.setVisibility(View.VISIBLE);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("Add Polio Team");
-        drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
+   //     drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
       //  team_container = (RelativeLayout) findViewById(R.id.team_container);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        View viewinflate = Add_Polio_TeamActivity.this.getLayoutInflater().inflate(R.layout.nav_header_main, null);
-        Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(Add_Polio_TeamActivity.this, menuName, null);
-        mDrawerList.setAdapter(navigations_itemsAdapter);
-        mDrawerList.addHeaderView(viewinflate);
+     //   mDrawerList = (ListView) findViewById(R.id.left_drawer);
+     //   View viewinflate = Add_Polio_TeamActivity.this.getLayoutInflater().inflate(R.layout.nav_header_main, null);
+    //    Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(Add_Polio_TeamActivity.this, menuName, a);
+   //     mDrawerList.setAdapter(navigations_itemsAdapter);
+    //    mDrawerList.addHeaderView(viewinflate);
 
         back_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,16 +79,16 @@ public class Add_Polio_TeamActivity extends AppCompatActivity {
             }
         });
 
-        mDrawerToggle = new ActionBarDrawerToggle(Add_Polio_TeamActivity.this, drawer_layout, null, R.string.app_name, R.string.app_name) {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                super.onDrawerSlide(drawerView, slideOffset);
-                team_container.setTranslationX(slideOffset * drawerView.getWidth());
-                drawer_layout.bringChildToFront(drawerView);
-                drawer_layout.requestLayout();
-            }
-        };
-        drawer_layout.setDrawerListener(mDrawerToggle);
+//        mDrawerToggle = new ActionBarDrawerToggle(Add_Polio_TeamActivity.this, drawer_layout, null, R.string.app_name, R.string.app_name) {
+//            @Override
+//            public void onDrawerSlide(View drawerView, float slideOffset) {
+//                super.onDrawerSlide(drawerView, slideOffset);
+//                team_container.setTranslationX(slideOffset * drawerView.getWidth());
+//                drawer_layout.bringChildToFront(drawerView);
+//                drawer_layout.requestLayout();
+//            }
+//        };
+//        drawer_layout.setDrawerListener(mDrawerToggle);
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.add_member_container, new Polio_TeamList())
@@ -95,33 +97,33 @@ public class Add_Polio_TeamActivity extends AppCompatActivity {
 
 
 
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 1) {
-                    Intent intent = new Intent(Add_Polio_TeamActivity.this, UcHome.class);
-                    startActivity(intent);
-                    finish();
-                } else if (i == 2) {
-                    Intent intent = new Intent(Add_Polio_TeamActivity.this, Add_Polio_TeamActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else if (i == 3) {
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .add(R.id.add_member_container, new About_Fragment())
-                            //  .addToBackStack(null)
-                            .commit();
-                }
-                else if (i ==5) {
-                    UC_Object uc_object = new UC_Object("","","","","","","");
-                    SharedPref_UC.setCurrentUser(Add_Polio_TeamActivity.this,uc_object);
-                    Intent intent = new Intent(Add_Polio_TeamActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
+//        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                if (i == 1) {
+//                    Intent intent = new Intent(Add_Polio_TeamActivity.this, UcHome.class);
+//                    startActivity(intent);
+//                    finish();
+//                } else if (i == 2) {
+//                    Intent intent = new Intent(Add_Polio_TeamActivity.this, Add_Polio_TeamActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                }else if (i == 3) {
+//                    getSupportFragmentManager()
+//                            .beginTransaction()
+//                            .add(R.id.add_member_container, new About_Fragment())
+//                            //  .addToBackStack(null)
+//                            .commit();
+//                }
+//                else if (i ==5) {
+//                    UC_Object uc_object = new UC_Object("","","","","","","");
+//                    SharedPref_UC.setCurrentUser(Add_Polio_TeamActivity.this,uc_object);
+//                    Intent intent = new Intent(Add_Polio_TeamActivity.this,LoginActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                }
+//            }
+//        });
 
     }
 

@@ -71,6 +71,8 @@ public class UserHome extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     public LinearLayout customer_container;
     public String[] menuName = {"Home", "Terms & Conditions", "View Fill Forms", "Add Form", "Setting", "Logout"};
+    public int a[]={R.drawable.home,R.drawable.terms,R.drawable.view_token,
+            R.drawable.file,R.drawable.settingss,R.drawable.logout};
     public ImageView back_arrow;
     private Uri destination;
     StorageReference storegeRef, imgRef;
@@ -115,7 +117,7 @@ public class UserHome extends AppCompatActivity {
         name.setText(UserModel.myObj.getName());
         email.setText(UserModel.myObj.getEmail());
 
-        Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(UserHome.this, menuName, null);
+        Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(UserHome.this, menuName, a);
         mDrawerList.setAdapter(navigations_itemsAdapter);
         mDrawerList.addHeaderView(viewinflate);
 
@@ -139,22 +141,29 @@ public class UserHome extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 1) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserHomeFragment()).commit();
+                    getSupportFragmentManager().popBackStack();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserHomeFragment()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 6) {
+                //    getSupportFragmentManager().popBackStack();
                     FirebaseAuth.getInstance().signOut();
+                    finish();
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 3) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserFormListScreen()).commit();
+                    getSupportFragmentManager().popBackStack();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserFormListScreen()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 4) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new Add_form()).commit();
+                    getSupportFragmentManager().popBackStack();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new Add_form()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 5) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new SettingFragment()).commit();
+                    getSupportFragmentManager().popBackStack();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new SettingFragment()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 2) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserTerms_Fragment()).commit();
+                    getSupportFragmentManager().popBackStack();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserTerms_Fragment()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
                 }
             }

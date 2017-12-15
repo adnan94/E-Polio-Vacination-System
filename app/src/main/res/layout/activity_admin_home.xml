@@ -57,14 +57,27 @@
                         android:layout_weight="1"
                         android:background="#ddfd6f27">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                        <LinearLayout
                             android:layout_gravity="center_vertical"
                             android:gravity="center"
-                            android:text="Add Form"
-                            android:textColor="#fff"
-                            android:textSize="20dp" />
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        <ImageView
+                            android:background="@drawable/view_token"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:id="@+id/textView5"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="UC List"
+                                android:textColor="#fff"
+                                android:textSize="17sp" />
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -75,16 +88,28 @@
                         android:id="@+id/viewToken"
                         android:background="#dd2d49b6"
                         >
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                        <LinearLayout
                             android:layout_gravity="center_vertical"
                             android:gravity="center"
-                            android:textSize="20sp"
-                            android:text="View Token"
-                            android:textColor="#fff" />
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:background="@drawable/group"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
 
+                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:id="@+id/textView4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center"
+                                android:text="Monitoring Team"
+                                android:textColor="#fff"
+                                android:textSize="17sp" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -102,16 +127,28 @@
                         android:background="#dd34b134"
                         >
 
+                        <LinearLayout
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:background="@drawable/list"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
 
                         <TextView
+                            android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:gravity="center"
-                            android:text="View Forms"
-                            android:textSize="20dp"
+                            android:text="Polio Forms"
+                            android:textSize="17sp"
                             android:textColor="#fff" />
-
+</LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -122,15 +159,27 @@
                         android:background="#633c69"
                         >
 
+                        <LinearLayout
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:background="@drawable/calendar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
                         <TextView
+                            android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:gravity="center"
-                            android:text="View Shedule"
+                            android:text="Add Shedule"
                             android:textColor="#fff"
-                            android:textSize="20dp"/>
-
+                            android:textSize="17sp"/>
+</LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 

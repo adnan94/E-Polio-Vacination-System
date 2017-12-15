@@ -42,6 +42,8 @@ public class AdminHome extends AppCompatActivity {
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     public String[] menuName = {"Home", "List Of Uc", "Polio Forms", "Add UC Member", "Add Polio Schedule", "Monitor Polio Team", "Logout"};
+    public int a[]={R.drawable.home,R.drawable.list,R.drawable.view_token,R.drawable.businessman,R.drawable.calendar,
+            R.drawable.group,R.drawable.logout};
     public ImageView back_arrow;
     ViewPagerCustomDuration viewPager;
     Slider_Pager_Adaptor slider_pager_adaptor;
@@ -67,7 +69,7 @@ public class AdminHome extends AppCompatActivity {
         maincontainer_admin = (RelativeLayout) findViewById(R.id.maincontainer_admin);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         View viewinflate = getLayoutInflater().inflate(R.layout.nav_header_main, null);
-        Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(AdminHome.this, menuName, null);
+        Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(AdminHome.this, menuName, a);
         mDrawerList.setAdapter(navigations_itemsAdapter);
         mDrawerList.addHeaderView(viewinflate);
 

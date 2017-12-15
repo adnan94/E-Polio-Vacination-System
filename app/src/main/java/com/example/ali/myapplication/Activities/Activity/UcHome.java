@@ -1,6 +1,7 @@
 package com.example.ali.myapplication.Activities.Activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -28,9 +31,11 @@ import com.example.ali.myapplication.Activities.Uc_Ui.Completed_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.In_Progress_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.Add_Polio_TeamActivity;
 import com.example.ali.myapplication.Activities.Uc_Ui.SettingFragment;
+import com.example.ali.myapplication.Activities.Uc_Ui.UcSetting_Fragment;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.util.ArrayList;
 
@@ -48,6 +53,8 @@ public class UcHome extends AppCompatActivity {
     public FrameLayout maincontainer_uc;
     public DrawerLayout drawer_layout;
     public String[] menuName = {"Home","Polio Teams","Terms & Conditions", "Setting","Log Out"};
+    public int a[]={R.drawable.home,R.drawable.team,R.drawable.terms
+            ,R.drawable.settingss,R.drawable.logout};
     private ActionBarDrawerToggle mDrawerToggle;
     public ImageView back_arrow;
     public static TextView ActionBartitle;
@@ -56,6 +63,22 @@ public class UcHome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        Window window = getWindow();
+//        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+//
+//
+//            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+//            tintManager.setStatusBarTintEnabled(true);
+//            tintManager.setStatusBarTintColor(getResources().getColor(R.color.bt_accent));
+//
+//
+//        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//
+//            getWindow().setStatusBarColor(getResources().getColor(R.color.bt_accent));
+//        }
         setContentView(R.layout.activity_uc_home);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_outside);
         setSupportActionBar(toolbar);
@@ -69,7 +92,7 @@ public class UcHome extends AppCompatActivity {
         maincontainer_uc = (FrameLayout)findViewById(R.id.maincontainer_uc);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         View viewinflate = UcHome.this.getLayoutInflater().inflate(R.layout.nav_header_main, null);
-        Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(UcHome.this, menuName, null);
+        Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(UcHome.this, menuName, a);
         mDrawerList.setAdapter(navigations_itemsAdapter);
         mDrawerList.addHeaderView(viewinflate);
 
@@ -156,7 +179,7 @@ public class UcHome extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc,new About_Fragment()).addToBackStack(null).commit();
                         drawer_layout.closeDrawer(mDrawerList);
                     }else if(i==4){
-                        getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc,new SettingFragment()).addToBackStack(null).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc,new UcSetting_Fragment()).addToBackStack(null).commit();
                         drawer_layout.closeDrawer(mDrawerList);
                        // SettingFragment
                     }
