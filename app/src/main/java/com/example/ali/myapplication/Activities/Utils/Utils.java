@@ -61,6 +61,14 @@ public class Utils {
         typeface = Typeface.createFromAsset(context.getAssets(), "fonts/Raleway-Regular.ttf");
         textView.setTypeface(typeface);
 
+
+    }
+
+    public static void relwayRegular(Context context, CheckBox textView) {
+        typeface = Typeface.createFromAsset(context.getAssets(), "fonts/Raleway-Regular.ttf");
+        textView.setTypeface(typeface);
+
+
     }
     public static void relwayRegular(Context context, EditText textView) {
         typeface = Typeface.createFromAsset(context.getAssets(), "fonts/Raleway-Regular.ttf");

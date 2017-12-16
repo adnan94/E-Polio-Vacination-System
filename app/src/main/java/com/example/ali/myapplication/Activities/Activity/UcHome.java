@@ -33,6 +33,7 @@ import com.example.ali.myapplication.Activities.Uc_Ui.Add_Polio_TeamActivity;
 import com.example.ali.myapplication.Activities.Uc_Ui.SettingFragment;
 import com.example.ali.myapplication.Activities.Uc_Ui.UcSetting_Fragment;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -88,6 +89,7 @@ public class UcHome extends AppCompatActivity {
         back_arrow.setImageResource(R.mipmap.menu);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("UC Office");
+        Utils.relwayMedium(UcHome.this,ActionBartitle);
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
         maincontainer_uc = (FrameLayout)findViewById(R.id.maincontainer_uc);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -127,6 +129,7 @@ public class UcHome extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Applied"));
         tabLayout.addTab(tabLayout.newTab().setText("In-Progress"));
         tabLayout.addTab(tabLayout.newTab().setText("Completed"));
+
 
 
          Form_PagerAdapter adapter = new Form_PagerAdapter(getSupportFragmentManager(), fragments);

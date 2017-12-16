@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
     public boolean team_flag = false;
     public boolean uc_flag = false;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    public TextView heading,sub_heading,signup_t;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -70,17 +71,38 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        signUpText = (TextView) findViewById(R.id.signup);
-        loginBtn = (Button) findViewById(R.id.user_login);
-        useremail = (EditText) findViewById(R.id.editText_Loginemail);
-        userpass = (TextInputEditText) findViewById(R.id.editText_loginpass);
-        firebase = FirebaseDatabase.getInstance().getReference();
+        heading = (TextView)findViewById(R.id.heading);
+        sub_heading = (TextView)findViewById(R.id.sub_heading);
         checkBox = (CheckBox) findViewById(R.id.remember_me);
+        signUpText = (TextView) findViewById(R.id.signup);
+        forgotPassword = (TextView) findViewById(R.id.forgotPassword);
+        signup_t = (TextView)findViewById(R.id.signup_t);
+
+
+        Utils.relwayRegular(LoginActivity.this,forgotPassword);
+        Utils.relwaySemiBold(LoginActivity.this,heading);
+        Utils.relwayRegular(LoginActivity.this,sub_heading);
+        Utils.relwayRegular(LoginActivity.this,signup_t);
+
+        Utils.relwayRegular(LoginActivity.this,checkBox);
+        Utils.relwayBold(LoginActivity.this,signUpText);
+
+
+
+
+        loginBtn = (Button) findViewById(R.id.user_login);
+        Utils.relwayRegular(LoginActivity.this,loginBtn);
+        useremail = (EditText) findViewById(R.id.editText_Loginemail);
+        Utils.relwayRegular(LoginActivity.this,useremail);
+        userpass = (TextInputEditText) findViewById(R.id.editText_loginpass);
+        Utils.relwayRegular(LoginActivity.this,userpass);
+        firebase = FirebaseDatabase.getInstance().getReference();
+
 //        if (mAuth.getCurrentUser() != null) {
 //            startActivity(new Intent(LoginActivity.this, UserHome.class));
 //            finish();
 //        }
-        forgotPassword = (TextView) findViewById(R.id.forgotPassword);
+
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,10 +189,10 @@ public class LoginActivity extends AppCompatActivity {
                 final String emails = useremail.getText().toString();
                 final String passo = userpass.getText().toString();
                 if (emails.length() == 0 || !useremail.getText().toString().matches(emailPattern)) {
-                    useremail.setError("This is Required Field");
+                    useremail.setError("Enter Valid E-mail");
                     progressDialog.dismiss();
                 } else if (passo.length() == 0 && passo.length() <= 6) {
-                    userpass.setError("This is Required Field");
+                    userpass.setError("Enter Valid Password");
                     progressDialog.dismiss();
                 } else {
                     try {
@@ -232,7 +254,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                 Snackbar.make(view, "Enter Correct Password", Snackbar.LENGTH_SHORT).show();
                                                             }
                                                         }else{
-
+                                              //      progressDialog.dismiss();
                                                         }
                                                     }
 
@@ -306,6 +328,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                     Snackbar.make(view,"Enter Correct Password",Snackbar.LENGTH_SHORT).show();
                                                                                                 }
                                                                                             }else{
+
                                                                                                 uc_flag=false;
                                                                                             }
                                                                                         }
@@ -357,6 +380,9 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                 }
                                                                                             });
                                                                                         }
+                                                                                    }else{
+                                                                                        progressDialog.dismiss();
+                                                                                        Snackbar.make(view,"Please Input valid Email & Password",Snackbar.LENGTH_SHORT).show();
                                                                                     }
                                                                                 }else{
                                                                                     mAuth.signInWithEmailAndPassword(emails, passo).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {

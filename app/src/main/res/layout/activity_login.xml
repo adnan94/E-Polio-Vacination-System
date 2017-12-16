@@ -35,6 +35,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/heading"
                     android:layout_marginTop="20dp"
                     android:textColor="#000"
                     android:layout_gravity="center"
@@ -42,6 +43,16 @@
                     android:layout_height="wrap_content"
                     android:text="Welcome To E-Polio"
                     android:textSize="20sp"
+                    />
+
+                <TextView
+                    android:id="@+id/sub_heading"
+                    android:textColor="#a6a5a5"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(Vaccination System)"
+                    android:textSize="15sp"
                     />
 
 
@@ -144,6 +155,7 @@
 
 
                     <TextView
+                        android:id="@+id/signup_t"
                         android:textSize="12sp"
                         android:text="Don't Have an Account?"
                         android:textColor="#000"

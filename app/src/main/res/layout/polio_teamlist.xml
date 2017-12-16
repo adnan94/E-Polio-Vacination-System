@@ -26,7 +26,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/customer_list_search"
+            android:id="@+id/team_list_search"
             android:textColor="#fff"
             android:textSize="12sp"
             android:layout_marginLeft="15dp"

@@ -18,6 +18,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,9 +31,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.ali.myapplication.Activities.Activity.AdminHome;
 import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.Uc_Ui.Add_Team_View;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -72,11 +75,24 @@ public class Add_UC_Activity extends AppCompatActivity {
     public ImageView back_image;
     public String key="";
     public UC_Object uc_object;
+    public Toolbar toolbar_outside;
+    public TextView ActionBartitle;
+    public ImageView back_arrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add__uc_);
+
+        toolbar_outside = (Toolbar)findViewById(R.id.toolbar_outside);
+        setSupportActionBar(toolbar_outside);
+        getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
+        back_arrow = (ImageView) toolbar_outside.findViewById(R.id.back_image);
+        //  back_arrow.setVisibility(View.INVISIBLE);
+//        back_arrow.setImageResource(R.mipmap.menu);
+        ActionBartitle = (TextView) toolbar_outside.findViewById(R.id.main_appbar_textView);
+        Utils.relwayMedium(Add_UC_Activity.this,ActionBartitle);
+        ActionBartitle.setText("Create UC Member");
 
 
         back_image = (ImageView)findViewById(R.id.back_image);

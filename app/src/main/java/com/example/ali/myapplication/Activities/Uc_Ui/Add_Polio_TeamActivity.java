@@ -26,6 +26,7 @@ import com.example.ali.myapplication.Activities.Activity.UcHome;
 import com.example.ali.myapplication.Activities.Adaptor.Navigations_ItemsAdapter;
 import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -64,6 +65,7 @@ public class Add_Polio_TeamActivity extends AppCompatActivity {
      //   back_arrow.setVisibility(View.VISIBLE);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("Add Polio Team");
+        Utils.relwayMedium(Add_Polio_TeamActivity.this,ActionBartitle);
    //     drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
       //  team_container = (RelativeLayout) findViewById(R.id.team_container);
      //   mDrawerList = (ListView) findViewById(R.id.left_drawer);

@@ -26,6 +26,7 @@ import com.example.ali.myapplication.Activities.Admin_Ui.PolioSchedule;
 import com.example.ali.myapplication.Activities.Admin_Ui.Polio_FormList;
 import com.example.ali.myapplication.Activities.Uc_Ui.Add_Polio_TeamActivity;
 import com.example.ali.myapplication.Activities.User_Ui.UserHomeFragment;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.Activities.Utils.ViewPagerCustomDuration;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,6 +50,7 @@ public class AdminHome extends AppCompatActivity {
     Slider_Pager_Adaptor slider_pager_adaptor;
     public static TextView ActionBartitle;
     public RelativeLayout maincontainer_admin;
+    public TextView add_schedule,polio_forms,monitoring,uc_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,18 @@ public class AdminHome extends AppCompatActivity {
         //  back_arrow.setVisibility(View.INVISIBLE);
         back_arrow.setImageResource(R.mipmap.menu);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
+        Utils.relwayMedium(AdminHome.this,ActionBartitle);
         ActionBartitle.setText("Admin Home");
+        add_schedule  =(TextView)findViewById(R.id.add_schedule);
+        polio_forms = (TextView)findViewById(R.id.polio_forms);
+        monitoring = (TextView)findViewById(R.id.monitoring);
+        uc_list = (TextView)findViewById(R.id.uc_list);
+
+
+        Utils.relwayMedium(AdminHome.this,add_schedule);
+        Utils.relwayMedium(AdminHome.this,polio_forms);
+        Utils.relwayMedium(AdminHome.this,monitoring);
+        Utils.relwayMedium(AdminHome.this,uc_list);
 
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
         maincontainer_admin = (RelativeLayout) findViewById(R.id.maincontainer_admin);

@@ -5,12 +5,14 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.Activities.Utils.Service;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_Team;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,12 +28,21 @@ public class SplashScreen extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     public UserModel userModel;
+    public TextView title;
+    public TextView sub_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         mAuth = FirebaseAuth.getInstance();
+        title = (TextView)findViewById(R.id.title);
+        sub_title = (TextView)findViewById(R.id.sub_title);
+
+        Utils.relwaySemiBold(SplashScreen.this,title);
+        Utils.relwayRegular(SplashScreen.this,sub_title);
+
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         //  mFirebaseAnalytics = FirebaseAnalytics.getInstance(SplashScreen.this);
         new Handler().postDelayed(new Runnable(){

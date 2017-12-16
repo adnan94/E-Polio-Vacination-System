@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 
 
@@ -69,6 +70,11 @@ public class PolioTeam_list_Adapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
+       Utils.relwaySemiBold(mContext,viewHolder.cust_adapter_user_app);
+   //     Utils.relwayRegular(mContext,viewHolder.cust_adapter_user_app);
+        Utils.relwayRegular(mContext,viewHolder.cust_adapter_user_name);
+        Utils.relwayBold(mContext,viewHolder.cus_status);
+
         Glide.with(mContext).load(R.mipmap.ic_launcher).asBitmap().into(viewHolder.cust_adapter_image);
         viewHolder.cus_status.setText(userModels.get(i).getTeam_status());
         viewHolder.cust_adapter_user_name.setText(userModels.get(i).getTeam_area());
@@ -82,30 +88,30 @@ public class PolioTeam_list_Adapter extends BaseAdapter {
     }
 
     public void filterCustomer(String s) {
-//        int filterLength = s.length();
-//        s = s.toLowerCase();
-//        if (filterLength == 0 || filterLength < mCurrentfilterLength) {
-//            mCurrentfilterLength = filterLength;
-//            userModels.clear();
-//            userModels.addAll(backUplist);
-//            if (filterLength == 0) {
-//                notifyDataSetChanged();
-//                return;
-//            }
-//        }
-//        int i = 0;
-//        while (i < userModels.size()) {
-//            if (!userModels.get(i).getCust_name().toLowerCase().contains(s) || !userModels.get(i).getCust_name().toLowerCase().startsWith(String.valueOf(s.charAt(0))))
-//            //  || !mValues.get(i).getName().toLowerCase().startsWith(String.valueOf(s.charAt(0)))) {
-//            {
-//                userModels.remove(i);
-//            } else {
-//                i++;
-//            }
-//
-//        }
-//        mCurrentfilterLength = filterLength;
-//        notifyDataSetChanged();
+        int filterLength = s.length();
+        s = s.toLowerCase();
+        if (filterLength == 0 || filterLength < mCurrentfilterLength) {
+            mCurrentfilterLength = filterLength;
+            userModels.clear();
+            userModels.addAll(backUplist);
+            if (filterLength == 0) {
+                notifyDataSetChanged();
+                return;
+            }
+        }
+        int i = 0;
+        while (i < userModels.size()) {
+            if (!userModels.get(i).getTeam_name().toLowerCase().contains(s) || !userModels.get(i).getTeam_name().toLowerCase().startsWith(String.valueOf(s.charAt(0))))
+            //  || !mValues.get(i).getName().toLowerCase().startsWith(String.valueOf(s.charAt(0)))) {
+            {
+                userModels.remove(i);
+            } else {
+                i++;
+            }
+
+        }
+        mCurrentfilterLength = filterLength;
+        notifyDataSetChanged();
     }
 
 

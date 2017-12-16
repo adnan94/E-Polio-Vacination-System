@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ali.myapplication.Activities.Activity.UcHome;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 
 /**
@@ -26,6 +27,7 @@ public class About_Fragment extends android.support.v4.app.Fragment {
     public TextView ActionBartitle;
     public ImageView back_arrow;
     public Toolbar toolbar_outside;
+    public TextView terms_heading,heading_two,para_one,para_two;
 
     @Nullable
     @Override
@@ -40,8 +42,21 @@ public class About_Fragment extends android.support.v4.app.Fragment {
         ActionBartitle = (TextView) toolbar_outside.findViewById(R.id.main_appbar_textView);
         //   add_teams = (FloatingActionButton)view.findViewById(R.id.add_teams);
         ActionBartitle.setText("Terms & Conditions");
+        Utils.relwayMedium(getActivity(),ActionBartitle);
         back_image = (ImageView)view.findViewById(R.id.back_image);
         terms_and_cond_btn = (Button)view.findViewById(R.id.terms_and_cond_btn);
+
+        Utils.relwayRegular(getActivity(),terms_and_cond_btn);
+        terms_heading = (TextView)view.findViewById(R.id.terms_heading);
+        para_one = (TextView)view.findViewById(R.id.para_one);
+        heading_two = (TextView)view.findViewById(R.id.heading_two);
+        para_two = (TextView)view.findViewById(R.id.para_two);
+
+        Utils.relwayBold(getActivity(),terms_heading);
+        Utils.relwayLight(getActivity(),para_one);
+        Utils.relwayLight(getActivity(),para_two);
+        Utils.relwaySemiBold(getActivity(),heading_two);
+        Utils.relwayRegular(getActivity(),terms_and_cond_btn);
 
         terms_and_cond_btn.setOnClickListener(new View.OnClickListener() {
             @Override

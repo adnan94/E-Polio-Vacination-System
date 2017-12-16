@@ -13,10 +13,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.ali.myapplication.Activities.Activity.AdminHome;
 import com.example.ali.myapplication.Activities.Adaptor.Uc_ListAdapter;
 import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,7 +53,7 @@ public class ListOfUc extends android.support.v4.app.Fragment {
         back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("List Of UC");
-
+        Utils.relwayMedium(getActivity(),ActionBartitle);
         back_arrow.setVisibility(View.INVISIBLE);
         uc_memberlist = (ListView)view.findViewById(R.id.uc_memberlist);
         userModelArrayList = new ArrayList<>();

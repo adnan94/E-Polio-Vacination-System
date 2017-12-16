@@ -19,6 +19,7 @@ import com.example.ali.myapplication.Activities.Adaptor.SheduleListAdapter;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Schedule;
 import com.example.ali.myapplication.Activities.Uc_Ui.Add_PolioTeam_Fragment;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -62,6 +63,7 @@ public class PolioSchedule extends android.support.v4.app.Fragment {
      //   back_arrow.setVisibility(View.INVISIBLE);
         back_arrow.setImageResource(R.mipmap.menu);
         ActionBartitle.setText("My Schedule");
+        Utils.relwayMedium(getActivity(),ActionBartitle);
         polio_scheduleArrayList = new ArrayList<>();
         my_schedule= (ListView)view.findViewById(R.id.my_schedule);
         sheduleListAdapter = new SheduleListAdapter(polio_scheduleArrayList,getActivity());

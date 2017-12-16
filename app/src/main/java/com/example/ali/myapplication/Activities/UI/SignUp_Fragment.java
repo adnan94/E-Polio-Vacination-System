@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.example.ali.myapplication.Activities.ModelClasses.UserModel;
 import com.example.ali.myapplication.Activities.Utils.AppLogs;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -80,6 +81,7 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
     public EditText code_area;
     public String code;
     public CheckBox check;
+    public TextView textView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,6 +99,7 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
 
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("SignUp");
+        Utils.relwayMedium(getActivity(),ActionBartitle);
         back_arrow = (ImageView)toolbar.findViewById(R.id.back_image);
         firebase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -104,15 +107,25 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
 //        editor = sharedPreferences.edit();
 //        editor.clear();
         check= (CheckBox)rootView.findViewById(R.id.check);
+        Utils.relwayRegular(getActivity(),check);
+        textView = (TextView)rootView.findViewById(R.id.textView);
+        Utils.relwaySemiBold(getActivity(),textView);
         email = (EditText) rootView.findViewById(R.id.email);
+        Utils.relwayRegular(getActivity(),email);
         cnic = (EditText) rootView.findViewById(R.id.cnic);
+        Utils.relwayRegular(getActivity(),cnic);
         password = (TextInputEditText) rootView.findViewById(R.id.password);
+        Utils.relwayRegular(getActivity(),password);
         fname = (EditText) rootView.findViewById(R.id.father_name);
+        Utils.relwayRegular(getActivity(),fname);
         name = (EditText) rootView.findViewById(R.id.name);
+        Utils.relwayRegular(getActivity(),name);
         address = (EditText) rootView.findViewById(R.id.address);
+        Utils.relwayRegular(getActivity(),address);
         cell_no = (EditText) rootView.findViewById(R.id.cell_no);
+        Utils.relwayRegular(getActivity(),cell_no);
         verified = (Button)rootView.findViewById(R.id.verified);
-
+        Utils.relwayRegular(getActivity(),verified);
         completeView = getActivity().getLayoutInflater().inflate(R.layout.number_verified, null);
         show_token = new Dialog(getActivity());
         show_token.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -120,8 +133,11 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
         show_token.setCancelable(false);
 
         cancle = (Button)completeView.findViewById(R.id.cancle);
+        Utils.relwayRegular(getActivity(),cancle);
         verfiy_code = (Button)completeView.findViewById(R.id.verfiy_code);
+        Utils.relwayRegular(getActivity(),verfiy_code);
         code_area = (EditText)completeView.findViewById(R.id.code_area);
+        Utils.relwayRegular(getActivity(),code_area);
 
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,6 +167,7 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
 
 
         signup = (Button) rootView.findViewById(R.id.signup_btn);
+        Utils.relwayRegular(getActivity(),signup);
 
         back_arrow.setOnClickListener(new View.OnClickListener() {
             @Override

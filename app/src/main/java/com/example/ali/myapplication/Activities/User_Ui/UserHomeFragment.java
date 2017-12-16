@@ -8,8 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.example.ali.myapplication.Activities.Activity.AdminHome;
 import com.example.ali.myapplication.Activities.Adaptor.Slider_Pager_Adaptor;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.Activities.Utils.ViewPagerCustomDuration;
 import com.example.ali.myapplication.R;
 import com.google.android.gms.vision.text.Line;
@@ -29,6 +32,7 @@ public class UserHomeFragment extends Fragment {
     ViewPagerCustomDuration viewPager;
     Slider_Pager_Adaptor slider_pager_adaptor;
     LinearLayout addForm, viewForm, viewShedule, viewToken;
+    public TextView view_schedule,add_forms,view_forms,view_tokens;
 
     public UserHomeFragment() {
         // Required empty public constructor
@@ -49,6 +53,16 @@ public class UserHomeFragment extends Fragment {
         viewForm = (LinearLayout) view.findViewById(R.id.viewForm);
         viewShedule = (LinearLayout) view.findViewById(R.id.viewShedule);
         viewToken = (LinearLayout) view.findViewById(R.id.viewToken);
+        view_schedule = (TextView)view.findViewById(R.id.view_schedule);
+        view_forms = (TextView)view.findViewById(R.id.view_forms);
+        view_tokens = (TextView)view.findViewById(R.id.view_tokens);
+        add_forms = (TextView)view.findViewById(R.id.add_forms);
+
+        Utils.relwayMedium(getActivity(),view_schedule);
+        Utils.relwayMedium(getActivity(),view_forms);
+        Utils.relwayMedium(getActivity(),view_tokens);
+        Utils.relwayMedium(getActivity(),add_forms);
+
 
         viewPager = (ViewPagerCustomDuration) view.findViewById(R.id.viewPager);
         viewPager.setScrollDuration(2000);

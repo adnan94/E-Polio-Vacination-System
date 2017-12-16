@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.ali.myapplication.Activities.Activity.UcHome;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 
 /**
@@ -20,6 +22,10 @@ public class UserTerms_Fragment extends android.support.v4.app.Fragment {
 
     public Button terms_and_cond_btn;
     public ImageView back_image;
+    public TextView terms_heading;
+    public TextView para_one;
+    public TextView heading_two;
+    public TextView para_two;
 
     @Nullable
     @Override
@@ -29,6 +35,17 @@ public class UserTerms_Fragment extends android.support.v4.app.Fragment {
 
      ///   back_image = (ImageView)view.findViewById(R.id.back_image);
         terms_and_cond_btn = (Button)view.findViewById(R.id.terms_and_cond_btn);
+        terms_heading = (TextView)view.findViewById(R.id.terms_heading);
+        para_one = (TextView)view.findViewById(R.id.para_one);
+        heading_two = (TextView)view.findViewById(R.id.heading_two);
+        para_two = (TextView)view.findViewById(R.id.para_two);
+
+        Utils.relwayBold(getActivity(),terms_heading);
+        Utils.relwayLight(getActivity(),para_one);
+        Utils.relwayLight(getActivity(),para_two);
+        Utils.relwaySemiBold(getActivity(),heading_two);
+        Utils.relwayRegular(getActivity(),terms_and_cond_btn);
+
 
         terms_and_cond_btn.setOnClickListener(new View.OnClickListener() {
             @Override

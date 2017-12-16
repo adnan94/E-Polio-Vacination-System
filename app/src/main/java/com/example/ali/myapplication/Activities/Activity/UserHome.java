@@ -93,6 +93,7 @@ public class UserHome extends AppCompatActivity {
         back_arrow.setImageResource(R.mipmap.menu);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("User Dashboard");
+        Utils.relwayMedium(UserHome.this,ActionBartitle);
         getSupportFragmentManager().beginTransaction().add(R.id.maincontainer, new UserHomeFragment()).commit();
         storegeRef = FirebaseStorage.getInstance().getReference();
 

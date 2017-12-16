@@ -9,10 +9,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +26,7 @@ import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
 import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -48,6 +52,7 @@ public class Polio_TeamList extends android.support.v4.app.Fragment {
     public ImageView floatingMenuItem2;
     public View clist_back_view;
     public UC_Object uc_object;
+    public EditText team_list_search;
 
 
     @Nullable
@@ -63,6 +68,11 @@ public class Polio_TeamList extends android.support.v4.app.Fragment {
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
      //   add_teams = (FloatingActionButton)view.findViewById(R.id.add_teams);
         ActionBartitle.setText("Polio Team List");
+
+        Utils.relwayMedium(getActivity(),ActionBartitle);
+        team_list_search = (EditText)view.findViewById(R.id.team_list_search);
+        Utils.relwayRegular(getActivity(),team_list_search);
+
         floatingActionButton = (ImageView) view.findViewById(R.id.customer_list_sort);
         floatingMenuItem1 = (ImageView)view.findViewById(R.id.floatingMenuItem1);
         floatingMenuItem2 = (ImageView)view.findViewById(R.id.floatingMenuItem2);
@@ -104,20 +114,39 @@ public class Polio_TeamList extends android.support.v4.app.Fragment {
             }
         });
 
+        team_list_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                 if(team_list_search.getText().toString().length() >0){
+                     polioTeam_list_adapter.filterCustomer(team_list_search.getText().toString());
+                 }
+            }
+        });
+
 
         polio_teamlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Polio_TeamDetail add_polioTeam_fragment = new Polio_TeamDetail();
+                Polio_TeamDetail polio_teamDetail = new Polio_TeamDetail();
 
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("obj", polio_teams.get(i));
 
-                add_polioTeam_fragment.setArguments(bundle);
+                polio_teamDetail.setArguments(bundle);
                getActivity().getSupportFragmentManager().popBackStack();
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.add_member_container, add_polioTeam_fragment)
+                        .replace(R.id.add_member_container, polio_teamDetail)
                         .addToBackStack(null)
                         .commit();
             }
