@@ -356,7 +356,10 @@ public class Add_form extends android.support.v4.app.Fragment {
         cell = (EditText) view.findViewById(R.id.editTextCell);
         district = (Spinner) view.findViewById(R.id.editTextDistrict);
         submit = (Button) view.findViewById(R.id.submitForm);
+        Utils.relwayRegular(getActivity(),submit);
         addLocation = (Button) view.findViewById(R.id.addLocation);
+
+        Utils.relwayRegular(getActivity(),addLocation);
         yes = (CheckBox) view.findViewById(R.id.checkBoxYes);
         no = (CheckBox) view.findViewById(R.id.checkBoxNo);
         male = (CheckBox) view.findViewById(R.id.checkBoxMale);

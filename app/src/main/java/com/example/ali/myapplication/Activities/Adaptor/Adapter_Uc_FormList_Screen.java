@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 
 import java.util.ArrayList;
@@ -47,8 +48,14 @@ public class Adapter_Uc_FormList_Screen extends BaseAdapter {
         View v = inflater.inflate(R.layout.item_form_uc_screen,null);
         TextView name = (TextView) v.findViewById(R.id.textNameUcFormListScreen);
         TextView cnic = (TextView) v.findViewById(R.id.textCnicUcFormListScreen);
+
+        Utils.relwayRegular(context,name);
+        Utils.relwayRegular(context,cnic);
+
         name.setText("Name : " + list.get(i).getUserName());
         cnic.setText("Cnic : " + list.get(i).getApplicantCnic());
+
+
 
         return v;
     }

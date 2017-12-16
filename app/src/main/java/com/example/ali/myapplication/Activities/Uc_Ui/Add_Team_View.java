@@ -38,7 +38,11 @@ import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
 import com.example.ali.myapplication.Activities.ModelClasses.Team_MemberObject;
 import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+
 import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
+
+import com.example.ali.myapplication.Activities.Utils.Utils;
+
 import com.example.ali.myapplication.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -89,6 +93,7 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
     public String key = "";
     public String teamid="";
     public UC_Object uc_object;
+    public TextView member_email,member_text,member_cninc,member_phone,type;
 
 
     @Override
@@ -362,14 +367,33 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
         back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("Add Team Member");
+        Utils.relwayMedium(getActivity(),ActionBartitle);
+        type = (TextView)view.findViewById(R.id.type);
+        Utils.relwayRegular(getActivity(),type);
+        member_text = (TextView)view.findViewById(R.id.member_text);
+        Utils.relwayRegular(getActivity(),member_text);
+        member_cninc = (TextView)view.findViewById(R.id.member_cninc);
+        Utils.relwayRegular(getActivity(),member_cninc);
+        member_email = (TextView)view.findViewById(R.id.member_email);
+        Utils.relwayRegular(getActivity(),member_email);
+        member_phone = (TextView)view.findViewById(R.id.member_phone);
+        Utils.relwayRegular(getActivity(),member_phone);
+
+
         team_member_type = (Spinner)view.findViewById(R.id.team_member_type);
         team_mname = (EditText)view.findViewById(R.id.team_mname);
+        Utils.relwayRegular(getActivity(),team_mname);
         member_image = (ImageView)view.findViewById(R.id.member_image);
         team_mnic_no = (EditText)view.findViewById(R.id.team_mnic_no);
+        Utils.relwayRegular(getActivity(),team_mnic_no);
         team_email = (EditText)view.findViewById(R.id.team_email);
+        Utils.relwayRegular(getActivity(),team_email);
        // team_maddress = (EditText)view.findViewById(R.id.team_maddress);
         team_mphone_no = (EditText)view.findViewById(R.id.team_mphone_no);
+        Utils.relwayRegular(getActivity(),team_mphone_no);
         add_member = (Button)view.findViewById(R.id.add_member);
+        Utils.relwayRegular(getActivity(),add_member);
+
         rootStorageRef = FirebaseStorage.getInstance().getReference();
         folderRef = rootStorageRef.child("user_profile_images");
 
@@ -382,7 +406,8 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (adapterView.getChildAt(0) != null) {
                     ((TextView) adapterView.getChildAt(0)).setTextSize(10);
-                    ((TextView) adapterView.getChildAt(0)).setTypeface(null, Typeface.BOLD);
+                    Utils.relwayRegular(getActivity(),(TextView) adapterView.getChildAt(0));
+                 //   ((TextView) adapterView.getChildAt(0)).setTypeface(null, Typeface.BOLD);
                 }
 
             }

@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
 import com.example.ali.myapplication.Activities.ModelClasses.Team_MemberObject;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,24 +32,25 @@ public class Polio_TeamDetail extends android.support.v4.app.Fragment {
 
     public ImageView floatingActionButton;
     public ImageView floatingMenuItem1;
-    public ImageView floatingMenuItem2,back_arrow;
+    public ImageView floatingMenuItem2, back_arrow;
     public View cdetail_back_view;
     public static TextView ActionBartitle;
     public String key;
     public Polio_Team polio_team;
     public View detail_view;
     public LinearLayout members_container;
-    public TextView team_id,team_name,team_detail_email;
+    public TextView team_id, team_name, team_detail_email;
     public TextView team_area_detail;
+    public TextView id, polio_team_details, team_n, temail, team_a;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.politeam_details,null);
+        View view = inflater.inflate(R.layout.politeam_details, null);
         initView(view);
 
-        if(getArguments()!=null) {
+        if (getArguments() != null) {
             if (getArguments().getParcelable("obj") != null) {
                 polio_team = getArguments().getParcelable("obj");
                 team_name.setText(polio_team.getTeam_name());
@@ -83,6 +85,7 @@ public class Polio_TeamDetail extends android.support.v4.app.Fragment {
                             }
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
@@ -95,13 +98,13 @@ public class Polio_TeamDetail extends android.support.v4.app.Fragment {
 
     private void initView(View view) {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar_outside);
-        detail_view = (View)view.findViewById(R.id.detail_view);
-        cdetail_back_view = (View)view.findViewById(R.id.cdetail_back_view);
-        members_container = (LinearLayout)view.findViewById(R.id.members_container);
-        team_id = (TextView)view.findViewById(R.id.team_id);
-        team_name = (TextView)view.findViewById(R.id.team_name);
-        team_detail_email = (TextView)view.findViewById(R.id.team_detail_email);
-        team_area_detail = (TextView)view.findViewById(R.id.team_area_detail);
+        detail_view = (View) view.findViewById(R.id.detail_view);
+        cdetail_back_view = (View) view.findViewById(R.id.cdetail_back_view);
+        members_container = (LinearLayout) view.findViewById(R.id.members_container);
+        team_id = (TextView) view.findViewById(R.id.team_id);
+        team_name = (TextView) view.findViewById(R.id.team_name);
+        team_detail_email = (TextView) view.findViewById(R.id.team_detail_email);
+        team_area_detail = (TextView) view.findViewById(R.id.team_area_detail);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
         back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
@@ -109,17 +112,29 @@ public class Polio_TeamDetail extends android.support.v4.app.Fragment {
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         //   add_teams = (FloatingActionButton)view.findViewById(R.id.add_teams);
         ActionBartitle.setText("Polio Team Detail");
+        Utils.relwayMedium(getActivity(), ActionBartitle);
         floatingActionButton = (ImageView) view.findViewById(R.id.customer_team_sort);
-        floatingMenuItem1 = (ImageView)view.findViewById(R.id.edit_team_details);
-        floatingMenuItem2 = (ImageView)view.findViewById(R.id.delete_team_details);
+        floatingMenuItem1 = (ImageView) view.findViewById(R.id.edit_team_details);
+        floatingMenuItem2 = (ImageView) view.findViewById(R.id.delete_team_details);
+        polio_team_details = (TextView) view.findViewById(R.id.polio_team_details);
+        Utils.relwaySemiBold(getActivity(),polio_team_details);
+        id = (TextView) view.findViewById(R.id.id);
+        Utils.relwayRegular(getActivity(),id);
+        team_n = (TextView) view.findViewById(R.id.team_n);
+        Utils.relwayRegular(getActivity(),team_n);
+        temail = (TextView) view.findViewById(R.id.temail);
+        Utils.relwayRegular(getActivity(),temail);
+        team_a = (TextView) view.findViewById(R.id.team_a);
+        Utils.relwayRegular(getActivity(),team_a);
+
 
         floatingMenuItem1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().popBackStack();
-                Bundle bundle= new Bundle();
-                bundle.putParcelable("obj",polio_team);
-             //   bundle.putParcelable("member",team_memberObject);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("obj", polio_team);
+                //   bundle.putParcelable("member",team_memberObject);
                 Add_PolioTeam_Fragment add_team_view = new Add_PolioTeam_Fragment();
                 add_team_view.setArguments(bundle);
                 getActivity().getSupportFragmentManager()
@@ -245,6 +260,7 @@ public class Polio_TeamDetail extends android.support.v4.app.Fragment {
 
         animatorSet.start();
     }
+
     private void addLayout(Team_MemberObject team_memberObject) {
         LayoutInflater inflater;
         inflater = LayoutInflater.from(getActivity());
@@ -255,7 +271,18 @@ public class Polio_TeamDetail extends android.support.v4.app.Fragment {
         TextView member_email = (TextView) layout.findViewById(R.id.member_email);
         TextView member_nic = (TextView) layout.findViewById(R.id.member_nic);
         TextView member_phone = (TextView) layout.findViewById(R.id.member_phone);
+        TextView m_email = (TextView)layout.findViewById(R.id.m_email);
+        TextView member_cninc = (TextView)layout.findViewById(R.id.member_cninc);
+        TextView m_phone = (TextView)layout.findViewById(R.id.m_phone);
         layout.setTag(team_memberObject);
+
+        Utils.relwaySemiBold(getActivity(),member_name);
+        Utils.relwayLight(getActivity(),member_email);
+        Utils.relwayLight(getActivity(),member_nic);
+        Utils.relwayLight(getActivity(),member_phone);
+        Utils.relwayRegular(getActivity(),m_email);
+        Utils.relwayRegular(getActivity(),member_cninc);
+        Utils.relwayRegular(getActivity(),m_phone);
 
         String split[] = team_memberObject.getMember_email().split("team");
 
@@ -263,7 +290,7 @@ public class Polio_TeamDetail extends android.support.v4.app.Fragment {
         member_email.setText(split[1]);
         member_nic.setText(team_memberObject.getMember_nic_no());
         member_phone.setText(team_memberObject.getMember_phone_no());
-        ImageView member_picture = (ImageView)layout.findViewById(R.id.member_picture);
+        ImageView member_picture = (ImageView) layout.findViewById(R.id.member_picture);
 
 
         Glide.with(getActivity())

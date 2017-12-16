@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 
 /**
@@ -25,7 +27,7 @@ public class Navigations_ItemsAdapter extends BaseAdapter {
 
         this.context = activity;
         this.menuName = menuName;
-    //    this.menuIcons = menuIcons;
+        this.menuIcons = menuIcons;
         this.layoutInflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
@@ -53,10 +55,10 @@ public class Navigations_ItemsAdapter extends BaseAdapter {
         View view1 = layoutInflater.inflate(R.layout.navinner_view,null);
 
         TextView textView = (TextView)view1.findViewById(R.id.text_nav);
-     //   ImageView imageView = (ImageView)view1.findViewById(R.id.icon_nav);
-
+        ImageView imageView = (ImageView)view1.findViewById(R.id.icon_nav);
+        Utils.relwaySemiBold(context,textView);
         textView.setText(menuName[i]);
-     //   imageView.setImageResource(menuIcons[i]);
+        imageView.setImageResource(menuIcons[i]);
 
 
         return view1;

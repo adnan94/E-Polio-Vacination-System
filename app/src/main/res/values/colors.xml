@@ -11,7 +11,7 @@
     <color name="colorWhite">#039be5</color>
 
     <color name="viewcolor">#7fe2e2e2</color>
-
+    <color name="transparent">#00000000</color>
     <color name="White">#FFFFFF</color>
    <color name="tv_branding">#3F51B5</color>
    <color name="tv_branding_dark">#3F51B5</color>

@@ -24,6 +24,7 @@ import com.example.ali.myapplication.Activities.ModelClasses.Team_MemberObject;
 import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -54,9 +55,11 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
     public Polio_Team polio_team;
     public Button add_polio_team;
     public LinearLayout members_container;
+    public TextView team_statusss,team_area,team_member_area;
     public Spinner team_status;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     public UC_Object uc_object;
+    public TextView add_mem_text;
 
     @Nullable
     @Override
@@ -139,7 +142,7 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (adapterView.getChildAt(0) != null) {
                     ((TextView) adapterView.getChildAt(0)).setTextSize(10);
-                    ((TextView) adapterView.getChildAt(0)).setTypeface(null, Typeface.BOLD);
+                    Utils.relwayRegular(getActivity(),(TextView) adapterView.getChildAt(0));
                 }
 
             }
@@ -155,7 +158,8 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (adapterView.getChildAt(0) != null) {
                     ((TextView) adapterView.getChildAt(0)).setTextSize(10);
-                    ((TextView) adapterView.getChildAt(0)).setTypeface(null, Typeface.BOLD);
+                    Utils.relwayRegular(getActivity(),(TextView) adapterView.getChildAt(0));
+
                 }
 
             }
@@ -251,13 +255,17 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
         back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("Add Team");
+        Utils.relwayMedium(getActivity(),ActionBartitle);
         reference = FirebaseDatabase.getInstance().getReference();
         referenceKey = FirebaseHandler.getInstance().getPolio_teams().push();
         key = referenceKey.getKey();
         add_members = (LinearLayout) view.findViewById(R.id.add_members);
         team_name = (EditText) view.findViewById(R.id.team_name);
+        Utils.relwayRegular(getActivity(),team_name);
         add_polio_team = (Button) view.findViewById(R.id.add_polio_team);
+        Utils.relwayRegular(getActivity(),add_polio_team);
         team_email = (EditText) view.findViewById(R.id.team_email);
+        Utils.relwayRegular(getActivity(),team_email);
         members_container = (LinearLayout) view.findViewById(R.id.members_container);
         spinner_area = (Spinner) view.findViewById(R.id.spinner_area);
         team_status = (Spinner)view.findViewById(R.id.team_status);
@@ -266,10 +274,20 @@ public class Add_PolioTeam_Fragment extends android.support.v4.app.Fragment {
         spinner_area.setAdapter(arrayAdapter);
         team_status.setAdapter(team_adapter);
 
+        add_mem_text = (TextView)view.findViewById(R.id.add_mem_text);
+        Utils.relwaySemiBold(getActivity(),add_mem_text);
+        team_statusss = (TextView)view.findViewById(R.id.team_statusss);
+        Utils.relwayRegular(getActivity(),team_statusss);
+        team_area = (TextView)view.findViewById(R.id.team_area);
+        Utils.relwayRegular(getActivity(),team_area);
+        team_member_area = (TextView)view.findViewById(R.id.team_member_area);
+        Utils.relwayRegular(getActivity(),team_member_area);
+
+
         back_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
 

@@ -31,6 +31,7 @@ import com.example.ali.myapplication.Activities.ModelClasses.Polio_Schedule;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
 import com.example.ali.myapplication.Activities.ModelClasses.Visit_DateObject;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -234,6 +235,7 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
         //   back_arrow.setVisibility(View.INVISIBLE);
         back_arrow.setImageResource(R.mipmap.menu);
         ActionBartitle.setText("Add Polio Schedule");
+        Utils.relwayMedium(getActivity(),ActionBartitle);
         save_schedule = (Button) view.findViewById(R.id.save_schedule);
         schedule_from = (EditText) view.findViewById(R.id.schedule_from);
         schedule_to = (EditText) view.findViewById(R.id.schedule_to);

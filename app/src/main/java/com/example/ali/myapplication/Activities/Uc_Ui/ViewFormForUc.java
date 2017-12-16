@@ -89,6 +89,7 @@ public class ViewFormForUc extends Fragment {
             @Override
             public void onClick(View view) {
                 filter_dialog.show();
+
             }
         });
 
@@ -149,6 +150,7 @@ public class ViewFormForUc extends Fragment {
             disability.setText("Disability : "+bform.getDisablity());
             address.setText("Address : "+bform.getAddress());
             district.setText("District : "+bform.getDistrict());
+           status_userform.setSelection(statusAdapter.getPosition(bform.getForm_status()));
 
         }
     }
