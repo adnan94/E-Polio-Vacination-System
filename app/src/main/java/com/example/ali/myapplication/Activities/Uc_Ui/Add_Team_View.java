@@ -36,7 +36,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
 import com.example.ali.myapplication.Activities.ModelClasses.Team_MemberObject;
+import com.example.ali.myapplication.Activities.ModelClasses.UC_Object;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
 import com.example.ali.myapplication.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -86,6 +88,8 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
     public Team_MemberObject team_memberObject;
     public String key = "";
     public String teamid="";
+    public UC_Object uc_object;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -122,6 +126,8 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
                         .into(member_image);
             }
         }
+
+        uc_object = SharedPref_UC.getCurrentUser(getActivity());
 
         member_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,7 +223,7 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
                     }
 
                     final Team_MemberObject team_memberObject = new Team_MemberObject(team_mname.getText().toString(),"team"+team_email.getText().toString()
-                            , team_mnic_no.getText().toString(), team_member_type.getSelectedItem().toString(), team_mphone_no.getText().toString(),key,downloadURL,teamid);
+                            , team_mnic_no.getText().toString(), team_member_type.getSelectedItem().toString(), team_mphone_no.getText().toString(),key,downloadURL,teamid,uc_object.getUc_member_uid());
 
                     FirebaseHandler.getInstance().getPolio_teams()
                             .child(polio_team.getTeam_uid()).child(key).setValue(team_memberObject, new DatabaseReference.CompletionListener() {

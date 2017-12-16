@@ -81,6 +81,10 @@ public class Service extends android.app.Service {
                                     map.put("lat", location.getLatitude()+"");
                                     map.put("lng", location.getLongitude()+"");
                                     map.put("teamId",SharedPref_Team.getCurrentUser(getApplicationContext()).getTeam_uid()+"");
+                                    map.put("uc_id",SharedPref_Team.getCurrentUser(getApplicationContext()).getUc_id()+"");
+//
+//                     map.put("uc_id",SharedPref_Team.getCurrentUser(getApplicationContext()).get+"");
+
                                     if(!SharedPref_Team.getCurrentUser(getApplicationContext()).getMember_email().equals("")) {
                                             firebase.child("TeamTracking").child(SharedPref_Team.getCurrentUser(getApplicationContext()).getMember_uid()).setValue(map, new DatabaseReference.CompletionListener() {
                                                 @Override

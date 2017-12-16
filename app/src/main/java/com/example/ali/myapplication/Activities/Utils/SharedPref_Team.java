@@ -19,6 +19,8 @@ public class SharedPref_Team   {
     private static String M_UID = "m_uid";
     private static String M_PIC = "m_pic";
     private static String M_T_UID = "m_tuid";
+    private static String M_T_UCID="m_ucid";
+
 
     public static void setCurrentUser(Context context, Team_MemberObject user) {
         SharedPreferences preferences = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
@@ -30,6 +32,7 @@ public class SharedPref_Team   {
         preferences.edit().putString(M_UID, user.getMember_uid()).apply();
         preferences.edit().putString(M_PIC,user.getMember_pic()).apply();
         preferences.edit().putString(M_T_UID,user.getTeam_uid()).apply();
+        preferences.edit().putString(M_T_UCID,user.getUc_id()).apply();
     }
 
     public static Team_MemberObject getCurrentUser(Context context) {
@@ -43,6 +46,7 @@ public class SharedPref_Team   {
         user.setMember_uid(preferences.getString(M_UID, ""));
         user.setMember_pic(preferences.getString(M_PIC, ""));
         user.setTeam_uid(preferences.getString(M_T_UID, ""));
+        user.setUc_id(preferences.getString(M_T_UCID,""));
         return user;
     }
 

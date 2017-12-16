@@ -186,9 +186,9 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-//        googleMap.setMyLocationEnabled(true);
-//        googleMap.getUiSettings().isZoomControlsEnabled();
-//        googleMap.getUiSettings().isMyLocationButtonEnabled();
+        googleMap.setMyLocationEnabled(true);
+        googleMap.getUiSettings().isZoomControlsEnabled();
+        googleMap.getUiSettings().isMyLocationButtonEnabled();
 //        googleMap.getUiSettings().setZoomControlsEnabled(true);
         googleMap.setOnInfoWindowClickListener(this);
         getLocation();

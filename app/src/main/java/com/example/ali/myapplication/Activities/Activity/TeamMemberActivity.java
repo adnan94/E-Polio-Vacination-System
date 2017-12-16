@@ -88,7 +88,7 @@ public class TeamMemberActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().add(R.id.maincontainer, new Form_List_Team_Member()).addToBackStack(null).commit();
 
                 } else if (i == 5) {
-                    Team_MemberObject uc_object = new Team_MemberObject("", "", "", "", "", "", "", "");
+                    Team_MemberObject uc_object = new Team_MemberObject("", "", "", "", "", "", "", "","");
                     SharedPref_Team.setCurrentUser(TeamMemberActivity.this, uc_object);
                     Intent intent = new Intent(TeamMemberActivity.this, LoginActivity.class);
                     startActivity(intent);
