@@ -80,8 +80,12 @@ public class In_Progress_Forms extends android.support.v4.app.Fragment {
                                 adopter.notifyDataSetChanged();
                             }
                         }
+                    }else{
+                        adopter.notifyDataSetChanged();
                     }
                 }
+                adopter.notifyDataSetChanged();
+
             }
 
             @Override

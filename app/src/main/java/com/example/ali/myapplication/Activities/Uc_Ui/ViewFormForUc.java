@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -29,11 +30,14 @@ import com.example.ali.myapplication.Activities.ModelClasses.BForm;
 import com.example.ali.myapplication.Activities.ModelClasses.Form_Token;
 import com.example.ali.myapplication.Activities.UI.FragmentEditForm;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -100,6 +104,21 @@ public class ViewFormForUc extends Fragment {
             }
         });
 
+        status_userform.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (adapterView.getChildAt(0) != null) {
+                    ((TextView) adapterView.getChildAt(0)).setTextSize(10);
+                    Utils.relwayRegular(getActivity(),(TextView) adapterView.getChildAt(0));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
 
         form_status_apply.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +137,19 @@ public class ViewFormForUc extends Fragment {
                                 getActivity().getSupportFragmentManager().popBackStack();
                            }
                        });
+                   }else if(status_userform.getSelectedItem().toString().equals("Completed")){
+                       FirebaseHandler.getInstance().getAdd_forms().child(bform.getFormID()).child("form_status").setValue(status_userform.getSelectedItem().toString(), new DatabaseReference.CompletionListener() {
+                           @Override
+                           public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                               filter_dialog.dismiss();
+                               DatabaseReference key = FirebaseHandler.getInstance().getForm_token().child(bform.getUser_uid()).child(bform.getFormID()).push();
+                               key.setValue(new Form_Token(key.getKey(), bform.getFormID(),
+                                       bform.getUserName(), bform.getApplicantCnic(),
+                                       bform.getTimestamp(), token_date.getText().toString(),token_time.getText().toString(), ServerValue.TIMESTAMP));
+                               getActivity().getSupportFragmentManager().popBackStack();
+                           }
+                       });
+
                    }else{
                        filter_dialog.dismiss();
                    }
@@ -133,61 +165,106 @@ public class ViewFormForUc extends Fragment {
 
     private void init() {
         bform = getArguments().getParcelable("formData");
-        if(bform!=null){
-            name.setText("Applicant Name : "+bform.getUserName());
-            cnic.setText("Applicant Cnic : "+bform.getApplicantCnic());
-            childName.setText("Child Name : "+bform.getChildName());
-            relation.setText("Relation : "+bform.getRelation());
-            gender.setText("Gender : "+bform.getGender());
-            religion.setText("Relation : "+bform.getReligion());
-            fatherName.setText("Father Name : "+bform.getFatherName());
-            fatherCnic.setText("Father Cnic : "+bform.getFatherCnic());
-            motherName.setText("Mother Name : "+bform.getMotherName());
-            motherCnic.setText("Mother Cnic : "+bform.getMotherCnic());
-            areaOfBirth.setText("Area Of Birth : "+bform.getAreaOfBirth());
-            dateOfBirth.setText("Date Of Birth : "+bform.getDateOfBirth());
-            vacinated.setText("Vaccinated : "+bform.isVacinated());
-            disability.setText("Disability : "+bform.getDisablity());
-            address.setText("Address : "+bform.getAddress());
-            district.setText("District : "+bform.getDistrict());
-           status_userform.setSelection(statusAdapter.getPosition(bform.getForm_status()));
 
-        }
+        FirebaseHandler.getInstance()
+                .getAdd_forms()
+                .child(bform.getFormID())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot!=null){
+                            if(dataSnapshot.getValue()!=null){
+                                BForm bform = dataSnapshot.getValue(BForm.class);
+
+                                if(bform!=null){
+                                    name.setText("Applicant Name : "+bform.getUserName());
+                                    cnic.setText("Applicant Cnic : "+bform.getApplicantCnic());
+                                    childName.setText("Child Name : "+bform.getChildName());
+                                    relation.setText("Relation : "+bform.getRelation());
+                                    gender.setText("Gender : "+bform.getGender());
+                                    religion.setText("Relation : "+bform.getReligion());
+                                    fatherName.setText("Father Name : "+bform.getFatherName());
+                                    fatherCnic.setText("Father Cnic : "+bform.getFatherCnic());
+                                    motherName.setText("Mother Name : "+bform.getMotherName());
+                                    motherCnic.setText("Mother Cnic : "+bform.getMotherCnic());
+                                    areaOfBirth.setText("Area Of Birth : "+bform.getAreaOfBirth());
+                                    dateOfBirth.setText("Date Of Birth : "+bform.getDateOfBirth());
+                                    vacinated.setText("Vaccinated : "+bform.isVacinated());
+                                    disability.setText("Disability : "+bform.getDisablity());
+                                    address.setText("Address : "+bform.getAddress());
+                                    district.setText("District : "+bform.getDistrict());
+                                    status_userform.setSelection(statusAdapter.getPosition(bform.getForm_status()));
+
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
     }
 
     private void cast(View view) {
         View completeView = getActivity().getLayoutInflater().inflate(R.layout.filter_dialog, null);
         name = (TextView) view.findViewById(R.id.applicantName);
+        Utils.relwayRegular(getActivity(),name);
         cnic = (TextView) view.findViewById(R.id.applicantCnic);
+        Utils.relwayRegular(getActivity(),cnic);
         childName = (TextView) view.findViewById(R.id.childName);
+        Utils.relwayRegular(getActivity(),childName);
         relation = (TextView) view.findViewById(R.id.relation);
+        Utils.relwayRegular(getActivity(),relation);
         gender = (TextView) view.findViewById(R.id.gender);
+        Utils.relwayRegular(getActivity(),gender);
         religion = (TextView) view.findViewById(R.id.religion);
+        Utils.relwayRegular(getActivity(),religion);
         fatherName = (TextView) view.findViewById(R.id.fatherName);
+        Utils.relwayRegular(getActivity(),fatherName);
         fatherCnic = (TextView) view.findViewById(R.id.fatherCnic);
+        Utils.relwayRegular(getActivity(),fatherCnic);
         motherName = (TextView) view.findViewById(R.id.motherName);
+        Utils.relwayRegular(getActivity(),motherName);
         motherCnic = (TextView) view.findViewById(R.id.motherCnic);
+        Utils.relwayRegular(getActivity(),motherCnic);
         areaOfBirth = (TextView) view.findViewById(R.id.areaOfBirth);
+        Utils.relwayRegular(getActivity(),areaOfBirth);
         dateOfBirth = (TextView) view.findViewById(R.id.dateOfBirth);
+        Utils.relwayRegular(getActivity(),dateOfBirth);
         vacinated = (TextView) view.findViewById(R.id.vacinated);
+        Utils.relwayRegular(getActivity(),vacinated);
         disability = (TextView) view.findViewById(R.id.disability);
+        Utils.relwayRegular(getActivity(),disability);
         address = (TextView) view.findViewById(R.id.address);
+        Utils.relwayRegular(getActivity(),address);
         district = (TextView) view.findViewById(R.id.district);
+        Utils.relwayRegular(getActivity(),district);
         edit=(Button)view.findViewById(R.id.edit);
+        Utils.relwayRegular(getActivity(),edit);
         toolbar_outside =  (android.support.v7.widget.Toolbar)view.findViewById(R.id.toolbar_outside);
         back_image = (ImageView)toolbar_outside.findViewById(R.id.back_image);
         change_status = (Button)view.findViewById(R.id.change_status);
+        Utils.relwayRegular(getActivity(),change_status);
         back_image.setVisibility(View.INVISIBLE);
         main_appbar_textView = (TextView)view.findViewById(R.id.main_appbar_textView);
+        Utils.relwayMedium(getActivity(),main_appbar_textView);
         main_appbar_textView.setText("View Form");
         filter_dialog = new Dialog(getActivity());
         filter_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         filter_dialog.setContentView(completeView);
         form_status_cancle = (Button)completeView.findViewById(R.id.form_status_cancle);
+        Utils.relwayRegular(getActivity(),form_status_cancle);
         form_status_apply= (Button)completeView.findViewById(R.id.form_status_apply);
+        Utils.relwayRegular(getActivity(),form_status_apply);
         status_userform= (Spinner)completeView.findViewById(R.id.status_userform);
         token_date = (EditText)completeView.findViewById(R.id.token_date);
+        Utils.relwayRegular(getActivity(),token_date);
         token_time = (EditText)completeView.findViewById(R.id.token_time);
+        Utils.relwayRegular(getActivity(),token_time);
         token_date.setInputType(InputType.TYPE_NULL);
         token_time.setInputType(InputType.TYPE_NULL);
         statusAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,status);

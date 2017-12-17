@@ -85,7 +85,11 @@ public class Applied_Forms extends android.support.v4.app.Fragment {
                                 adopter.notifyDataSetChanged();
                             }
                         }
+                    }else{
+                        adopter.notifyDataSetChanged();
                     }
+                }else{
+                    adopter.notifyDataSetChanged();
                 }
             }
 

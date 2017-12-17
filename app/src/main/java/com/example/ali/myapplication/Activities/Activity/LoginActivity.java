@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         heading = (TextView)findViewById(R.id.heading);
         sub_heading = (TextView)findViewById(R.id.sub_heading);
         checkBox = (CheckBox) findViewById(R.id.remember_me);
+        checkBox.setVisibility(View.GONE);
         signUpText = (TextView) findViewById(R.id.signup);
         forgotPassword = (TextView) findViewById(R.id.forgotPassword);
         signup_t = (TextView)findViewById(R.id.signup_t);
@@ -160,16 +161,16 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    remember_flag = true;
-                } else {
-                    remember_flag = false;
-                }
-            }
-        });
+//        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    remember_flag = true;
+//                } else {
+//                    remember_flag = false;
+//                }
+//            }
+//        });
 
 
         signUpText.setOnClickListener(new View.OnClickListener() {
@@ -226,7 +227,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                         SharedPref_Team.setCurrentUser(LoginActivity.this, team_memberObject);
                                                                                                         startService(new Intent(LoginActivity.this, Service.class));
                                                                                                         startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
-
+                                        finish();
                                                                                                         break;
                                                                                                     } else {
                                                                                                         progressDialog.dismiss();
@@ -321,6 +322,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                     progressDialog.dismiss();
 
                                                                                                     startActivity(new Intent(LoginActivity.this, UcHome.class));
+                                                                                                    finish();
                                                                                                     break;
                                                                                                 }else{
                                                                                                     uc_flag = false;
@@ -509,6 +511,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                 progressDialog.dismiss();
 
                                                                                                 startActivity(new Intent(LoginActivity.this, UcHome.class));
+                                                                                                finish();
                                                                                                 break;
                                                                                             }else{
                                                                                                 uc_flag = false;

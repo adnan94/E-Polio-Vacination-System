@@ -1,16 +1,19 @@
 package com.example.ali.myapplication.Activities.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -53,9 +56,9 @@ public class UcHome extends AppCompatActivity {
     public ListView mDrawerList;
     public FrameLayout maincontainer_uc;
     public DrawerLayout drawer_layout;
-    public String[] menuName = {"Home","Polio Teams","Terms & Conditions", "Setting","Log Out"};
-    public int a[]={R.drawable.home,R.drawable.team,R.drawable.terms
-            ,R.drawable.settingss,R.drawable.logout};
+    public String[] menuName = {"Home", "Polio Teams", "Terms & Conditions", "Setting", "Log Out"};
+    public int a[] = {R.drawable.home, R.drawable.team, R.drawable.terms
+            , R.drawable.settingss, R.drawable.logout};
     private ActionBarDrawerToggle mDrawerToggle;
     public ImageView back_arrow;
     public static TextView ActionBartitle;
@@ -81,17 +84,17 @@ public class UcHome extends AppCompatActivity {
 //            getWindow().setStatusBarColor(getResources().getColor(R.color.bt_accent));
 //        }
         setContentView(R.layout.activity_uc_home);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_outside);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_outside);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
+        getSupportActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
         back_arrow = (ImageView) toolbar.findViewById(R.id.back_image);
-      //  back_arrow.setVisibility(View.INVISIBLE);
+        //  back_arrow.setVisibility(View.INVISIBLE);
         back_arrow.setImageResource(R.mipmap.menu);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("UC Office");
-        Utils.relwayMedium(UcHome.this,ActionBartitle);
+        Utils.relwayMedium(UcHome.this, ActionBartitle);
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        maincontainer_uc = (FrameLayout)findViewById(R.id.maincontainer_uc);
+        maincontainer_uc = (FrameLayout) findViewById(R.id.maincontainer_uc);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         View viewinflate = UcHome.this.getLayoutInflater().inflate(R.layout.nav_header_main, null);
         Navigations_ItemsAdapter navigations_itemsAdapter = new Navigations_ItemsAdapter(UcHome.this, menuName, a);
@@ -131,64 +134,82 @@ public class UcHome extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Completed"));
 
 
-
-         Form_PagerAdapter adapter = new Form_PagerAdapter(getSupportFragmentManager(), fragments);
+        Form_PagerAdapter adapter = new Form_PagerAdapter(getSupportFragmentManager(), fragments);
         //is line se tablayout k neche jo shade araaha hai woh change hoga pageviewer k mutabik
         viewPager.setAdapter(adapter);
         // viewPager.setOffscreenPageLimit(0);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-            tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                @Override
-                public void onTabSelected(TabLayout.Tab tab) {
-                    viewPager.setCurrentItem(tab.getPosition());
 
+        tabLayout.setupWithViewPager(viewPager);
+
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TextView tv = (TextView) LayoutInflater.from(UcHome.this).inflate(R.layout.custom_text, null);
+            Utils.relwaySemiBold(UcHome.this, tv);
+            tv.setTextColor(Color.WHITE);
+            if(i==0){
+                tv.setText("Applied");
+            }else if(i==1){
+                tv.setText("In-Progress");
+            }else if(i==2){
+                tv.setText("Completed");
+            }
+
+            tabLayout.getTabAt(i).setCustomView(tv);
+
+        }
+
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 1) {
+                    Intent intent = new Intent(UcHome.this, UcHome.class);
+                    startActivity(intent);
+                    finish();
+                    drawer_layout.closeDrawer(mDrawerList);
+                } else if (i == 2) {
+                    Intent intent = new Intent(UcHome.this, Add_Polio_TeamActivity.class);
+                    startActivity(intent);
+                    finish();
+                    drawer_layout.closeDrawer(mDrawerList);
+                } else if (i == 5) {
+                    UC_Object uc_object = new UC_Object("", "", "", "", "", "", "");
+                    SharedPref_UC.setCurrentUser(UcHome.this, uc_object);
+                    Intent intent = new Intent(UcHome.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                    //   FirebaseAuth.getInstance().signOut();
+                    drawer_layout.closeDrawer(mDrawerList);
+                } else if (i == 3) {
+                    getSupportFragmentManager().popBackStack();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc, new About_Fragment()).addToBackStack(null).commit();
+                    drawer_layout.closeDrawer(mDrawerList);
+                } else if (i == 4) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc, new UcSetting_Fragment()).addToBackStack(null).commit();
+                    drawer_layout.closeDrawer(mDrawerList);
+                    // SettingFragment
                 }
-
-                @Override
-                public void onTabUnselected(TabLayout.Tab tab) {
-
-                }
-
-                @Override
-                public void onTabReselected(TabLayout.Tab tab) {
-
-                }
-            });
-
-            mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    if(i==1){
-                        Intent intent = new Intent(UcHome.this, UcHome.class);
-                        startActivity(intent);
-                        finish();
-                        drawer_layout.closeDrawer(mDrawerList);
-                    } else if(i==2){
-                        Intent intent = new Intent(UcHome.this, Add_Polio_TeamActivity.class);
-                        startActivity(intent);
-                        finish();
-                        drawer_layout.closeDrawer(mDrawerList);
-                    }else if(i==5){
-                        UC_Object uc_object = new UC_Object("","","","","","","");
-                        SharedPref_UC.setCurrentUser(UcHome.this,uc_object);
-                        Intent intent = new Intent(UcHome.this,LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                        //   FirebaseAuth.getInstance().signOut();
-                        drawer_layout.closeDrawer(mDrawerList);
-                    }else if(i==3){
-                        getSupportFragmentManager().popBackStack();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc,new About_Fragment()).addToBackStack(null).commit();
-                        drawer_layout.closeDrawer(mDrawerList);
-                    }else if(i==4){
-                        getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer_uc,new UcSetting_Fragment()).addToBackStack(null).commit();
-                        drawer_layout.closeDrawer(mDrawerList);
-                       // SettingFragment
-                    }
-                }
-            });
-
+            }
+        });
 
 
     }
