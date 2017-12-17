@@ -99,10 +99,15 @@ public class Add_UC_Activity extends AppCompatActivity {
         member_image = (CircleImageView)findViewById(R.id.member_image);
         uc_area = (Spinner)findViewById(R.id.uc_area);
         uc_member_email  = (EditText)findViewById(R.id.uc_member_email);
+        Utils.relwayRegular(Add_UC_Activity.this,uc_member_email);
         uc_team_name  = (EditText)findViewById(R.id.uc_team_name);
+        Utils.relwayRegular(Add_UC_Activity.this,uc_team_name);
         uc_team_nic_no = (EditText)findViewById(R.id.uc_team_nic_no);
+        Utils.relwayRegular(Add_UC_Activity.this,uc_team_nic_no);
         uc_member_phone_no = (EditText)findViewById(R.id.uc_member_phone_no);
+        Utils.relwayRegular(Add_UC_Activity.this,uc_member_phone_no);
         add_member  = (Button)findViewById(R.id.add_member);
+        Utils.relwayRegular(Add_UC_Activity.this,add_member);
         rootStorageRef = FirebaseStorage.getInstance().getReference();
         folderRef = rootStorageRef.child("user_profile_images");
         arrayAdapter = new ArrayAdapter<String>(Add_UC_Activity.this,android.R.layout.simple_list_item_1,uc_areas);

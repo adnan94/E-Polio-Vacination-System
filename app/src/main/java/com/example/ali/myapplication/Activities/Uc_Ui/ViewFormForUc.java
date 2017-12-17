@@ -1,6 +1,7 @@
 package com.example.ali.myapplication.Activities.Uc_Ui;
 
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.Service;
@@ -43,6 +44,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import static com.example.ali.myapplication.R.layout.filter_dialog;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -52,7 +55,7 @@ public class ViewFormForUc extends Fragment {
     Button edit;
     BForm bform;
     public Button change_status;
-    public Dialog filter_dialog;
+  //  public Dialog filter_dialog;
     public Spinner status_userform;
     public String status[]={"Applied","In-Progress","Completed"};
     public ArrayAdapter<String> statusAdapter;
@@ -63,6 +66,7 @@ public class ViewFormForUc extends Fragment {
     public android.support.v7.widget.Toolbar toolbar_outside;
     public ImageView back_image;
     public TextView main_appbar_textView;
+    public AlertDialog alertDialog;
 
     public ViewFormForUc() {
         // Required empty public constructor
@@ -92,7 +96,7 @@ public class ViewFormForUc extends Fragment {
         change_status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                filter_dialog.show();
+                alertDialog.show();
 
             }
         });
@@ -100,7 +104,7 @@ public class ViewFormForUc extends Fragment {
         form_status_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                filter_dialog.dismiss();
+                alertDialog.dismiss();
             }
         });
 
@@ -129,11 +133,11 @@ public class ViewFormForUc extends Fragment {
                        FirebaseHandler.getInstance().getAdd_forms().child(bform.getFormID()).child("form_status").setValue(status_userform.getSelectedItem().toString(), new DatabaseReference.CompletionListener() {
                            @Override
                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                               filter_dialog.dismiss();
+                               alertDialog.dismiss();
                                DatabaseReference key = FirebaseHandler.getInstance().getForm_token().child(bform.getUser_uid()).child(bform.getFormID()).push();
                                key.setValue(new Form_Token(key.getKey(), bform.getFormID(),
                                        bform.getUserName(), bform.getApplicantCnic(),
-                                       bform.getTimestamp(), token_date.getText().toString(),token_time.getText().toString(), ServerValue.TIMESTAMP));
+                                       bform.getTimestamp(), token_date.getText().toString(),token_time.getText().toString(), ServerValue.TIMESTAMP,"In-Progress"));
                                 getActivity().getSupportFragmentManager().popBackStack();
                            }
                        });
@@ -141,17 +145,17 @@ public class ViewFormForUc extends Fragment {
                        FirebaseHandler.getInstance().getAdd_forms().child(bform.getFormID()).child("form_status").setValue(status_userform.getSelectedItem().toString(), new DatabaseReference.CompletionListener() {
                            @Override
                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                               filter_dialog.dismiss();
+                               alertDialog.dismiss();
                                DatabaseReference key = FirebaseHandler.getInstance().getForm_token().child(bform.getUser_uid()).child(bform.getFormID()).push();
                                key.setValue(new Form_Token(key.getKey(), bform.getFormID(),
                                        bform.getUserName(), bform.getApplicantCnic(),
-                                       bform.getTimestamp(), token_date.getText().toString(),token_time.getText().toString(), ServerValue.TIMESTAMP));
+                                       bform.getTimestamp(), token_date.getText().toString(),token_time.getText().toString(), ServerValue.TIMESTAMP,"Completed"));
                                getActivity().getSupportFragmentManager().popBackStack();
                            }
                        });
 
                    }else{
-                       filter_dialog.dismiss();
+                       alertDialog.dismiss();
                    }
                }
             }
@@ -210,7 +214,7 @@ public class ViewFormForUc extends Fragment {
     }
 
     private void cast(View view) {
-        View completeView = getActivity().getLayoutInflater().inflate(R.layout.filter_dialog, null);
+        View completeView = getActivity().getLayoutInflater().inflate(filter_dialog, null);
         name = (TextView) view.findViewById(R.id.applicantName);
         Utils.relwayRegular(getActivity(),name);
         cnic = (TextView) view.findViewById(R.id.applicantCnic);
@@ -253,9 +257,9 @@ public class ViewFormForUc extends Fragment {
         main_appbar_textView = (TextView)view.findViewById(R.id.main_appbar_textView);
         Utils.relwayMedium(getActivity(),main_appbar_textView);
         main_appbar_textView.setText("View Form");
-        filter_dialog = new Dialog(getActivity());
-        filter_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        filter_dialog.setContentView(completeView);
+
+       alertDialog = new AlertDialog.Builder(getActivity()).create();;
+        alertDialog.setView(completeView);
         form_status_cancle = (Button)completeView.findViewById(R.id.form_status_cancle);
         Utils.relwayRegular(getActivity(),form_status_cancle);
         form_status_apply= (Button)completeView.findViewById(R.id.form_status_apply);

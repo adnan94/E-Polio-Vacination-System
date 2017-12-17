@@ -3,14 +3,18 @@ package com.example.ali.myapplication.Activities.UI;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.InflateException;
@@ -18,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -44,6 +49,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -117,7 +124,7 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
                 }
             }
         });
-        ib=(ImageButton)view.findViewById(R.id.gps);
+        ib = (ImageButton) view.findViewById(R.id.gps);
         ib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -249,25 +256,51 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
 
     @Override
     public void onInfoWindowClick(final Marker marker) {
-        if (list.get(Integer.parseInt(marker.getTitle())).getDrops() == 10) {
-            Utils.toast(getActivity(), "Drops limit exceed");
-        } else {
-            final Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            calendar.add(Calendar.MONTH, 6);
-            list.get(Integer.parseInt(marker.getTitle())).setDrops(list.get(Integer.parseInt(marker.getTitle())).getDrops() + 1);
-            list.get(Integer.parseInt(marker.getTitle())).setVacinationDate(calendar.getTimeInMillis());
-            FirebaseHandler.getInstance().getAdd_forms().child(list.get(Integer.parseInt(marker.getTitle())).getFormID()).setValue(list.get(Integer.parseInt(marker.getTitle())), new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                    Utils.toast(getActivity(), "Next Vacination Date Starts From" + Utils.formatDAte(new Date(calendar.getTimeInMillis())));
-                    list.get(Integer.parseInt(marker.getTitle()));
-                    marker.remove();
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+//
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View view = layoutInflater.inflate(R.layout.alert_layout, null);
+        Button button = (Button) view.findViewById(R.id.alertSubmit);
+        TextView title = (TextView) view.findViewById(R.id.alertTitleText);
+        final TextView message = (TextView) view.findViewById(R.id.alertMessageText);
+        final EditText emailText = (EditText) view.findViewById(R.id.alertEditText);
+        button.setText("Vaccinated");
+        emailText.setVisibility(View.GONE);
+        title.setText("Vaccinated");
+        message.setText("Are you sure this child is vaccinated ?");
+        alert.setView(view);
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Please while updatting");
+        final AlertDialog alertDialog = alert.create();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (list.get(Integer.parseInt(marker.getTitle())).getDrops() == 10) {
+                    Utils.toast(getActivity(), "Drops limit exceed");
+                } else {
+                    final Calendar calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(System.currentTimeMillis());
+                    calendar.add(Calendar.MONTH, 6);
+                    list.get(Integer.parseInt(marker.getTitle())).setDrops(list.get(Integer.parseInt(marker.getTitle())).getDrops() + 1);
+                    list.get(Integer.parseInt(marker.getTitle())).setVacinationDate(calendar.getTimeInMillis());
+                    FirebaseHandler.getInstance().getAdd_forms().child(list.get(Integer.parseInt(marker.getTitle())).getFormID()).setValue(list.get(Integer.parseInt(marker.getTitle())), new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            Utils.toast(getActivity(), "Next Vacination Date Starts From" + Utils.formatDAte(new Date(calendar.getTimeInMillis())));
+                            list.get(Integer.parseInt(marker.getTitle()));
+                            marker.remove();
+                            alertDialog.dismiss();
+                        }
+                    });
 
                 }
-            });
 
-        }
+            }
+
+        });
+        alertDialog.show();
+
+
     }
 
     @Override
@@ -288,7 +321,7 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
                     if (d < 50) {
                         map.moveCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 15.0f));
                     } else {
-                        Utils.toast(getActivity(),"Select Location Less Than 50km From Current Location");
+                        Utils.toast(getActivity(), "Select Location Less Than 50km From Current Location");
                     }
                 }
 
@@ -297,7 +330,7 @@ public class TeamMemberHomeFragment extends Fragment implements OnMapReadyCallba
                 Status status = PlaceAutocomplete.getStatus(getActivity(), data);
             }
         }
-            super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
 
     }
 }

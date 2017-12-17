@@ -83,9 +83,9 @@ public class Completed_Forms extends android.support.v4.app.Fragment {
                     }else{
                         adopter.notifyDataSetChanged();
                     }
-                }else{
-                    adopter.notifyDataSetChanged();
                 }
+                    adopter.notifyDataSetChanged();
+
             }
 
             @Override

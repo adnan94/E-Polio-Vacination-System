@@ -59,7 +59,7 @@ public class Service extends android.app.Service {
 //            id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 //        }
 //        if (FirebaseAuth.getInstance().getCurrentUser().getUid() != null) {
-            getTokenNotifications();
+        getTokenNotifications();
 //        }
         Timerr();
         return START_STICKY;
@@ -77,21 +77,21 @@ public class Service extends android.app.Service {
                             @Override
                             public void onLocationUpdated(Location location) {
                                 if (location != null) {
-                                    Map<String,String> map = new HashMap<>();
-                                    map.put("lat", location.getLatitude()+"");
-                                    map.put("lng", location.getLongitude()+"");
-                                    map.put("teamId",SharedPref_Team.getCurrentUser(getApplicationContext()).getTeam_uid()+"");
-                                    map.put("uc_id",SharedPref_Team.getCurrentUser(getApplicationContext()).getUc_id()+"");
+                                    Map<String, String> map = new HashMap<>();
+                                    map.put("lat", location.getLatitude() + "");
+                                    map.put("lng", location.getLongitude() + "");
+                                    map.put("teamId", SharedPref_Team.getCurrentUser(getApplicationContext()).getTeam_uid() + "");
+                                    map.put("uc_id", SharedPref_Team.getCurrentUser(getApplicationContext()).getUc_id() + "");
 //
 //                     map.put("uc_id",SharedPref_Team.getCurrentUser(getApplicationContext()).get+"");
 
-                                    if(!SharedPref_Team.getCurrentUser(getApplicationContext()).getMember_email().equals("")) {
-                                            firebase.child("TeamTracking").child(SharedPref_Team.getCurrentUser(getApplicationContext()).getMember_uid()).setValue(map, new DatabaseReference.CompletionListener() {
-                                                @Override
-                                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                    if (!SharedPref_Team.getCurrentUser(getApplicationContext()).getMember_email().equals("")) {
+                                        firebase.child("TeamTracking").child(SharedPref_Team.getCurrentUser(getApplicationContext()).getMember_uid()).setValue(map, new DatabaseReference.CompletionListener() {
+                                            @Override
+                                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 
-                                                }
-                                            });
+                                            }
+                                        });
                                     }
                                 }
 
@@ -108,7 +108,7 @@ public class Service extends android.app.Service {
     }
 
     private void getTokenNotifications() {
-        if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
             firebase.child("form_tokens").child(id).addChildEventListener(new ChildEventListener() {
@@ -117,13 +117,22 @@ public class Service extends android.app.Service {
                     if (dataSnapshot.getValue() != null) {
                         Log.d("TAG", dataSnapshot.getValue().toString());
                         long tokenDate = 0;
+                        String message = "Message";
+
                         for (DataSnapshot d : dataSnapshot.getChildren()) {
 //                            for (DataSnapshot d1 : d.getChildren()) {
+
+                            if(d.getValue()!=null) {
                                 tokenDate = Long.parseLong(d.child("token_date").getValue().toString());
-//                            }
+                                message = d.child("form_status").getValue().toString();
+
                             }
+//
+// }
+                        }
 
                         final long finalTokenDate = tokenDate;
+                        final String finalMessage = message;
                         firebase.child("ActivitySeen").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -140,8 +149,8 @@ public class Service extends android.app.Service {
                                                 notification = new Notification.Builder(getApplicationContext())
                                                         .setTicker("E-Polio")
                                                         .setContentTitle("E-Polio")
-                                                        .setStyle(new Notification.BigTextStyle().bigText("Your form request is in progress"))
-                                                        .setContentText("Your form request is in progress")
+                                                        .setStyle(new Notification.BigTextStyle().bigText("Your form request is " + finalMessage))
+                                                        .setContentText("Your form request is " + finalMessage)
                                                         .setTicker("E-Polio")
                                                         .setPriority(Notification.PRIORITY_HIGH)
                                                         .setSmallIcon(R.mipmap.nadra)
@@ -190,11 +199,14 @@ public class Service extends android.app.Service {
                     if (dataSnapshot.getValue() != null) {
                         Log.d("TAG", dataSnapshot.getValue().toString());
                         long tokenDate = 0;
+                        String message = "";
                         for (DataSnapshot d : dataSnapshot.getChildren()) {
                             tokenDate = Long.parseLong(d.child("token_date").getValue().toString());
-                        }
+                            message = d.child("form_status").getValue().toString();
 
+                        }
                         final long finalTokenDate = tokenDate;
+                        final String finalMessage = message;
                         firebase.child("ActivitySeen").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -211,8 +223,8 @@ public class Service extends android.app.Service {
                                             notification = new Notification.Builder(getApplicationContext())
                                                     .setTicker("E-Polio")
                                                     .setContentTitle("E-Polio")
-                                                    .setStyle(new Notification.BigTextStyle().bigText("Your form request is in progress"))
-                                                    .setContentText("Your form request is in progress")
+                                                    .setStyle(new Notification.BigTextStyle().bigText("Your form request is " + finalMessage))
+                                                    .setContentText("Your form request is " + finalMessage)
                                                     .setTicker("E-Polio")
                                                     .setPriority(Notification.PRIORITY_HIGH)
                                                     .setSmallIcon(R.mipmap.nadra)

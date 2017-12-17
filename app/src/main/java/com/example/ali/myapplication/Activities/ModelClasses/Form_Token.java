@@ -16,12 +16,14 @@ public class Form_Token {
     private String appointment_date;
     private String appointment_time;
     private Object token_date;
+    private String form_status;
+
 
 
     public Form_Token() {
     }
 
-    public Form_Token(String token_id, String form_id, String applicantName, String CNIC_no, long form_date, String appointment_date, String appointment_time, Object token_date) {
+    public Form_Token(String token_id, String form_id, String applicantName, String CNIC_no, long form_date, String appointment_date, String appointment_time, Object token_date,String form_status) {
         this.token_id = token_id;
         Form_id = form_id;
         ApplicantName = applicantName;
@@ -30,6 +32,7 @@ public class Form_Token {
         this.appointment_date = appointment_date;
         this.appointment_time = appointment_time;
         this.token_date = token_date;
+        this.form_status=form_status;
     }
 
     public String getToken_id() {
@@ -86,6 +89,14 @@ public class Form_Token {
 
     public void setAppointment_time(String appointment_time) {
         this.appointment_time = appointment_time;
+    }
+
+    public String getForm_status() {
+        return form_status;
+    }
+
+    public void setForm_status(String form_status) {
+        this.form_status = form_status;
     }
 
     public Object getToken_date() {

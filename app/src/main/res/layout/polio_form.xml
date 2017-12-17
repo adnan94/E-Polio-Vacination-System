@@ -7,418 +7,435 @@
     >
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff"
-        android:fitsSystemWindows="true"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:src="@mipmap/nadra" />
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextApplicantName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Applicant's Name"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextApplicantCnic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Applicant's Cnic"
-                android:inputType="number"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp"
-
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextChildName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Child's Name"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp"
-
-                />
-        </android.support.design.widget.TextInputLayout>
-
-
-
-            <Spinner
-                android:id="@+id/editTextRelation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-
-                />
-
-
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_margin="5dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
 
-            <LinearLayout
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:background="#fff"
+                android:fitsSystemWindows="true"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/textViewGender"
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/nadra" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextApplicantName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Applicant's Name"
+                        android:inputType="textPersonName"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextApplicantCnic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Applicant's Cnic"
+                        android:inputType="number"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp"
+
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextChildName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Child's Name"
+                        android:inputType="textPersonName"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp"
+
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <Spinner
+                    android:id="@+id/editTextRelation"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="sans-serif"
-                    android:text="Gender"
-                    android:textColor="#000"
-                    android:textSize="16sp"
+
 
                     />
 
-                <CheckBox
-                    android:id="@+id/checkBoxMale"
-                    android:layout_width="wrap_content"
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="17dp"
-                    android:layout_marginRight="17dp"
-                    android:layout_marginTop="5dp"
-                    android:checked="true"
-                    android:fontFamily="sans-serif"
-                    android:text="Male"
-                    android:textColor="#000"
-                    android:textSize="12sp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewGender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Gender"
+                            android:textColor="#000"
+                            android:textSize="16sp"
+
+                            />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxMale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="17dp"
+                            android:layout_marginRight="17dp"
+                            android:layout_marginTop="5dp"
+                            android:checked="true"
+                            android:fontFamily="sans-serif"
+                            android:text="Male"
+                            android:textColor="#000"
+                            android:textSize="12sp"
+
+                            />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxFemale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="Female"
+                            android:textColor="#000"
+                            android:textSize="12sp"
+
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewVacinated"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Vacinated"
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxYes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:checked="true"
+                            android:fontFamily="sans-serif"
+                            android:text="Yes"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxNo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="No"
+                            android:textColor="#000"
+                            android:textSize="12sp"
+
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <Spinner
+                    android:id="@+id/TextReligion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
 
                     />
 
-                <CheckBox
-                    android:id="@+id/checkBoxFemale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
-                    android:text="Female"
-                    android:textColor="#000"
-                    android:textSize="12sp"
 
-                    />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextFatherName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Father's Name"
+                        android:inputType="textPersonName"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp"
+
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextFatherCnic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Father's Cnic"
+                        android:inputType="number"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp"
+
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextMotherName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Mother's Name"
+                        android:inputType="textPersonName"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp"
+
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextMotherCnic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Mother's Cnic"
+                        android:inputType="number"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp"
+
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextAreaOfBirth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Area Of Birth"
+                        android:inputType="textPersonName"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp"
+
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextDateOfBirth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@mipmap/calendar"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Date Of Birth"
+                        android:inputType="date"
+                        android:paddingBottom="25dp"
+                        android:paddingRight="15dp"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp"
+
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextDisability"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/checkBoxYes"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Disability"
+                        android:inputType="textPersonName"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@mipmap/map_pin"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Address"
+                        android:inputType="textPersonName"
+                        android:paddingBottom="20dp"
+                        android:paddingRight="15dp"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <Spinner
+
+                    android:id="@+id/editTextDistrict"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextCell"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Cell Number"
+                        android:inputType="number"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTextDrops"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:hint="Vaccination Before"
+                        android:inputType="number"
+                        android:textColor="#000"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+                </android.support.design.widget.TextInputLayout>
+
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textViewVacinated"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:fontFamily="sans-serif"
-                    android:text="Vacinated"
-                    android:textColor="#000"
-                    android:textSize="16sp" />
-
-                <CheckBox
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/checkBoxYes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:fontFamily="sans-serif"
-                    android:text="Yes"
-                    android:textColor="#000"
-                    android:textSize="12sp" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxNo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
-                    android:text="No"
-                    android:textColor="#000"
-                    android:textSize="12sp"
-
-                    />
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <Spinner
-            android:id="@+id/TextReligion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-
-            />
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextFatherName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Father's Name"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp"
-
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextFatherCnic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Father's Cnic"
-                android:inputType="number"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp"
-
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextMotherName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Mother's Name"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp"
-
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextMotherCnic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Mother's Cnic"
-                android:inputType="number"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp"
-
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextAreaOfBirth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Area Of Birth"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp"
-
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextDateOfBirth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:paddingBottom="25dp"
-                android:paddingRight="15dp"
-                android:drawableEnd="@mipmap/calendar"
-                android:fontFamily="sans-serif"
-                android:hint="Date Of Birth"
-                android:inputType="date"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp"
-
-                />
-        </android.support.design.widget.TextInputLayout>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextDisability"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/checkBoxYes"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Disability"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:drawableEnd="@mipmap/map_pin"
-                android:paddingRight="15dp"
-                android:paddingBottom="20dp"
-                android:id="@+id/editTextAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Address"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp" />
-
-        </android.support.design.widget.TextInputLayout>
-
-
-
-            <Spinner
-
-                android:id="@+id/editTextDistrict"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                 />
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextCell"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Cell Number"
-                android:inputType="number"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp" />
-        </android.support.design.widget.TextInputLayout>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextDrops"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="Vaccination Before"
-                android:inputType="number"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="12sp" />
-        </android.support.design.widget.TextInputLayout>
+        </android.support.v7.widget.CardView>
 
         <Button
             android:id="@+id/addLocation"
             android:layout_width="match_parent"
             android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:background="@drawable/curver_btn"
             android:fontFamily="sans-serif"
             android:text="Add Location"
-            android:textColor="#fff"
             android:textAllCaps="false"
-            android:textStyle="bold"
-            android:textSize="14sp" />
+            android:textColor="#fff"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/submitForm"
             android:layout_width="match_parent"
             android:layout_height="35dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/curver_btn"
             android:fontFamily="sans-serif"
             android:text="Submit"
             android:textAllCaps="false"
-            android:textStyle="bold"
             android:textColor="#fff"
             android:textSize="14sp"
+            android:textStyle="bold"
 
             />
     </LinearLayout>
-
 </ScrollView>
 

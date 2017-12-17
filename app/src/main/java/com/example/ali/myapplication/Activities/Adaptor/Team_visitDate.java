@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ali.myapplication.Activities.ModelClasses.Visit_DateObject;
+import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 
 import java.util.ArrayList;
@@ -48,9 +49,11 @@ public class Team_visitDate extends BaseAdapter {
         View v = inflater.inflate(R.layout.visit_dateview, null);
 
         TextView date_visit = (TextView) v.findViewById(R.id.date_visit);
+        Utils.relwayRegular(mcontext,date_visit);
         TextView visit_month = (TextView) v.findViewById(R.id.visit_month);
+        Utils.relwayRegular(mcontext,visit_month);
         TextView visit_time = (TextView)v.findViewById(R.id.visit_time);
-
+        Utils.relwayRegular(mcontext,visit_time);
         String s[] = visit_dateObjects.get(i).getVisit_date().split("/");
 
         date_visit.setText(s[0]);

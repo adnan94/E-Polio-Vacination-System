@@ -1,6 +1,8 @@
 package com.example.ali.myapplication.Activities.Activity;
 
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -10,17 +12,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,6 +47,7 @@ import com.example.ali.myapplication.Activities.User_Ui.Add_form;
 import com.example.ali.myapplication.Activities.User_Ui.UserFormListScreen;
 import com.example.ali.myapplication.Activities.User_Ui.UserHomeFragment;
 import com.example.ali.myapplication.Activities.User_Ui.UserTerms_Fragment;
+import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.Activities.Utils.SharedPref;
 import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
@@ -59,6 +66,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -71,8 +80,8 @@ public class UserHome extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     public LinearLayout customer_container;
     public String[] menuName = {"Home", "Terms & Conditions", "View Fill Forms", "Add Form", "Setting", "Logout"};
-    public int a[]={R.drawable.home,R.drawable.terms,R.drawable.view_token,
-            R.drawable.file,R.drawable.settingss,R.drawable.logout};
+    public int a[] = {R.drawable.home, R.drawable.terms, R.drawable.view_token,
+            R.drawable.file, R.drawable.settingss, R.drawable.logout};
     public ImageView back_arrow;
     private Uri destination;
     StorageReference storegeRef, imgRef;
@@ -93,7 +102,7 @@ public class UserHome extends AppCompatActivity {
         back_arrow.setImageResource(R.mipmap.menu);
         ActionBartitle = (TextView) toolbar.findViewById(R.id.main_appbar_textView);
         ActionBartitle.setText("User Dashboard");
-        Utils.relwayMedium(UserHome.this,ActionBartitle);
+        Utils.relwayMedium(UserHome.this, ActionBartitle);
         getSupportFragmentManager().beginTransaction().add(R.id.maincontainer, new UserHomeFragment()).commit();
         storegeRef = FirebaseStorage.getInstance().getReference();
 
@@ -146,7 +155,7 @@ public class UserHome extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserHomeFragment()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 6) {
-                //    getSupportFragmentManager().popBackStack();
+                    //    getSupportFragmentManager().popBackStack();
                     FirebaseAuth.getInstance().signOut();
                     finish();
                     drawer_layout.closeDrawer(mDrawerList);
@@ -155,9 +164,43 @@ public class UserHome extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserFormListScreen()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 4) {
-                    getSupportFragmentManager().popBackStack();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new Add_form()).addToBackStack(null).commit();
-                    drawer_layout.closeDrawer(mDrawerList);
+                    final AlertDialog.Builder alert = new AlertDialog.Builder(UserHome.this);
+                    LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+                    View vieww = layoutInflater.inflate(R.layout.alert_confirm_home, null);
+                    Button button = (Button) vieww.findViewById(R.id.alertSubmit);
+                    Button cancel = (Button) vieww.findViewById(R.id.alertCencel);
+
+                    TextView title = (TextView) vieww.findViewById(R.id.alertTitleText);
+                    TextView message = (TextView) vieww.findViewById(R.id.alertMessageText);
+                    final EditText emailText = (EditText) vieww.findViewById(R.id.alertEditText);
+                    button.setText("Confirm");
+                    emailText.setVisibility(View.GONE);
+                    title.setText("Information");
+                    message.setText("Are you at your home ?");
+                    alert.setView(vieww);
+
+                    final AlertDialog alertDialog = alert.create();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            getSupportFragmentManager().popBackStack();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new Add_form()).addToBackStack(null).commit();
+                            drawer_layout.closeDrawer(mDrawerList);
+                            alertDialog.dismiss();
+                        }
+
+                    });
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                        }
+
+                    });
+
+                    alertDialog.show();
+
+
                 } else if (i == 5) {
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new SettingFragment()).addToBackStack(null).commit();
@@ -266,9 +309,9 @@ public class UserHome extends AppCompatActivity {
             @Override
             public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                 final String url = taskSnapshot.getDownloadUrl().toString();
-            //    UserModel userModel = SharedPref.getCurrentUser(getApplicationContext());
-            //    userModel.setPicUrl(url);
-            //    SharedPref.setCurrentUser(getApplicationContext(), userModel);
+                //    UserModel userModel = SharedPref.getCurrentUser(getApplicationContext());
+                //    userModel.setPicUrl(url);
+                //    SharedPref.setCurrentUser(getApplicationContext(), userModel);
 
                 FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("picUrl").setValue(url, new DatabaseReference.CompletionListener() {
                     @Override

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -56,7 +57,7 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
     public TextView ActionBartitle;
     public EditText schedule_from, schedule_to, schedule_title, schedule_des;
     public LinearLayout add_visit_dates;
-    public Dialog filter_dialog;
+  //  public Dialog filter_dialog;
     public Button save_schedule;
     public DatabaseReference databaseReference;
     public String key = "";
@@ -73,6 +74,8 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
     public ArrayList<Visit_DateObject> visit_dateObjects;
     public Team_visitDate team_visitDateAdapter;
     public ProgressDialog progressDialog;
+    AlertDialog alertDialog;
+    public TextView add_to_schdeule,from,too,schedule_t,sceh_des,datess;
 
     @Nullable
     @Override
@@ -112,11 +115,12 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
         }
 
         FirebaseHandler.getInstance().getPolio_subSchedule()
-                .child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                .child(key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot!=null){
                     if(dataSnapshot.getValue()!=null){
+                        visit_dateObjects.clear();
                         for(DataSnapshot data: dataSnapshot.getChildren()){
                             Visit_DateObject visit_dateObject = data.getValue(Visit_DateObject.class);
                             visit_dateObjects.add(visit_dateObject);
@@ -237,25 +241,52 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
         ActionBartitle.setText("Add Polio Schedule");
         Utils.relwayMedium(getActivity(),ActionBartitle);
         save_schedule = (Button) view.findViewById(R.id.save_schedule);
+        Utils.relwayRegular(getActivity(),save_schedule);
         schedule_from = (EditText) view.findViewById(R.id.schedule_from);
+        Utils.relwayRegular(getActivity(),schedule_from);
         schedule_to = (EditText) view.findViewById(R.id.schedule_to);
+        Utils.relwayRegular(getActivity(),schedule_to);
         schedule_title = (EditText) view.findViewById(R.id.schedule_title);
+        Utils.relwayRegular(getActivity(),schedule_title);
         schedule_des = (EditText) view.findViewById(R.id.schedule_des);
+        Utils.relwayRegular(getActivity(),schedule_des);
         team_visitDateAdapter = new Team_visitDate(visit_dateObjects,getActivity());
         visit_dates.setAdapter(team_visitDateAdapter);
 
-        View completeView = getActivity().getLayoutInflater().inflate(R.layout.add_visit_date, null);
-        filter_dialog = new Dialog(getActivity());
-        filter_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        filter_dialog.setContentView(completeView);
-        Button btn = (Button) completeView.findViewById(R.id.save_time);
-        visit_date = (EditText) completeView.findViewById(R.id.visit_date);
-        time_from = (EditText) completeView.findViewById(R.id.time_from);
-        time_to = (EditText) completeView.findViewById(R.id.time_to);
+        add_to_schdeule = (TextView)view.findViewById(R.id.add_to_schdeule);
+        Utils.relwayRegular(getActivity(),add_to_schdeule);
+
+        from = (TextView)view.findViewById(R.id.from);
+        Utils.relwayRegular(getActivity(),from);
+        too = (TextView)view.findViewById(R.id.too);
+        Utils.relwayRegular(getActivity(),too);
+        sceh_des = (TextView)view.findViewById(R.id.sceh_des);
+        Utils.relwayRegular(getActivity(),sceh_des);
+        schedule_t = (TextView)view.findViewById(R.id.schedule_t);
+        Utils.relwayRegular(getActivity(),schedule_t);
+
+        datess = (TextView)view.findViewById(R.id.datess);
+        Utils.relwaySemiBold(getActivity(),datess);
+
+    //    filter_dialog = new Dialog(getActivity());
+    //    filter_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+    //    filter_dialog.setContentView(completeView);
+
         add_visit_dates = (LinearLayout) view.findViewById(R.id.add_visit_dates);
         dialog_calender = Calendar.getInstance();
 
-
+         alertDialog = new AlertDialog.Builder(
+                getActivity()).create();
+        View completeView = getActivity().getLayoutInflater().inflate(R.layout.add_visit_date, null);
+        Button btn = (Button) completeView.findViewById(R.id.save_time);
+        Utils.relwayRegular(getActivity(),btn);
+        visit_date = (EditText) completeView.findViewById(R.id.visit_date);
+        Utils.relwayRegular(getActivity(),visit_date);
+        time_from = (EditText) completeView.findViewById(R.id.time_from);
+        Utils.relwayRegular(getActivity(),time_from);
+        time_to = (EditText) completeView.findViewById(R.id.time_to);
+        Utils.relwayRegular(getActivity(),time_to);
+        alertDialog.setView(completeView);
 
 
         final DatePickerDialog.OnDateSetListener dialog_date = new DatePickerDialog.OnDateSetListener() {
@@ -385,7 +416,7 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
                         .setValue(visit_dateObject, new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                filter_dialog.dismiss();
+                                alertDialog.dismiss();
                             }
                         });
 
@@ -402,7 +433,7 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
                 }else if(schedule_to.getText().toString().length()==0 || schedule_to.getText().toString().equals("")){
                     schedule_to.setError("Please Enter to Date");
                 }else {
-                    filter_dialog.show();
+                    alertDialog.show();
                 }
             }
         });

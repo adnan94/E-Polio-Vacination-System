@@ -244,10 +244,10 @@ public class Add_form extends android.support.v4.app.Fragment {
                             } else {
                                 if (Integer.parseInt(drops.getText().toString()) > 1) {
                                     Snackbar.make(v, "Invalid No Of Vaccinated Before", Snackbar.LENGTH_SHORT).show();
-                               progressDialog.dismiss();
+                                    progressDialog.dismiss();
                                 } else {
                                     bForm.setDrops(Integer.parseInt(drops.getText().toString()));
-                                    add(bForm,progressDialog);
+                                    add(bForm, progressDialog);
                                 }
                             }
                         }
@@ -341,25 +341,38 @@ public class Add_form extends android.support.v4.app.Fragment {
 
     private void cast(View view) {
         name = (EditText) view.findViewById(R.id.editTextApplicantName);
+        Utils.setTypeFace(getActivity(), name);
         cnic = (EditText) view.findViewById(R.id.editTextApplicantCnic);
+        Utils.setTypeFace(getActivity(), cnic);
         childName = (EditText) view.findViewById(R.id.editTextChildName);
+        Utils.setTypeFace(getActivity(), childName);
         relation = (Spinner) view.findViewById(R.id.editTextRelation);
         religion = (Spinner) view.findViewById(R.id.TextReligion);
         fatherName = (EditText) view.findViewById(R.id.editTextFatherName);
+        Utils.setTypeFace(getActivity(), fatherName);
         fatherCnic = (EditText) view.findViewById(R.id.editTextFatherCnic);
+        Utils.setTypeFace(getActivity(), fatherCnic);
         motherName = (EditText) view.findViewById(R.id.editTextMotherName);
+        Utils.setTypeFace(getActivity(), motherName);
         motherCnic = (EditText) view.findViewById(R.id.editTextMotherCnic);
+        Utils.setTypeFace(getActivity(), motherCnic);
         areaOfBirth = (EditText) view.findViewById(R.id.editTextAreaOfBirth);
+        Utils.setTypeFace(getActivity(), areaOfBirth);
         dateOfBirth = (EditText) view.findViewById(R.id.editTextDateOfBirth);
+        Utils.setTypeFace(getActivity(), dateOfBirth);
         disability = (EditText) view.findViewById(R.id.editTextDisability);
+        Utils.setTypeFace(getActivity(), disability);
         address = (EditText) view.findViewById(R.id.editTextAddress);
+        Utils.setTypeFace(getActivity(), address);
         cell = (EditText) view.findViewById(R.id.editTextCell);
+        Utils.setTypeFace(getActivity(), cell);
         district = (Spinner) view.findViewById(R.id.editTextDistrict);
+        Utils.setTypeFace(getActivity(), disability);
         submit = (Button) view.findViewById(R.id.submitForm);
-        Utils.relwayRegular(getActivity(),submit);
+        Utils.relwayRegular(getActivity(), submit);
         addLocation = (Button) view.findViewById(R.id.addLocation);
 
-        Utils.relwayRegular(getActivity(),addLocation);
+        Utils.relwayRegular(getActivity(), addLocation);
         yes = (CheckBox) view.findViewById(R.id.checkBoxYes);
         no = (CheckBox) view.findViewById(R.id.checkBoxNo);
         male = (CheckBox) view.findViewById(R.id.checkBoxMale);
