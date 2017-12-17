@@ -22,6 +22,7 @@ import com.example.ali.myapplication.Activities.ModelClasses.BForm;
 import com.example.ali.myapplication.Activities.ModelClasses.Tracking;
 import com.example.ali.myapplication.Activities.User_Ui.Add_form;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
+import com.example.ali.myapplication.Activities.Utils.SharedPref_Team;
 import com.example.ali.myapplication.Activities.Utils.Utils;
 import com.example.ali.myapplication.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -92,19 +93,38 @@ public class Monitoring_Fragment extends android.support.v4.app.Fragment impleme
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if (dataSnapshot.getValue() != null) {
+
                     final double lat = Double.valueOf(dataSnapshot.child("lat").getValue().toString());
                     final double lng = Double.valueOf(dataSnapshot.child("lng").getValue().toString());
                     final String teamId = dataSnapshot.child("teamId").getValue().toString();
+                    final String ucId = dataSnapshot.child("uc_id").getValue().toString();
                     final String key = dataSnapshot.getKey();
 
                     FirebaseDatabase.getInstance().getReference().child("polio_teams").child(teamId).child(key).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.getValue() != null) {
-                                listTracking.add(new Tracking(lat, lng, key, dataSnapshot.child("member_name").getValue().toString(), map.addMarker(new MarkerOptions()
-                                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.tour_icon_marker))
-                                        .title(dataSnapshot.child("member_name").getValue().toString())
-                                        .position(new LatLng(lat, lng)))));
+                               final String memberName= dataSnapshot.child("member_name").getValue().toString();
+                                FirebaseDatabase.getInstance().getReference().child("uc_teams").child(ucId).child(teamId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.getValue() != null) {
+                                            if (dataSnapshot.child("team_status").getValue().toString().equals("Activated")) {
+                                                listTracking.add(new Tracking(lat, lng, key, memberName, map.addMarker(new MarkerOptions()
+                                                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.tour_icon_marker))
+                                                        .title(memberName)
+                                                        .position(new LatLng(lat, lng)))));
+
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
 
                             }
                         }
@@ -123,17 +143,42 @@ public class Monitoring_Fragment extends android.support.v4.app.Fragment impleme
                 if (getActivity() != null) {
                     final double lat = Double.valueOf(dataSnapshot.child("lat").getValue().toString());
                     final double lng = Double.valueOf(dataSnapshot.child("lng").getValue().toString());
+                    final String teamId = dataSnapshot.child("teamId").getValue().toString();
+                    final String ucId = dataSnapshot.child("uc_id").getValue().toString();
+
                     final String key = dataSnapshot.getKey();
 
                     for (int i = 0; i < listTracking.size(); i++) {
                         if (dataSnapshot.getKey().equals(listTracking.get(i).getId())) {
-                            listTracking.add(new Tracking(lat, lng, key, listTracking.get(i).getName(), map.addMarker(new MarkerOptions()
-                                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.tour_icon_marker))
-                                    .title(listTracking.get(i).getName())
-                                    .position(new LatLng(lat, lng)))));
-                            listTracking.get(i).getMarker().remove();
-                            listTracking.remove(i);
-                        Utils.toast(getActivity(),"Updated");
+                            final int finalI = i;
+                            FirebaseDatabase.getInstance().getReference().child("uc_teams").child(ucId).child(teamId)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.getValue() != null) {
+                                                if (dataSnapshot.child("team_status").getValue().toString().equals("Activated")) {
+
+                                                    listTracking.add(new Tracking(lat, lng, key, listTracking.get(finalI).getName(), map.addMarker(new MarkerOptions()
+                                                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.tour_icon_marker))
+                                                            .title(listTracking.get(finalI).getName())
+                                                            .position(new LatLng(lat, lng)))));
+                                                    listTracking.get(finalI).getMarker().remove();
+                                                    listTracking.remove(finalI);
+                                                    Utils.toast(getActivity(), "Updated");
+                                                }else{
+                                                    listTracking.get(finalI).getMarker().remove();
+                                                    listTracking.remove(finalI);
+
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
+
                         }
 
                     }

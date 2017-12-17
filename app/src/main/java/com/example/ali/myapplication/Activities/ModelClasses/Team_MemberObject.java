@@ -18,11 +18,12 @@ public class Team_MemberObject implements Parcelable {
     public String member_uid;
     public String member_pic;
     public String team_uid;
+    public String uc_id;
 
     public Team_MemberObject() {
     }
 
-    public Team_MemberObject(String member_name, String member_email, String member_nic_no, String member_type, String member_phone_no, String member_uid, String member_pic, String team_uid) {
+    public Team_MemberObject(String member_name, String member_email, String member_nic_no, String member_type, String member_phone_no, String member_uid, String member_pic, String team_uid, String uc_id) {
         this.member_name = member_name;
         this.member_email = member_email;
         this.member_nic_no = member_nic_no;
@@ -31,6 +32,7 @@ public class Team_MemberObject implements Parcelable {
         this.member_uid = member_uid;
         this.member_pic = member_pic;
         this.team_uid = team_uid;
+        this.uc_id = uc_id;
     }
 
     protected Team_MemberObject(Parcel in) {
@@ -42,23 +44,7 @@ public class Team_MemberObject implements Parcelable {
         member_uid = in.readString();
         member_pic = in.readString();
         team_uid = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(member_name);
-        dest.writeString(member_email);
-        dest.writeString(member_nic_no);
-        dest.writeString(member_type);
-        dest.writeString(member_phone_no);
-        dest.writeString(member_uid);
-        dest.writeString(member_pic);
-        dest.writeString(team_uid);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
+        uc_id = in.readString();
     }
 
     public static final Creator<Team_MemberObject> CREATOR = new Creator<Team_MemberObject>() {
@@ -72,6 +58,14 @@ public class Team_MemberObject implements Parcelable {
             return new Team_MemberObject[size];
         }
     };
+
+    public String getUc_id() {
+        return uc_id;
+    }
+
+    public void setUc_id(String uc_id) {
+        this.uc_id = uc_id;
+    }
 
     public String getTeam_uid() {
         return team_uid;
@@ -135,5 +129,23 @@ public class Team_MemberObject implements Parcelable {
 
     public String getMember_phone_no() {
         return member_phone_no;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(member_name);
+        dest.writeString(member_email);
+        dest.writeString(member_nic_no);
+        dest.writeString(member_type);
+        dest.writeString(member_phone_no);
+        dest.writeString(member_uid);
+        dest.writeString(member_pic);
+        dest.writeString(team_uid);
+        dest.writeString(uc_id);
     }
 }

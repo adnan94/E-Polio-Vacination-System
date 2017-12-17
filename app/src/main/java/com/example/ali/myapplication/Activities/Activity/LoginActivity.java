@@ -316,7 +316,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                 if(passo.equals("pakistan")){
 
                                                                                                     uc_flag=true;
-                                                                                                    Team_MemberObject team_memberObject  = new Team_MemberObject("","","","","","","","");
+                                                                                                    Team_MemberObject team_memberObject  = new Team_MemberObject("","","","","","","","","");
                                                                                                     SharedPref_Team.setCurrentUser(LoginActivity.this,team_memberObject);
                                                                                                     SharedPref_UC.setCurrentUser(LoginActivity.this,uc_object);
                                                                                                     progressDialog.dismiss();
@@ -505,7 +505,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                             if(passo.equals("pakistan")){
 
                                                                                                 uc_flag=true;
-                                                                                                Team_MemberObject team_memberObject  = new Team_MemberObject("","","","","","","","");
+                                                                                                Team_MemberObject team_memberObject  = new Team_MemberObject("","","","","","","","","");
                                                                                                 SharedPref_Team.setCurrentUser(LoginActivity.this,team_memberObject);
                                                                                                 SharedPref_UC.setCurrentUser(LoginActivity.this,uc_object);
                                                                                                 progressDialog.dismiss();
