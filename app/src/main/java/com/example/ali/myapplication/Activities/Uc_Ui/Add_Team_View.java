@@ -228,7 +228,7 @@ public class Add_Team_View extends android.support.v4.app.Fragment {
                     }
 
                     final Team_MemberObject team_memberObject = new Team_MemberObject(team_mname.getText().toString(),"team"+team_email.getText().toString()
-                            , team_mnic_no.getText().toString(), team_member_type.getSelectedItem().toString(), team_mphone_no.getText().toString(),key,downloadURL,teamid,uc_object.getUc_member_uid());
+                            , team_mnic_no.getText().toString(), team_member_type.getSelectedItem().toString(), team_mphone_no.getText().toString(),key,downloadURL,teamid,uc_object.getUc_member_uid(),"NotActive");
 
                     FirebaseHandler.getInstance().getPolio_teams()
                             .child(polio_team.getTeam_uid()).child(key).setValue(team_memberObject, new DatabaseReference.CompletionListener() {

@@ -83,93 +83,93 @@ public class LoginActivity extends AppCompatActivity {
                             Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_CONTACTS, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS, Manifest.permission.RECORD_AUDIO, Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR, Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE},
                     2);
         }
-            mAuth = FirebaseAuth.getInstance();
-            heading = (TextView) findViewById(R.id.heading);
-            sub_heading = (TextView) findViewById(R.id.sub_heading);
-            checkBox = (CheckBox) findViewById(R.id.remember_me);
-            checkBox.setVisibility(View.GONE);
-            signUpText = (TextView) findViewById(R.id.signup);
-            forgotPassword = (TextView) findViewById(R.id.forgotPassword);
-            signup_t = (TextView) findViewById(R.id.signup_t);
+        mAuth = FirebaseAuth.getInstance();
+        heading = (TextView) findViewById(R.id.heading);
+        sub_heading = (TextView) findViewById(R.id.sub_heading);
+        checkBox = (CheckBox) findViewById(R.id.remember_me);
+        checkBox.setVisibility(View.GONE);
+        signUpText = (TextView) findViewById(R.id.signup);
+        forgotPassword = (TextView) findViewById(R.id.forgotPassword);
+        signup_t = (TextView) findViewById(R.id.signup_t);
 
 
-            Utils.relwayRegular(LoginActivity.this, forgotPassword);
-            Utils.relwaySemiBold(LoginActivity.this, heading);
-            Utils.relwayRegular(LoginActivity.this, sub_heading);
-            Utils.relwayRegular(LoginActivity.this, signup_t);
+        Utils.relwayRegular(LoginActivity.this, forgotPassword);
+        Utils.relwaySemiBold(LoginActivity.this, heading);
+        Utils.relwayRegular(LoginActivity.this, sub_heading);
+        Utils.relwayRegular(LoginActivity.this, signup_t);
 
-            Utils.relwayRegular(LoginActivity.this, checkBox);
-            Utils.relwayBold(LoginActivity.this, signUpText);
+        Utils.relwayRegular(LoginActivity.this, checkBox);
+        Utils.relwayBold(LoginActivity.this, signUpText);
 
 
-            loginBtn = (Button) findViewById(R.id.user_login);
-            Utils.relwayRegular(LoginActivity.this, loginBtn);
-            useremail = (EditText) findViewById(R.id.editText_Loginemail);
-            Utils.relwayRegular(LoginActivity.this, useremail);
-            userpass = (TextInputEditText) findViewById(R.id.editText_loginpass);
-            Utils.relwayRegular(LoginActivity.this, userpass);
-            firebase = FirebaseDatabase.getInstance().getReference();
+        loginBtn = (Button) findViewById(R.id.user_login);
+        Utils.relwayRegular(LoginActivity.this, loginBtn);
+        useremail = (EditText) findViewById(R.id.editText_Loginemail);
+        Utils.relwayRegular(LoginActivity.this, useremail);
+        userpass = (TextInputEditText) findViewById(R.id.editText_loginpass);
+        Utils.relwayRegular(LoginActivity.this, userpass);
+        firebase = FirebaseDatabase.getInstance().getReference();
 
 //        if (mAuth.getCurrentUser() != null) {
 //            startActivity(new Intent(LoginActivity.this, UserHome.class));
 //            finish();
 //        }
 
-            forgotPassword.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
 //
-                    LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
-                    View view = layoutInflater.inflate(R.layout.alert_layout, null);
-                    Button button = (Button) view.findViewById(R.id.alertSubmit);
-                    TextView title = (TextView) view.findViewById(R.id.alertTitleText);
-                    TextView message = (TextView) view.findViewById(R.id.alertMessageText);
-                    final EditText emailText = (EditText) view.findViewById(R.id.alertEditText);
-                    button.setText("Submit");
-                    emailText.setVisibility(View.VISIBLE);
-                    title.setText("Forgot your password");
-                    message.setText("Enter your email here we sent you email for password reset");
-                    alert.setView(view);
+                LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+                View view = layoutInflater.inflate(R.layout.alert_layout, null);
+                Button button = (Button) view.findViewById(R.id.alertSubmit);
+                TextView title = (TextView) view.findViewById(R.id.alertTitleText);
+                TextView message = (TextView) view.findViewById(R.id.alertMessageText);
+                final EditText emailText = (EditText) view.findViewById(R.id.alertEditText);
+                button.setText("Submit");
+                emailText.setVisibility(View.VISIBLE);
+                title.setText("Forgot your password");
+                message.setText("Enter your email here we sent you email for password reset");
+                alert.setView(view);
 
-                    final AlertDialog alertDialog = alert.create();
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (emailText.getText().toString().equals("")) {
-                                Snackbar.make(v, "Enter Email First", Snackbar.LENGTH_SHORT).show();
-                            } else {
-                                mAuth.sendPasswordResetEmail(emailText.getText().toString())
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    Utils.toast(LoginActivity.this, "Sucessfull");
-                                                    alertDialog.dismiss();
-                                                } else {
-                                                    task.getException().getMessage();
-                                                    Snackbar.make(emailText, "" + task.getException().getMessage(), Snackbar.LENGTH_SHORT).show();
-                                                }
+                final AlertDialog alertDialog = alert.create();
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (emailText.getText().toString().equals("")) {
+                            Snackbar.make(v, "Enter Email First", Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            mAuth.sendPasswordResetEmail(emailText.getText().toString())
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Utils.toast(LoginActivity.this, "Sucessfull");
+                                                alertDialog.dismiss();
+                                            } else {
+                                                task.getException().getMessage();
+                                                Snackbar.make(emailText, "" + task.getException().getMessage(), Snackbar.LENGTH_SHORT).show();
                                             }
-                                        });
-                            }
+                                        }
+                                    });
                         }
+                    }
 
-                    });
-                    alertDialog.show();
+                });
+                alertDialog.show();
 
 
-                }
-            });
-            permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
-            fragmentManager = getSupportFragmentManager();
-            //   fbSignIn = false;
-
-            if (SharedPref.getCurrentUser(LoginActivity.this) != null) {
-                UserModel user = SharedPref.getCurrentUser(LoginActivity.this);
-                useremail.setText(user.getEmail());
-                userpass.setText(user.getPassword());
             }
+        });
+        permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
+        fragmentManager = getSupportFragmentManager();
+        //   fbSignIn = false;
+
+        if (SharedPref.getCurrentUser(LoginActivity.this) != null) {
+            UserModel user = SharedPref.getCurrentUser(LoginActivity.this);
+            useremail.setText(user.getEmail());
+            userpass.setText(user.getPassword());
+        }
 
 
 //        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -184,221 +184,357 @@ public class LoginActivity extends AppCompatActivity {
 //        });
 
 
-            signUpText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        signUpText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                    fragmentManager.beginTransaction().add(R.id.container, new SignUp_Fragment()).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().add(R.id.container, new SignUp_Fragment()).addToBackStack(null).commit();
 
 
-                }
-            });
+            }
+        });
 
-            loginBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View view) {
-                    final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, "Sign In", "Connecting...", true, false);
-                    final String emails = useremail.getText().toString();
-                    final String passo = userpass.getText().toString();
-                    if (emails.length() == 0 || !useremail.getText().toString().matches(emailPattern)) {
-                        useremail.setError("Enter Valid E-mail");
-                        progressDialog.dismiss();
-                    } else if (passo.length() == 0 && passo.length() <= 6) {
-                        userpass.setError("Enter Valid Password");
-                        progressDialog.dismiss();
-                    } else {
-                        try {
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, "Sign In", "Connecting...", true, false);
+                final String emails = useremail.getText().toString();
+                final String passo = userpass.getText().toString();
+                if (emails.length() == 0 || !useremail.getText().toString().matches(emailPattern)) {
+                    useremail.setError("Enter Valid E-mail");
+                    progressDialog.dismiss();
+                } else if (passo.length() == 0 && passo.length() <= 6) {
+                    userpass.setError("Enter Valid Password");
+                    progressDialog.dismiss();
+                } else {
+                    try {
 
-                            FirebaseHandler.getInstance().getPolio_teams()
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot dataSnapshot) {
-                                            if (dataSnapshot != null) {
-                                                if (dataSnapshot.getValue() != null) {
-                                                    for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                                        for (DataSnapshot d : data.getChildren()) {
-                                                            final Team_MemberObject team_memberObject = d.getValue(Team_MemberObject.class);
-                                                            if (team_memberObject.getMember_email().equals("team" + emails)) {
-                                                                if (passo.equals("pakistan")) {
-                                                                    FirebaseHandler.getInstance()
-                                                                            .getUc_teams()
-                                                                            // .child(team_memberObject.getTeam_uid())
-                                                                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                                @Override
-                                                                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                                                                    if (dataSnapshot != null) {
-                                                                                        if (dataSnapshot.getValue() != null) {
-                                                                                            for (DataSnapshot d : dataSnapshot.getChildren()) {
-                                                                                                for (DataSnapshot snap : d.getChildren()) {
-                                                                                                    Polio_Team polio_team = snap.getValue(Polio_Team.class);
-                                                                                                    if (polio_team.getTeam_uid().equals(team_memberObject.getTeam_uid())) {
-                                                                                                        if (polio_team.getTeam_status().equals("Activated")) {
-                                                                                                            progressDialog.dismiss();
-                                                                                                            team_flag = true;
-                                                                                                            SharedPref_Team.setCurrentUser(LoginActivity.this, team_memberObject);
-                                                                                                            startService(new Intent(LoginActivity.this, Service.class));
-                                                                                                            startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
-                                                                                                            finish();
-                                                                                                            break;
-                                                                                                        } else {
-                                                                                                            progressDialog.dismiss();
-                                                                                                            Snackbar.make(view, "ID is not Activated", Snackbar.LENGTH_SHORT).show();
-                                                                                                            team_flag = false;
-                                                                                                            break;
-                                                                                                        }
+                        FirebaseHandler.getInstance().getPolio_teams()
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot != null) {
+                                            if (dataSnapshot.getValue() != null) {
+                                                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                                    for (DataSnapshot d : data.getChildren()) {
+                                                        final Team_MemberObject team_memberObject = d.getValue(Team_MemberObject.class);
+                                                        if (team_memberObject.getMember_email().equals("team" + emails)) {
+                                                            if (passo.equals("pakistan")) {
+                                                                FirebaseHandler.getInstance()
+                                                                        .getUc_teams()
+                                                                        // .child(team_memberObject.getTeam_uid())
+                                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                            @Override
+                                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                                if (dataSnapshot != null) {
+                                                                                    if (dataSnapshot.getValue() != null) {
+                                                                                        for (DataSnapshot d : dataSnapshot.getChildren()) {
+                                                                                            for (DataSnapshot snap : d.getChildren()) {
+                                                                                                Polio_Team polio_team = snap.getValue(Polio_Team.class);
+                                                                                                if (polio_team.getTeam_uid().equals(team_memberObject.getTeam_uid())) {
+                                                                                                    if (polio_team.getTeam_status().equals("Activated")) {
+                                                                                                        progressDialog.dismiss();
+                                                                                                        team_flag = true;
+                                                                                                        SharedPref_Team.setCurrentUser(LoginActivity.this, team_memberObject);
+                                                                                                        startService(new Intent(LoginActivity.this, Service.class));
+                                                                                                        startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
+                                                                                                        finish();
+                                                                                                        break;
+                                                                                                    } else {
+                                                                                                        progressDialog.dismiss();
+                                                                                                        Snackbar.make(view, "ID is not Activated", Snackbar.LENGTH_SHORT).show();
+                                                                                                        team_flag = false;
+                                                                                                        break;
                                                                                                     }
                                                                                                 }
                                                                                             }
                                                                                         }
                                                                                     }
                                                                                 }
+                                                                            }
 
-                                                                                @Override
-                                                                                public void onCancelled(DatabaseError databaseError) {
+                                                                            @Override
+                                                                            public void onCancelled(DatabaseError databaseError) {
 
-                                                                                }
-                                                                            });
+                                                                            }
+                                                                        });
 
-                                                                    break;
+                                                                break;
 
-                                                                } else {
-                                                                    team_flag = false;
-                                                                    progressDialog.dismiss();
-                                                                    Snackbar.make(view, "Enter Correct Password", Snackbar.LENGTH_SHORT).show();
-                                                                }
                                                             } else {
-                                                                //      progressDialog.dismiss();
+                                                                team_flag = false;
+                                                                progressDialog.dismiss();
+                                                                Snackbar.make(view, "Enter Correct Password", Snackbar.LENGTH_SHORT).show();
+                                                            }
+                                                        } else {
+                                                            //      progressDialog.dismiss();
+                                                        }
+                                                    }
+
+                                                }
+                                                if (!team_flag) {
+                                                    mAuth.signInWithEmailAndPassword(emails, passo).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                                            if (task.isSuccessful()) {
+                                                                AppLogs.logd("signInWithEmail:onComplete:" + task.isSuccessful());
+                                                                Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                                                                progressDialog.dismiss();
+
+                                                                FirebaseHandler.getInstance().getUsersRef().child(task.getResult().getUser().getUid()).addValueEventListener(new ValueEventListener() {
+                                                                    @Override
+                                                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                        if (dataSnapshot != null) {
+                                                                            if (dataSnapshot.getValue() != null) {
+                                                                                UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                                                                                UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(), userModel.getPicUrl(), userModel.getUid());
+                                                                                UserModel.myObj = userModel1;
+//                                                                                    if (userModel.getUser_type() == 3) {
+//                                                                                        //User Screen
+//                                                                                        startActivity(new Intent(LoginActivity.this, UserHome.class));
+//                                                                                    } else if (userModel.getUser_type() == 1) {
+//                                                                                        //Admin Screen
+//                                                                                        startActivity(new Intent(LoginActivity.this, AdminHome.class));
+//                                                                                    } else if (userModel.getUser_type() == 2) {
+//                                                                                        //Uc Screen
+//                                                                                        startActivity(new Intent(LoginActivity.this, UcHome.class));
+//                                                                                    } else if (userModel.getUser_type() == 4) {
+//                                                                                        startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
+//                                                                                    }
+                                                                                finish();
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onCancelled(DatabaseError databaseError) {
+
+                                                                    }
+                                                                });
+                                                            } else if (!task.isSuccessful()) {
+                                                                //   progressDialog.dismiss();
+                                                                //    AppLogs.logw("signInWithEmail" + task.getException());
+                                                                //     Toast.makeText(LoginActivity.this, "" + task.getException(),
+                                                                //            Toast.LENGTH_LONG).show();
+                                                                FirebaseHandler.getInstance().getUc_members()
+                                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                            @Override
+                                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                                if (dataSnapshot != null) {
+                                                                                    if (dataSnapshot.getValue() != null) {
+                                                                                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                                                                            UC_Object uc_object = data.getValue(UC_Object.class);
+                                                                                            if (uc_object.getUc_member_email().equals(emails)) {
+                                                                                                if (passo.equals("pakistan")) {
+
+                                                                                                    uc_flag = true;
+                                                                                                    Team_MemberObject team_memberObject = new Team_MemberObject("", "", "", "", "", "", "", "", "","");
+                                                                                                    SharedPref_Team.setCurrentUser(LoginActivity.this, team_memberObject);
+                                                                                                    SharedPref_UC.setCurrentUser(LoginActivity.this, uc_object);
+                                                                                                    progressDialog.dismiss();
+
+                                                                                                    startActivity(new Intent(LoginActivity.this, UcHome.class));
+                                                                                                    finish();
+                                                                                                    break;
+                                                                                                } else {
+                                                                                                    uc_flag = false;
+                                                                                                    progressDialog.dismiss();
+                                                                                                    Snackbar.make(view, "Enter Correct Password", Snackbar.LENGTH_SHORT).show();
+                                                                                                }
+                                                                                            } else {
+
+                                                                                                uc_flag = false;
+                                                                                            }
+                                                                                        }
+                                                                                        if (!uc_flag) {
+                                                                                            mAuth.signInWithEmailAndPassword(emails, passo).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                                                                                @Override
+                                                                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                                                    if (task.isSuccessful()) {
+                                                                                                        AppLogs.logd("signInWithEmail:onComplete:" + task.isSuccessful());
+                                                                                                        Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                                                                                                        progressDialog.dismiss();
+
+                                                                                                        FirebaseHandler.getInstance().getUsersRef().child(task.getResult().getUser().getUid()).addValueEventListener(new ValueEventListener() {
+                                                                                                            @Override
+                                                                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                                                                if (dataSnapshot != null) {
+                                                                                                                    if (dataSnapshot.getValue() != null) {
+                                                                                                                        UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                                                                                                                        UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(), userModel.getPicUrl(), userModel.getUid());
+                                                                                                                        UserModel.myObj = userModel1;
+//                                                                                    if (userModel.getUser_type() == 3) {
+//                                                                                        //User Screen
+//                                                                                        startActivity(new Intent(LoginActivity.this, UserHome.class));
+//                                                                                    } else if (userModel.getUser_type() == 1) {
+//                                                                                        //Admin Screen
+//                                                                                        startActivity(new Intent(LoginActivity.this, AdminHome.class));
+//                                                                                    } else if (userModel.getUser_type() == 2) {
+//                                                                                        //Uc Screen
+//                                                                                        startActivity(new Intent(LoginActivity.this, UcHome.class));
+//                                                                                    } else if (userModel.getUser_type() == 4) {
+//                                                                                        startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
+//                                                                                    }
+                                                                                                                        finish();
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+
+                                                                                                            @Override
+                                                                                                            public void onCancelled(DatabaseError databaseError) {
+
+                                                                                                            }
+                                                                                                        });
+                                                                                                    } else if (!task.isSuccessful()) {
+                                                                                                        progressDialog.dismiss();
+                                                                                                        //     AppLogs.logw("signInWithEmail" + task.getException());
+                                                                                                        //   Toast.makeText(LoginActivity.this, "" + task.getException(),
+                                                                                                        //         Toast.LENGTH_LONG).show();
+                                                                                                    }
+                                                                                                }
+                                                                                            });
+                                                                                        }
+                                                                                    } else {
+                                                                                        progressDialog.dismiss();
+                                                                                        Snackbar.make(view, "Please Input valid Email & Password", Snackbar.LENGTH_SHORT).show();
+                                                                                    }
+                                                                                } else {
+                                                                                    mAuth.signInWithEmailAndPassword(emails, passo).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                                                                        @Override
+                                                                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                                            if (task.isSuccessful()) {
+                                                                                                AppLogs.logd("signInWithEmail:onComplete:" + task.isSuccessful());
+                                                                                                Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                                                                                                progressDialog.dismiss();
+
+                                                                                                FirebaseHandler.getInstance().getUsersRef().child(task.getResult().getUser().getUid()).addValueEventListener(new ValueEventListener() {
+                                                                                                    @Override
+                                                                                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                                                        if (dataSnapshot != null) {
+                                                                                                            if (dataSnapshot.getValue() != null) {
+                                                                                                                UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                                                                                                                UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(), userModel.getPicUrl(), userModel.getUid());
+                                                                                                                UserModel.myObj = userModel1;
+//                                                                                    if (userModel.getUser_type() == 3) {
+//                                                                                        //User Screen
+//                                                                                        startActivity(new Intent(LoginActivity.this, UserHome.class));
+//                                                                                    } else if (userModel.getUser_type() == 1) {
+//                                                                                        //Admin Screen
+//                                                                                        startActivity(new Intent(LoginActivity.this, AdminHome.class));
+//                                                                                    } else if (userModel.getUser_type() == 2) {
+//                                                                                        //Uc Screen
+//                                                                                        startActivity(new Intent(LoginActivity.this, UcHome.class));
+//                                                                                    } else if (userModel.getUser_type() == 4) {
+//                                                                                        startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
+//                                                                                    }
+                                                                                                                finish();
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+
+                                                                                                    @Override
+                                                                                                    public void onCancelled(DatabaseError databaseError) {
+
+                                                                                                    }
+                                                                                                });
+                                                                                            } else if (!task.isSuccessful()) {
+                                                                                                progressDialog.dismiss();
+                                                                                                AppLogs.logw("signInWithEmail" + task.getException());
+                                                                                                Toast.makeText(LoginActivity.this, "" + task.getException(),
+                                                                                                        Toast.LENGTH_LONG).show();
+                                                                                            }
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                            }
+
+                                                                            @Override
+                                                                            public void onCancelled(DatabaseError databaseError) {
+
+                                                                            }
+                                                                        });
                                                             }
                                                         }
+                                                    });
+                                                }
+                                            } else {
+                                                mAuth.signInWithEmailAndPassword(emails, passo).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                                        if (task.isSuccessful()) {
+                                                            AppLogs.logd("signInWithEmail:onComplete:" + task.isSuccessful());
+                                                            Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                                                            progressDialog.dismiss();
 
-                                                    }
-                                                    if (!team_flag) {
-                                                        mAuth.signInWithEmailAndPassword(emails, passo).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                                                if (task.isSuccessful()) {
-                                                                    AppLogs.logd("signInWithEmail:onComplete:" + task.isSuccessful());
-                                                                    Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                                                    progressDialog.dismiss();
+                                                            FirebaseHandler.getInstance().getUsersRef().child(task.getResult().getUser().getUid()).addValueEventListener(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                    if (dataSnapshot != null) {
+                                                                        if (dataSnapshot.getValue() != null) {
+                                                                            UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                                                                            UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(), userModel.getPicUrl(), userModel.getUid());
+                                                                            UserModel.myObj = userModel1;
+//                                                                                    if (userModel.getUser_type() == 3) {
+//                                                                                        //User Screen
+//                                                                                        startActivity(new Intent(LoginActivity.this, UserHome.class));
+//                                                                                    } else if (userModel.getUser_type() == 1) {
+//                                                                                        //Admin Screen
+//                                                                                        startActivity(new Intent(LoginActivity.this, AdminHome.class));
+//                                                                                    } else if (userModel.getUser_type() == 2) {
+//                                                                                        //Uc Screen
+//                                                                                        startActivity(new Intent(LoginActivity.this, UcHome.class));
+//                                                                                    } else if (userModel.getUser_type() == 4) {
+//                                                                                        startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
+//                                                                                    }
+                                                                            finish();
+                                                                        }
+                                                                    }
+                                                                }
 
-                                                                    FirebaseHandler.getInstance().getUsersRef().child(task.getResult().getUser().getUid()).addValueEventListener(new ValueEventListener() {
+                                                                @Override
+                                                                public void onCancelled(DatabaseError databaseError) {
+
+                                                                }
+                                                            });
+                                                        } else if (!task.isSuccessful()) {
+                                                            //    progressDialog.dismiss();
+                                                            //   AppLogs.logw("signInWithEmail" + task.getException());
+                                                            //  Toast.makeText(LoginActivity.this, "" + task.getException(),
+                                                            //         Toast.LENGTH_LONG).show();
+                                                            //   progressDialog.dismiss();
+                                                            //    AppLogs.logw("signInWithEmail" + task.getException());
+                                                            //     Toast.makeText(LoginActivity.this, "" + task.getException(),
+                                                            //            Toast.LENGTH_LONG).show();
+                                                            FirebaseHandler.getInstance().getUc_members()
+                                                                    .addListenerForSingleValueEvent(new ValueEventListener() {
                                                                         @Override
                                                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                                                             if (dataSnapshot != null) {
                                                                                 if (dataSnapshot.getValue() != null) {
-                                                                                    UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                                                    UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(), userModel.getPicUrl(), userModel.getUid());
-                                                                                    UserModel.myObj = userModel1;
-//                                                                                    if (userModel.getUser_type() == 3) {
-//                                                                                        //User Screen
-//                                                                                        startActivity(new Intent(LoginActivity.this, UserHome.class));
-//                                                                                    } else if (userModel.getUser_type() == 1) {
-//                                                                                        //Admin Screen
-//                                                                                        startActivity(new Intent(LoginActivity.this, AdminHome.class));
-//                                                                                    } else if (userModel.getUser_type() == 2) {
-//                                                                                        //Uc Screen
-//                                                                                        startActivity(new Intent(LoginActivity.this, UcHome.class));
-//                                                                                    } else if (userModel.getUser_type() == 4) {
-//                                                                                        startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
-//                                                                                    }
-                                                                                    finish();
-                                                                                }
-                                                                            }
-                                                                        }
+                                                                                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                                                                        UC_Object uc_object = data.getValue(UC_Object.class);
+                                                                                        if (uc_object.getUc_member_email().equals(emails)) {
+                                                                                            if (passo.equals("pakistan")) {
 
-                                                                        @Override
-                                                                        public void onCancelled(DatabaseError databaseError) {
+                                                                                                uc_flag = true;
+                                                                                                Team_MemberObject team_memberObject = new Team_MemberObject("", "", "", "", "", "", "", "", "","");
+                                                                                                SharedPref_Team.setCurrentUser(LoginActivity.this, team_memberObject);
+                                                                                                SharedPref_UC.setCurrentUser(LoginActivity.this, uc_object);
+                                                                                                progressDialog.dismiss();
 
-                                                                        }
-                                                                    });
-                                                                } else if (!task.isSuccessful()) {
-                                                                    //   progressDialog.dismiss();
-                                                                    //    AppLogs.logw("signInWithEmail" + task.getException());
-                                                                    //     Toast.makeText(LoginActivity.this, "" + task.getException(),
-                                                                    //            Toast.LENGTH_LONG).show();
-                                                                    FirebaseHandler.getInstance().getUc_members()
-                                                                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                                @Override
-                                                                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                                                                    if (dataSnapshot != null) {
-                                                                                        if (dataSnapshot.getValue() != null) {
-                                                                                            for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                                                                                UC_Object uc_object = data.getValue(UC_Object.class);
-                                                                                                if (uc_object.getUc_member_email().equals(emails)) {
-                                                                                                    if (passo.equals("pakistan")) {
-
-                                                                                                        uc_flag = true;
-                                                                                                        Team_MemberObject team_memberObject = new Team_MemberObject("", "", "", "", "", "", "", "", "");
-                                                                                                        SharedPref_Team.setCurrentUser(LoginActivity.this, team_memberObject);
-                                                                                                        SharedPref_UC.setCurrentUser(LoginActivity.this, uc_object);
-                                                                                                        progressDialog.dismiss();
-
-                                                                                                        startActivity(new Intent(LoginActivity.this, UcHome.class));
-                                                                                                        finish();
-                                                                                                        break;
-                                                                                                    } else {
-                                                                                                        uc_flag = false;
-                                                                                                        progressDialog.dismiss();
-                                                                                                        Snackbar.make(view, "Enter Correct Password", Snackbar.LENGTH_SHORT).show();
-                                                                                                    }
-                                                                                                } else {
-
-                                                                                                    uc_flag = false;
-                                                                                                }
-                                                                                            }
-                                                                                            if (!uc_flag) {
-                                                                                                mAuth.signInWithEmailAndPassword(emails, passo).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                                                                                    @Override
-                                                                                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                                                                                        if (task.isSuccessful()) {
-                                                                                                            AppLogs.logd("signInWithEmail:onComplete:" + task.isSuccessful());
-                                                                                                            Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                                                                                            progressDialog.dismiss();
-
-                                                                                                            FirebaseHandler.getInstance().getUsersRef().child(task.getResult().getUser().getUid()).addValueEventListener(new ValueEventListener() {
-                                                                                                                @Override
-                                                                                                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                                                                                                    if (dataSnapshot != null) {
-                                                                                                                        if (dataSnapshot.getValue() != null) {
-                                                                                                                            UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                                                                                            UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(), userModel.getPicUrl(), userModel.getUid());
-                                                                                                                            UserModel.myObj = userModel1;
-//                                                                                    if (userModel.getUser_type() == 3) {
-//                                                                                        //User Screen
-//                                                                                        startActivity(new Intent(LoginActivity.this, UserHome.class));
-//                                                                                    } else if (userModel.getUser_type() == 1) {
-//                                                                                        //Admin Screen
-//                                                                                        startActivity(new Intent(LoginActivity.this, AdminHome.class));
-//                                                                                    } else if (userModel.getUser_type() == 2) {
-//                                                                                        //Uc Screen
-//                                                                                        startActivity(new Intent(LoginActivity.this, UcHome.class));
-//                                                                                    } else if (userModel.getUser_type() == 4) {
-//                                                                                        startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
-//                                                                                    }
-                                                                                                                            finish();
-                                                                                                                        }
-                                                                                                                    }
-                                                                                                                }
-
-                                                                                                                @Override
-                                                                                                                public void onCancelled(DatabaseError databaseError) {
-
-                                                                                                                }
-                                                                                                            });
-                                                                                                        } else if (!task.isSuccessful()) {
-                                                                                                            progressDialog.dismiss();
-                                                                                                            //     AppLogs.logw("signInWithEmail" + task.getException());
-                                                                                                            //   Toast.makeText(LoginActivity.this, "" + task.getException(),
-                                                                                                            //         Toast.LENGTH_LONG).show();
-                                                                                                        }
-                                                                                                    }
-                                                                                                });
+                                                                                                startActivity(new Intent(LoginActivity.this, UcHome.class));
+                                                                                                finish();
+                                                                                                break;
+                                                                                            } else {
+                                                                                                uc_flag = false;
+                                                                                                progressDialog.dismiss();
+                                                                                                Snackbar.make(view, "Enter Correct Password", Snackbar.LENGTH_SHORT).show();
                                                                                             }
                                                                                         } else {
-                                                                                            progressDialog.dismiss();
-                                                                                            Snackbar.make(view, "Please Input valid Email & Password", Snackbar.LENGTH_SHORT).show();
+                                                                                            uc_flag = false;
                                                                                         }
-                                                                                    } else {
+                                                                                    }
+                                                                                    if (!uc_flag) {
                                                                                         mAuth.signInWithEmailAndPassword(emails, passo).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                                                                             @Override
                                                                                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -447,110 +583,23 @@ public class LoginActivity extends AppCompatActivity {
                                                                                         });
                                                                                     }
                                                                                 }
+                                                                            } else {
+                                                                                mAuth.signInWithEmailAndPassword(emails, passo).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                                                                    @Override
+                                                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                                        if (task.isSuccessful()) {
+                                                                                            AppLogs.logd("signInWithEmail:onComplete:" + task.isSuccessful());
+                                                                                            Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                                                                                            progressDialog.dismiss();
 
-                                                                                @Override
-                                                                                public void onCancelled(DatabaseError databaseError) {
-
-                                                                                }
-                                                                            });
-                                                                }
-                                                            }
-                                                        });
-                                                    }
-                                                } else {
-                                                    mAuth.signInWithEmailAndPassword(emails, passo).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<AuthResult> task) {
-                                                            if (task.isSuccessful()) {
-                                                                AppLogs.logd("signInWithEmail:onComplete:" + task.isSuccessful());
-                                                                Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                                                progressDialog.dismiss();
-
-                                                                FirebaseHandler.getInstance().getUsersRef().child(task.getResult().getUser().getUid()).addValueEventListener(new ValueEventListener() {
-                                                                    @Override
-                                                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                                                        if (dataSnapshot != null) {
-                                                                            if (dataSnapshot.getValue() != null) {
-                                                                                UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                                                UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(), userModel.getPicUrl(), userModel.getUid());
-                                                                                UserModel.myObj = userModel1;
-//                                                                                    if (userModel.getUser_type() == 3) {
-//                                                                                        //User Screen
-//                                                                                        startActivity(new Intent(LoginActivity.this, UserHome.class));
-//                                                                                    } else if (userModel.getUser_type() == 1) {
-//                                                                                        //Admin Screen
-//                                                                                        startActivity(new Intent(LoginActivity.this, AdminHome.class));
-//                                                                                    } else if (userModel.getUser_type() == 2) {
-//                                                                                        //Uc Screen
-//                                                                                        startActivity(new Intent(LoginActivity.this, UcHome.class));
-//                                                                                    } else if (userModel.getUser_type() == 4) {
-//                                                                                        startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
-//                                                                                    }
-                                                                                finish();
-                                                                            }
-                                                                        }
-                                                                    }
-
-                                                                    @Override
-                                                                    public void onCancelled(DatabaseError databaseError) {
-
-                                                                    }
-                                                                });
-                                                            } else if (!task.isSuccessful()) {
-                                                                //    progressDialog.dismiss();
-                                                                //   AppLogs.logw("signInWithEmail" + task.getException());
-                                                                //  Toast.makeText(LoginActivity.this, "" + task.getException(),
-                                                                //         Toast.LENGTH_LONG).show();
-                                                                //   progressDialog.dismiss();
-                                                                //    AppLogs.logw("signInWithEmail" + task.getException());
-                                                                //     Toast.makeText(LoginActivity.this, "" + task.getException(),
-                                                                //            Toast.LENGTH_LONG).show();
-                                                                FirebaseHandler.getInstance().getUc_members()
-                                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                            @Override
-                                                                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                                                                if (dataSnapshot != null) {
-                                                                                    if (dataSnapshot.getValue() != null) {
-                                                                                        for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                                                                            UC_Object uc_object = data.getValue(UC_Object.class);
-                                                                                            if (uc_object.getUc_member_email().equals(emails)) {
-                                                                                                if (passo.equals("pakistan")) {
-
-                                                                                                    uc_flag = true;
-                                                                                                    Team_MemberObject team_memberObject = new Team_MemberObject("", "", "", "", "", "", "", "", "");
-                                                                                                    SharedPref_Team.setCurrentUser(LoginActivity.this, team_memberObject);
-                                                                                                    SharedPref_UC.setCurrentUser(LoginActivity.this, uc_object);
-                                                                                                    progressDialog.dismiss();
-
-                                                                                                    startActivity(new Intent(LoginActivity.this, UcHome.class));
-                                                                                                    finish();
-                                                                                                    break;
-                                                                                                } else {
-                                                                                                    uc_flag = false;
-                                                                                                    progressDialog.dismiss();
-                                                                                                    Snackbar.make(view, "Enter Correct Password", Snackbar.LENGTH_SHORT).show();
-                                                                                                }
-                                                                                            } else {
-                                                                                                uc_flag = false;
-                                                                                            }
-                                                                                        }
-                                                                                        if (!uc_flag) {
-                                                                                            mAuth.signInWithEmailAndPassword(emails, passo).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                                                                            FirebaseHandler.getInstance().getUsersRef().child(task.getResult().getUser().getUid()).addValueEventListener(new ValueEventListener() {
                                                                                                 @Override
-                                                                                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                                                                                    if (task.isSuccessful()) {
-                                                                                                        AppLogs.logd("signInWithEmail:onComplete:" + task.isSuccessful());
-                                                                                                        Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                                                                                        progressDialog.dismiss();
-
-                                                                                                        FirebaseHandler.getInstance().getUsersRef().child(task.getResult().getUser().getUid()).addValueEventListener(new ValueEventListener() {
-                                                                                                            @Override
-                                                                                                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                                                                                                if (dataSnapshot != null) {
-                                                                                                                    if (dataSnapshot.getValue() != null) {
-                                                                                                                        UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                                                                                        UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(), userModel.getPicUrl(), userModel.getUid());
-                                                                                                                        UserModel.myObj = userModel1;
+                                                                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                                                    if (dataSnapshot != null) {
+                                                                                                        if (dataSnapshot.getValue() != null) {
+                                                                                                            UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                                                                                                            UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(), userModel.getPicUrl(), userModel.getUid());
+                                                                                                            UserModel.myObj = userModel1;
 //                                                                                    if (userModel.getUser_type() == 3) {
 //                                                                                        //User Screen
 //                                                                                        startActivity(new Intent(LoginActivity.this, UserHome.class));
@@ -563,109 +612,60 @@ public class LoginActivity extends AppCompatActivity {
 //                                                                                    } else if (userModel.getUser_type() == 4) {
 //                                                                                        startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
 //                                                                                    }
-                                                                                                                        finish();
-                                                                                                                    }
-                                                                                                                }
-                                                                                                            }
-
-                                                                                                            @Override
-                                                                                                            public void onCancelled(DatabaseError databaseError) {
-
-                                                                                                            }
-                                                                                                        });
-                                                                                                    } else if (!task.isSuccessful()) {
-                                                                                                        progressDialog.dismiss();
-                                                                                                        AppLogs.logw("signInWithEmail" + task.getException());
-                                                                                                        Toast.makeText(LoginActivity.this, "" + task.getException(),
-                                                                                                                Toast.LENGTH_LONG).show();
-                                                                                                    }
-                                                                                                }
-                                                                                            });
-                                                                                        }
-                                                                                    }
-                                                                                } else {
-                                                                                    mAuth.signInWithEmailAndPassword(emails, passo).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                                                                        @Override
-                                                                                        public void onComplete(@NonNull Task<AuthResult> task) {
-                                                                                            if (task.isSuccessful()) {
-                                                                                                AppLogs.logd("signInWithEmail:onComplete:" + task.isSuccessful());
-                                                                                                Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                                                                                progressDialog.dismiss();
-
-                                                                                                FirebaseHandler.getInstance().getUsersRef().child(task.getResult().getUser().getUid()).addValueEventListener(new ValueEventListener() {
-                                                                                                    @Override
-                                                                                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                                                                                        if (dataSnapshot != null) {
-                                                                                                            if (dataSnapshot.getValue() != null) {
-                                                                                                                UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                                                                                                                UserModel userModel1 = new UserModel(userModel.getName(), userModel.getFname(), userModel.getAddress(), userModel.getEmail(), userModel.getPassword(), userModel.getCnic(), userModel.getCellNo(), userModel.getUser_type(), userModel.getPicUrl(), userModel.getUid());
-                                                                                                                UserModel.myObj = userModel1;
-//                                                                                    if (userModel.getUser_type() == 3) {
-//                                                                                        //User Screen
-//                                                                                        startActivity(new Intent(LoginActivity.this, UserHome.class));
-//                                                                                    } else if (userModel.getUser_type() == 1) {
-//                                                                                        //Admin Screen
-//                                                                                        startActivity(new Intent(LoginActivity.this, AdminHome.class));
-//                                                                                    } else if (userModel.getUser_type() == 2) {
-//                                                                                        //Uc Screen
-//                                                                                        startActivity(new Intent(LoginActivity.this, UcHome.class));
-//                                                                                    } else if (userModel.getUser_type() == 4) {
-//                                                                                        startActivity(new Intent(LoginActivity.this, TeamMemberActivity.class));
-//                                                                                    }
-                                                                                                                finish();
-                                                                                                            }
+                                                                                                            finish();
                                                                                                         }
                                                                                                     }
+                                                                                                }
 
-                                                                                                    @Override
-                                                                                                    public void onCancelled(DatabaseError databaseError) {
+                                                                                                @Override
+                                                                                                public void onCancelled(DatabaseError databaseError) {
 
-                                                                                                    }
-                                                                                                });
-                                                                                            } else if (!task.isSuccessful()) {
-                                                                                                progressDialog.dismiss();
-                                                                                                AppLogs.logw("signInWithEmail" + task.getException());
-                                                                                                //        Toast.makeText(LoginActivity.this, "" + task.getException(),
-                                                                                                //                 Toast.LENGTH_LONG).show();
-                                                                                            }
+                                                                                                }
+                                                                                            });
+                                                                                        } else if (!task.isSuccessful()) {
+                                                                                            progressDialog.dismiss();
+                                                                                            AppLogs.logw("signInWithEmail" + task.getException());
+                                                                                            //        Toast.makeText(LoginActivity.this, "" + task.getException(),
+                                                                                            //                 Toast.LENGTH_LONG).show();
                                                                                         }
-                                                                                    });
-                                                                                }
+                                                                                    }
+                                                                                });
                                                                             }
+                                                                        }
 
-                                                                            @Override
-                                                                            public void onCancelled(DatabaseError databaseError) {
+                                                                        @Override
+                                                                        public void onCancelled(DatabaseError databaseError) {
 
-                                                                            }
-                                                                        });
-                                                            }
+                                                                        }
+                                                                    });
                                                         }
-                                                    });
-                                                }
+                                                    }
+                                                });
                                             }
                                         }
+                                    }
 
-                                        @Override
-                                        public void onCancelled(DatabaseError databaseError) {
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
 
-                                        }
-                                    });
+                                    }
+                                });
 
 
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                            progressDialog.dismiss();
-                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        progressDialog.dismiss();
                     }
                 }
-            });
+            }
+        });
 
 
-        }
-
-        @Override
-        public void onBackPressed () {
-            super.onBackPressed();
-
-        }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
+}

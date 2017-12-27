@@ -19,11 +19,12 @@ public class Team_MemberObject implements Parcelable {
     public String member_pic;
     public String team_uid;
     public String uc_id;
+    public String status;
 
     public Team_MemberObject() {
     }
 
-    public Team_MemberObject(String member_name, String member_email, String member_nic_no, String member_type, String member_phone_no, String member_uid, String member_pic, String team_uid, String uc_id) {
+    public Team_MemberObject(String member_name, String member_email, String member_nic_no, String member_type, String member_phone_no, String member_uid, String member_pic, String team_uid, String uc_id, String status) {
         this.member_name = member_name;
         this.member_email = member_email;
         this.member_nic_no = member_nic_no;
@@ -33,6 +34,7 @@ public class Team_MemberObject implements Parcelable {
         this.member_pic = member_pic;
         this.team_uid = team_uid;
         this.uc_id = uc_id;
+        this.status = status;
     }
 
     protected Team_MemberObject(Parcel in) {
@@ -45,6 +47,15 @@ public class Team_MemberObject implements Parcelable {
         member_pic = in.readString();
         team_uid = in.readString();
         uc_id = in.readString();
+        status = in.readString();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public static final Creator<Team_MemberObject> CREATOR = new Creator<Team_MemberObject>() {
@@ -147,5 +158,6 @@ public class Team_MemberObject implements Parcelable {
         dest.writeString(member_pic);
         dest.writeString(team_uid);
         dest.writeString(uc_id);
+        dest.writeString(status);
     }
 }

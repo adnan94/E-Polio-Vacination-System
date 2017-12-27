@@ -29,6 +29,7 @@ import com.example.ali.myapplication.Activities.Uc_Ui.Add_Polio_TeamActivity;
 import com.example.ali.myapplication.Activities.Uc_Ui.Applied_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.Completed_Forms;
 import com.example.ali.myapplication.Activities.Uc_Ui.In_Progress_Forms;
+import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.Activities.Utils.Service;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_Team;
 import com.example.ali.myapplication.Activities.Utils.SharedPref_UC;
@@ -50,8 +51,8 @@ public class TeamMemberActivity extends AppCompatActivity {
     public FrameLayout maincontainer_uc;
     public DrawerLayout drawer_layout;
     public String[] menuName = {"Home", "View Forms", "Terms & Conditions", "Setting", "LogOut"};
-    public int a[]={R.drawable.home,R.drawable.terms,R.drawable.view_token
-            ,R.drawable.settingss,R.drawable.logout};
+    public int a[] = {R.drawable.home, R.drawable.terms, R.drawable.view_token
+            , R.drawable.settingss, R.drawable.logout};
 
     private ActionBarDrawerToggle mDrawerToggle;
     public static TextView ActionBartitle;
@@ -60,6 +61,7 @@ public class TeamMemberActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_member);
+        FirebaseHandler.getInstance().getPolio_teams().child(SharedPref_Team.getCurrentUser(TeamMemberActivity.this).getTeam_uid()).child(SharedPref_Team.getCurrentUser(TeamMemberActivity.this).getMember_uid()).child("status").setValue("Active");
         getSupportFragmentManager().beginTransaction().add(R.id.maincontainer, new TeamMemberHomeFragment()).addToBackStack(null).commit();
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
         maincontainer_uc = (FrameLayout) findViewById(R.id.maincontainer);
@@ -84,14 +86,15 @@ public class TeamMemberActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 1) {
-                  getSupportFragmentManager().popBackStack(1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    getSupportFragmentManager().popBackStack(1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 2) {
-                   drawer_layout.closeDrawer(Gravity.LEFT);
+                    drawer_layout.closeDrawer(Gravity.LEFT);
                     getSupportFragmentManager().beginTransaction().add(R.id.maincontainer, new Form_List_Team_Member()).addToBackStack(null).commit();
 
                 } else if (i == 5) {
-                    Team_MemberObject uc_object = new Team_MemberObject("", "", "", "", "", "", "", "","");
+                    FirebaseHandler.getInstance().getPolio_teams().child(SharedPref_Team.getCurrentUser(TeamMemberActivity.this).getTeam_uid()).child(SharedPref_Team.getCurrentUser(TeamMemberActivity.this).getMember_uid()).child("status").setValue("NotActive");
+                    Team_MemberObject uc_object = new Team_MemberObject("", "", "", "", "", "", "", "", "", "");
                     SharedPref_Team.setCurrentUser(TeamMemberActivity.this, uc_object);
                     Intent intent = new Intent(TeamMemberActivity.this, LoginActivity.class);
                     startActivity(intent);
