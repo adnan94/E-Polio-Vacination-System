@@ -1,5 +1,6 @@
 package com.example.ali.myapplication.Activities.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -51,6 +52,7 @@ public class AdminHome extends AppCompatActivity {
     public static TextView ActionBartitle;
     public RelativeLayout maincontainer_admin;
     public TextView add_schedule,polio_forms,monitoring,uc_list;
+    public static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class AdminHome extends AppCompatActivity {
         setContentView(R.layout.activity_admin_home);
         //    listUc = (Button) findViewById(R.id.ucList);
         slider();
+        activity=this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_outside);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(0, android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE);
