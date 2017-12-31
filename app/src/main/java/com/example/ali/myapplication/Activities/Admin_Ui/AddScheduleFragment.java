@@ -3,7 +3,8 @@ package com.example.ali.myapplication.Activities.Admin_Ui;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
+
+
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
+import com.example.ali.myapplication.Activities.Adaptor.RangeTimePickerDialog;
 import com.example.ali.myapplication.Activities.Adaptor.Team_visitDate;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Schedule;
 import com.example.ali.myapplication.Activities.ModelClasses.Polio_Team;
@@ -76,6 +79,7 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
     public ProgressDialog progressDialog;
     AlertDialog alertDialog;
     public TextView add_to_schdeule,from,too,schedule_t,sceh_des,datess;
+    public int min_from,min_to,max_for,max_to;
 
     @Nullable
     @Override
@@ -355,15 +359,19 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
 
                     int hour = time_fromm.get(Calendar.HOUR_OF_DAY);
                     int minute = time_fromm.get(Calendar.MINUTE);
-                    TimePickerDialog mTimePicker;
-                    mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    RangeTimePickerDialog mTimePicker;
+                    mTimePicker = new RangeTimePickerDialog(getActivity(), new RangeTimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                             time_from.setText(selectedHour + ":" + selectedMinute);
+                            min_from = selectedHour;
+                            min_to = selectedMinute;
+                            time_to.setEnabled(true);
                         }
                     }, hour, minute, true);//Yes 24 hour time
                     mTimePicker.setTitle("Select Time");
-
+            //        mTimePicker.setMin(time_fromm.get(Calendar.HOUR_OF_DAY),time_fromm.get(Calendar.MINUTE));
+            //        mTimePicker.setMax(max_for,max_to);
                     mTimePicker.show();
 
                     return true;
@@ -380,14 +388,16 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
                     Calendar mcurrentTime = Calendar.getInstance();
                     int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                     int minute = mcurrentTime.get(Calendar.MINUTE);
-                    TimePickerDialog mTimePicker;
-                    mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    RangeTimePickerDialog mTimePicker;
+                    mTimePicker = new RangeTimePickerDialog(getActivity(), new RangeTimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                              time_to.setText(selectedHour + ":" + selectedMinute);
                         }
                     }, hour, minute, true);//Yes 24 hour time
                     mTimePicker.setTitle("Select Time");
+                    mTimePicker.setMin(min_from,min_to);
+             //       mTimePicker.setMax(max_for,max_to);
                     mTimePicker.show();
 
                 return true;
@@ -486,6 +496,7 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         // schedule_from.setTag(myCalendarStart.getTimeInMillis());
         visit_date.setText(sdf.format(dialog_calender.getTime()));
+        time_from.setEnabled(true);
     }
 
     private void updateLabelStart() {
@@ -493,6 +504,7 @@ public class AddScheduleFragment extends android.support.v4.app.Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         // schedule_from.setTag(myCalendarStart.getTimeInMillis());
         schedule_from.setText(sdf.format(myCalendarStart.getTime()));
+     //   time_to.setEnabled(true);
     }
 
     private void updateLabelend() {

@@ -41,6 +41,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Sami Khan on 10/7/2017.
@@ -89,15 +91,15 @@ public class Add_form extends android.support.v4.app.Fragment {
     public boolean checkEmptyFields() {
 
         boolean flag = true;
-        if (cnic.getText().toString().length() == 0) {
+        if (cnic.getText().toString().length() == 0 || cnic.getText().toString().length() >13 || cnic.getText().toString().length() <13) {
             cnic.setError("Enter Applicant Cnic");
             flag = false;
         }
-        if (name.getText().toString().length() == 0) {
+        if (name.getText().toString().length() == 0 ||  check_validation(name.getText().toString())) {
             name.setError("Enter Applicant Name");
             flag = false;
         }
-        if (childName.getText().toString().length() == 0) {
+        if (childName.getText().toString().length() == 0 ||  check_validation(childName.getText().toString())) {
             childName.setError("Enter Child Name");
             flag = false;
         }
@@ -109,23 +111,23 @@ public class Add_form extends android.support.v4.app.Fragment {
 //            religion.setError("Enter Religion ");
 //            flag = false;
 //        }
-        if (fatherCnic.getText().toString().length() == 0) {
+        if (fatherCnic.getText().toString().length() == 0 || fatherCnic.getText().toString().length() >13 || fatherCnic.getText().toString().length() <13) {
             fatherCnic.setError("Enter Father Cnic");
             flag = false;
         }
-        if (fatherName.getText().toString().length() == 0) {
+        if (fatherName.getText().toString().length() == 0 ||  check_validation(fatherName.getText().toString())) {
             flag = false;
             fatherName.setError("Enter Father Name");
         }
-        if (motherName.getText().toString().length() == 0) {
+        if (motherName.getText().toString().length() == 0 ||  check_validation(motherName.getText().toString())) {
             flag = false;
             motherName.setError("Enter Mother Name");
         }
-        if (motherCnic.getText().toString().length() == 0) {
+        if (motherCnic.getText().toString().length() == 0 || motherCnic.getText().toString().length() >13 || motherCnic.getText().toString().length() <13) {
             flag = false;
             motherCnic.setError("Enter Mother Cnic");
         }
-        if (areaOfBirth.getText().toString().length() == 0) {
+        if (areaOfBirth.getText().toString().length() == 0 || check_validation(areaOfBirth.getText().toString())) {
             flag = false;
             areaOfBirth.setError("Enter Area Of Birth");
         }
@@ -133,12 +135,12 @@ public class Add_form extends android.support.v4.app.Fragment {
             flag = false;
             dateOfBirth.setError("Enter Date Of Birth");
         }
-        if (address.getText().toString().length() == 0) {
+        if (address.getText().toString().length() == 0 || check_validation(areaOfBirth.getText().toString())) {
             flag = false;
             address.setError("Enter Address");
 //            address.requestFocus();
         }
-        if (cell.getText().toString().length() == 0) {
+        if (cell.getText().toString().length() == 0 || motherCnic.getText().toString().length() >11 || motherCnic.getText().toString().length() <11 ) {
             flag = false;
             cell.setError("Enter Contact Number");
 //            address.requestFocus();
@@ -505,5 +507,25 @@ public class Add_form extends android.support.v4.app.Fragment {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         dateOfBirth.setText(sdf.format(myCalendar.getTime()));
+    }
+    public boolean check_validation(String inputStr){
+
+        boolean flag;
+
+        Pattern pattern = Pattern.compile(new String ("^[a-zA-Z]+( [a-zA-z]+)*$"));
+        Matcher matcher = pattern.matcher(inputStr);
+
+        if(matcher.matches())
+        {
+            //if pattern matches
+            flag = false;
+        }
+        else
+        {
+            flag = true;
+            //if pattern does not matches
+        }
+
+        return flag;
     }
 }

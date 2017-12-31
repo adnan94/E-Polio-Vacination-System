@@ -387,6 +387,8 @@ public class LoginActivity extends AppCompatActivity {
                                                                                                             });
                                                                                                         } else if (!task.isSuccessful()) {
                                                                                                             progressDialog.dismiss();
+                                                                                                            Snackbar.make(view, "Please Input valid Email & Password", Snackbar.LENGTH_SHORT).show();
+
                                                                                                             //     AppLogs.logw("signInWithEmail" + task.getException());
                                                                                                             //   Toast.makeText(LoginActivity.this, "" + task.getException(),
                                                                                                             //         Toast.LENGTH_LONG).show();

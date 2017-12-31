@@ -47,6 +47,7 @@ import com.example.ali.myapplication.Activities.User_Ui.Add_form;
 import com.example.ali.myapplication.Activities.User_Ui.UserFormListScreen;
 import com.example.ali.myapplication.Activities.User_Ui.UserHomeFragment;
 import com.example.ali.myapplication.Activities.User_Ui.UserTerms_Fragment;
+import com.example.ali.myapplication.Activities.User_Ui.ViewSchedule_Fragment;
 import com.example.ali.myapplication.Activities.Utils.FirebaseHandler;
 import com.example.ali.myapplication.Activities.Utils.SharedPref;
 import com.example.ali.myapplication.Activities.Utils.Utils;
@@ -79,8 +80,8 @@ public class UserHome extends AppCompatActivity {
     public ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     public LinearLayout customer_container;
-    public String[] menuName = {"Home", "Terms & Conditions", "View Fill Forms", "Add Form", "Setting", "Logout"};
-    public int a[] = {R.drawable.home, R.drawable.terms, R.drawable.view_token,
+    public String[] menuName = {"Home", "Terms & Conditions", "View Fill Forms","View Schedule", "Add Form", "Setting", "Logout"};
+    public int a[] = {R.drawable.home, R.drawable.terms, R.drawable.view_token,R.drawable.calendar,
             R.drawable.file, R.drawable.settingss, R.drawable.logout};
     public ImageView back_arrow;
     private Uri destination;
@@ -154,7 +155,7 @@ public class UserHome extends AppCompatActivity {
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserHomeFragment()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
-                } else if (i == 6) {
+                } else if (i == 7) {
                     //    getSupportFragmentManager().popBackStack();
                     FirebaseAuth.getInstance().signOut();
                     finish();
@@ -163,7 +164,7 @@ public class UserHome extends AppCompatActivity {
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserFormListScreen()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
-                } else if (i == 4) {
+                } else if (i == 5) {
                     final AlertDialog.Builder alert = new AlertDialog.Builder(UserHome.this);
                     LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
                     View vieww = layoutInflater.inflate(R.layout.alert_confirm_home, null);
@@ -201,13 +202,17 @@ public class UserHome extends AppCompatActivity {
                     alertDialog.show();
 
 
-                } else if (i == 5) {
+                } else if (i == 6) {
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new SettingFragment()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
                 } else if (i == 2) {
                     getSupportFragmentManager().popBackStack();
                     getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new UserTerms_Fragment()).addToBackStack(null).commit();
+                    drawer_layout.closeDrawer(mDrawerList);
+                }else if(i==4){
+                    getSupportFragmentManager().popBackStack();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.maincontainer, new ViewSchedule_Fragment()).addToBackStack(null).commit();
                     drawer_layout.closeDrawer(mDrawerList);
                 }
             }

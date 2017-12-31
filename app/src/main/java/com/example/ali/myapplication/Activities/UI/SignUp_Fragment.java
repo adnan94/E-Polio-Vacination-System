@@ -149,7 +149,13 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
         verfiy_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                verifyPhoneNumberWithCode(mVerificationId,code_area.getText().toString());
+                if(code_area.getText().toString().equals("") || code_area.getText().toString().length()==0) {
+                    Snackbar.make(view,"Please Enter Valid Code",Snackbar.LENGTH_SHORT).show();
+
+                }else{
+                    verifyPhoneNumberWithCode(mVerificationId, code_area.getText().toString());
+
+                }
             }
         });
 
@@ -389,7 +395,7 @@ public class SignUp_Fragment extends android.support.v4.app.Fragment {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
                                 // [START_EXCLUDE silent]
-                                code_area.setError("Invalid code.");
+                                Toast.makeText(getActivity(),"Invalid code.",Toast.LENGTH_SHORT).show();
                                 // [END_EXCLUDE]
                             }
                             // [START_EXCLUDE silent]

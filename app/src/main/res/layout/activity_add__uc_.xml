@@ -132,6 +132,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="MEMBER NIC NO"
+                        android:maxLength="13"
                         android:inputType="number"
                         android:textSize="12sp" />
 
@@ -170,6 +171,7 @@
                         android:layout_height="wrap_content"
                         android:hint="MEMBER PHONE NO"
                         android:inputType="number"
+                        android:maxLength="11"
                         android:textSize="12sp" />
 
 
