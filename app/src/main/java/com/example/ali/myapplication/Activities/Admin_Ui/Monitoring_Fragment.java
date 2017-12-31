@@ -18,6 +18,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.util.Util;
+import com.example.ali.myapplication.Activities.Activity.AdminHome;
 import com.example.ali.myapplication.Activities.ModelClasses.BForm;
 import com.example.ali.myapplication.Activities.ModelClasses.Team_MemberObject;
 import com.example.ali.myapplication.Activities.ModelClasses.Tracking;
@@ -110,6 +111,7 @@ public class Monitoring_Fragment extends android.support.v4.app.Fragment impleme
                 childEventListenerStatus = this;
                 if (dataSnapshot.getValue() != null) {
                     if (childChangeCount == 0) {
+                        //////////////////////////////////////////////////////////////////
                         ++childChangeCount;
 
                         for (final DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
@@ -185,10 +187,55 @@ public class Monitoring_Fragment extends android.support.v4.app.Fragment impleme
                                     }
 
 
+                                } else {
+                                    if (team_memberObject.getStatus().equals("Active")) {
+                                        FirebaseDatabase.getInstance().getReference().child("TeamTracking").child(team_memberObject.getMember_uid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                if (dataSnapshot.getValue() != null) {
+                                                    final double lat = Double.valueOf(dataSnapshot.child("lat").getValue().toString());
+                                                    final double lng = Double.valueOf(dataSnapshot.child("lng").getValue().toString());
+                                                    final String teamId = dataSnapshot.child("teamId").getValue().toString();
+                                                    final String ucId = dataSnapshot.child("uc_id").getValue().toString();
+                                                    final String key = dataSnapshot.getKey();
+                                                    FirebaseDatabase.getInstance().getReference().child("uc_teams").child(ucId).child(teamId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                                            if (dataSnapshot.getValue() != null) {
+                                                                boolean flag = true;
+
+                                                                if (dataSnapshot.child("team_status").getValue().toString().equals("Activated")) {
+                                                                    listTracking.add(new Tracking(lat, lng, key, team_memberObject.member_name, map.addMarker(new MarkerOptions()
+                                                                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.tour_icon_marker))
+                                                                            .title(team_memberObject.getMember_name())
+                                                                            .position(new LatLng(lat, lng)))));
+
+                                                                }
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(DatabaseError databaseError) {
+
+                                                        }
+                                                    });
+                                                }
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+
+                                    }
+
+
                                 }
                             }
                         }
-
+///////////////////////////////////////////////////////////////////////////////////////
                     } else {
                         childChangeCount = 0;
                         Log.d("Adnan", "else");
@@ -262,6 +309,51 @@ public class Monitoring_Fragment extends android.support.v4.app.Fragment impleme
                                             });
 
                                         }
+
+                                    }
+
+
+                                } else {
+                                    if (team_memberObject.getStatus().equals("Active")) {
+                                        FirebaseDatabase.getInstance().getReference().child("TeamTracking").child(team_memberObject.getMember_uid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                if (dataSnapshot.getValue() != null) {
+                                                    final double lat = Double.valueOf(dataSnapshot.child("lat").getValue().toString());
+                                                    final double lng = Double.valueOf(dataSnapshot.child("lng").getValue().toString());
+                                                    final String teamId = dataSnapshot.child("teamId").getValue().toString();
+                                                    final String ucId = dataSnapshot.child("uc_id").getValue().toString();
+                                                    final String key = dataSnapshot.getKey();
+                                                    FirebaseDatabase.getInstance().getReference().child("uc_teams").child(ucId).child(teamId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                                            if (dataSnapshot.getValue() != null) {
+                                                                boolean flag = true;
+
+                                                                if (dataSnapshot.child("team_status").getValue().toString().equals("Activated")) {
+                                                                    listTracking.add(new Tracking(lat, lng, key, team_memberObject.member_name, map.addMarker(new MarkerOptions()
+                                                                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.tour_icon_marker))
+                                                                            .title(team_memberObject.getMember_name())
+                                                                            .position(new LatLng(lat, lng)))));
+
+                                                                }
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(DatabaseError databaseError) {
+
+                                                        }
+                                                    });
+                                                }
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
 
                                     }
 
@@ -396,8 +488,8 @@ public class Monitoring_Fragment extends android.support.v4.app.Fragment impleme
                                                                             .title(listTracking.get(finalI).getName())
                                                                             .position(new LatLng(lat, lng)))));
                                                                     listTracking.get(finalI).getMarker().remove();
-                                                                    listTracking.remove(finalI);
-                                                                    Utils.toast(getActivity(), "Updated");
+                                                                     listTracking.remove(finalI);
+                                                                    Utils.toast(AdminHome.activity, "Updated");
 
 
                                                                 }

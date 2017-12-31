@@ -1,6 +1,7 @@
 package com.example.ali.myapplication.Activities.Activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -166,6 +167,7 @@ public class LoginActivity extends AppCompatActivity {
         //   fbSignIn = false;
 
         if (SharedPref.getCurrentUser(LoginActivity.this) != null) {
+
             UserModel user = SharedPref.getCurrentUser(LoginActivity.this);
             useremail.setText(user.getEmail());
             userpass.setText(user.getPassword());
@@ -197,6 +199,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
+
                 final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, "Sign In", "Connecting...", true, false);
                 final String emails = useremail.getText().toString();
                 final String passo = userpass.getText().toString();
