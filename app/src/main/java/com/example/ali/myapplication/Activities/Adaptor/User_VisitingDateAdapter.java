@@ -58,23 +58,23 @@ public class User_VisitingDateAdapter extends BaseAdapter {
 
         String datee[] = visit_dateObjects.get(i).getVisit_date().split("/");
 
-        if(datee[1].equals("1")){
+        if(datee[1].equals("01")){
             month.setText("Jan");
-        }else if(datee[1].equals("2")){
+        }else if(datee[1].equals("02")){
             month.setText("Feb");
-        }else if(datee[1].equals("3")){
+        }else if(datee[1].equals("03")){
             month.setText("Mar");
-        }else if(datee[1].equals("4")){
+        }else if(datee[1].equals("04")){
             month.setText("Apr");
-        }else if(datee[1].equals("5")){
+        }else if(datee[1].equals("05")){
             month.setText("May");
-        }else if(datee[1].equals("6")){
+        }else if(datee[1].equals("06")){
             month.setText("Jun");
-        }else if(datee[1].equals("7")){
+        }else if(datee[1].equals("07")){
             month.setText("Jul");
-        }else if(datee[1].equals("8")){
+        }else if(datee[1].equals("08")){
             month.setText("Aug");
-        }else if(datee[1].equals("9")){
+        }else if(datee[1].equals("09")){
             month.setText("Sep");
         }else if(datee[1].equals("10")){
             month.setText("Oct");

@@ -26,15 +26,6 @@
             android:layout_margin="10dp"
             android:visibility="visible">
 
-            <Button
-                android:id="@+id/locationSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="20dp"
-                android:background="@mipmap/search_bar_drop_off"
-                android:text="Search Location"
-                android:textColor="#000" />
 
 
             <ImageView
@@ -42,7 +33,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@mipmap/home_map_icon" />
+                android:src="@mipmap/home_map_icon"
+                android:visibility="gone"
+                />
 
             <LinearLayout
                 android:id="@+id/linearLayout7"
@@ -61,7 +54,15 @@
                     android:layout_gravity="right"
                     android:layout_margin="5dp"
                     android:background="#00000000"
+                    android:visibility="gone"
                     android:src="@mipmap/gps_location_icon" />
+                <Button
+                    android:id="@+id/locationSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/search_bar_drop_off"
+                    android:text="Search Location"
+                    android:textColor="#000" />
 
                 <Button
                     android:id="@+id/submit"

@@ -58,23 +58,23 @@ public class Team_visitDate extends BaseAdapter {
 
         date_visit.setText(s[0]);
 
-        if(s[1].equals("1")){
+        if(s[1].equals("01")){
             s[1] = "January";
-        }else if(s[1].equals("2")){
+        }else if(s[1].equals("02")){
             s[1] = "February";
-        }else if(s[1].equals("3")){
+        }else if(s[1].equals("03")){
             s[1] = "March";
-        }else if(s[1].equals("4")){
+        }else if(s[1].equals("04")){
             s[1] = "April";
-        }else if(s[1].equals("5")){
+        }else if(s[1].equals("05")){
             s[1] = "May";
-        }else if(s[1].equals("6")){
+        }else if(s[1].equals("06")){
             s[1] = "June";
-        }else if(s[1].equals("7")){
+        }else if(s[1].equals("07")){
             s[1] = "July";
-        }else if(s[1].equals("8")){
+        }else if(s[1].equals("08")){
             s[1] = "August";
-        }else if(s[1].equals("9")){
+        }else if(s[1].equals("09")){
             s[1] = "September";
         }else if(s[1].equals("10")){
             s[1] = "October";

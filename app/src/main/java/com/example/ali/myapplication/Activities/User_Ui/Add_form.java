@@ -127,7 +127,7 @@ public class Add_form extends android.support.v4.app.Fragment {
             flag = false;
             motherCnic.setError("Enter Mother Cnic");
         }
-        if (areaOfBirth.getText().toString().length() == 0 || check_validation(areaOfBirth.getText().toString())) {
+        if (areaOfBirth.getText().toString().length() == 0 ) {
             flag = false;
             areaOfBirth.setError("Enter Area Of Birth");
         }
@@ -135,12 +135,12 @@ public class Add_form extends android.support.v4.app.Fragment {
             flag = false;
             dateOfBirth.setError("Enter Date Of Birth");
         }
-        if (address.getText().toString().length() == 0 || check_validation(areaOfBirth.getText().toString())) {
+        if (address.getText().toString().length() == 0 ) {
             flag = false;
             address.setError("Enter Address");
 //            address.requestFocus();
         }
-        if (cell.getText().toString().length() == 0 || motherCnic.getText().toString().length() >11 || motherCnic.getText().toString().length() <11 ) {
+        if (cell.getText().toString().length() == 0 || cell.getText().toString().length() >11 || cell.getText().toString().length() <11 ) {
             flag = false;
             cell.setError("Enter Contact Number");
 //            address.requestFocus();
@@ -262,10 +262,12 @@ public class Add_form extends android.support.v4.app.Fragment {
                     if (location == null) {
                         Snackbar.make(v, "Add Location", Snackbar.LENGTH_SHORT).show();
 
-                    } else {
-                        Snackbar.make(v, "Empty Fields Not Allowed", Snackbar.LENGTH_SHORT).show();
-
                     }
+
+//                    else {
+//                        Snackbar.make(v, "Empty Fields Not Allowed", Snackbar.LENGTH_SHORT).show();
+//
+//                    }
                 }
             }
         });

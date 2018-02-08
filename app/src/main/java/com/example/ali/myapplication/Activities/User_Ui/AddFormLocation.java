@@ -167,6 +167,9 @@ public class AddFormLocation extends Fragment implements OnMapReadyCallback, Goo
         }
         googleMap.setOnCameraIdleListener(this);
         googleMap.setOnCameraMoveListener(this);
+        googleMap.setMyLocationEnabled(true);
+        googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+//        googleMap.getUiSettings().setZoomControlsEnabled(true);
 //        googleMap.setMyLocationEnabled(true);
 //        googleMap.getUiSettings().isZoomControlsEnabled();
 //        googleMap.getUiSettings().isMyLocationButtonEnabled();
@@ -203,9 +206,9 @@ public class AddFormLocation extends Fragment implements OnMapReadyCallback, Goo
 
     @Override
     public void onCameraIdle() {
-        LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
-        source = bounds.getCenter();
-        Log.d("ADI", "Updated");
+//        LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
+//        source = bounds.getCenter();
+//        Log.d("ADI", "Updated");
     }
 
     @Override

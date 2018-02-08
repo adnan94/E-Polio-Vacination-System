@@ -143,6 +143,7 @@
                             android:nextFocusDown="@+id/editText_userID"
                             android:paddingBottom="15dp"
                             android:singleLine="true"
+                            android:maxLength="13"
                             android:text=""
                             android:textColor="#000"
                             android:textColorHint="#000"
@@ -229,7 +230,7 @@
                             android:paddingBottom="15dp"
                             android:singleLine="true"
                             android:text=""
-
+                            android:maxLength="11"
                             android:textColor="#000"
                             android:textColorHint="#000"
                             android:textSize="12sp" />
